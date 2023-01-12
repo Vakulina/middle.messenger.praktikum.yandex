@@ -9,29 +9,29 @@ import settings from '../modules/settings';
 
 const menuTemplate = `<ul>
 <li>
-    <a href=/chats>Список чатов</a>
+    <a href=./chats>Список чатов</a>
 </li>
 <li>
-    <a href=/chat>Лента переписки</a>
+    <a href=./chat>Лента переписки</a>
 </li>
 <li>
-    <a href=/setting>Настройки профиля</a>
+    <a href=./setting>Настройки профиля</a>
 </li>
 <li>
-    <a href=/sign-in>Авторизация</a>
+    <a href=./sign-in>Авторизация</a>
 </li>
 <li>
-    <a href=/sign-up>Регистрация</a>
+    <a href=./sign-up>Регистрация</a>
 </li>
 <li>
-    <a href=/not-found >404</a>
+    <a href=./not-found >404</a>
 </li>
 <li>
-    <a href=/error>Ошибка сервера</a>
+    <a href=./error>Ошибка сервера</a>
 </li>
 </ul>`;
 
-export default renderPage = () => {
+const renderPage = () => {
     const pathname = window.location.pathname;
     function render(pageTemplate) {
         document.getElementById('root').innerHTML = pageTemplate;
@@ -74,4 +74,6 @@ export default renderPage = () => {
             render(settings());
             break;
     }
-}
+};
+
+export default renderPage;

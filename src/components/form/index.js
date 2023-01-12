@@ -1,10 +1,10 @@
 import tpl from './tpl.hbs';
-import s from './style.module.scss';
 import input from '../input';
 import button from '../button';
 import link from '../link';
 import styles from '../../utiles/styles';
 import fileInput from '../fileInput';
+import s from './style.module.scss';
 
 const renderInput = (item) => {
 	if (item.type === 'file') {
@@ -15,7 +15,7 @@ const renderInput = (item) => {
 	}
 }
 
-export default ({
+const form = ({
 	inputList,
 	buttonList,
 	linkList,
@@ -34,4 +34,6 @@ export default ({
 		stylePrefix: styles.getClassWithPrefix(s, 'form', stylePrefix),
 		image
 	});
-}
+};
+
+export default form;

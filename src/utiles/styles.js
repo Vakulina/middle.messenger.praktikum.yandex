@@ -1,2 +1,3 @@
 const getClassWithPrefix = (s, className, prefix) => prefix ? ` ${s[className + '_' + prefix]}` : null;
-export default styles = { getClassWithPrefix }
+const styles = { getClassWithPrefix };
+export default styles;

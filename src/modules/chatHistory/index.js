@@ -5,10 +5,12 @@ import message from '../../components/message';
 import style from './style.module.scss';
 import link from '../../components/link';
 
-const profileTemplateLink= link({href:'/setting', text:'Профиль &#62', stylePrefix: 'profile'});
+const profileTemplateLink = link({ href: '/setting', text: 'Профиль &#62', stylePrefix: 'profile' });
 
-const content = tpl({ chatItem, class:style, link: profileTemplateLink, message });
+const content = tpl({ chatItem, class: style, link: profileTemplateLink, message });
 
-export default () => {
+const chatHistory = () => {
 	return pageLayout(content);
-}
+};
+
+export default chatHistory;

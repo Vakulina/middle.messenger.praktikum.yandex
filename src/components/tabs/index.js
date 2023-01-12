@@ -1,8 +1,8 @@
 import tpl from './tpl.hbs';
 import style from './style.module.scss';
 import link from '../../components/link';
-
-export default (config) => {
+ 
+const tabs = (config) => {
 	const pathname = window.location.pathname;
 	const activeLink = config.filter((tab) => pathname.includes(tab.pathRoute))[0]?.pathRoute || config[0]?.pathRoute;
 	const links = config.map((tab) => link({ href: tab.pathRoute, text: tab.name, stylePrefix: 'tabs', active: (tab.pathRoute === activeLink) ? 'active' : null })).join('');
@@ -11,4 +11,6 @@ export default (config) => {
 
 	return tpl({ content, links, class: style.tabs });
 
-}
+};
+
+export default tabs;

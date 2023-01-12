@@ -22,6 +22,8 @@ const linkList=[
 const authForm = form({ inputList, buttonList, linkList, title: 'Регистрация' });
 const content = tpl({ form: authForm, class: style.registration });
 
-export default () => {
+const registration = () => {
 	return pageLayout(content);
-}
+};
+
+export default registration;

@@ -19,6 +19,8 @@ const linkList=[
 const authForm = form({ inputList, buttonList, linkList, title: 'Вход' });
 const content = tpl({ form: authForm, class: style.auth });
 
-export default () => {
+const auth = () => {
 	return pageLayout(content);
-}
+};
+
+export default auth;

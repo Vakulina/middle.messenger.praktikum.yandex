@@ -6,6 +6,8 @@ const linkTemplate = link({ href: '/chats', text: 'Назад к чатам' })
 
 const errorTemplate = error({ code: '404', message: 'Не туда попали', link: linkTemplate });
 
-export default () => {
+const notFoundPage = () => {
 	return pageLayout(errorTemplate);
-}
+};
+
+export default notFoundPage;

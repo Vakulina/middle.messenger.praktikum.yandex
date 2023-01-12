@@ -6,6 +6,8 @@ const linkTemplate = link({ href: '/chats', text: 'Назад к чатам' })
 
 const errorTemplate = error({ code: '500', message: 'Мы уже фиксим', link: linkTemplate });
 
-export default () => {
+const serverErrorPage = () => {
 	return pageLayout(errorTemplate);
-}
+};
+
+export default serverErrorPage;

@@ -1,6 +1,8 @@
 import tpl from './tpl.hbs';
 import s from './style.module.scss';
 
-export default () => {
+const message = () => {
 	return tpl({ class: s.input});
-}
+};
+
+export default message;

@@ -26,6 +26,8 @@ const tabsConfig = [
 const tabsContent = tabs(tabsConfig )
 const content = tpl({ tabsContent, class: style.setting });
 
-export default () => {
+const setting = () => {
 	return pageLayout(content);
-}
+};
+
+export default setting;

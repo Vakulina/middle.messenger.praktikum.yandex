@@ -9,6 +9,8 @@ const profileTemplateLink = link({ href: '/setting', text: 'Профиль &#62'
 
 const content = tpl({ chatItem, class: style, link: profileTemplateLink, message });
 
-export default () => {
-	return pageLayout(content)
-}
+const chatSelection = () => {
+	return pageLayout(content);
+};
+
+export default chatSelection;
