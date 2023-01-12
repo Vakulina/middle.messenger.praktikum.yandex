@@ -1,5 +1,6 @@
 @import 'src/assets/stylesheets/_reusable.scss';
 
 .auth {
-	@include centralContent;
+	width: 100%;
+	padding-top: calc(50vh - 200px);
 }
