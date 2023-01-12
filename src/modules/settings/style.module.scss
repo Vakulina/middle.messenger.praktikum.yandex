@@ -1,0 +1,11 @@
+@import 'src/assets/stylesheets/_reusable.scss';
+
+.setting{
+	color: $shadeDark;
+	width: 100%;
+	
+	&__title {
+		@include title;
+		margin-left: 15px;
+	}
+}

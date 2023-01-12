@@ -1,0 +1,11 @@
+@import '../../assets/stylesheets/reusable';
+
+.page {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	display: flex;
+	height: 100vh;
+	max-height: 100vh;
+	color: $shadeLight;
+}

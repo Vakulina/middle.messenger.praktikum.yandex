@@ -1,0 +1,62 @@
+@import 'src/assets/stylesheets/_reusable.scss';
+
+.fileInput {
+	width: 100%;
+	max-width: 500px;
+	outline: none;
+	border: none;
+	padding: 0;
+	box-sizing: border-box;
+
+	&__input {
+		opacity: 0;
+		width: 0;
+		height: 0;
+		position: absolute;
+		z-index: -1;
+
+		&:hover+label,
+		&:focus+label {
+			background-color: $lightPrimaryColor;
+		}
+	}
+
+	&__label {
+		display: block;
+		@include btn-style;
+		display: block;
+		position: relative;
+		width: 115px;
+		height: 41px;
+		line-height: 1.1;
+		cursor: pointer;
+		transition: transform .2s ease-out;
+		box-shadow: 0 4px 4px rgb(0 0 0/ 25%);
+
+		&:hover,
+		&:active {
+			background-color: $lightPrimaryColor;
+		}
+	}
+
+	&__fileName {
+		position: absolute;
+		left: 150px;
+		top: 0px;
+		@include montserrat;
+		font-size: 14px;
+		color: $shadeDark;
+		margin: 0;
+		height: 41px;
+		width: 100%;
+		min-width: 335px;
+		max-width: 345px;
+		border: 1px solid $secondaryLight;
+		border-radius: 9px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		padding-left: 20px;
+		box-sizing: border-box;
+	}
+}

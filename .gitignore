@@ -1,0 +1,10 @@
+/dist
+/node_modules
+/build
+.parcel-cache
+*.exe
+*.bin
+*.jar
+*.war
+*.mp3
+*.mp4

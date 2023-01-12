@@ -1,0 +1,34 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "custom messenger like telegram, whatsapp",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html --no-cache --open",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vakulina/middle.messenger.praktikum.yandex.git"
+  },
+  "keywords": [
+    "messenger",
+    "typescript"
+  ],
+  "author": "V.Yakovleva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vakulina/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/Vakulina/middle.messenger.praktikum.yandex#readme",
+  "dependencies": {
+    "handlebars": "4.7.7"
+  },
+  "devDependencies": {
+    "@parcel/transformer-inline-string": "2.8.2",
+    "@parcel/transformer-sass": "2.8.2",
+    "parcel": "2.8.2",
+    "parcel-transformer-hbs": "1.0.4",
+    "sass": "1.57.1"
+  }
+}
