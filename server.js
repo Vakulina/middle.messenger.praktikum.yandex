@@ -7,8 +7,12 @@ const PORT = process.env.PORT || 3000;
 const rootPath = (path.join(__dirname, 'dist'));
 
 app.listen(PORT, function() {
-    console.log(`Приложение запущено на ${PORT}`)
+    console.log(`App on port ${PORT}`)
 })
+
 
 app.use(express.static(rootPath));
 
+app.use('/', (req, res) => {
+    res.sendFile((path.join(rootPath, 'index.html')))
+});
