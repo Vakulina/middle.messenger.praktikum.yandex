@@ -5,7 +5,16 @@
   "main": "src/index.js",
   "source": "src/index.html",
   "targets": {
-    "main": false
+    "main": false,
+    "default": {
+      "sourceMap": false,
+      "engines": {
+        "browsers": ">=50%"
+      }
+    }
+  },
+  "engines": {
+    "node": ">=12.0.0"
   },
   "scripts": {
     "dev": "parcel src/index.html --no-cache --open",
