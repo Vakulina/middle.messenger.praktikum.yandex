@@ -1,5 +1,8 @@
 @import 'src/assets/stylesheets/_reusable.scss';
 
 .registration {
-	@include centralContent;
+	width: 100%;
+	box-sizing: border-box;
+	padding-top: calc(50vh - 400px);
+	margin-bottom: 30px;
 }
