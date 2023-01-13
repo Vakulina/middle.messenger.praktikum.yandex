@@ -31,7 +31,7 @@
 		line-height: 1.1;
 		cursor: pointer;
 		transition: transform .2s ease-out;
-		box-shadow: 0 4px 4px rgb(0 0 0/ 25%);
+		@include lightShadow;
 
 		&:hover,
 		&:active {

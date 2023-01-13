@@ -34,13 +34,13 @@
     margin-bottom: 10px;
     padding-left: 10px;
     text-decoration: none;
-    color: #33443F;
+    color: $secondaryDark;
 
     &[active] {
       border-right: 3px solid $primary-color;	  ;
       color: $lightPrimaryColor;
       font-weight: 600;
-      background-color: #F2FBF9;	  ;
+      background-color: $ligthestPrimaryColor;	  ;
     }
 }
 }

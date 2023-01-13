@@ -1,10 +1,12 @@
 $primary-color: #00A783;
 $lightPrimaryColor: #00cb9f;
+$ligthestPrimaryColor:#F2FBF9;
 $shadeDark: #1E1E1E;
 $secondaryDark: #3C3C3B;
 $shadeLight: #999;
 $secondaryLight: #D0D4D8;
 $shadeLigthest: #EFEFEF;
+$lightTextColor: #FFF;
 
 @mixin btn-style {
     background-color: $primary-color;
@@ -75,5 +77,11 @@ $shadeLigthest: #EFEFEF;
 @mixin ellipsis-overflow {
     overflow: hidden;
     text-overflow: ellipsis;
+}
 
+@mixin lightShadow {
+    box-shadow: 0 4px 4px rgb(0 0 0/ 25%);
+}
+@mixin primaryShadow {
+    box-shadow: 0 0 0 2px #b3e5da;
 }
