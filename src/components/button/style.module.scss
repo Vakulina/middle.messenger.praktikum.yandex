@@ -1,0 +1,29 @@
+@import 'src/assets/stylesheets/_reusable.scss';
+
+.button {
+	@include btn-style;
+
+	&_submit,
+	&_save,
+	&_save-avatar {
+		width: 100%;
+		margin-top: 10px;
+	@include lightShadow;	
+
+		&:hover,
+		&:active {
+			background-color: $lightPrimaryColor;
+		}
+	}
+
+	&_save {
+		width: 140px;
+		margin-top: 70px;
+	}
+
+	&_save-avatar {
+		width: 140px;
+		margin-top: 30px;
+	}
+
+}

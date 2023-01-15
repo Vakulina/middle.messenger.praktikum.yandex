@@ -1,0 +1,67 @@
+@import 'src/assets/stylesheets/_reusable.scss';
+
+.field {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	outline: none;
+	border: none;
+	padding: 0;
+	box-sizing: border-box;
+	margin-bottom: 15px;
+
+
+	&__label {
+		@include montserrat;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 18px;
+		width: 100%;
+		margin-bottom: 8px;
+	}
+
+	&__input {
+		@include montserrat;
+		background-color: $shadeLigthest;
+		border: 1px solid $secondaryLight;
+		border-radius: 8px;
+		font-size: 14px;
+		font-weight: 500;
+		height: 44px;
+		line-height: 1.2;
+		box-sizing: border-box;
+		width: 100%;
+		padding: 10px 12px 10px;
+		transition-property: border-color, color, background-color, box-shadow;
+		transition-duration: .25s;
+		transition-timing-function: ease
+	}
+
+	&__input:focus {
+		border-color: $primary-color;
+		@include primaryShadow;
+		outline: none;
+	}
+
+	&__input::placeholder {
+		color: $secondaryDark;
+		font-weight: 400;
+	}
+
+	&_setting {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	&_setting &__label {
+		text-align: left;
+		color: $secondaryDark;
+		font-size: 16px;
+		max-width: 150px;
+	}
+	&_setting &__input{
+		width: 100%;
+		max-width: 364px;
+	}
+}
