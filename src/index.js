@@ -1,3 +1,3 @@
-import renderPage from "./utiles/navigate";
+import renderPage from './utiles/navigate';
 
 renderPage();

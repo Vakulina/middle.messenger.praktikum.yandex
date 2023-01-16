@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "parcel src/index.html --no-cache --open",
-    "start": "parcel build  && node server.js --open",
+    "start": "parcel build  && node server.ts --open",
     "prebuild": "rm -rf dist",
     "build": "parcel build"
   },
@@ -37,14 +37,20 @@
   },
   "homepage": "https://github.com/Vakulina/middle.messenger.praktikum.yandex#readme",
   "dependencies": {
-    "express": "^4.18.2",
+    "express": "4.18.2",
     "handlebars": "4.7.7"
   },
   "devDependencies": {
     "@parcel/transformer-inline-string": "2.8.2",
     "@parcel/transformer-sass": "2.8.2",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.32.0",
+    "eslint-config-airbnb": "^19.0.4",
     "parcel": "2.8.2",
     "parcel-transformer-hbs": "1.0.4",
-    "sass": "1.57.1"
+    "sass": "1.57.1",
+    "eslint-config-airbnb-typescript": "^17.0.0"
   }
 }

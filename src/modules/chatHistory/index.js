@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import pageLayout from '../../components/pageLayout'
+import pageLayout from '../../components/pageLayout';
 import chatItem from '../../components/chatItem';
 import message from '../../components/message';
 import style from './style.module.scss';
@@ -7,10 +7,10 @@ import link from '../../components/link';
 
 const profileTemplateLink = link({ href: '/setting', text: 'Профиль &#62', stylePrefix: 'profile' });
 
-const content = tpl({ chatItem, class: style, link: profileTemplateLink, message });
+const content = tpl({
+  chatItem, class: style, link: profileTemplateLink, message,
+});
 
-const chatHistory = () => {
-	return pageLayout(content);
-};
+const chatHistory = () => pageLayout(content);
 
 export default chatHistory;

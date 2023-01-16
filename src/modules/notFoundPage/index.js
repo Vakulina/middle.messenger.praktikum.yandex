@@ -1,13 +1,11 @@
 import pageLayout from '../../components/pageLayout';
 import error from '../../components/error';
-import link from '../../components/link'
+import link from '../../components/link';
 
-const linkTemplate = link({ href: '/chats', text: 'Назад к чатам' })
+const linkTemplate = link({ href: '/chats', text: 'Назад к чатам' });
 
 const errorTemplate = error({ code: '404', message: 'Не туда попали', link: linkTemplate });
 
-const notFoundPage = () => {
-	return pageLayout(errorTemplate);
-};
+const notFoundPage = () => pageLayout(errorTemplate);
 
 export default notFoundPage;

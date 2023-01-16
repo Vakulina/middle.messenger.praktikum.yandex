@@ -4,7 +4,7 @@ import auth from '../modules/auth';
 import registration from '../modules/registration';
 import notFoundPage from '../modules/notFoundPage';
 import serverErrorPage from '../modules/serverErrorPage';
-import { routes } from '../utiles/constants';
+import { routes } from './constants';
 import settings from '../modules/settings';
 
 const menuTemplate = `<nav>
@@ -34,48 +34,48 @@ const menuTemplate = `<nav>
 </nav>`;
 
 const renderPage = () => {
-    const pathname = window.location.pathname;
-    function render(pageTemplate) {
-        document.getElementById('root').innerHTML = pageTemplate;
-    }
-    switch (pathname) {
-        case routes.home:
-            render(menuTemplate);
-            break;
-        case routes.chats:
-            render(chatSelection());
-            break;
-        case routes.chat:
-            render(chatHistory());
-            break;
-        case routes.authorization:
-            render(auth());
-            break;
-        case routes.registration:
-            render(registration());
-            break;
-        case routes.serverError:
-            render(serverErrorPage());
-            break;
-        case routes.notFound:
-            render(notFoundPage());
-            break;
-        case routes.setting:
-            render(settings());
-            break;
-        case routes.setting:
-            render(settings());
-            break;
-        case routes.setAvatar:
-            render(settings());
-            break;
-        case routes.setRegInfo:
-            render(settings());
-            break;
-        case routes.setSafety:
-            render(settings());
-            break;
-    }
+  const { pathname } = window.location;
+  function render(pageTemplate) {
+    document.getElementById('root').innerHTML = pageTemplate;
+  }
+  switch (pathname) {
+    case routes.home:
+      render(menuTemplate);
+      break;
+    case routes.chats:
+      render(chatSelection());
+      break;
+    case routes.chat:
+      render(chatHistory());
+      break;
+    case routes.authorization:
+      render(auth());
+      break;
+    case routes.registration:
+      render(registration());
+      break;
+    case routes.serverError:
+      render(serverErrorPage());
+      break;
+    case routes.notFound:
+      render(notFoundPage());
+      break;
+    case routes.setting:
+      render(settings());
+      break;
+    case routes.setAvatar:
+      render(settings());
+      break;
+    case routes.setRegInfo:
+      render(settings());
+      break;
+    case routes.setSafety:
+      render(settings());
+      break;
+    default:
+      render(notFoundPage());
+      break;
+  }
 };
 
 export default renderPage;
