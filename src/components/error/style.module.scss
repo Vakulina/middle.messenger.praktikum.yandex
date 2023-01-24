@@ -1,19 +1,22 @@
-@import 'src/assets/stylesheets/_reusable.scss';
+@import "src/assets/stylesheets/reusable";
 
 .error {
-	margin: 0 auto;
-	text-align: center;
-	@include centralContent;
+  margin: 0 auto;
+  text-align: center;
 
-	&__title {
-		@include inter;
-		color: $shadeDark;
-	}
+  @include centralContent;
 
-	&__message {
-		@include inter;
-		color: $shadeDark;
-		font-size: 20px;
-		line-height: 20px;
-	}
+  &__title {
+    @include inter;
+
+    color: $shadeDark;
+  }
+
+  &__message {
+    @include inter;
+
+    color: $shadeDark;
+    font-size: 20px;
+    line-height: 20px;
+  }
 }

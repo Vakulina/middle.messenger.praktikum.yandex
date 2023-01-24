@@ -1,29 +1,29 @@
-@import 'src/assets/stylesheets/_reusable.scss';
+@import "src/assets/stylesheets/reusable";
 
 .button {
-	@include btn-style;
+  @include btn-style;
 
-	&_submit,
-	&_save,
-	&_save-avatar {
-		width: 100%;
-		margin-top: 10px;
-	@include lightShadow;	
+  &_save {
+    width: 140px;
+    margin-top: 70px;
+  }
 
-		&:hover,
-		&:active {
-			background-color: $lightPrimaryColor;
-		}
-	}
+  &_save-avatar {
+    width: 140px;
+    margin-top: 30px;
+  }
 
-	&_save {
-		width: 140px;
-		margin-top: 70px;
-	}
+  &_submit,
+  &_save,
+  &_save-avatar {
+    width: 100%;
+    margin-top: 10px;
 
-	&_save-avatar {
-		width: 140px;
-		margin-top: 30px;
-	}
+    @include lightShadow;
 
+    &:hover,
+    &:active {
+      background-color: $lightPrimaryColor;
+    }
+  }
 }

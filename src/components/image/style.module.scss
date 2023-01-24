@@ -1,12 +1,11 @@
 .image {
-	&_avatar {
-		border-radius: 50%;
-		height: 170px;
-		width: 170px;
-		margin-left: 0;
-		margin-right: auto;
-		display: block;
-		margin-left: 150px;
-		margin-bottom: 50px;
-	}
+  &_avatar {
+    border-radius: 50%;
+    height: 170px;
+    width: 170px;
+    margin-right: auto;
+    display: block;
+    margin-left: 150px;
+    margin-bottom: 50px;
+  }
 }

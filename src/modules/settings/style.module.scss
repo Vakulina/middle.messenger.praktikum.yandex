@@ -1,11 +1,12 @@
-@import 'src/assets/stylesheets/_reusable.scss';
+@import "src/assets/stylesheets/reusable";
 
-.setting{
-	color: $shadeDark;
-	width: 100%;
-	
-	&__title {
-		@include title;
-		margin-left: 15px;
-	}
+.setting {
+  color: $shadeDark;
+  width: 100%;
+
+  &__title {
+    @include title;
+
+    margin-left: 15px;
+  }
 }

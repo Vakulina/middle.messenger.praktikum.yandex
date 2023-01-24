@@ -20,7 +20,8 @@
     "dev": "parcel src/index.html --no-cache --open",
     "start": "parcel build  && node server.ts --open",
     "prebuild": "rm -rf dist",
-    "build": "parcel build"
+    "build": "parcel build",
+    "lint": "npx stylelint \"**/*.scss\""
   },
   "repository": {
     "type": "git",
@@ -48,9 +49,11 @@
     "@typescript-eslint/parser": "^5.48.1",
     "eslint": "^8.32.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "parcel": "2.8.2",
     "parcel-transformer-hbs": "1.0.4",
     "sass": "1.57.1",
-    "eslint-config-airbnb-typescript": "^17.0.0"
+    "stylelint": "14.16.1",
+    "stylelint-config-standard-scss": "6.1.0"
   }
 }
