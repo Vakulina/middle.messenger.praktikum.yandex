@@ -9,7 +9,13 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "module": "commonjs",
-    "allowSyntheticDefaultImports":true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "~*": [
+        "*/."
+      ]
+    }
   },
   "exclude": [
     "node_modules"

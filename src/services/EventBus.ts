@@ -1,4 +1,11 @@
-class EventBus {
+export interface IEventBus {
+  listeners: Record<string, Array<Function>>,
+  on: (event: string, callback: (...args: unknown[]) => void) => void,
+  off: (event: string, callback: (...args: unknown[]) => void) => void,
+  emit: (event: string, ...args: unknown[]) => void
+}
+
+class EventBus  implements IEventBus {
   readonly listeners: { [key: string]: Array<Function> }
 
   constructor() {
@@ -33,4 +40,4 @@ class EventBus {
     });
   }
 }
-export default EventBus
+export {EventBus}
