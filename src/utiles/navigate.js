@@ -35,8 +35,16 @@ const menuTemplate = `<nav>
 
 const renderPage = () => {
   const { pathname } = window.location;
+
   function render(pageTemplate) {
-    document.getElementById('root').innerHTML = pageTemplate;
+    const root = document.getElementById('root')
+    if (typeof pageTemplate === 'string') {
+      root.innerHTML = pageTemplate;
+    }
+    else {
+      root.innerHTML = '';
+      root.appendChild(pageTemplate);
+    }
   }
   switch (pathname) {
     case routes.home:
@@ -49,10 +57,10 @@ const renderPage = () => {
       render(chatHistory());
       break;
     case routes.authorization:
-      render(auth());
+      render(auth().getContent());
       break;
     case routes.registration:
-      render(registration());
+      render(registration().getContent());
       break;
     case routes.serverError:
       render(serverErrorPage());

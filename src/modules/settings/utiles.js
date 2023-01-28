@@ -1,4 +1,4 @@
-import form from '../../components/form';
+import { Form } from '../../components/form';
 import image from '../../components/image';
 import avatar from '../../../static/avatar.jpg';
 
@@ -26,10 +26,10 @@ const getRegistrationInfoTemplate = () => {
 
   const buttonList = [
     {
-      id: 'save-reg-info', text: 'Сохранить', stylePrefix: 'save', type: 'submit',
+      text: 'Сохранить', stylePrefix: 'save', type: 'submit',
     },
   ];
-  return form({
+  return new Form({
     inputList, buttonList, title: 'Личные данные', stylePrefix: 'tabs',
   });
 };
@@ -43,10 +43,10 @@ const getAvatarTemplate = () => {
 
   const buttonList = [
     {
-      id: 'save-avatar', text: 'Сохранить', stylePrefix: 'save-avatar', type: 'submit',
+      text: 'Сохранить', stylePrefix: 'save-avatar', type: 'submit',
     },
   ];
-  return form({
+  return new Form({
     inputList,
     buttonList,
     title: 'Аватар',
@@ -70,10 +70,10 @@ const getPasswordTemplate = () => {
 
   const buttonList = [
     {
-      id: 'save-new-password', text: 'Сохранить', stylePrefix: 'save', type: 'submit',
+       text: 'Сохранить', stylePrefix: 'save', type: 'submit',
     },
   ];
-  return form({
+  return new Form({
     inputList, buttonList, title: 'Безопасность', stylePrefix: 'tabs',
   });
 };

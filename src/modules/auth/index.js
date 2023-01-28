@@ -1,6 +1,6 @@
 import tpl from './tpl.hbs';
 import pageLayout from '../../components/pageLayout';
-import form from '../../components/form';
+import form, { Form } from '../../components/form';
 import style from './style.module.scss';
 
 const inputList = [
@@ -9,18 +9,18 @@ const inputList = [
 ];
 
 const buttonList = [
-  { id: 'sign-in', text: 'Вход', stylePrefix: 'submit' },
+  {  text: 'Вход', stylePrefix: 'submit' },
 ];
 
 const linkList = [
   { href: '/sign-up', text: 'Нет аккаунта?' },
 ];
 
-const authForm = form({
+const authForm = new Form({
   inputList, buttonList, linkList, title: 'Вход',
 });
-const content = tpl({ form: authForm, class: style.auth });
-
-const auth = () => pageLayout(content);
+//const content = tpl({ form: authForm, class: style.auth });
+console.log(authForm)
+const auth = () => authForm;
 
 export default auth;

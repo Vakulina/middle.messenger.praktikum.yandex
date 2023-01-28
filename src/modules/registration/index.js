@@ -1,6 +1,6 @@
 import tpl from './tpl.hbs';
 import pageLayout from '../../components/pageLayout';
-import form from '../../components/form';
+import form, { Form } from '../../components/form';
 import style from './style.module.scss';
 
 const inputList = [
@@ -21,11 +21,11 @@ const buttonList = [
 const linkList = [
   { href: '/sign-in', text: 'Войти' },
 ];
-const authForm = form({
+const authForm = new Form({
   inputList, buttonList, linkList, title: 'Регистрация',
 });
-const content = tpl({ form: authForm, class: style.registration });
+//const content = tpl({ form: authForm, class: style.registration });
 
-const registration = () => pageLayout(content);
+const registration = () => authForm;
 
 export default registration;
