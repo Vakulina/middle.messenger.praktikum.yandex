@@ -1,6 +1,6 @@
 import chatSelection from '../modules/chatSelection';
 import chatHistory from '../modules/chatHistory';
-import auth from '../modules/auth';
+import {auth} from '../modules/auth';
 import registration from '../modules/registration';
 import notFoundPage from '../modules/notFoundPage';
 import serverErrorPage from '../modules/serverErrorPage';

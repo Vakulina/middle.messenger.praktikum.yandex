@@ -21,20 +21,16 @@ type FormProps = {
   title?: string,
   stylePrefix?: string | null,
   image?: any,
+  class?:string,
 }
 export class Form extends Block {
-  constructor({
-    inputList = [],
-    buttonList = [],
-    linkList = [],
-    title = 'Заголовок формы',
-    stylePrefix = null,
-    image = null,
-  }: FormProps) {
-    super('form', { inputList, buttonList, linkList, title, stylePrefix: styles.getClassWithPrefix(s, 'form', stylePrefix), image })
+  constructor(props: FormProps) {
+    super('form', props)
+    this.setProps({
+      stylePrefix: styles.getClassWithPrefix(s, 'form', this.props.stylePrefix)||''
+    })
   }
 
-  
   protected render() {
     return this.compile(tpl, this.props);
   }

@@ -34,6 +34,7 @@ abstract class Block {
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
+  protected initChildren() {}
 
   private _getChildrenAndProps(propsWithChildren: PropsType): { props: Record<string, string>, children: ChildrenType } {
     const props: Record<string, string> = {};
@@ -48,9 +49,10 @@ abstract class Block {
   private _registerEvents(eventBus: IEventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
+
 
   private _makePropsProxy(props: Record<string, string>) {
     const checkPrivateProp: (prop: string) => boolean = prop => prop.startsWith('_');
@@ -84,17 +86,29 @@ abstract class Block {
     })
   }
 
+
   get element() {
     return this._element;
   }
 
-  getContent(): HTMLElement | null {
-    return this.element;
+  getContent(): HTMLElement {
+    if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+      setTimeout(() => {
+        if (
+          this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE
+        ) {
+          this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+        }
+      }, 100);
+    }
+
+    return this.element!;
   }
 
   private _init() {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+
   }
 
   private _createResources() {
@@ -106,6 +120,7 @@ abstract class Block {
   }
 
   private _render() {
+    this.initChildren();
     const fragment = this.render();
     this._element!.innerHTML = '';
     this._element!.append(fragment);
@@ -157,17 +172,18 @@ abstract class Block {
   }
 
   _componentDidUpdate(oldProps: PropsType, newProps: PropsType) {
-    if (oldProps !== newProps) {
+    /* if (oldProps !== newProps) {
+       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+     }*/
+    if (this.componentDidUpdate()) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
-    /*if (this.componentDidUpdate()) {
- this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-}*/
   }
-  /*componentDidUpdate() {
+
+  componentDidUpdate() {
     return true;
-}
-*/
+  }
+
   setProps = (nextProps: PropsType) => {
     if (!nextProps) {
       return;
@@ -175,8 +191,12 @@ abstract class Block {
     Object.assign(this.props, nextProps);
   }
 
+
+
   protected compile(template: (context: any) => string, context: any) {
-    const contextAndStubs = { ...context };
+    const contextAndStubs = Object.assign({},context);
+
+    console.log(this.children, this._meta.tagName)
 
     Object.entries(this.children).forEach(([name, component]) => {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
@@ -188,7 +208,6 @@ abstract class Block {
 
     Object.entries(this.children).forEach(([_, component]) => {
       const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-
       if (!stub) {
         return;
       }

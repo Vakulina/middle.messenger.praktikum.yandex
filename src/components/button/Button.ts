@@ -11,6 +11,7 @@ interface ButtonProps {
   events?: {
     click: () => void;
   },
+  name?:string
 }
 
 export class Button extends Block {
@@ -19,6 +20,7 @@ export class Button extends Block {
     stylePrefix = null,
     type = 'submit',
     events = { click: () => { console.log("click") } },
+    name
   }: ButtonProps) {
     super('button',
       {
