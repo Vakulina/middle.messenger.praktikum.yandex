@@ -3,6 +3,7 @@ import s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 
+
 interface ButtonProps {
   text: string;
   stylePrefix?: string | null,
@@ -17,14 +18,13 @@ export class Button extends Block {
     text,
     stylePrefix = null,
     type = 'submit',
-    events = { click: () => { console.log("click") } }
+    events = { click: () => { console.log("click") } },
   }: ButtonProps) {
     super('button',
       {
         text,
-        stylePrefix: styles.getClassWithPrefix(s, 'button', stylePrefix),
         type,
-        class: s.button,
+        class: `${s.button} ${styles.getClassWithPrefix(s, 'button', stylePrefix)}`,
         events
       })
   }
@@ -32,3 +32,5 @@ export class Button extends Block {
     return this.compile(tpl, this.props);
   }
 }
+
+

@@ -1,16 +1,13 @@
-import Block from "./Block";
+type RenderBlockProps = HTMLElement | string
 
-type RenderBlockProps = Block | string
-
-function render(pageTemplate: RenderBlockProps) {
+export function render(pageTemplate: RenderBlockProps) {
   const root = document.getElementById('root')
 
-  if (pageTemplate instanceof Block) {
-    root!.innerHTML = '';
-    root!.appendChild(pageTemplate.getContent());
-
+  if (typeof pageTemplate === 'string') {
+    root!.innerHTML = pageTemplate;
   }
   else {
-    root!.innerHTML = pageTemplate;
+    root!.innerHTML = '';
+    root!.appendChild(pageTemplate);
   }
 }

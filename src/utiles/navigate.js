@@ -6,6 +6,7 @@ import notFoundPage from '../modules/notFoundPage';
 import serverErrorPage from '../modules/serverErrorPage';
 import { routes } from './constants';
 import settings from '../modules/settings';
+import {render} from '../services/renderBlock'
 
 const menuTemplate = `<nav>
     <ul>
@@ -36,16 +37,6 @@ const menuTemplate = `<nav>
 const renderPage = () => {
   const { pathname } = window.location;
 
-  function render(pageTemplate) {
-    const root = document.getElementById('root')
-    if (typeof pageTemplate === 'string') {
-      root.innerHTML = pageTemplate;
-    }
-    else {
-      root.innerHTML = '';
-      root.appendChild(pageTemplate);
-    }
-  }
   switch (pathname) {
     case routes.home:
       render(menuTemplate);

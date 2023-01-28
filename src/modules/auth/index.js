@@ -2,6 +2,8 @@ import tpl from './tpl.hbs';
 import pageLayout from '../../components/pageLayout';
 import form, { Form } from '../../components/form';
 import style from './style.module.scss';
+import { Button } from '../../components/button';
+import styles from '../../utiles/styles';
 
 const inputList = [
   { name: 'login', label: 'Логин', placeholder: 'v.yakovleva' },
@@ -9,7 +11,7 @@ const inputList = [
 ];
 
 const buttonList = [
-  {  text: 'Вход', stylePrefix: 'submit' },
+  { text: 'Вход', stylePrefix: 'submit' },
 ];
 
 const linkList = [
@@ -20,7 +22,8 @@ const authForm = new Form({
   inputList, buttonList, linkList, title: 'Вход',
 });
 //const content = tpl({ form: authForm, class: style.auth });
-console.log(authForm)
-const auth = () => authForm;
 
+const auth = () => new Button({ stylePrefix: 'submit', text: 'Вход',}
+);
+console.log(auth())
 export default auth;

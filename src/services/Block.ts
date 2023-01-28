@@ -110,6 +110,7 @@ abstract class Block {
     this._element!.innerHTML = '';
     this._element!.append(fragment);
     this._addEvents();
+    this.addAttribute();
   }
 
   protected render() {
@@ -122,7 +123,15 @@ abstract class Block {
       this._element?.addEventListener(eventName, events[eventName]);
     });
   }
-
+  public addAttribute() {
+    const attr: Record<string, string> | undefined = {
+      type: this.props.type,
+      class: this.props.class,
+    }
+    Object.entries(attr).forEach(([key, value]) => {
+      this.element!.setAttribute(key, value);
+    });
+  }
   _removeEventListeners() {
     const { events } = this.props as PropsType & { events: Record<string, () => void> };
     if (!events) {
@@ -151,17 +160,21 @@ abstract class Block {
     if (oldProps !== newProps) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
-    /*    if (this.componentDidUpdate(oldProps, newProps)) {
-   this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
- }*/
+    /*if (this.componentDidUpdate()) {
+ this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+}*/
   }
-
+  /*componentDidUpdate() {
+    return true;
+}
+*/
   setProps = (nextProps: PropsType) => {
     if (!nextProps) {
       return;
     }
     Object.assign(this.props, nextProps);
   }
+
   protected compile(template: (context: any) => string, context: any) {
     const contextAndStubs = { ...context };
 
