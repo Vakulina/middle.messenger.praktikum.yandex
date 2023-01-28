@@ -112,7 +112,7 @@ abstract class Block {
     this._addEvents();
   }
 
-  public render() {
+  protected render() {
     return new DocumentFragment()
   }
   _addEvents() {
