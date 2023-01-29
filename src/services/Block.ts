@@ -34,7 +34,7 @@ abstract class Block {
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
-  protected initChildren() {}
+  protected initChildren() { }
 
   private _getChildrenAndProps(propsWithChildren: PropsType): { props: Record<string, string>, children: ChildrenType } {
     const props: Record<string, string> = {};
@@ -139,12 +139,14 @@ abstract class Block {
     });
   }
   public addAttribute() {
-    const attr: Record<string, string> | undefined = {
-      type: this.props.type,
-      class: this.props.class,
+    const attr: Record<string, string | null> | undefined = {
+      type: this.props.type || null,
+      class: this.props.class || null,
+      href: this.props.href || null,
+      active: this.props.active || null
     }
     Object.entries(attr).forEach(([key, value]) => {
-      this.element!.setAttribute(key, value);
+      if (value) this.element!.setAttribute(key, value);
     });
   }
   _removeEventListeners() {
@@ -193,8 +195,8 @@ abstract class Block {
   }
 
   protected compile(template: (context: any) => string, context: any) {
-    const contextAndStubs = Object.assign({},context);
-    
+    const contextAndStubs = Object.assign({}, context);
+
     Object.entries(this.children).forEach(([name, component]) => {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
     });
