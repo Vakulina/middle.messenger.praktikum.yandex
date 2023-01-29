@@ -1,8 +1,10 @@
 import tpl from './tpl.hbs';
-import pageLayout from '../../components/pageLayout';
+import {PageLayout} from '../../components/pageLayout';
 import tabs from '../../components/tabs';
 import style from './style.module.scss';
-import { registrationInfoTemplate, avatarTemplate, passwordTemplate } from './utiles';
+import {  avatarTemplate,} from './avatarTemplate';
+import { registrationInfoTemplate } from './registrationInfoTemplate';
+import {passwordTemplate} from './passwordTemplate'
 
 const tabsConfig = [
   {
@@ -25,6 +27,6 @@ const tabsConfig = [
 const tabsContent = tabs(tabsConfig);
 const content = tpl({ tabsContent, class: style.setting });
 
-const setting = () => pageLayout(content);
+const setting = () =>new PageLayout({content:avatarTemplate});
 
 export default setting;

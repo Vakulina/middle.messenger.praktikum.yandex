@@ -35,13 +35,13 @@ const renderPage = () => {
       render(getNotFoundPage().getContent());
       break;
     case routes.setting:
-      render(settings());
+      render(settings().getContent());
       break;
     case routes.setAvatar:
-      render(settings());
+      render(settings().getContent());
       break;
     case routes.setRegInfo:
-      render(settings());
+      render(settings().getContent());
       break;
     case routes.setSafety:
       render(settings());
