@@ -1,6 +1,7 @@
 import chatSelection from '../modules/chatSelection';
 import chatHistory from '../modules/chatHistory';
 import { getAuthForm } from '../modules/auth';
+import { getRegistrationForm } from '../modules/registration';
 import registration from '../modules/registration';
 import notFoundPage from '../modules/notFoundPage';
 import serverErrorPage from '../modules/serverErrorPage';
@@ -51,7 +52,7 @@ const renderPage = () => {
       render(getAuthForm().getContent());
       break;
     case routes.registration:
-      render(registration().getContent());
+      render(getRegistrationForm().getContent());
       break;
     case routes.serverError:
       render(serverErrorPage());

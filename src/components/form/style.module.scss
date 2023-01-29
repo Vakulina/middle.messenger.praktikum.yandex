@@ -22,7 +22,7 @@
     font-weight: 600;
   }
 
-  &_auth {
+  &_auth, &_reg {
     width: 100%;
     min-height: 220px;
     padding: calc(50vh - 100px);
