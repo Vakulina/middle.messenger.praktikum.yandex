@@ -61,5 +61,11 @@
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
+
+    &[data-style=placeholder]{
+      color: $secondaryDark;
+      font-weight: 400;
+    }
   }
+
 }

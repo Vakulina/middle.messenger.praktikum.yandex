@@ -20,7 +20,7 @@ const getAvatarTemplate = () => {
     buttonList,
     title: 'Аватар',
     stylePrefix: 'tabs',
-    image: image({ url: avatar, alt: 'аватар', stylePrefix: 'avatar' }),
+    image: image({ src: avatar, alt: 'аватар', stylePrefix: 'avatar' }),
   });
 };
 

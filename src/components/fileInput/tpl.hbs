@@ -1,5 +1,9 @@
 <label>
   <span>Обзор...</span>
+  {{#if fileName}}
   <span>{{fileName}}</spane>
+    {{else}}
+    <span data-style="placeholder">Выбрать файл на компьютере</span>
+    {{/if}}
     <input name={{{name}}} value="{{{value}}}" type={{type}} accept="{{{accept}}}" />
 </label>
