@@ -1,6 +1,6 @@
 import chatSelection from '../modules/chatSelection';
 import chatHistory from '../modules/chatHistory';
-import {auth} from '../modules/auth';
+import { getAuthForm } from '../modules/auth';
 import registration from '../modules/registration';
 import notFoundPage from '../modules/notFoundPage';
 import serverErrorPage from '../modules/serverErrorPage';
@@ -48,7 +48,7 @@ const renderPage = () => {
       render(chatHistory());
       break;
     case routes.authorization:
-      render(auth().getContent());
+      render(getAuthForm().getContent());
       break;
     case routes.registration:
       render(registration().getContent());

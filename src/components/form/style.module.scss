@@ -6,7 +6,7 @@
   margin: 0 auto;
   color: $shadeDark;
 
-  &__title {
+  h2 {
     @include title;
   }
 
@@ -16,9 +16,15 @@
     max-width: 490px;
   }
 
-  &_tabs &__title {
+  &_tabs h2 {
     text-align: left;
     margin: 0 auto 50px 0;
     font-weight: 600;
+  }
+
+  &_auth {
+    width: 100%;
+    min-height: 220px;
+    padding: calc(50vh - 100px);
   }
 }

@@ -15,19 +15,17 @@ import Block from '~src/services/Block';
   return input(item);
 };*/
 type FormProps = {
-  inputList?: any,
-  buttonList?: Button[],
-  linkList?: any,
   title?: string,
   stylePrefix?: string | null,
   image?: any,
-  class?:string,
+  class?: string
 }
 export class Form extends Block {
+
   constructor(props: FormProps) {
-    super('form', props)
+    super('form', props);
     this.setProps({
-      stylePrefix: styles.getClassWithPrefix(s, 'form', this.props.stylePrefix)||''
+      class: `${s.form} ${styles.getClassWithPrefix(s, 'form', this.props.stylePrefix)}`,
     })
   }
 

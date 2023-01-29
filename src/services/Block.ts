@@ -2,8 +2,8 @@ import { v4 as makeUUID } from 'uuid';
 
 import { EventBus, IEventBus } from "./EventBus";
 
-type PropsType = Record<string, string | Block>;
-type ChildrenType = Record<string, Block>;
+export type PropsType = Record<string, string | Block>;
+export type ChildrenType = Record<string, Block>;
 
 abstract class Block {
   static EVENTS = {
@@ -189,9 +189,8 @@ abstract class Block {
       return;
     }
     Object.assign(this.props, nextProps);
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   }
-
-
 
   protected compile(template: (context: any) => string, context: any) {
     const contextAndStubs = Object.assign({},context);
