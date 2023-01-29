@@ -30,9 +30,9 @@ $lightTextColor: #fff;
   white-space: nowrap;
 }
 
-@mixin centralContent {
+@mixin centralContent ($height) {
   width: 100%;
-  padding: calc(50vh - 100px);
+  padding-top: calc(50vh - $height/2);
   min-height: 220px;
 }
 

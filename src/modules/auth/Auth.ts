@@ -7,4 +7,3 @@ const authPage = new PageLayout({ content: form })
 export const getAuthForm = () => {
   return authPage;
 }
-

@@ -4,7 +4,7 @@
   margin: 0 auto;
   text-align: center;
 
-  @include centralContent;
+  @include centralContent(200px);
 
   h1 {
     @include inter;
