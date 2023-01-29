@@ -11,7 +11,7 @@
   box-sizing: border-box;
   margin-bottom: 15px;
 
-  &__label {
+  label {
     @include montserrat;
 
     font-size: 14px;
@@ -21,10 +21,10 @@
     margin-bottom: 8px;
   }
 
-  &__input {
+  input {
     @include montserrat;
 
-    background-color: $shadeLigthest;
+    background-color: $shadeLigthestBackground;
     border: 1px solid $secondaryLight;
     border-radius: 8px;
     font-size: 14px;
@@ -39,7 +39,7 @@
     transition-timing-function: ease;
   }
 
-  &__input:focus {
+ input:focus {
     border-color: $primary-color;
 
     @include primaryShadow;
@@ -47,7 +47,7 @@
     outline: none;
   }
 
-  &__input::placeholder {
+  input::placeholder {
     color: $secondaryDark;
     font-weight: 400;
   }
@@ -57,14 +57,14 @@
     align-items: center;
   }
 
-  &_setting &__label {
+  &_setting label {
     text-align: left;
     color: $secondaryDark;
     font-size: 16px;
     max-width: 150px;
   }
 
-  &_setting &__input {
+  &_setting input {
     width: 100%;
     max-width: 364px;
   }

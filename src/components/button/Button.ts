@@ -9,25 +9,29 @@ interface ButtonProps {
   stylePrefix?: string | null,
   type?: string,
   events?: {
-    click: () => void;
+    click: (e: Event) => void;
   },
-  name?:string
+  name?: string
 }
 
 export class Button extends Block {
   constructor({
-    text,
     stylePrefix = null,
     type = 'submit',
-    events = { click: () => { console.log("click") } },
-    name
+    events = {
+      click: (e) => {
+        e.preventDefault();
+        console.log("click")
+      }
+    },
+    ...otherProps
   }: ButtonProps) {
     super('button',
       {
-        text,
         type,
         class: `${s.button} ${styles.getClassWithPrefix(s, 'button', stylePrefix)}`,
-        events
+        events,
+        ...otherProps
       })
   }
   protected render() {

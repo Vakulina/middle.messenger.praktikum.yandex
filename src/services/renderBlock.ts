@@ -1,8 +1,7 @@
 type RenderBlockProps = HTMLElement | string
 
 export function render(pageTemplate: RenderBlockProps) {
-  console.log(pageTemplate)
-  const root = document.getElementById('root')
+  const root = document.getElementById('root');
 
   if (typeof pageTemplate === 'string') {
     root!.innerHTML = pageTemplate;

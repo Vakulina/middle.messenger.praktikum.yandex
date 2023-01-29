@@ -194,9 +194,7 @@ abstract class Block {
 
   protected compile(template: (context: any) => string, context: any) {
     const contextAndStubs = Object.assign({},context);
-
-    console.log(this.children, this._meta.tagName)
-
+    
     Object.entries(this.children).forEach(([name, component]) => {
       contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
     });
