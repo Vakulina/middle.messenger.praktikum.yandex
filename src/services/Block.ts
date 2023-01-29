@@ -143,7 +143,8 @@ abstract class Block {
       type: this.props.type || null,
       class: this.props.class || null,
       href: this.props.href || null,
-      active: this.props.active || null
+      active: this.props.active || null,
+      autofocus: this.props.autofocus || null
     }
     Object.entries(attr).forEach(([key, value]) => {
       if (value) this.element!.setAttribute(key, value);

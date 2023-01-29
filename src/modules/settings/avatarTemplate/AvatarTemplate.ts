@@ -1,14 +1,14 @@
 import tpl from './tpl.hbs';
 import { Form } from '~src/components/form';
 import { Button } from '~src/components/button';
-import { Input } from '~src/components/input';
+import { FileInput } from '~src/components/fileInput';
 
 export class AvatarTemplate extends Form {
   initChildren() {
     this.children = {
       ...this.children,
-      'avatar': new Input({ name: 'avatar', stylePrefix: 'file', type: 'file', accept: 'image/*' }),
-      'button': new Button({ text: 'Сохранить', stylePrefix: 'save', type: 'submit', }),
+      'avatar': new FileInput({ name: 'avatar', type: 'file', accept: 'image/*' }),
+      'save-avatar': new Button({ text: 'Сохранить', stylePrefix: 'save-avatar', type: 'submit', }),
     }
   }
   render(): DocumentFragment {

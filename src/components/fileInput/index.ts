@@ -2,43 +2,48 @@ import tpl from './tpl.hbs';
 import s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
+/*
+const fileInput = ({
+  name, accept = null, fileName = 'file.jpg', id,
+}) => tpl({
+  name,
+  fileName,
+  class: s.fileInput,
+  accept,
+  id,
+});
+export default fileInput;
+*/
 
-interface InputProps {
+interface FileInputProps {
   label?: string,
-  placeholder? : string,
   stylePrefix?: string | null,
-  type?: string,
-  accept?: string,
-  autocomplete?:string,
+  accept: string,
   value?: string,
-  autofocus?:boolean|null,
   events?: {
-    blur?: (event: FocusEvent & { target: HTMLInputElement }) => unknown;//при потере фокуса
-    focus?: (event: FocusEvent & { target: HTMLInputElement }) => unknown;//при фокусировке
     change?: (e: InputEvent) => unknown; //произойдет при потере фокуса
     input?: (e: InputEvent) => unknown;
   }
-  name?: string
+  name?: string,
+  type?:'file'
 }
 
-export class Input extends Block {
+export class FileInput extends Block {
   constructor({
-    type = 'text',
+    type = 'file',
     stylePrefix=null,
-    autofocus=null,
     events = {
       input: (e) => {
         console.log(e.target)
       }
     },
     ...otherProps
-  }: InputProps) {
+  }: FileInputProps) {
     super('fieldset',
       {
         type,
-        class: `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
+        class: s.fileInput,
         events,
-        autofocus,
         ...otherProps
       })
   }

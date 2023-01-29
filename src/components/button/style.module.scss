@@ -8,11 +8,6 @@
     margin-top: 70px;
   }
 
-  &_save-avatar {
-    width: 140px;
-    margin-top: 30px;
-  }
-
   &_submit,
   &_save,
   &_save-avatar {
@@ -25,5 +20,9 @@
     &:active {
       background-color: $lightPrimaryColor;
     }
+  }
+  &_save-avatar {
+    width: 140px;
+    margin-top: 30px;
   }
 }
