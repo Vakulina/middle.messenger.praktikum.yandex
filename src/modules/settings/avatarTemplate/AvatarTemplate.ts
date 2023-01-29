@@ -5,6 +5,8 @@ import { FileInput } from '~src/components/fileInput';
 import avatar from '../../../../static/avatar.jpg';
 import { Image } from '~src/components/image';
 
+//TODO организовать обновления изображения синхронно с выбором файл. предположительно брать src из глобального стейта
+
 export class AvatarTemplate extends Form {
   initChildren() {
     this.children = {
