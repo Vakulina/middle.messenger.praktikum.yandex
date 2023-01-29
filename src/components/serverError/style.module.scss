@@ -6,13 +6,13 @@
 
   @include centralContent;
 
-  &__title {
+  h1 {
     @include inter;
 
     color: $shadeDark;
   }
 
-  &__message {
+  p {
     @include inter;
 
     color: $shadeDark;

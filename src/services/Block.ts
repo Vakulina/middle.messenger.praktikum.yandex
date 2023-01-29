@@ -174,9 +174,6 @@ abstract class Block {
   }
 
   _componentDidUpdate(oldProps: PropsType, newProps: PropsType) {
-    /* if (oldProps !== newProps) {
-       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-     }*/
     if (this.componentDidUpdate()) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }

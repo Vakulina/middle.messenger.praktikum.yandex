@@ -2,9 +2,8 @@ import chatSelection from '../modules/chatSelection';
 import chatHistory from '../modules/chatHistory';
 import { getAuthForm } from '../modules/auth';
 import { getRegistrationForm } from '../modules/registration';
-import registration from '../modules/registration';
-import notFoundPage from '../modules/notFoundPage';
-import serverErrorPage from '../modules/serverErrorPage';
+import { getServerErrorPage } from '../modules/serverErrorPage';
+import { getNotFoundPage } from '../modules/notFoundPage';
 import { routes } from './constants';
 import settings from '../modules/settings';
 import {render} from '../services/renderBlock'
@@ -55,10 +54,10 @@ const renderPage = () => {
       render(getRegistrationForm().getContent());
       break;
     case routes.serverError:
-      render(serverErrorPage());
+      render(getServerErrorPage().getContent());
       break;
     case routes.notFound:
-      render(notFoundPage());
+      render(getNotFoundPage().getContent());
       break;
     case routes.setting:
       render(settings());
