@@ -53,27 +53,30 @@ export class Tabs extends Block {
 
   initChildren() {
 
+    const currentPathname = window.location.pathname
+    const activeLink = this.children.tabsConfig.filter((tab: Tab) => {
+      return currentPathname.includes(tab.pathRoute)
+    })[0]?.pathRoute || this.children.tabsConfig[0]?.pathRoute;
 
-    //if(typeof this.children.tabsConfig==='Array')  this.children.tabsConfig.forEach(item=> {console.log(item)})
     const links = this.children.tabsConfig.map((tab: Tab) => {
-      const standartPathname = this.children.tabsConfig[0].pathRoute
-      const currentPathname = window.location.pathname
-
       const newLink = new Link({
         href: tab.pathRoute,
         text: tab.name,
         stylePrefix: 'tabs',
-        active: !!(tab.pathRoute === currentPathname) ? true : !!((tab.pathRoute === standartPathname) && (this.props.rootPathname === currentPathname)),
+        active: (tab.pathRoute === activeLink) ? true : false,
       })
 
       return newLink
     })
+    const activeTab = this.children.tabsConfig.filter((tab:Tab) => tab.pathRoute === activeLink)[0];
+    const content = activeTab?.content;
 
     const { tabsConfig: _, ...newChildren } = this.children
 
     this.children = {
       ...newChildren,
-      links
+      links, 
+      content
     }
   }
 
