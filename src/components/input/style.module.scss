@@ -40,7 +40,7 @@
     margin-top: 8px;
   }
 
- input:focus {
+  input:focus {
     border-color: $primary-color;
 
     @include primaryShadow;
@@ -59,17 +59,21 @@
   }
 
   &_setting label {
-    text-align: left;
     color: $secondaryDark;
     font-size: 16px;
-    max-width: 150px;
+    max-width: 514px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
   }
 
   &_setting input {
     width: 100%;
-    max-width: 364px;
+    max-width: 340px;
+    margin-top: 0;
   }
-  input[name=avatar]{
-border-color: red;
+
+  input[name=avatar] {
+    border-color: red;
   }
 }

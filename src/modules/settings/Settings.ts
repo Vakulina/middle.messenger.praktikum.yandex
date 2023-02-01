@@ -44,9 +44,7 @@ class Settings extends Block {
   }
 };
 const settingTabs = new Tabs({ tabsConfig, rootPathname: '/setting',  })
-//console.log(settingTabs)
 
 const settingLayout = new Settings({ tabs: settingTabs, title:'Настройки профиля' })
-console.log(settingLayout)
 
 export const getSettingPage = () => new PageLayout({ content: settingLayout})
