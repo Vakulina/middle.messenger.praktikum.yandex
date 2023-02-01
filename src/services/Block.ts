@@ -3,7 +3,8 @@ import { v4 as makeUUID } from 'uuid';
 import { EventBus, IEventBus } from "./EventBus";
 
 export type PropsType = Record<string, string | Block>;
-export type ChildrenType = Record<string, Block>;
+export type ChildrenType = Record<string, Block | Block[]|any>;
+
 
 abstract class Block {
   static EVENTS = {
@@ -40,8 +41,8 @@ abstract class Block {
     const props: Record<string, string> = {};
     const children: ChildrenType = {}
 
-    Object.entries(propsWithChildren).forEach(([key, value]) => {
-      (value instanceof Block) ? children[key] = value : props[key] = value
+   Object.entries(propsWithChildren).forEach(([key, value]) => {
+      ((value instanceof Block)||(value instanceof Array<Block>)) ? children[key] = value : props[key] = value
     })
     return { props, children }
   }
@@ -63,8 +64,8 @@ abstract class Block {
           throw new Error("Нет прав");
         } else {
           if (property in target) {
-            let value = Reflect.get(target, property, receiver);
-            return typeof value == 'function' ? value.bind(target) : value;
+            const value = Reflect.get(target, property, receiver);
+            return (typeof value === 'function') ? value.bind(target) : value;
           }
         }
       },
@@ -186,7 +187,7 @@ abstract class Block {
     return true;
   }
 
-  setProps = (nextProps: PropsType) => {
+  setProps(nextProps: PropsType) {
     if (!nextProps) {
       return;
     }
@@ -198,14 +199,44 @@ abstract class Block {
     const contextAndStubs = Object.assign({}, context);
 
     Object.entries(this.children).forEach(([name, component]) => {
-      contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
-    });
+      if (component instanceof Block) {
+        contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
+      }
+      if (Array.isArray(component)) {
+       
+        contextAndStubs[name] = component.map((item) =>{
+          return `<div data-id=${item.id}></div>`}
+        );
+        console.log(contextAndStubs[name] )
 
+    }
+  });
     const html = template(contextAndStubs);
+
     const temp = document.createElement('template');
     temp.innerHTML = html;
 
-    Object.entries(this.children).forEach(([_, component]) => {
+
+    Object.values(this.children).forEach((component) => {
+      if ((Array.isArray(component))) {
+        component.forEach((item) => {
+          // TODO Remove dublicated code from here
+          const stub = temp.content.querySelector(
+            `[data-id="${item.id}"]`
+          );
+          stub?.replaceWith(item.getContent());
+        });
+      } else {
+        const stub = temp.content.querySelector(
+          `[data-id="${component.id}"]`
+        );
+        stub?.replaceWith(component.getContent());
+      }
+    });
+
+    return temp.content;
+  }
+ /*   Object.entries(this.children).forEach(([_, component]) => {
       const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
       if (!stub) {
         return;
@@ -215,7 +246,7 @@ abstract class Block {
       stub.replaceWith(component.getContent()!);
     });
     return temp.content;
-  }
+  }*/
 
   show() {
     if (this.getContent()) this.getContent()!.style.display = "block";

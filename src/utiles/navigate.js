@@ -6,7 +6,7 @@ import { getServerErrorPage } from '../modules/serverErrorPage';
 import { getNotFoundPage } from '../modules/notFoundPage';
 import {getNavigationPage} from '~src/modules/navigation'
 import { routes } from './constants';
-import settings from '../modules/settings';
+import { getSettingPage} from '../modules/settings';
 import {render} from '../services/renderBlock'
 
 const renderPage = () => {
@@ -35,9 +35,9 @@ const renderPage = () => {
       render(getNotFoundPage().getContent());
       break;
     case routes.setting:
-      render(settings().getContent());
+      render(getSettingPage().getContent());
       break;
-    case routes.setAvatar:
+   /* case routes.setAvatar:
       render(settings().getContent());
       break;
     case routes.setRegInfo:
@@ -45,9 +45,9 @@ const renderPage = () => {
       break;
     case routes.setSafety:
       render(settings());
-      break;
+      break;*/
     default:
-      render(notFoundPage());
+      render(getNotFoundPage().getContent());
       break;
   }
 };
