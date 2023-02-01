@@ -37,15 +37,15 @@ const renderPage = () => {
     case routes.setting:
       render(getSettingPage().getContent());
       break;
-   /* case routes.setAvatar:
-      render(settings().getContent());
+    case routes.setAvatar:
+      render(getSettingPage().getContent());
       break;
     case routes.setRegInfo:
-      render(settings().getContent());
+      render(getSettingPage().getContent());
       break;
     case routes.setSafety:
-      render(settings());
-      break;*/
+      render(getSettingPage().getContent());
+      break;
     default:
       render(getNotFoundPage().getContent());
       break;

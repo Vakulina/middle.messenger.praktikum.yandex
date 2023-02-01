@@ -19,24 +19,25 @@ export type Tab = {
 
 //TODO перенести логику роутинга в Routes, который планируется в 3 спринте
 export class Tabs extends Block {
-  private pathname: string;
+  pathname: string;
   protected currentTab: string;
   protected activeLink: string
   protected currentPathname: Location
 
   constructor({ globalListerners, rootPathname, ...otherProps }: TabsProps) {
+
     super('div', {
       globalListerners,
       rootPathname,
       class: `${s.tabs} ${styles.getClassWithPrefix(s, 'tabs', otherProps.stylePrefix || '')}`,
       ...otherProps
     });
+
     //console.log(this.props.tabsConfig)
-    this.pathname = window.location.pathname
-    /*this.activeLink = tabsConfig.filter((tab) => this.pathname.includes(tab.pathRoute))[0]?.pathRoute || tabsConfig[0]?.pathRoute;
-    this.links = tabsConfig.map((tab) => new Link({
+    //  this.activeLink = tabsConfig.filter((tab) => this.pathname.includes(tab.pathRoute))[0]?.pathRoute || tabsConfig[0]?.pathRoute;
+    /*this.links = tabsConfig.map((tab) => new Link({
       href: tab.pathRoute, text: tab.name, stylePrefix: 'tabs', active: !!(tab.pathRoute === this.activeLink),
-    }))*/
+    }))
 
     /*this.setProps({
       class: `${s.tabs} ${styles.getClassWithPrefix(s, 'tabs', this.props.stylePrefix)}`,
@@ -49,31 +50,35 @@ export class Tabs extends Block {
 
     )*/
   }
+
   initChildren() {
-    console.log(this.children.tabsConfig)
+
+
     //if(typeof this.children.tabsConfig==='Array')  this.children.tabsConfig.forEach(item=> {console.log(item)})
     const links = this.children.tabsConfig.map((tab: Tab) => {
+      const standartPathname = this.children.tabsConfig[0].pathRoute
+      const currentPathname = window.location.pathname
+
       const newLink = new Link({
         href: tab.pathRoute,
         text: tab.name,
         stylePrefix: 'tabs',
-        active: !!(tab.pathRoute == this.activeLink),
+        active: !!(tab.pathRoute === currentPathname) ? true : !!((tab.pathRoute === standartPathname) && (this.props.rootPathname === currentPathname)),
       })
+
       return newLink
     })
-    console.log(links)
+
+    const { tabsConfig: _, ...newChildren } = this.children
 
     this.children = {
-      ...this.children,
+      ...newChildren,
       links
     }
-    /*console.log(this.props.tabsConfig[0]!.pathRoute
-      )*/
   }
 
 
   protected render() {
-
     return this.compile(tpl, this.props);
   }
 

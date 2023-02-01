@@ -43,11 +43,10 @@ class Settings extends Block {
     return this.compile(tpl, this.props);
   }
 };
-const settingTabs = new Tabs({ tabsConfig, rootPathname: '/setting' })
+const settingTabs = new Tabs({ tabsConfig, rootPathname: '/setting',  })
 //console.log(settingTabs)
 
-/*
-export const settingLayout = new Settings({ tabs: settingTabs })
-console.log(settingLayout)*/
+const settingLayout = new Settings({ tabs: settingTabs, title:'Настройки профиля' })
+console.log(settingLayout)
 
-export const getSettingPage = () => new PageLayout({ content: settingTabs })
+export const getSettingPage = () => new PageLayout({ content: settingLayout})

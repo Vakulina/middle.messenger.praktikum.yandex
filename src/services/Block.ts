@@ -177,7 +177,7 @@ abstract class Block {
     Object.values(this.children).forEach(child => child.dispatchComponentDidMount());
   }
 
-  _componentDidUpdate(oldProps: PropsType, newProps: PropsType) {
+  _componentDidUpdate() {
     if (this.componentDidUpdate()) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
@@ -207,7 +207,6 @@ abstract class Block {
         contextAndStubs[name] = component.map((item) =>{
           return `<div data-id=${item.id}></div>`}
         );
-        console.log(contextAndStubs[name] )
 
     }
   });
