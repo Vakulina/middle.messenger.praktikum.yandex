@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
 
-  &__links {
+  div:first-child {
     width: 232px;
     border-right: 2px solid $lightPrimaryColor;
     min-height: 60vh;
