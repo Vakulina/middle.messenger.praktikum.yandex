@@ -5,7 +5,6 @@ import { EventBus, IEventBus } from "./EventBus";
 export type PropsType = Record<string, string | Block>;
 export type ChildrenType = Record<string, Block | Block[]|any>;
 
-
 abstract class Block {
   static EVENTS = {
     INIT: "init",
@@ -184,6 +183,7 @@ abstract class Block {
   }
 
   componentDidUpdate() {
+    //TODO добавить глубокое сравнение объектов oldProps  newProps;
     return true;
   }
 
@@ -217,9 +217,8 @@ abstract class Block {
 
 
     Object.values(this.children).forEach((component) => {
-      if ((Array.isArray(component))) {
+      if (Array.isArray(component)) {
         component.forEach((item) => {
-          // TODO Remove dublicated code from here
           const stub = temp.content.querySelector(
             `[data-id="${item.id}"]`
           );
@@ -235,17 +234,6 @@ abstract class Block {
 
     return temp.content;
   }
- /*   Object.entries(this.children).forEach(([_, component]) => {
-      const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
-      if (!stub) {
-        return;
-      }
-
-      component.getContent()?.append(...Array.from(stub.childNodes));
-      stub.replaceWith(component.getContent()!);
-    });
-    return temp.content;
-  }*/
 
   show() {
     if (this.getContent()) this.getContent()!.style.display = "block";

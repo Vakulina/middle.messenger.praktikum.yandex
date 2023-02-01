@@ -1,16 +1,9 @@
-{{#if stylePrefix}}
-<div class="{{class}}{{stylePrefix}}">
-	{{else}}
-	<div class={{class}}>
-		{{/if}}
-		<img class={{class}}__avatar src={{{avatar}}} alt="" />
-		<div class={{class}}__column>
-			<h3 class={{class}}__title>Андрей</h3>
-			<p class={{class}}__text>Друзья, у меня для вас особенный выпуск новостей!...
-				Посмотрите как устроен мир прекрасно.</p>
-		</div>
-		<div class={{class}}__column>
-			<span class={{class}}__time>14:30</span>
-			<div class={{class}}__count>3</div>
-		</div>
-	</div>
+{{{avatar}}}
+<div class={{class}}__column>
+  <h3 class={{class}}__title>{{{name}}}</h3>
+  <p class={{class}}__text>{{{text}}}</p>
+</div>
+<div class={{class}}__column>
+  <span class={{class}}__time>{{{time}}}</span>
+  <div class={{class}}__count>{{{count}}}</div>
+</div>

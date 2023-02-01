@@ -1,5 +1,5 @@
-import chatSelection from '../modules/chatSelection';
-import chatHistory from '../modules/chatHistory';
+import {getChats} from '~src/modules/chats'
+import chatHistory from '../modules/chats/Chats';
 import { getAuthForm } from '../modules/auth';
 import { getRegistrationForm } from '../modules/registration';
 import { getServerErrorPage } from '../modules/serverErrorPage';
@@ -17,10 +17,10 @@ const renderPage = () => {
       render(getNavigationPage().getContent());
       break;
     case routes.chats:
-      render(chatSelection());
+      render(getChats().getContent());
       break;
     case routes.chat:
-      render(chatHistory());
+      render(chatHistory().getContent());
       break;
     case routes.authorization:
       render(getAuthForm().getContent());
