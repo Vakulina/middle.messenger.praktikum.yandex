@@ -1,1 +1,1 @@
-export * from './RegistrationInfoTemplate'
+export * from './RegistrationInfoTemplate';

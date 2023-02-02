@@ -9,18 +9,22 @@ interface ChatSidebarProps {
 
 export class ChatSidebar extends Block {
   constructor(props: ChatSidebarProps) {
-    super('sidebar',
+    super(
+      'sidebar',
       {
         class: s.sidebar,
-        ...props
-      })
+        ...props,
+      },
+    );
   }
+
   initChildren() {
     this.children = {
       ...this.children,
-      panel: new Panel()
-    }
+      panel: new Panel(),
+    };
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

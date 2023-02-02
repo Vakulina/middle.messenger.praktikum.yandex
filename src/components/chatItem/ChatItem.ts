@@ -3,7 +3,6 @@ import s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 
-
 interface ChatItemProps {
   name: string,
   text: string,
@@ -21,18 +20,22 @@ export class ChatItem extends Block {
     stylePrefix = null,
     events = {
       click: () => {
-        console.log('Выбран чат!')
-      }
+        console.log('Выбран чат!');
+      },
     },
     ...otherProps
   }: ChatItemProps) {
-    super('div',
+    super(
+      'div',
       {
-        class: s.chatItem, stylePrefix: styles.getClassWithPrefix(s, 'chatItem', stylePrefix),
+        class: s.chatItem,
+        stylePrefix: styles.getClassWithPrefix(s, 'chatItem', stylePrefix),
         events,
-        ...otherProps
-      })
+        ...otherProps,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

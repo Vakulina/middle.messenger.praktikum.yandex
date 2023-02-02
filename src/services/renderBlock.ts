@@ -1,12 +1,11 @@
-type RenderBlockProps = HTMLElement | string
+type RenderBlockProps = HTMLElement | string;
 
 export function render(pageTemplate: RenderBlockProps) {
   const root = document.getElementById('root');
 
   if (typeof pageTemplate === 'string') {
     root!.innerHTML = pageTemplate;
-  }
-  else {
+  } else {
     root!.innerHTML = '';
     root!.appendChild(pageTemplate);
   }

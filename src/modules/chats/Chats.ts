@@ -7,9 +7,9 @@ import s from './style.module.scss';
 import { PageLayout } from '~src/components/pageLayout';
 import { ChatHeader } from '~src/components/chatHeader';
 
-const message = new Message()
-const sidebar = new ChatSidebar({ items })
-const header= new ChatHeader()
+const message = new Message();
+const sidebar = new ChatSidebar({ items });
+const header = new ChatHeader();
 
 interface ChatsProps {
   sidebar: Block,
@@ -20,20 +20,20 @@ interface ChatsProps {
 
 export class Chats extends Block {
   constructor(props: ChatsProps) {
-    super('section',
+    super(
+      'section',
       {
         class: s.chats,
-        ...props
-      })
+        ...props,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }
 }
 
+const chats = new Chats({ sidebar, message, header });
 
-const chats = new Chats({sidebar, message, header})
-
-export const getChats =() => new PageLayout({content: chats});
-
-
+export const getChats = () => new PageLayout({ content: chats });

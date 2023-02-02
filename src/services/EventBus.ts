@@ -5,8 +5,8 @@ export interface IEventBus {
   emit: (event: string, ...args: unknown[]) => void
 }
 
-class EventBus  implements IEventBus {
-  readonly listeners: { [key: string]: Array<Function> }
+class EventBus implements IEventBus {
+  readonly listeners: { [key: string]: Array<Function> };
 
   constructor() {
     this.listeners = {};
@@ -26,7 +26,7 @@ class EventBus  implements IEventBus {
     }
 
     this.listeners[event] = this.listeners[event].filter(
-      listener => listener !== callback
+      (listener) => listener !== callback,
     );
   }
 
@@ -35,9 +35,9 @@ class EventBus  implements IEventBus {
       throw new Error(`Нет события: ${event}`);
     }
 
-    this.listeners[event].forEach(function (listener) {
+    this.listeners[event].forEach((listener) => {
       listener(...args);
     });
   }
 }
-export {EventBus}
+export { EventBus };

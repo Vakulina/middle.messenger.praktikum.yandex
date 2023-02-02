@@ -8,14 +8,13 @@ type FormProps = {
   stylePrefix?: string | null,
   image?: any,
   class?: string
-}
+};
 export abstract class Form extends Block {
-
   constructor(props: FormProps) {
     super('form', props);
     this.setProps({
       class: `${s.form} ${styles.getClassWithPrefix(s, 'form', this.props.stylePrefix)}`,
-    })
+    });
   }
 
   protected render() {

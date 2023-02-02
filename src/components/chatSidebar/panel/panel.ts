@@ -6,17 +6,20 @@ import { Search } from '~src/components/search';
 
 export class Panel extends Block {
   constructor() {
-    super('div', { class: s.panel, })
+    super('div', { class: s.panel });
   }
+
   initChildren() {
     this.children = {
       ...this.children,
-      link: new Link({  href: '/setting', text: 'Профиль &#62', stylePrefix: 'profile'}),
-      search: new Search({        
-        placeholder : 'Поиск',
-        name:'search',})
-    }
+      link: new Link({ href: '/setting', text: 'Профиль &#62', stylePrefix: 'profile' }),
+      search: new Search({
+        placeholder: 'Поиск',
+        name: 'search',
+      }),
+    };
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

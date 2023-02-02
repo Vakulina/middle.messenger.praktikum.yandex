@@ -15,13 +15,16 @@ export class Image extends Block {
     alt = '',
     ...otherProps
   }: ImageProps) {
-    super('img',
+    super(
+      'img',
       {
         alt,
         class: `${s.image} ${styles.getClassWithPrefix(s, 'image', stylePrefix)}`,
-        ...otherProps
-      })
+        ...otherProps,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

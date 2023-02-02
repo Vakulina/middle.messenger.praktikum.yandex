@@ -15,9 +15,9 @@ interface InputProps {
   value?: string,
   autofocus?: boolean | null,
   events?: {
-    blur?: (e: InputEventType) => unknown;//при потере фокуса
-    focus?: (e: InputEventType) => unknown;//при фокусировке
-    change?: (e: InputEventType) => unknown; //произойдет при потере фокуса
+    blur?: (e: InputEventType) => unknown;// при потере фокуса
+    focus?: (e: InputEventType) => unknown;// при фокусировке
+    change?: (e: InputEventType) => unknown; // произойдет при потере фокуса
     input?: (e: InputEventType) => unknown;
   }
   name?: string
@@ -30,20 +30,23 @@ export class Input extends Block {
     autofocus = null,
     events = {
       input: (e) => {
-        console.log(e.target.value)
-      }
+        console.log(e.target.value);
+      },
     },
     ...otherProps
   }: InputProps) {
-    super('fieldset',
+    super(
+      'fieldset',
       {
         type,
         class: otherProps.class ? `${otherProps.class}` : `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
         events,
         autofocus,
-        ...otherProps
-      })
+        ...otherProps,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

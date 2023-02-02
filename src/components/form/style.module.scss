@@ -22,11 +22,9 @@
     font-weight: 600;
   }
 
-  &_auth{
-    @include centralContent(350px)
-  }
-  &_reg{
-    @include centralContent(810px)
-  }
+  &_auth {
+    @include centralContent(350px); }
 
+  &_reg {
+    @include centralContent(810px); }
 }

@@ -1,1 +1,1 @@
-export * from './PasswordTemplate'
+export * from './PasswordTemplate';

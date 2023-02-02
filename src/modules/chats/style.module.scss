@@ -1,11 +1,10 @@
 @import "../../assets/stylesheets/reusable";
 
 .chats {
-  display: block;
   width: 100%;
   display: flex;
 
-  &__wrapper{
+  &__wrapper {
     width: 100%;
     display: flex;
     flex-direction: column;

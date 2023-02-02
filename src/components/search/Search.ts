@@ -17,18 +17,21 @@ export class Search extends Block {
   constructor({
     events = {
       input: (e) => {
-        console.log(e.target.value)
-      }
+        console.log(e.target.value);
+      },
     },
     ...otherProps
   }: SearchProps) {
-    super('div',
+    super(
+      'div',
       {
         class: s.search,
         events,
-        ...otherProps
-      })
+        ...otherProps,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

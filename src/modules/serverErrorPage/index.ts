@@ -1,1 +1,1 @@
-export * from './ServerErrorPage'
+export * from './ServerErrorPage';

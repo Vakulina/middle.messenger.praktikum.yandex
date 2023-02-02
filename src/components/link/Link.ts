@@ -6,21 +6,24 @@ import Block from '~src/services/Block';
 interface LinkProps {
   href: string,
   text: string,
-  stylePrefix?: string|null,
+  stylePrefix?: string | null,
   active?:boolean,
 }
 
 export class Link extends Block {
   constructor({
-    stylePrefix=null,
+    stylePrefix = null,
     ...otherProps
   }: LinkProps) {
-    super('a',
+    super(
+      'a',
       {
         class: `${s.link} ${styles.getClassWithPrefix(s, 'link', stylePrefix)}`,
-        ...otherProps
-      })
+        ...otherProps,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

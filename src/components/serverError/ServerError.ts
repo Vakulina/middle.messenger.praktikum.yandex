@@ -11,12 +11,15 @@ export class ServerError extends Block {
   constructor({
     ...props
   }: ServerErrorProps) {
-    super('section',
+    super(
+      'section',
       {
         class: s.error,
-        ...props
-      })
+        ...props,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

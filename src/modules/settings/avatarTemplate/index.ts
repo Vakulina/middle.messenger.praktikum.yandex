@@ -1,1 +1,1 @@
-export * from './AvatarTemplate'
+export * from './AvatarTemplate';

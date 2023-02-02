@@ -4,7 +4,6 @@ import Block from '~src/services/Block';
 import { InputEventType } from '~src/utiles';
 import styles from '~src/utiles/styles';
 
-
 interface FileInputProps {
   label?: string,
   stylePrefix?: string | null,
@@ -17,32 +16,34 @@ interface FileInputProps {
   name?: string,
   type?: 'file',
   fileName?: string,
-  text:string|Block
+  text:string | Block
 }
 
 export class FileInput extends Block {
   constructor({
     type = 'file',
     stylePrefix = null,
-    text='Обзор...',
+    text = 'Обзор...',
     events = {
       change: (e) => {
-        if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name })
-      }
+        if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name });
+      },
     },
     ...otherProps
   }: FileInputProps) {
-    super('fieldset',
+    super(
+      'fieldset',
       {
         type,
         text,
-        class: !stylePrefix? s.fileInput: `${s.fileInput} ${styles.getClassWithPrefix(s, 'fileInput', stylePrefix)}`,
+        class: !stylePrefix ? s.fileInput : `${s.fileInput} ${styles.getClassWithPrefix(s, 'fileInput', stylePrefix)}`,
         events,
-        ...otherProps
-      })
+        ...otherProps,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }
 }
-

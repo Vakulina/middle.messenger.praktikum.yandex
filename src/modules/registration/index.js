@@ -1,4 +1,4 @@
-/*import tpl from './tpl.hbs';
+/* import tpl from './tpl.hbs';
 import pageLayout from '../../components/pageLayout';
 import form, { Form } from '../../components/form';
 import style from './style.module.scss';
@@ -30,4 +30,4 @@ const registration = () => authForm;
 
 export default registration;
 */
-export * from './registration'
+export * from './registration';

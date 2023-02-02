@@ -4,38 +4,39 @@ import s from './style.module.scss';
 import Block, { ChildrenType, PropsType } from '~src/services/Block';
 import { Link } from '../link/Link';
 
-
 type TabsProps = {
   tabsConfig: Tab[],
   globalListerners?: Array<{ targetElement: HTMLElement, event: Event, action: (e: Event) => void }>,
   rootPathname: string,
   stylePrefix?: string
-}
+};
 export type Tab = {
   name: string,
   content: Block | ChildrenType,
   pathRoute: string,
-}
+};
 
-//TODO перенести логику роутинга в Routes, который планируется в 3 спринте
+// TODO перенести логику роутинга в Routes, который планируется в 3 спринте
 export class Tabs extends Block {
   pathname: string;
+
   protected currentTab: string;
-  protected activeLink: string
-  protected currentPathname: Location
+
+  protected activeLink: string;
+
+  protected currentPathname: Location;
 
   constructor({ globalListerners, rootPathname, ...otherProps }: TabsProps) {
-
     super('div', {
       globalListerners,
       rootPathname,
       class: `${s.tabs} ${styles.getClassWithPrefix(s, 'tabs', otherProps.stylePrefix || '')}`,
-      ...otherProps
+      ...otherProps,
     });
 
-    //console.log(this.props.tabsConfig)
+    // console.log(this.props.tabsConfig)
     //  this.activeLink = tabsConfig.filter((tab) => this.pathname.includes(tab.pathRoute))[0]?.pathRoute || tabsConfig[0]?.pathRoute;
-    /*this.links = tabsConfig.map((tab) => new Link({
+    /* this.links = tabsConfig.map((tab) => new Link({
       href: tab.pathRoute, text: tab.name, stylePrefix: 'tabs', active: !!(tab.pathRoute === this.activeLink),
     }))
 
@@ -45,17 +46,16 @@ export class Tabs extends Block {
            targetElement:window,
            event: 'popstate',
            action: (e:Event)=>console.log(e),
-         }]  
+         }]
     },
 
-    )*/
+    ) */
   }
 
   initChildren() {
-
-    const currentPathname = window.location.pathname
+    const currentPathname = window.location.pathname;
     const activeLink = this.children.tabsConfig.filter((tab: Tab) => {
-      return currentPathname.includes(tab.pathRoute)
+      return currentPathname.includes(tab.pathRoute);
     })[0]?.pathRoute || this.children.tabsConfig[0]?.pathRoute;
 
     const links = this.children.tabsConfig.map((tab: Tab) => {
@@ -63,23 +63,22 @@ export class Tabs extends Block {
         href: tab.pathRoute,
         text: tab.name,
         stylePrefix: 'tabs',
-        active: (tab.pathRoute === activeLink) ? true : false,
-      })
+        active: (tab.pathRoute === activeLink),
+      });
 
-      return newLink
-    })
+      return newLink;
+    });
     const activeTab = this.children.tabsConfig.filter((tab:Tab) => tab.pathRoute === activeLink)[0];
     const content = activeTab?.content;
 
-    const { tabsConfig: _, ...newChildren } = this.children
+    const { tabsConfig: _, ...newChildren } = this.children;
 
     this.children = {
       ...newChildren,
-      links, 
-      content
-    }
+      links,
+      content,
+    };
   }
-
 
   protected render() {
     return this.compile(tpl, this.props);
@@ -88,8 +87,8 @@ export class Tabs extends Block {
   _addGlobalListerners() {
     const { globalListerners = [] } = this.props;
 
-    /*Object.keys(globalListerners).forEach(eventName => {
+    /* Object.keys(globalListerners).forEach(eventName => {
       this._element.addEventListener(eventName, events[eventName]);
-    });*/
+    }); */
   }
 }

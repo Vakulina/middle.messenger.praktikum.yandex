@@ -1,13 +1,13 @@
-import {getChats} from '~src/modules/chats'
+import { getChats } from '~src/modules/chats';
 import chatHistory from '../modules/chats/Chats';
 import { getAuthForm } from '../modules/auth';
 import { getRegistrationForm } from '../modules/registration';
 import { getServerErrorPage } from '../modules/serverErrorPage';
 import { getNotFoundPage } from '../modules/notFoundPage';
-import {getNavigationPage} from '~src/modules/navigation'
+import { getNavigationPage } from '~src/modules/navigation';
 import { routes } from './constants';
-import { getSettingPage} from '../modules/settings';
-import {render} from '../services/renderBlock'
+import { getSettingPage } from '../modules/settings';
+import { render } from '../services/renderBlock';
 
 const renderPage = () => {
   const { pathname } = window.location;

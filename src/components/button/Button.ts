@@ -2,11 +2,10 @@ import tpl from './tpl.hbs';
 import s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
-import { BtnEventType} from '~src/utiles';
-
+import { BtnEventType } from '~src/utiles';
 
 interface ButtonProps {
-  text: string|Block;
+  text: string | Block;
   stylePrefix?: string | null,
   type?: string,
   events?: {
@@ -22,22 +21,23 @@ export class Button extends Block {
     events = {
       click: (e) => {
         e.preventDefault();
-        console.log("click")
-      }
+        console.log('click');
+      },
     },
     ...otherProps
   }: ButtonProps) {
-    super('button',
+    super(
+      'button',
       {
         type,
         class: `${s.button} ${styles.getClassWithPrefix(s, 'button', stylePrefix)}`,
         events,
-        ...otherProps
-      })
+        ...otherProps,
+      },
+    );
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }
 }
-
-

@@ -24,18 +24,21 @@ export class Textarea extends Block {
   constructor({
     events = {
       input: (e) => {
-        console.log(e.target.value)
-      }
+        console.log(e.target.value);
+      },
     },
     ...otherProps
   }: TextareaProps) {
-    super('div',
+    super(
+      'div',
       {
         events,
-        ...otherProps
-      })
-    this.setProps({ class: `${s.wrapper} ${styles.getClassWithPrefix(s, 'wrapper', otherProps.stylePrefix || '')}` })
+        ...otherProps,
+      },
+    );
+    this.setProps({ class: `${s.wrapper} ${styles.getClassWithPrefix(s, 'wrapper', otherProps.stylePrefix || '')}` });
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

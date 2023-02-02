@@ -15,20 +15,21 @@ const dotsButton = new Button({
   stylePrefix: 'withArrow',
   type: 'button',
   events: {
-    click: (e: BtnEventType) => console.log("open menu")
+    click: (e: BtnEventType) => console.log('open menu'),
   },
-  name: 'sendMessage'
-})
+  name: 'sendMessage',
+});
 
 export class ChatHeader extends Block {
   constructor() {
     super('div', {
-      class:s.header,
+      class: s.header,
       avatar: new Image({ alt: 'аватар', stylePrefix: 'chatItems', src: avatar }),
       name: 'Александр',
-      button: dotsButton
+      button: dotsButton,
     });
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

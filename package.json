@@ -20,9 +20,9 @@
     "dev": "parcel src/index.html --no-cache --open",
     "start": "parcel build  && node server.ts --open",
     "prebuild": "rm -rf dist",
-    "eslint": "eslint .",
+    "eslint": "eslint .  --fix",
     "build": "parcel build",
-    "lint": "npx stylelint \"**/*.scss\""
+    "lint": "npx stylelint \"**/*.scss\" --fix"
   },
   "repository": {
     "type": "git",
