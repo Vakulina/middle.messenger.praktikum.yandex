@@ -3,9 +3,10 @@ import s from './style.module.scss';
 import Block from '~src/services/Block';
 import { Button } from '../button';
 import { Textarea } from '../textarea';
-import { InputEventType } from '~src/utiles';
+import { BtnEventType, InputEventType } from '~src/utiles';
 import { Image } from '../image';
 import clip from '../../../static/clip.svg'
+import arrow from '../../../static/arrow.svg'
 import { FileInput } from '../fileInput';
 
 const textarea = new Textarea({
@@ -14,12 +15,11 @@ const textarea = new Textarea({
   events: {
     blur: (e: InputEventType) => console.log(`Отправим сообщение ${e.target.value}`)
   }
-})
+});
 
 const addFileInput = new FileInput({
   text: new Image({
     src: clip,
-    alt: 'Добавить вложение',
     stylePrefix: 'clip',
   }),
   stylePrefix: 'clip',
@@ -28,7 +28,20 @@ const addFileInput = new FileInput({
     change: (e: InputEventType) => console.log('Выбрать файл')
   },
   name: 'clipBtn',
-  accept:'video/*, image/*'
+  accept: 'video/*, image/*'
+});
+
+const sendMessage = new Button({
+  text: new Image({
+    src: arrow,
+    stylePrefix: 'arrow',
+  }),
+  stylePrefix: 'withArrow',
+  type: 'button',
+  events: {
+    click: (e: BtnEventType) => console.log("send message")
+  },
+  name: 'sendMessage'
 })
 
 export class Message extends Block {
@@ -42,8 +55,8 @@ export class Message extends Block {
     this.children = {
       ...this.children,
       addFileInput,
-     // 'sendMessage': new Button({}),
-      textarea
+      textarea,
+      sendMessage,
     }
   }
   protected render() {

@@ -4,18 +4,20 @@ import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 
 interface ImageProps {
-  src?:any,
-  alt:string,
-  stylePrefix: string|null,
+  src?: any,
+  alt?: string,
+  stylePrefix: string | null,
 }
 
 export class Image extends Block {
   constructor({
-    stylePrefix=null,
+    stylePrefix = null,
+    alt = '',
     ...otherProps
   }: ImageProps) {
     super('img',
       {
+        alt,
         class: `${s.image} ${styles.getClassWithPrefix(s, 'image', stylePrefix)}`,
         ...otherProps
       })

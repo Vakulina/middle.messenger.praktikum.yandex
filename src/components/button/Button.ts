@@ -2,6 +2,7 @@ import tpl from './tpl.hbs';
 import s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
+import { BtnEventType} from '~src/utiles';
 
 
 interface ButtonProps {
@@ -9,7 +10,7 @@ interface ButtonProps {
   stylePrefix?: string | null,
   type?: string,
   events?: {
-    click: (e: Event) => void;
+    click: (e: BtnEventType) => void;
   },
   name?: string
 }
