@@ -14,11 +14,6 @@
     height: 0;
     position: absolute;
     z-index: -1;
-
-    &:hover + label,
-    &:focus + label {
-      background-color: $lightPrimaryColor;
-    }
   }
 
   label {
@@ -33,11 +28,6 @@
     transition: transform 0.2s ease-out;
 
     @include lightShadow;
-
-    &:hover,
-    &:active {
-      background-color: $lightPrimaryColor;
-    }
   }
 
   span:last-of-type {
@@ -61,11 +51,6 @@
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
-
-    &[data-style="placeholder"] {
-      color: $secondaryDark;
-      font-weight: 400;
-    }
   }
 
   &_clip {
@@ -81,17 +66,31 @@
       background-color: transparent;
       width: 32px;
       height: 32px;
-
-      &:hover,
-      :active {
-        background-color: transparent;
-      }
-
       position: static;
       display: flex;
       justify-content: center;
       align-items: center;
       box-shadow: none;
+
+      &:hover,
+      :active {
+        background-color: transparent;
+      }
     }
+  }
+
+  label:hover,
+  label:active {
+    background-color: $lightPrimaryColor;
+  }
+
+  input:hover + label,
+  input:focus + label {
+    background-color: $lightPrimaryColor;
+  }
+
+  span:last-of-type[data-style="placeholder"] {
+    color: $secondaryDark;
+    font-weight: 400;
   }
 }

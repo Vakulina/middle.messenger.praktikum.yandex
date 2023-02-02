@@ -40,19 +40,6 @@
     margin-top: 8px;
   }
 
-  input:focus {
-    border-color: $primary-color;
-
-    @include primaryShadow;
-
-    outline: none;
-  }
-
-  input::placeholder {
-    color: $secondaryDark;
-    font-weight: 400;
-  }
-
   &_setting {
     flex-direction: row;
     align-items: center;
@@ -71,6 +58,19 @@
     width: 100%;
     max-width: 340px;
     margin-top: 0;
+  }
+
+  input:focus {
+    border-color: $primary-color;
+
+    @include primaryShadow;
+
+    outline: none;
+  }
+
+  input::placeholder {
+    color: $secondaryDark;
+    font-weight: 400;
   }
 
   input[name="avatar"] {

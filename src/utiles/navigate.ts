@@ -1,5 +1,4 @@
 import { getChats } from '~src/modules/chats';
-import chatHistory from '../modules/chats/Chats';
 import { getAuthForm } from '../modules/auth';
 import { getRegistrationForm } from '../modules/registration';
 import { getServerErrorPage } from '../modules/serverErrorPage';
@@ -18,9 +17,6 @@ const renderPage = () => {
       break;
     case routes.chats:
       render(getChats().getContent());
-      break;
-    case routes.chat:
-      render(chatHistory().getContent());
       break;
     case routes.authorization:
       render(getAuthForm().getContent());

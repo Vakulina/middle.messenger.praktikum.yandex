@@ -32,7 +32,9 @@ $lightTextColor: #fff;
 
 @mixin centralContent($height) {
   width: 100%;
+  /* stylelint-disable scss/operator-no-unspaced */
   padding-top: calc(50vh - $height/2);
+  /* stylelint-enable */
   min-height: 220px;
 }
 

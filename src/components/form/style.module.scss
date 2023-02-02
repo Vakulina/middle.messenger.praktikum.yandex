@@ -23,8 +23,10 @@
   }
 
   &_auth {
-    @include centralContent(350px); }
+    @include centralContent(350px);
+  }
 
   &_reg {
-    @include centralContent(810px); }
+    @include centralContent(810px);
+  }
 }
