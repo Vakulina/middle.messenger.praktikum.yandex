@@ -1,10 +1,9 @@
 import tpl from './tpl.hbs';
 import s from './style.module.scss';
 import Block from '~src/services/Block';
+import { InputEventType } from '~src/utiles';
+import styles from '~src/utiles/styles';
 
-interface HTMLInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
 
 interface FileInputProps {
   label?: string,
@@ -12,18 +11,20 @@ interface FileInputProps {
   accept: string,
   value?: string,
   events?: {
-    change?: (e: HTMLInputEvent) => unknown;
-    input?: (e: HTMLInputEvent) => unknown;
+    change?: (e: InputEventType) => unknown;
+    input?: (e: InputEventType) => unknown;
   }
   name?: string,
   type?: 'file',
-  fileName?: string
+  fileName?: string,
+  text:string|Block
 }
 
 export class FileInput extends Block {
   constructor({
     type = 'file',
     stylePrefix = null,
+    text='Обзор...',
     events = {
       change: (e) => {
         if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name })
@@ -34,7 +35,8 @@ export class FileInput extends Block {
     super('fieldset',
       {
         type,
-        class: s.fileInput,
+        text,
+        class: !stylePrefix? s.fileInput: `${s.fileInput} ${styles.getClassWithPrefix(s, 'fileInput', stylePrefix)}`,
         events,
         ...otherProps
       })

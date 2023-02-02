@@ -2,21 +2,23 @@ import tpl from './tpl.hbs';
 import s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
+import { InputEventType } from '~src/utiles';
 
 interface InputProps {
   label?: string,
-  placeholder? : string,
+  placeholder?: string,
   stylePrefix?: string | null,
   type?: string,
+  class?: string,
   accept?: string,
-  autocomplete?:string,
+  autocomplete?: string,
   value?: string,
-  autofocus?:boolean|null,
+  autofocus?: boolean | null,
   events?: {
-    blur?: (event: FocusEvent & { target: HTMLInputElement }) => unknown;//при потере фокуса
-    focus?: (event: FocusEvent & { target: HTMLInputElement }) => unknown;//при фокусировке
-    change?: (e: InputEvent) => unknown; //произойдет при потере фокуса
-    input?: (e: InputEvent) => unknown;
+    blur?: (e: InputEventType) => unknown;//при потере фокуса
+    focus?: (e: InputEventType) => unknown;//при фокусировке
+    change?: (e: InputEventType) => unknown; //произойдет при потере фокуса
+    input?: (e: InputEventType) => unknown;
   }
   name?: string
 }
@@ -24,11 +26,11 @@ interface InputProps {
 export class Input extends Block {
   constructor({
     type = 'text',
-    stylePrefix=null,
-    autofocus=null,
+    stylePrefix = null,
+    autofocus = null,
     events = {
       input: (e) => {
-        console.log(e.target)
+        console.log(e.target.value)
       }
     },
     ...otherProps
@@ -36,7 +38,7 @@ export class Input extends Block {
     super('fieldset',
       {
         type,
-        class: `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
+        class: otherProps.class ? `${otherProps.class}` : `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
         events,
         autofocus,
         ...otherProps

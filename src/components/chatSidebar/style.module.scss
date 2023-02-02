@@ -1,10 +1,9 @@
 @import "../../assets/stylesheets/reusable";
 
 .sidebar {
+  display: block;
   max-width: 310px;
   max-height: 100vh;
-  padding: 0 10px;
-
 
   ul {
     @include reset-list;

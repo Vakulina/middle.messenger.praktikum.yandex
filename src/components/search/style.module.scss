@@ -1,17 +1,17 @@
 @import "src/assets/stylesheets/reusable";
 
 .search {
-  padding-left: 33px;
-  box-sizing: border-box;
-  height: 32px;
-  min-height: 32px;
-  border-radius: 6px;
-  background-color: $shadeLigthest;
-  border: none;
+  position: relative;
   width: 100%;
 
-  &__wrapper {
-    position: relative;
+  &__input {
+    padding-left: 33px;
+    box-sizing: border-box;
+    height: 32px;
+    min-height: 32px;
+    border-radius: 6px;
+    background-color: $shadeLigthest;
+    border: none;
     width: 100%;
   }
 

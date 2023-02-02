@@ -12,7 +12,9 @@ export class Panel extends Block {
     this.children = {
       ...this.children,
       link: new Link({  href: '/setting', text: 'Профиль &#62', stylePrefix: 'profile'}),
-      search: new Search()
+      search: new Search({        
+        placeholder : 'Поиск',
+        name:'search',})
     }
   }
   protected render() {

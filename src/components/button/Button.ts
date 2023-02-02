@@ -5,7 +5,7 @@ import Block from '~src/services/Block';
 
 
 interface ButtonProps {
-  text: string;
+  text: string|Block;
   stylePrefix?: string | null,
   type?: string,
   events?: {

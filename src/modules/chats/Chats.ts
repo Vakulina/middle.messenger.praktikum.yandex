@@ -4,7 +4,7 @@ import style from './style.module.scss';
 import { Link } from '../../components/link';
 import { ChatSidebar } from '../../components/chatSidebar';
 import { items } from './constants';
-
+import { Message } from '~src/components/message';
 
 /*
 const profileTemplateLink = new Link({ href: '/setting', text: 'Профиль &#62', stylePrefix: 'profile' });
@@ -16,7 +16,7 @@ const content = tpl({
 const chatHistory = () => pageLayout(content);
 */
 
-
-export const getChats = () => new ChatSidebar({ items })
+const message = new Message()
+export const getChats = () => new Message()
 
 

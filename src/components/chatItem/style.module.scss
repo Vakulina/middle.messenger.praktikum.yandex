@@ -3,9 +3,10 @@
 .chatItem {
   display: flex;
   width: 100%;
-  max-width: 370px;
+  max-width: 300px;
   height: 70px;
   align-items: center;
+  cursor: pointer;
 
   &__title {
     @include reset-margins;

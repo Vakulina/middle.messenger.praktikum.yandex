@@ -62,9 +62,32 @@
     padding-left: 20px;
     box-sizing: border-box;
 
-    &[data-style=placeholder]{
+    &[data-style=placeholder] {
       color: $secondaryDark;
       font-weight: 400;
+    }
+  }
+
+  &_clip {
+    background-color: transparent;
+    color: $primary-color;
+
+    span[data-style=placeholder] {
+      display: none;
+    }
+    label {
+      background-color:transparent ;
+      width: 32px;
+      height: 32px;
+      &:hover, :active{
+        background-color: transparent;
+      }
+      display: block;
+      position: static;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: none;
     }
   }
 
