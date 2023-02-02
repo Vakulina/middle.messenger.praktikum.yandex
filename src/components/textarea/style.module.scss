@@ -1,79 +1,20 @@
 @import "src/assets/stylesheets/reusable";
 
-.field {
+.wrapper {
+  max-width: 849px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  outline: none;
-  border: none;
-  padding: 0;
-  box-sizing: border-box;
-  margin-bottom: 15px;
+  background: $shadeLigthest;
+  border-radius: 30px;
+  padding: 10px;
 
-  label {
-    @include montserrat;
-
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 18px;
+  textarea {
+    border: none;
     width: 100%;
-    margin-bottom: 8px;
-  }
-
-  input {
-    @include montserrat;
-
-    background-color: $shadeLigthestBackground;
-    border: 1px solid $secondaryLight;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    height: 44px;
-    line-height: 1.2;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 10px 12px;
-    transition-property: border-color, color, background-color, box-shadow;
-    transition-duration: 0.25s;
-    transition-timing-function: ease;
-    margin-top: 8px;
-  }
-
-  input:focus {
-    border-color: $primary-color;
-
-    @include primaryShadow;
-
+    height: 60px;
+    padding: 0 20px;
+    resize: vertical;
+    background: $shadeLigthest;
     outline: none;
-  }
-
-  input::placeholder {
-    color: $secondaryDark;
-    font-weight: 400;
-  }
-
-  &_setting {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  &_setting label {
-    color: $secondaryDark;
-    font-size: 16px;
-    max-width: 514px;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
-  &_setting input {
-    width: 100%;
-    max-width: 340px;
-    margin-top: 0;
-  }
-
-  input[name=avatar] {
-    border-color: red;
+    min-height: 60px;
   }
 }

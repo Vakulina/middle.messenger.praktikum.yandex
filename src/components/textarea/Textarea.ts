@@ -27,15 +27,14 @@ export class Textarea extends Block {
         console.log(e.target.value)
       }
     },
-    stylePrefix=null,
     ...otherProps
   }: TextareaProps) {
-    super('textarea',
+    super('div',
       {
-        class: otherProps.class ? `${otherProps.class}` : `${s.textarea} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
         events,
         ...otherProps
       })
+    this.setProps({ class: `${s.wrapper} ${styles.getClassWithPrefix(s, 'wrapper', otherProps.stylePrefix || '')}` })
   }
   protected render() {
     return this.compile(tpl, this.props);
