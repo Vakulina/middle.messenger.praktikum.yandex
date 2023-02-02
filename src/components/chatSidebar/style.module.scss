@@ -4,14 +4,15 @@
   max-width: 310px;
   max-height: 100vh;
   padding: 0 10px;
-}
 
-.list {
-  @include reset-list;
-  @include reset-margins;
 
-  max-height: calc(100vh - 102px);
-  overflow-y: scroll;
+  ul {
+    @include reset-list;
+    @include reset-margins;
+
+    max-height: calc(100vh - 102px);
+    overflow-y: scroll;
+  }
 }
 
 ::-webkit-scrollbar {

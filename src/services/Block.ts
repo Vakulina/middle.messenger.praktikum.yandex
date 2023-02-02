@@ -2,7 +2,7 @@ import { v4 as makeUUID } from 'uuid';
 
 import { EventBus, IEventBus } from "./EventBus";
 
-export type PropsType = Record<string, string | Block>;
+export type PropsType = Record<string, string|Record<string, Function>>;
 export type ChildrenType = Record<string, Block | Block[]|any>;
 
 abstract class Block {
@@ -28,7 +28,7 @@ abstract class Block {
       tagName,
       propsWithChildren
     };
-    this.children = children
+    this.children = this._makePropsProxy(children);
     this.props = this._makePropsProxy(props);
     this.eventBus = () => eventBus;
     this._registerEvents(eventBus);
@@ -36,7 +36,7 @@ abstract class Block {
   }
   protected initChildren() { }
 
-  private _getChildrenAndProps(propsWithChildren: PropsType): { props: Record<string, string>, children: ChildrenType } {
+  private _getChildrenAndProps(propsWithChildren: ChildrenType): { props: Record<string, string>, children: ChildrenType } {
     const props: Record<string, string> = {};
     const children: ChildrenType = {}
 
@@ -54,38 +54,22 @@ abstract class Block {
   }
 
 
-  private _makePropsProxy(props: Record<string, string>) {
-    const checkPrivateProp: (prop: string) => boolean = prop => prop.startsWith('_');
-
-    return new Proxy(props, {
-      get(target, property: string, receiver) {
-        if (checkPrivateProp(property)) {
-          throw new Error("Нет прав");
-        } else {
-          if (property in target) {
-            const value = Reflect.get(target, property, receiver);
-            return (typeof value === 'function') ? value.bind(target) : value;
-          }
-        }
+  private _makePropsProxy(props: ChildrenType): ChildrenType {
+    return new Proxy<ChildrenType>(props, {
+      get(target: ChildrenType, property: string): unknown {
+        const value: unknown = target[property as keyof ChildrenType];
+        return typeof value === 'function' ? (value as () => void).bind(target) : value;
       },
-      set(target, property: string, value, receiver) {
-        if (checkPrivateProp(property)) {
-          throw new Error("Нет прав");
-        } else {
-          return Reflect.set(target, property, value, receiver);
-        }
+      set: (target: ChildrenType, property: string, value: unknown): boolean => {
+        Reflect.set(target, property, value);
+        //this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+        return true;
       },
-      deleteProperty(target, property: string) {
-        if (checkPrivateProp(property)) {
-          throw new Error("Нет прав");
-        } else {
-          delete target[property];
-          return true;
-        }
-      }
-    })
+      deleteProperty() {
+        throw new Error('нет доступа');
+      },
+    });
   }
-
 
   get element() {
     return this._element;

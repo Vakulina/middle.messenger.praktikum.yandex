@@ -29,7 +29,6 @@ export class ChatItem extends Block {
     super('div',
       {
         class: s.chatItem, stylePrefix: styles.getClassWithPrefix(s, 'chatItem', stylePrefix),
-
         events,
         ...otherProps
       })
