@@ -3,7 +3,6 @@ import s from './style.module.scss';
 import Block from '~src/services/Block';
 import { Panel } from './panel';
 
-
 interface ChatSidebarProps {
   items: Block[],
 }
