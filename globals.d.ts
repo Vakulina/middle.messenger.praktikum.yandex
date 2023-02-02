@@ -1,5 +1,6 @@
 declare module 'uuid' {
   function v4(options?: v4Options, buffer?: any, offset?: number): string;
+  /* eslint-disable  @typescript-eslint/naming-convention */
   interface v4Options {
     random?: number[];
     rng?: any;

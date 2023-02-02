@@ -1,7 +1,7 @@
 import tpl from './tpl.hbs';
 import styles from '../../utiles/styles';
 import s from './style.module.scss';
-import Block, { ChildrenType, PropsType } from '~src/services/Block';
+import Block, { ChildrenType } from '~src/services/Block';
 import { Link } from '../link/Link';
 
 type TabsProps = {
@@ -33,23 +33,6 @@ export class Tabs extends Block {
       class: `${s.tabs} ${styles.getClassWithPrefix(s, 'tabs', otherProps.stylePrefix || '')}`,
       ...otherProps,
     });
-
-    // console.log(this.props.tabsConfig)
-    //  this.activeLink = tabsConfig.filter((tab) => this.pathname.includes(tab.pathRoute))[0]?.pathRoute || tabsConfig[0]?.pathRoute;
-    /* this.links = tabsConfig.map((tab) => new Link({
-      href: tab.pathRoute, text: tab.name, stylePrefix: 'tabs', active: !!(tab.pathRoute === this.activeLink),
-    }))
-
-    /*this.setProps({
-      class: `${s.tabs} ${styles.getClassWithPrefix(s, 'tabs', this.props.stylePrefix)}`,
-      /*    globalListerners:[{
-           targetElement:window,
-           event: 'popstate',
-           action: (e:Event)=>console.log(e),
-         }]
-    },
-
-    ) */
   }
 
   initChildren() {
@@ -68,9 +51,9 @@ export class Tabs extends Block {
 
       return newLink;
     });
-    const activeTab = this.children.tabsConfig.filter((tab:Tab) => tab.pathRoute === activeLink)[0];
+    const activeTab = this.children.tabsConfig.filter((tab: Tab) => tab.pathRoute === activeLink)[0];
     const content = activeTab?.content;
-
+    /* eslint-disable @typescript-eslint/naming-convention */
     const { tabsConfig: _, ...newChildren } = this.children;
 
     this.children = {
@@ -82,13 +65,5 @@ export class Tabs extends Block {
 
   protected render() {
     return this.compile(tpl, this.props);
-  }
-
-  _addGlobalListerners() {
-    const { globalListerners = [] } = this.props;
-
-    /* Object.keys(globalListerners).forEach(eventName => {
-      this._element.addEventListener(eventName, events[eventName]);
-    }); */
   }
 }

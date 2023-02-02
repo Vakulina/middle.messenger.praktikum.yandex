@@ -22,11 +22,16 @@
     ],
     "max-len": [
       2,
-      120
+      160
     ],
     "dot-notation": "off",
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "warn",
+    "no-underscore-dangle": "off",
     "@typescript-eslint/dot-notation": "warn",
-    "@typescript-eslint/no-unused-vars": 2,
+    "no-empty": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "class-methods-use-this": "off",
     "max-params": [
       2,
       3
@@ -34,6 +39,7 @@
     "import/prefer-default-export": [
       "off"
     ],
+    "import/extensions": "off",
     "arrow-body-style": [
       "off"
     ],
@@ -41,5 +47,6 @@
       "warn",
       "always"
     ]
+
   }
 }
