@@ -4,9 +4,9 @@ import { getRegistrationForm } from '../modules/registration';
 import { getServerErrorPage } from '../modules/serverErrorPage';
 import { getNotFoundPage } from '../modules/notFoundPage';
 import { getNavigationPage } from '~src/modules/navigation';
-import { routes } from './constants';
+import { routes } from '../utiles/constants';
 import { getSettingPage } from '../modules/settings';
-import { render } from '../services/renderBlock';
+import { render } from './renderBlock';
 
 const renderPage = () => {
   const { pathname } = window.location;
