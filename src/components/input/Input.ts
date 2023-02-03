@@ -14,6 +14,8 @@ interface InputProps {
   autocomplete?: string,
   value?: string,
   autofocus?: boolean | null,
+  pattern?: string;
+  textError?: string;
   events?: {
     blur?: (e: InputEventType) => unknown;// при потере фокуса
     focus?: (e: InputEventType) => unknown;// при фокусировке
@@ -24,27 +26,43 @@ interface InputProps {
 }
 
 export class Input extends Block {
+  isValid: boolean
   constructor({
     type = 'text',
     stylePrefix = null,
     autofocus = null,
-    events = {
-      input: (e) => {
-        console.log(e.target.value);
-      },
-    },
+    events,
     ...otherProps
   }: InputProps) {
     super(
       'fieldset',
       {
+        class: otherProps.class ? `${otherProps.class}` :
+          `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
         type,
-        class: otherProps.class ? `${otherProps.class}` : `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
-        events,
+        events: {
+          input: (e: InputEventType) => {
+            this.isValid = true
+            const attrValue = this.isValid ? 'false' : 'true';
+            this.addAttribute({ "data-error": attrValue })
+          },
+          change: (e: InputEventType) => {
+            this.checkInputValidity(e)
+          }
+        },
         autofocus,
+        error: otherProps.textError || 'Ошибка ввода',
         ...otherProps,
       },
     );
+    this.isValid = true
+  }
+
+  checkInputValidity(e: InputEventType) {
+    const regexp = new RegExp(this.props.pattern);
+    this.isValid = regexp.test(e.target.value);
+    const attrValue = this.isValid ? 'false' : 'true';
+    this.addAttribute({ "data-error": attrValue })
   }
 
   protected render() {

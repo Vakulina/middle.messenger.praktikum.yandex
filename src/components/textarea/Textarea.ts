@@ -32,11 +32,11 @@ export class Textarea extends Block {
     super(
       'div',
       {
+        class: `${s.wrapper} ${styles.getClassWithPrefix(s, 'wrapper', otherProps.stylePrefix || '')}`,
         events,
         ...otherProps,
       },
     );
-    this.setProps({ class: `${s.wrapper} ${styles.getClassWithPrefix(s, 'wrapper', otherProps.stylePrefix || '')}` });
   }
 
   protected render() {

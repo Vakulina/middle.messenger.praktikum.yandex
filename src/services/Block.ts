@@ -2,7 +2,7 @@ import { v4 as makeUUID } from 'uuid';
 
 import { EventBus, IEventBus } from './EventBus';
 
-export type PropsType = Record<string, string | Record<string, Function>>;
+export type PropsType = Record<string, string | Record<string, Function> | boolean>;
 export type ChildrenType = Record<string, Block | Block[] | any>;
 
 abstract class Block {
@@ -15,7 +15,7 @@ abstract class Block {
 
   private _meta: { tagName: string, propsWithChildren: PropsType };
 
-  private _element: HTMLElement | null = null;
+  private _element: HTMLElement;
 
   protected props: Record<string, string>;
 
@@ -63,11 +63,11 @@ abstract class Block {
     return new Proxy<ChildrenType>(props, {
       get(target: ChildrenType, property: string): unknown {
         const value: unknown = target[property as keyof ChildrenType];
-        return typeof value === 'function' ? (value as () => void).bind(target) : value;
+        return (typeof value === 'function') ? (value as () => void).bind(target) : value;
       },
       set: (target: ChildrenType, property: string, value: unknown): boolean => {
         Reflect.set(target, property, value);
-        // this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+         this.eventBus().emit(Block.EVENTS.FLOW_CDU);
         return true;
       },
       deleteProperty() {
@@ -112,8 +112,8 @@ abstract class Block {
     const fragment = this.render();
     this._element!.innerHTML = '';
     this._element!.append(fragment);
+    this.addAttribute(null);
     this._addEvents();
-    this.addAttribute();
   }
 
   protected render() {
@@ -122,13 +122,12 @@ abstract class Block {
 
   _addEvents() {
     const { events = {} } = this.props as PropsType & { events: Record<string, () => void> };
-
     Object.keys(events).forEach((eventName) => {
       this._element?.addEventListener(eventName, events[eventName]);
     });
   }
 
-  public addAttribute() {
+  public addAttribute(newAttr: Record<string, string> | null) {
     const attr: Record<string, string | null> | undefined = {
       type: this.props.type || null,
       class: this.props.class || null,
@@ -138,10 +137,10 @@ abstract class Block {
       src: this.props.src || null,
       alt: this.props.alt || null,
     };
-    Object.entries(attr).forEach(([key, value]) => {
+    Object.entries({...attr, ...newAttr}).forEach(([key, value]) => {
       if (value) this.element!.setAttribute(key, value);
     });
-  }
+}
 
   _removeEventListeners() {
     const { events } = this.props as PropsType & { events: Record<string, () => void> };
@@ -171,9 +170,8 @@ abstract class Block {
     }
   }
 
-  componentDidUpdate() {
-    // TODO добавить глубокое сравнение объектов oldProps  newProps;
-    return true;
+  componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
+    if (!props.oldProps && !props.oldProps) return true;
   }
 
   setProps(nextProps: PropsType) {
@@ -181,7 +179,7 @@ abstract class Block {
       return;
     }
     Object.assign(this.props, nextProps);
-    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+   // this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   }
 
   protected compile(template: (context: any) => string, context: any) {

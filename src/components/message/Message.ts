@@ -11,7 +11,6 @@ import { FileInput } from '../fileInput';
 
 const textarea = new Textarea({
   name: 'message',
-  class: s.textarea,
   events: {
     blur: (e: InputEventType) => console.log(`Отправим сообщение ${e.target.value}`),
   },

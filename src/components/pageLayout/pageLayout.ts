@@ -4,10 +4,9 @@ import Block, { ChildrenType, PropsType } from '~src/services/Block';
 
 export class PageLayout extends Block {
   constructor(props:PropsType | ChildrenType) {
-    super('page', props);
-    this.setProps({
+    super('page', {
       class: style.page,
-    });
+      ...props});
   }
 
   render(): DocumentFragment {
