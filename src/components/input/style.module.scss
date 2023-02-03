@@ -1,67 +1,93 @@
-@import 'src/assets/stylesheets/_reusable.scss';
+@import "src/assets/stylesheets/reusable";
 
 .field {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	outline: none;
-	border: none;
-	padding: 0;
-	box-sizing: border-box;
-	margin-bottom: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  outline: none;
+  border: none;
+  padding: 0;
+  box-sizing: border-box;
+  margin-bottom: 15px;
 
+  label {
+    @include montserrat;
 
-	&__label {
-		@include montserrat;
-		font-size: 14px;
-		font-weight: 500;
-		line-height: 18px;
-		width: 100%;
-		margin-bottom: 8px;
-	}
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    width: 100%;
+    margin-bottom: 8px;
+  }
 
-	&__input {
-		@include montserrat;
-		background-color: #fff;
-		border: 1px solid $secondaryLight;
-		border-radius: 8px;
-		font-size: 14px;
-		font-weight: 500;
-		height: 44px;
-		line-height: 1.2;
-		box-sizing: border-box;
-		width: 100%;
-		padding: 10px 12px 10px;
-		transition-property: border-color, color, background-color, box-shadow;
-		transition-duration: .25s;
-		transition-timing-function: ease
-	}
+  input {
+    @include montserrat;
 
-	&__input:focus {
-		border-color: $primary-color;
-		box-shadow: 0 0 0 2px #b3e5da;
-		outline: none;
-	}
+    background-color: $shadeLigthestBackground;
+    border: 1px solid $secondaryLight;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    height: 44px;
+    line-height: 1.2;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 12px;
+    transition-property: border-color, color, background-color, box-shadow;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+    margin-top: 8px;
+  }
 
-	&__input::placeholder {
-		color: $secondaryDark;
-		font-weight: 400;
-	}
+  &_setting {
+    flex-direction: row;
+    align-items: center;
+  }
 
-	&_setting {
-		flex-direction: row;
-		align-items: center;
-	}
+  &_setting label {
+    color: $secondaryDark;
+    font-size: 16px;
+    max-width: 514px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 
-	&_setting &__label {
-		text-align: left;
-		color: #3C3C3B;
-		font-size: 16px;
-		max-width: 150px;
-	}
-	&_setting &__input{
-		width: 100%;
-		max-width: 364px;
-	}
+  &_setting input {
+    width: 100%;
+    max-width: 340px;
+    margin-top: 0;
+  }
+
+  input:focus {
+    border-color: $primary-color;
+
+    @include primaryShadow;
+
+    outline: none;
+  }
+
+  input::placeholder {
+    color: $secondaryDark;
+    font-weight: 400;
+  }
+
+  input[name="avatar"] {
+    border-color: red;
+  }
+
+  & > label > span {
+    display: none;
+    color: $attantionColor;
+  }
+
+  &[data-error="true"] input {
+    border-color: $attantionColor;
+    box-shadow: none;
+  }
+
+  &[data-error="true"] span {
+    display: block;
+  }
 }

@@ -1,46 +1,50 @@
-@import 'src/assets/stylesheets/_reusable.scss';
+@import "src/assets/stylesheets/reusable";
 
-.link{
-	color: $primary-color;
-	background-color: transparent;
-	display: block;
-	margin: 0 auto;
-	text-decoration: none;
-	text-align: center;
-	margin-top: 14px;
-	@include inter;
+.link {
+  color: $primary-color;
+  background-color: transparent;
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 14px;
 
-	&:hover,
-	&:active {
-		color: $lightPrimaryColor;
-	}
+  @include inter;
 
-	&_profile {
-		background-color: transparent;
-		border: none;
-		cursor: pointer;
-		color: $shadeLight;
-		@include text;
-		margin: 0;
-		margin-left: auto;
-	}
-&_tabs{
-	cursor: pointer;
+  &:hover,
+  &:active {
+    color: $lightPrimaryColor;
+  }
+
+  &_profile {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: $shadeLight;
+
+    @include text;
+
+    margin: 0;
+    margin-left: auto;
+  }
+
+  &_tabs {
+    cursor: pointer;
     width: 220px;
     height: 44px;
     display: flex;
     align-items: center;
-	margin-top: 0;
+    margin-top: 0;
     margin-bottom: 10px;
     padding-left: 10px;
     text-decoration: none;
-    color: #33443F;
+    color: $secondaryDark;
 
     &[active] {
-      border-right: 3px solid $primary-color;	  ;
+      border-right: 3px solid $primary-color;
       color: $lightPrimaryColor;
       font-weight: 600;
-      background-color: #F2FBF9;	  ;
+      background-color: $ligthestPrimaryColor;
     }
-}
+  }
 }
