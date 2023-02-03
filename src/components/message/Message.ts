@@ -3,17 +3,18 @@ import s from './style.module.scss';
 import Block from '~src/services/Block';
 import { Button } from '../button';
 import { Textarea } from '../textarea';
-import { BtnEventType, InputEventType } from '~src/utiles';
+import { BtnEventType, InputEventType, VALIDATION_REGEXES } from '~src/utiles';
 import { Image } from '../image';
 import clip from '../../../static/clip.svg';
 import arrow from '../../../static/arrow.svg';
 import { FileInput } from '../fileInput';
+import { Form } from '../form';
 
 const textarea = new Textarea({
   name: 'message',
-  events: {
-    blur: (e: InputEventType) => console.log(`Отправим сообщение ${e.target.value}`),
-  },
+  autofocus: true,
+  pattern: VALIDATION_REGEXES.message[0],
+  textError: VALIDATION_REGEXES.message[1]
 });
 
 const addFileInput = new FileInput({
@@ -43,14 +44,12 @@ const sendMessage = new Button({
   name: 'sendMessage',
 });
 
-export class Message extends Block {
+export class Message extends Form {
   constructor() {
-    super('form', {
-      class: s.message,
-      textareaName: 'message',
-    });
+    super({
+      'class': `${s.message}`
+    })
   }
-
   initChildren() {
     this.children = {
       ...this.children,

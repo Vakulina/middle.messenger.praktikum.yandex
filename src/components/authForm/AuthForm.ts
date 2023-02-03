@@ -15,6 +15,7 @@ const loginInput = new Input({
   textError: VALIDATION_REGEXES.login[1]
 });
 
+
 const passwordInput = new Input({
   name: 'password',
   label: 'Пароль',

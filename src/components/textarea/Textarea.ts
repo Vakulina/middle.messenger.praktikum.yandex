@@ -13,32 +13,42 @@ interface TextareaProps {
   value?: string,
   autofocus?: boolean | null,
   events?: {
-    blur?: (e: InputEventType) => unknown;
-    focus?: (e: InputEventType) => unknown;
     change?: (e: InputEventType) => unknown;
     input?: (e: InputEventType) => unknown;
-  }
+  },
+  pattern?: string,
+  textError?: string
 }
 
 export class Textarea extends Block {
-  constructor({
-    events = {
-      input: (e) => {
-        console.log(e.target.value);
-      },
-    },
-    ...otherProps
-  }: TextareaProps) {
+  isValid: boolean;
+  constructor(props: TextareaProps) {
     super(
       'div',
       {
-        class: `${s.wrapper} ${styles.getClassWithPrefix(s, 'wrapper', otherProps.stylePrefix || '')}`,
-        events,
-        ...otherProps,
+        class: `${s.wrapper} ${styles.getClassWithPrefix(s, 'wrapper', props.stylePrefix || '')}`,
+        events: {
+          input: (e: InputEventType) => {
+            this.checkInputValidity(e)
+          },
+          change: (e: InputEventType) => {
+            this.isValid = true
+            const attrValue = this.isValid ? 'false' : 'true';
+            this.addAttribute({ "data-error": attrValue })
+          }
+        },
+        error: props.textError || '',
+        ...props,
       },
     );
+    this.isValid = true;
   }
-
+  checkInputValidity(e: InputEventType) {
+    const regexp = new RegExp(this.props.pattern);
+    this.isValid = regexp.test(e.target.value);
+    const attrValue = this.isValid ? 'false' : 'true';
+    this.addAttribute({ "data-error": attrValue })
+  }
   protected render() {
     return this.compile(tpl, this.props);
   }

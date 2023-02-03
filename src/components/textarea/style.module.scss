@@ -6,6 +6,7 @@
   background: $shadeLigthest;
   border-radius: 30px;
   padding: 10px;
+  position: relative;
 
   textarea {
     border: none;
@@ -16,5 +17,22 @@
     background: $shadeLigthest;
     outline: none;
     min-height: 60px;
+  }
+
+  &[data-error="true"] textarea {
+    border-color: $attantionColor;
+    box-shadow: none;
+  }
+
+  &[data-error="true"] span {
+    display: block;
+  }
+
+  &>span {
+    display: none;
+    color: $attantionColor;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
   }
 }

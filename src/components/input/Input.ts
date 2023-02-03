@@ -17,8 +17,6 @@ interface InputProps {
   pattern?: string;
   textError?: string;
   events?: {
-    blur?: (e: InputEventType) => unknown;// при потере фокуса
-    focus?: (e: InputEventType) => unknown;// при фокусировке
     change?: (e: InputEventType) => unknown; // произойдет при потере фокуса
     input?: (e: InputEventType) => unknown;
   }
@@ -26,7 +24,7 @@ interface InputProps {
 }
 
 export class Input extends Block {
-  isValid: boolean
+  isValid: boolean;
   constructor({
     type = 'text',
     stylePrefix = null,
@@ -41,12 +39,12 @@ export class Input extends Block {
           `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
         type,
         events: {
-          input: (e: InputEventType) => {
+          input: (e: InputEventType)=> {
             this.isValid = true
             const attrValue = this.isValid ? 'false' : 'true';
             this.addAttribute({ "data-error": attrValue })
           },
-          change: (e: InputEventType) => {
+          change: (e: InputEventType)=>{
             this.checkInputValidity(e)
           }
         },
