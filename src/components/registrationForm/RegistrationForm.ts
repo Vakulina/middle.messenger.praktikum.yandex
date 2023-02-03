@@ -92,12 +92,6 @@ export class RegistrationForm extends Form {
     if (this.validateForm()) console.log(this.getValues());
   }
 
-  validateForm() {
-    const values: RegistrationValuesType = this.getValues() as RegistrationValuesType;
-    const isMatchedPasswords = values.password === values.repeated_password;
-    return super.validateForm() && isMatchedPasswords;
-  }
-
   render(): DocumentFragment {
     return this.compile(tpl, this.props);
   }

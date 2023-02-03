@@ -2,7 +2,7 @@ import tpl from './tpl.hbs';
 import { Form } from '~src/components/form';
 import { Button } from '~src/components/button';
 import { Input } from '~src/components/input';
-import { VALIDATION_REGEXES } from '~src/utiles';
+import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import { VALIDATION_ERROR } from '~src/utiles/constants';
 
 export class PasswordTemplate extends Form {
@@ -37,8 +37,19 @@ export class PasswordTemplate extends Form {
         pattern: VALIDATION_REGEXES.password[0],
         textError: VALIDATION_REGEXES.password[1]
       }),
-      button: new Button({ text: 'Сохранить', stylePrefix: 'save', type: 'submit' }),
+      button: new Button({
+        text: 'Сохранить', stylePrefix: 'save', type: 'submit',
+        events: {
+          click: (e) => {
+            this.submit(e);
+          },
+        },
+      }),
     };
+  }
+  private submit(e: BtnEventType) {
+    e.preventDefault();
+    if (this.validateForm()) console.log(this.getValues());
   }
 
   render(): DocumentFragment {
