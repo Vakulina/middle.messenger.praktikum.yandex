@@ -1,3 +1,5 @@
+import { VALIDATION_REGEXES } from "./validationRegexes";
+
 export const routes = {
   home: '/',
   chats: '/chats',
@@ -11,3 +13,7 @@ export const routes = {
   notFound: '/not-found',
   serverError: '/error',
 };
+
+export const VALIDATION_ERROR = {
+  UNCORRECT_PASSWORD: 'Введите корректный пароль'
+}

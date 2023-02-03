@@ -1,6 +1,6 @@
-import { avatarTemplate } from './avatarTemplate';
-import { passwordTemplate } from './passwordTemplate';
-import { registrationInfoTemplate } from './registrationInfoTemplate';
+import { avatarTemplate } from './avatarSetting';
+import { passwordTemplate } from './passwordSetting';
+import { registrationInfoTemplate } from './registrationInfoSetting';
 import Block, { PropsType } from '~src/services/Block';
 import tpl from './tpl.hbs';
 import { PageLayout } from '~src/components/pageLayout';

@@ -4,6 +4,7 @@ import { Button } from '../button';
 import { Input } from '../input';
 import { Link } from '../link';
 import { VALIDATION_REGEXES } from '~src/utiles';
+import { VALIDATION_ERROR } from '~src/utiles/constants';
 
 const loginInput = new Input({
   name: 'login',
@@ -20,7 +21,7 @@ const passwordInput = new Input({
   type: 'password',
   autocomplete: 'on',
   pattern: VALIDATION_REGEXES.password[0],
-  textError: VALIDATION_REGEXES.password[1]
+  textError: VALIDATION_ERROR.UNCORRECT_PASSWORD
 })
 
 export class AuthForm extends Form {
