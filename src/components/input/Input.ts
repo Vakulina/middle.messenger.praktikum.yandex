@@ -17,7 +17,7 @@ interface InputProps {
   pattern?: string;
   textError?: string;
   events?: {
-    change?: (e: InputEventType) => unknown; // произойдет при потере фокуса
+    change?: (e: InputEventType) => unknown;
     input?: (e: InputEventType) => unknown;
   }
   name?: string
@@ -59,9 +59,9 @@ export class Input extends Block {
     this.valueState = ''
   }
 
-  checkInputValidity(e: InputEventType) {
+  checkInputValidity(e?: InputEventType) {
     const regexp = new RegExp(this.props.pattern);
-    this.isValid = regexp.test(e.target.value);
+    this.isValid = e ? regexp.test(e.target.value) : false
     const attrValue = this.isValid ? 'false' : 'true';
     this.addAttribute({ "data-error": attrValue })
   }

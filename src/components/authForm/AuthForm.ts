@@ -21,8 +21,8 @@ const passwordInput = new Input({
   label: 'Пароль',
   type: 'password',
   autocomplete: 'on',
-  pattern: VALIDATION_REGEXES.password[0],
-  textError: VALIDATION_ERROR.UNCORRECT_PASSWORD
+  pattern: VALIDATION_REGEXES.login[0],
+  textError: VALIDATION_REGEXES.login[1]
 })
 
 export class AuthForm extends Form {

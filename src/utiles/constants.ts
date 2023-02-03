@@ -1,5 +1,3 @@
-import { VALIDATION_REGEXES } from "./validationRegexes";
-
 export const routes = {
   home: '/',
   chats: '/chats',

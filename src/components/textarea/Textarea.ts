@@ -22,6 +22,7 @@ interface TextareaProps {
 
 export class Textarea extends Block {
   isValid: boolean;
+  valueState: string;
   constructor(props: TextareaProps) {
     super(
       'div',
@@ -41,13 +42,17 @@ export class Textarea extends Block {
         ...props,
       },
     );
-    this.isValid = true;
+    this.isValid = true
+    this.valueState = ''
   }
-  checkInputValidity(e: InputEventType) {
+  checkInputValidity(e?: InputEventType) {
     const regexp = new RegExp(this.props.pattern);
-    this.isValid = regexp.test(e.target.value);
+    this.isValid = e ? regexp.test(e.target.value) : false
     const attrValue = this.isValid ? 'false' : 'true';
     this.addAttribute({ "data-error": attrValue })
+  }
+  get value() {
+    return this.valueState
   }
   protected render() {
     return this.compile(tpl, this.props);

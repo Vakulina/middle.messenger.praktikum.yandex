@@ -5,6 +5,16 @@ import { Input } from '../input';
 import { Link } from '../link';
 import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 
+type RegistrationValuesType = {
+  password: string,
+  repeated_password: string,
+  first_name: string,
+  second_name: string,
+  login: string,
+  email: string,
+  phone: string,
+}
+
 export class RegistrationForm extends Form {
   initChildren() {
     this.children = {
@@ -69,7 +79,7 @@ export class RegistrationForm extends Form {
         text: 'Создать аккаунт', type: 'submit', stylePrefix: 'submit',
         events: {
           click: (e) => {
-            
+
             this.submit(e)
           },
         },
@@ -80,11 +90,17 @@ export class RegistrationForm extends Form {
 
   private submit(e: BtnEventType) {
     e.preventDefault()
+    this.validateForm()
     console.log(this.getValues())
   }
 
+  validateForm() {
+    const values: RegistrationValuesType = this.getValues() as RegistrationValuesType
+    const isMatchedPasswords = values.password === values.repeated_password
+    return super.validateForm() && isMatchedPasswords
+  }
+
   render(): DocumentFragment {
-    console.log("inputList", this.children)
     return this.compile(tpl, this.props);
   }
 }
