@@ -25,6 +25,7 @@ interface InputProps {
 
 export class Input extends Block {
   isValid: boolean;
+  valueState: string;
   constructor({
     type = 'text',
     stylePrefix = null,
@@ -39,12 +40,13 @@ export class Input extends Block {
           `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
         type,
         events: {
-          input: (e: InputEventType)=> {
+          input: (e: InputEventType) => {
             this.isValid = true
             const attrValue = this.isValid ? 'false' : 'true';
             this.addAttribute({ "data-error": attrValue })
+            this.valueState = e.target.value;
           },
-          change: (e: InputEventType)=>{
+          change: (e: InputEventType) => {
             this.checkInputValidity(e)
           }
         },
@@ -54,6 +56,7 @@ export class Input extends Block {
       },
     );
     this.isValid = true
+    this.valueState = ''
   }
 
   checkInputValidity(e: InputEventType) {
@@ -61,6 +64,10 @@ export class Input extends Block {
     this.isValid = regexp.test(e.target.value);
     const attrValue = this.isValid ? 'false' : 'true';
     this.addAttribute({ "data-error": attrValue })
+  }
+
+  get value() {
+    return this.valueState
   }
 
   protected render() {

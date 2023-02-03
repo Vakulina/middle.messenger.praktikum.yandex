@@ -3,7 +3,7 @@ import { Form } from '../form';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Link } from '../link';
-import { VALIDATION_REGEXES } from '~src/utiles';
+import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 
 export class RegistrationForm extends Form {
   initChildren() {
@@ -65,12 +65,26 @@ export class RegistrationForm extends Form {
         pattern: VALIDATION_REGEXES.password[0],
         textError: VALIDATION_REGEXES.password[1]
       }),
-      'sign-up': new Button({ text: 'Создать аккаунт', type: 'submit', stylePrefix: 'submit' }),
+      'sign-up': new Button({
+        text: 'Создать аккаунт', type: 'submit', stylePrefix: 'submit',
+        events: {
+          click: (e) => {
+            
+            this.submit(e)
+          },
+        },
+      }),
       'sign-in': new Link({ href: '/sign-in', text: 'Войти' }),
     };
   }
 
+  private submit(e: BtnEventType) {
+    e.preventDefault()
+    console.log(this.getValues())
+  }
+
   render(): DocumentFragment {
+    console.log("inputList", this.children)
     return this.compile(tpl, this.props);
   }
 }
