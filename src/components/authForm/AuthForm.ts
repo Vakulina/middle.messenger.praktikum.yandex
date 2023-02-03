@@ -3,7 +3,7 @@ import { Form } from '../form';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Link } from '../link';
-import { VALIDATION_REGEXES } from '~src/utiles';
+import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import { VALIDATION_ERROR } from '~src/utiles/constants';
 
 const loginInput = new Input({
@@ -21,19 +21,30 @@ const passwordInput = new Input({
   label: 'Пароль',
   type: 'password',
   autocomplete: 'on',
-  pattern: VALIDATION_REGEXES.login[0],
-  textError: VALIDATION_REGEXES.login[1]
+  pattern: VALIDATION_REGEXES.password[0],
+  textError: VALIDATION_ERROR.UNCORRECT_PASSWORD
 })
 
 export class AuthForm extends Form {
   initChildren() {
     this.children = {
       ...this.children,
-      button: new Button({ text: 'Вход', type: 'submit', stylePrefix: 'submit' }),
+      button: new Button({
+        text: 'Вход', type: 'submit', stylePrefix: 'submit',
+        events: {
+          click: (e) => {
+            this.submit(e);
+          },
+        },
+      }),
       login: loginInput,
       password: passwordInput,
       link: new Link({ href: '/sign-up', text: 'Нет аккаунта?' }),
     };
+  }
+  private submit(e: BtnEventType) {
+    e.preventDefault();
+    if (this.validateForm()) console.log(this.getValues());
   }
 
   render(): DocumentFragment {
