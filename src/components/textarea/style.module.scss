@@ -24,15 +24,15 @@
     box-shadow: none;
   }
 
-  &[data-error="true"] span {
-    display: block;
-  }
-
-  &>span {
+  & > span {
     display: none;
     color: $attantionColor;
     position: absolute;
     left: 10px;
     bottom: 10px;
+  }
+
+  &[data-error="true"] span {
+    display: block;
   }
 }

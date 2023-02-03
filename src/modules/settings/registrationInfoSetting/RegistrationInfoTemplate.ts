@@ -14,7 +14,7 @@ export class RegistrationInfoTemplate extends Form {
         placeholder: 'Виктория',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.name[0],
-        textError: VALIDATION_REGEXES.name[1]
+        textError: VALIDATION_REGEXES.name[1],
       }),
       second_name: new Input({
         name: 'second_name',
@@ -22,7 +22,7 @@ export class RegistrationInfoTemplate extends Form {
         placeholder: 'Яковлева',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.name[0],
-        textError: VALIDATION_REGEXES.name[1]
+        textError: VALIDATION_REGEXES.name[1],
       }),
       login: new Input({
         name: 'login',
@@ -30,7 +30,7 @@ export class RegistrationInfoTemplate extends Form {
         placeholder: 'Yakovleva',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.login[0],
-        textError: VALIDATION_REGEXES.login[1]
+        textError: VALIDATION_REGEXES.login[1],
       }),
       display_name: new Input({
         name: 'display_name', label: 'Имя в чате', placeholder: 'Вакулина', stylePrefix: 'setting',
@@ -42,7 +42,7 @@ export class RegistrationInfoTemplate extends Form {
         type: 'mail',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.email[0],
-        textError: VALIDATION_REGEXES.email[1]
+        textError: VALIDATION_REGEXES.email[1],
       }),
       phone: new Input({
         name: 'phone',
@@ -51,10 +51,12 @@ export class RegistrationInfoTemplate extends Form {
         placeholder: '+7(918) 5000000',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.phone[0],
-        textError: VALIDATION_REGEXES.phone[1]
+        textError: VALIDATION_REGEXES.phone[1],
       }),
       button: new Button({
-        text: 'Сохранить', stylePrefix: 'save', type: 'submit',
+        text: 'Сохранить',
+        stylePrefix: 'save',
+        type: 'submit',
         events: {
           click: (e) => {
             this.submit(e);
@@ -63,6 +65,7 @@ export class RegistrationInfoTemplate extends Form {
       }),
     };
   }
+
   private submit(e: BtnEventType) {
     e.preventDefault();
     if (this.validateForm()) console.log(this.getValues());

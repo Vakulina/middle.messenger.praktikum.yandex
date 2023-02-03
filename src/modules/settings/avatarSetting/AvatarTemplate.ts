@@ -13,9 +13,9 @@ export class AvatarTemplate extends Form {
       ...this.children,
       image: new Image({ alt: 'аватар', stylePrefix: 'avatar', src: avatar }),
       avatar: new FileInput({
-        name: 'avatar', 
-        type: 'file', 
-        accept: 'image/*', 
+        name: 'avatar',
+        type: 'file',
+        accept: 'image/*',
         text: 'Обзор...',
       }),
       'save-avatar': new Button({ text: 'Сохранить', stylePrefix: 'save-avatar', type: 'submit' }),

@@ -15,29 +15,31 @@ export abstract class Form extends Block {
   constructor(props: FormProps) {
     super('form', {
       class: props.class ? props.class : `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
-      ...props
+      ...props,
     });
   }
 
   protected getValues() {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
       if ((child instanceof Input) || (child instanceof Textarea)) {
-        acc = { ...acc, [key]: child.value }
+        /* eslint-disable no-param-reassign */
+        acc = { ...acc, [key]: child.value };
       }
       return acc;
-    }, {})
+    }, {});
   }
 
   protected validateForm() {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
       if ((child instanceof Input) || (child instanceof Textarea)) {
-        const isValideChild = child.isValid && (child.value !== '')
-        acc = acc && isValideChild
+        const isValideChild = child.isValid && (child.value !== '');
+        /* eslint-disable no-param-reassign */
+        acc = (acc && isValideChild);
         if (!isValideChild) child.checkInputValidity();
       }
 
       return acc;
-    }, true)
+    }, true);
   }
 
   protected render() {

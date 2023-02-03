@@ -17,7 +17,7 @@ export class PasswordTemplate extends Form {
         stylePrefix: 'setting',
         type: 'password',
         pattern: VALIDATION_REGEXES.password[0],
-        textError: VALIDATION_ERROR.UNCORRECT_PASSWORD
+        textError: VALIDATION_ERROR.UNCORRECT_PASSWORD,
       }),
       new_password: new Input({
         name: 'new_password',
@@ -26,7 +26,7 @@ export class PasswordTemplate extends Form {
         stylePrefix: 'setting',
         type: 'password',
         pattern: VALIDATION_REGEXES.password[0],
-        textError: VALIDATION_REGEXES.password[1]
+        textError: VALIDATION_REGEXES.password[1],
       }),
       repeated_password: new Input({
         name: 'repeated_password',
@@ -35,10 +35,12 @@ export class PasswordTemplate extends Form {
         stylePrefix: 'setting',
         type: 'password',
         pattern: VALIDATION_REGEXES.password[0],
-        textError: VALIDATION_REGEXES.password[1]
+        textError: VALIDATION_REGEXES.password[1],
       }),
       button: new Button({
-        text: 'Сохранить', stylePrefix: 'save', type: 'submit',
+        text: 'Сохранить',
+        stylePrefix: 'save',
+        type: 'submit',
         events: {
           click: (e) => {
             this.submit(e);
@@ -47,6 +49,7 @@ export class PasswordTemplate extends Form {
       }),
     };
   }
+
   private submit(e: BtnEventType) {
     e.preventDefault();
     if (this.validateForm()) console.log(this.getValues());

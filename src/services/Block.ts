@@ -67,7 +67,7 @@ abstract class Block {
       },
       set: (target: ChildrenType, property: string, value: unknown): boolean => {
         Reflect.set(target, property, value);
-         this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU);
         return true;
       },
       deleteProperty() {
@@ -137,10 +137,10 @@ abstract class Block {
       src: this.props.src || null,
       alt: this.props.alt || null,
     };
-    Object.entries({...attr, ...newAttr}).forEach(([key, value]) => {
+    Object.entries({ ...attr, ...newAttr }).forEach(([key, value]) => {
       if (value) this.element!.setAttribute(key, value);
     });
-}
+  }
 
   _removeEventListeners() {
     const { events } = this.props as PropsType & { events: Record<string, () => void> };
@@ -172,6 +172,7 @@ abstract class Block {
 
   componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
     if (!props.oldProps && !props.oldProps) return true;
+    return false;
   }
 
   setProps(nextProps: PropsType) {
@@ -179,7 +180,6 @@ abstract class Block {
       return;
     }
     Object.assign(this.props, nextProps);
-   // this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   }
 
   protected compile(template: (context: any) => string, context: any) {

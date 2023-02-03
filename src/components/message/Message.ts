@@ -1,6 +1,5 @@
 import tpl from './tpl.hbs';
 import s from './style.module.scss';
-import Block from '~src/services/Block';
 import { Button } from '../button';
 import { Textarea } from '../textarea';
 import { BtnEventType, InputEventType, VALIDATION_REGEXES } from '~src/utiles';
@@ -14,7 +13,7 @@ const textarea = new Textarea({
   name: 'message',
   autofocus: true,
   pattern: VALIDATION_REGEXES.message[0],
-  textError: VALIDATION_REGEXES.message[1]
+  textError: VALIDATION_REGEXES.message[1],
 });
 
 const addFileInput = new FileInput({
@@ -31,32 +30,38 @@ const addFileInput = new FileInput({
   accept: 'video/*, image/*',
 });
 
-const sendMessage = new Button({
-  text: new Image({
-    src: arrow,
-    stylePrefix: 'arrow',
-  }),
-  stylePrefix: 'withArrow',
-  type: 'button',
-  events: {
-    click: (e: BtnEventType) => console.log('send message'),
-  },
-  name: 'sendMessage',
-});
-
 export class Message extends Form {
   constructor() {
     super({
-      'class': `${s.message}`
-    })
+      class: `${s.message}`,
+    });
   }
+
   initChildren() {
     this.children = {
       ...this.children,
       addFileInput,
       textarea,
-      sendMessage,
+      sendMessage: new Button({
+        text: new Image({
+          src: arrow,
+          stylePrefix: 'arrow',
+        }),
+        stylePrefix: 'withArrow',
+        type: 'button',
+        events: {
+          click: (e) => {
+            this.submit(e);
+          },
+        },
+        name: 'sendMessage',
+      }),
     };
+  }
+
+  private submit(e: BtnEventType) {
+    e.preventDefault();
+    if (this.validateForm()) console.log(this.getValues());
   }
 
   protected render() {

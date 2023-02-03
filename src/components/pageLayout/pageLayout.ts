@@ -6,7 +6,8 @@ export class PageLayout extends Block {
   constructor(props:PropsType | ChildrenType) {
     super('page', {
       class: style.page,
-      ...props});
+      ...props,
+    });
   }
 
   render(): DocumentFragment {

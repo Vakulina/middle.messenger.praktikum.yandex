@@ -77,17 +77,17 @@
     border-color: red;
   }
 
+  & > label > span {
+    display: none;
+    color: $attantionColor;
+  }
+
   &[data-error="true"] input {
     border-color: $attantionColor;
-    box-shadow:none;
+    box-shadow: none;
   }
 
   &[data-error="true"] span {
     display: block;
-  }
-
-  &>label>span {
-    display: none;
-    color: $attantionColor;
   }
 }

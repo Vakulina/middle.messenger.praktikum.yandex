@@ -13,7 +13,7 @@ type RegistrationValuesType = {
   login: string,
   email: string,
   phone: string,
-}
+};
 
 export class RegistrationForm extends Form {
   initChildren() {
@@ -26,7 +26,7 @@ export class RegistrationForm extends Form {
         placeholder: 'Виктория',
         autofocus: true,
         pattern: VALIDATION_REGEXES.name[0],
-        textError: VALIDATION_REGEXES.name[1]
+        textError: VALIDATION_REGEXES.name[1],
       }),
       second_name: new Input({
         name: 'second_name',
@@ -34,14 +34,14 @@ export class RegistrationForm extends Form {
         placeholder: 'Яковлева',
         autofocus: false,
         pattern: VALIDATION_REGEXES.name[0],
-        textError: VALIDATION_REGEXES.name[1]
+        textError: VALIDATION_REGEXES.name[1],
       }),
       login: new Input({
         name: 'login',
         label: 'Логин',
         placeholder: 'v.yakovleva',
         pattern: VALIDATION_REGEXES.login[0],
-        textError: VALIDATION_REGEXES.login[1]
+        textError: VALIDATION_REGEXES.login[1],
       }),
       email: new Input({
         name: 'email',
@@ -49,7 +49,7 @@ export class RegistrationForm extends Form {
         placeholder: 'pochta@yandex.ru',
         type: 'mail',
         pattern: VALIDATION_REGEXES.email[0],
-        textError: VALIDATION_REGEXES.email[1]
+        textError: VALIDATION_REGEXES.email[1],
       }),
       phone: new Input({
         name: 'phone',
@@ -57,7 +57,7 @@ export class RegistrationForm extends Form {
         label: 'Телефон',
         placeholder: '+7(918) 5000000',
         pattern: VALIDATION_REGEXES.phone[0],
-        textError: VALIDATION_REGEXES.phone[1]
+        textError: VALIDATION_REGEXES.phone[1],
       }),
       password: new Input({
         name: 'password',
@@ -65,7 +65,7 @@ export class RegistrationForm extends Form {
         type: 'password',
         autocomplete: 'off',
         pattern: VALIDATION_REGEXES.password[0],
-        textError: VALIDATION_REGEXES.password[1]
+        textError: VALIDATION_REGEXES.password[1],
       }),
       repeated_password: new Input({
         name: 'repeated_password',
@@ -73,10 +73,12 @@ export class RegistrationForm extends Form {
         type: 'password',
         autocomplete: 'off',
         pattern: VALIDATION_REGEXES.password[0],
-        textError: VALIDATION_REGEXES.password[1]
+        textError: VALIDATION_REGEXES.password[1],
       }),
       'sign-up': new Button({
-        text: 'Создать аккаунт', type: 'submit', stylePrefix: 'submit',
+        text: 'Создать аккаунт',
+        type: 'submit',
+        stylePrefix: 'submit',
         events: {
           click: (e) => {
             this.submit(e);

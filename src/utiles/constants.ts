@@ -13,5 +13,5 @@ export const routes = {
 };
 
 export const VALIDATION_ERROR = {
-  UNCORRECT_PASSWORD: 'Введите корректный пароль'
-}
+  UNCORRECT_PASSWORD: 'Введите корректный пароль',
+};

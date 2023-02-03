@@ -25,7 +25,9 @@ interface InputProps {
 
 export class Input extends Block {
   isValid: boolean;
+
   valueState: string;
+
   constructor({
     type = 'text',
     stylePrefix = null,
@@ -36,38 +38,38 @@ export class Input extends Block {
     super(
       'fieldset',
       {
-        class: otherProps.class ? `${otherProps.class}` :
-          `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
+        class: otherProps.class ? `${otherProps.class}`
+          : `${s.field} ${styles.getClassWithPrefix(s, 'field', stylePrefix)}`,
         type,
         events: {
           input: (e: InputEventType) => {
-            this.isValid = true
+            this.isValid = true;
             const attrValue = this.isValid ? 'false' : 'true';
-            this.addAttribute({ "data-error": attrValue })
+            this.addAttribute({ 'data-error': attrValue });
             this.valueState = e.target.value;
           },
           change: (e: InputEventType) => {
-            this.checkInputValidity(e)
-          }
+            this.checkInputValidity(e);
+          },
         },
         autofocus,
         error: otherProps.textError || 'Ошибка ввода',
         ...otherProps,
       },
     );
-    this.isValid = true
-    this.valueState = ''
+    this.isValid = true;
+    this.valueState = '';
   }
 
   checkInputValidity(e?: InputEventType) {
     const regexp = new RegExp(this.props.pattern);
-    this.isValid = e ? regexp.test(e.target.value) : false
+    this.isValid = e ? regexp.test(e.target.value) : false;
     const attrValue = this.isValid ? 'false' : 'true';
-    this.addAttribute({ "data-error": attrValue })
+    this.addAttribute({ 'data-error': attrValue });
   }
 
   get value() {
-    return this.valueState
+    return this.valueState;
   }
 
   protected render() {

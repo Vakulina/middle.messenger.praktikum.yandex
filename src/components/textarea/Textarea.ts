@@ -22,7 +22,9 @@ interface TextareaProps {
 
 export class Textarea extends Block {
   isValid: boolean;
+
   valueState: string;
+
   constructor(props: TextareaProps) {
     super(
       'div',
@@ -30,30 +32,33 @@ export class Textarea extends Block {
         class: `${s.wrapper} ${styles.getClassWithPrefix(s, 'wrapper', props.stylePrefix || '')}`,
         events: {
           input: (e: InputEventType) => {
-            this.checkInputValidity(e)
+            this.checkInputValidity(e);
           },
           change: (e: InputEventType) => {
-            this.isValid = true
+            this.isValid = true;
             const attrValue = this.isValid ? 'false' : 'true';
-            this.addAttribute({ "data-error": attrValue })
-          }
+            this.addAttribute({ 'data-error': attrValue });
+          },
         },
         error: props.textError || '',
         ...props,
       },
     );
-    this.isValid = true
-    this.valueState = ''
+    this.isValid = true;
+    this.valueState = '';
   }
+
   checkInputValidity(e?: InputEventType) {
     const regexp = new RegExp(this.props.pattern);
-    this.isValid = e ? regexp.test(e.target.value) : false
+    this.isValid = e ? regexp.test(e.target.value) : false;
     const attrValue = this.isValid ? 'false' : 'true';
-    this.addAttribute({ "data-error": attrValue })
+    this.addAttribute({ 'data-error': attrValue });
   }
+
   get value() {
-    return this.valueState
+    return this.valueState;
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }
