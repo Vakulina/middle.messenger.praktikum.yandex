@@ -1,7 +1,7 @@
 import tpl from './tpl.hbs';
 import s from './style.module.scss';
 import Block from '~src/services/Block';
-import { Panel } from '~src/components/chatSidebar/panel';
+import { Panel } from './controlPanel';
 
 interface ChatSidebarProps {
   items: Block[],
