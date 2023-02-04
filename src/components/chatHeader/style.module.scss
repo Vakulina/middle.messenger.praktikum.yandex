@@ -1,0 +1,28 @@
+@import "src/assets/stylesheets/reusable";
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  height: 65px;
+  box-sizing: border-box;
+
+  &__group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  &__name {
+    @include inter;
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 13px;
+    color: $shadeDark;
+  }
+}

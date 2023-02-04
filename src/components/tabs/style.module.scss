@@ -1,14 +1,14 @@
-@import '../../assets/stylesheets/reusable';
+@import "../../assets/stylesheets/reusable";
 
 .tabs {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
 
-    &__links {
-        width: 232px;
-        border-right: 2px solid $lightPrimaryColor;
-        min-height: 60vh;
-        margin-right: 20px;
-        margin-bottom: 60px;
-    }
+  div:first-child {
+    width: 232px;
+    border-right: 2px solid $lightPrimaryColor;
+    min-height: 60vh;
+    margin-right: 20px;
+    margin-bottom: 60px;
+  }
 }

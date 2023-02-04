@@ -1,0 +1,52 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "no-console": "warn",
+    "linebreak-style": [
+      "warn",
+      "unix"
+    ],
+    "max-len": [
+      2,
+      160
+    ],
+    "dot-notation": "off",
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "warn",
+    "no-underscore-dangle": "off",
+    "@typescript-eslint/dot-notation": "warn",
+    "no-empty": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "class-methods-use-this": "off",
+    "max-params": [
+      2,
+      3
+    ],
+    "import/prefer-default-export": [
+      "off"
+    ],
+    "import/extensions": "off",
+    "arrow-body-style": [
+      "off"
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ]
+
+  }
+}

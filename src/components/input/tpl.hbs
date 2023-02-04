@@ -1,4 +1,7 @@
-<fieldset class="{{class}}{{stylePrefix}}">
-	<label class="{{class}}__label" for={{id}}>{{{label}}}</label>
-	<input name={{{name}}} placeholder="{{{placeholder}}}" class={{class}}__input type={{type}} accept={{accept}} />
-</fieldset>
+<label>
+  {{{label}}}
+  <input name={{{name}}} value="{{{value}}}" {{#if placeholder}} placeholder="{{{placeholder}}}" {{/if}} type={{type}}
+    {{#if accept}} accept="{{{accept}}}" {{/if}} {{#if autofocus}} autofocus="{{{autofocus}}}" {{/if}} {{#if pattern}}
+    pattern="{{{pattern}}}" {{/if}}/>
+  <span>{{{error}}}</span>
+</label>
