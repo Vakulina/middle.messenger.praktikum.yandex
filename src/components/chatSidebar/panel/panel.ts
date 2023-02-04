@@ -11,12 +11,12 @@ export class Panel extends Block {
 
   initChildren() {
     this.children = {
-      ...this.children,
       link: new Link({ href: '/setting', text: 'Профиль &#62', stylePrefix: 'profile' }),
       search: new Search({
         placeholder: 'Поиск',
         name: 'search',
       }),
+      ...this.children,
     };
   }
 
