@@ -9,7 +9,7 @@ import arrow from '../../../static/arrow.svg';
 import { FileInput } from '../fileInput';
 import { Form } from '../form';
 
-const textarea = new Textarea({
+const message = new Textarea({
   name: 'message',
   autofocus: true,
   pattern: VALIDATION_REGEXES.message[0],
@@ -41,7 +41,7 @@ export class Message extends Form {
     this.children = {
       ...this.children,
       addFileInput,
-      textarea,
+      message,
       sendMessage: new Button({
         text: new Image({
           src: arrow,

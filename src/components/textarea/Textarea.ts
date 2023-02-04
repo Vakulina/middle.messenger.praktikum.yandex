@@ -33,6 +33,7 @@ export class Textarea extends Block {
         events: {
           input: (e: InputEventType) => {
             this.checkInputValidity(e);
+            this.valueState = e.target.value;
           },
           change: (e: InputEventType) => {
             this.isValid = true;

@@ -21,6 +21,7 @@ export abstract class Form extends Block {
 
   protected getValues() {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
+
       if ((child instanceof Input) || (child instanceof Textarea)) {
         /* eslint-disable no-param-reassign */
         acc = { ...acc, [key]: child.value };
