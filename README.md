@@ -3,7 +3,7 @@
 
 Самостоятельный проект, разработанный в рамках курса Яндекс.Практикум. 
 
-- [Деплой](https://glowing-crisp-5ef741.netlify.app/chats)
+- [Деплой](https://glowing-crisp-5ef741.netlify.app)
 - [Макет figma](https://www.figma.com/file/bb2uxusIP7DzcWLj5qITnJ/Chat_external_link-(Copy)?node-id=0%3A1&t=BECpoojdFInoPUYE-1)
 
 ## Команды
