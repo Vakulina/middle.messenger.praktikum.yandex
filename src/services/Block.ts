@@ -110,6 +110,7 @@ abstract class Block {
   private _render() {
     this.initChildren();
     const fragment = this.render();
+    this._removeEventListeners();
     this._element!.innerHTML = '';
     this._element!.append(fragment);
     this.addAttribute(null);
