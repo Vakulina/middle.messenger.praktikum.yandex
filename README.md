@@ -3,7 +3,7 @@
 
 Самостоятельный проект, разработанный в рамках курса Яндекс.Практикум. 
 
-- [Деплой](https://63c0419acf5bc33db6300d3c--glowing-crisp-5ef741.netlify.app/)
+- [Деплой](https://glowing-crisp-5ef741.netlify.app/chats)
 - [Макет figma](https://www.figma.com/file/bb2uxusIP7DzcWLj5qITnJ/Chat_external_link-(Copy)?node-id=0%3A1&t=BECpoojdFInoPUYE-1)
 
 ## Команды
@@ -19,3 +19,11 @@
 - написан легкий сервер на Express для раздачи статики 
 - настроен [автодеплой на Netlify](https://63c0419acf5bc33db6300d3c--glowing-crisp-5ef741.netlify.app/) из ветки deploy
 
+### Спринт 2 
+- перенос на typescript
+- разбитие на отдельные компоненты
+- организация жизненного цикла компонентов с помощью абстрактного класса Block
+- подписка на события с помощью Event Bus
+- внедрение stylelint и eslint
+- валидация форм
+- подготовлен класс HTTPTransport для работы с запросами к API
