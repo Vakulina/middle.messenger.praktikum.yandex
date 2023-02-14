@@ -1,6 +1,6 @@
 import tpl from './tpl.hbs';
 import styles from '../../utiles/styles';
-import s from './style.module.scss';
+import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import { Input } from '../input';
 import { Textarea } from '../textarea';

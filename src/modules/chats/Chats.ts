@@ -3,7 +3,7 @@ import { ChatSidebar } from '../../components/chatSidebar';
 import { items } from './constants';
 import { Message } from '~src/components/message';
 import Block from '~src/services/Block';
-import s from './style.module.scss';
+import * as s from "./style.module.scss";
 import { PageLayout } from '~src/components/pageLayout';
 import { ChatHeader } from '~src/components/chatHeader';
 

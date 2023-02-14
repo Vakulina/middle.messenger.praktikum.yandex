@@ -4,7 +4,7 @@ import { registrationInfoTemplate } from './registrationInfoSetting';
 import Block, { PropsType } from '~src/services/Block';
 import tpl from './tpl.hbs';
 import { PageLayout } from '~src/components/pageLayout';
-import style from './style.module.scss';
+import * as style from './style.module.scss';
 import { Tabs } from '~src/components/tabs';
 
 export type Tab = {
