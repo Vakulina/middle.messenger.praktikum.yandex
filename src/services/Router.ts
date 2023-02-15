@@ -1,4 +1,5 @@
 import Block from "./Block";
+import Route from "./Route";
 
 class Router {
   routes: Array<any>;
@@ -17,7 +18,7 @@ class Router {
     Router.__instance = this;
   }
 
-  use(pathname:string, block:Block) {
+  use(pathname:string, block: Block) {
     const route = new Route(pathname, block);
     this.routes.push(route);
    return this;
