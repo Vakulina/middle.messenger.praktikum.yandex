@@ -3,6 +3,7 @@ import * as s from "../style.module.scss";
 import Block from '~src/services/Block';
 import { Link } from '~src/components/link';
 import { Search } from '~src/components/search';
+import { routes } from '~src/utiles/constants';
 
 export class Panel extends Block {
   constructor() {
@@ -11,7 +12,7 @@ export class Panel extends Block {
 
   initChildren() {
     this.children = {
-      link: new Link({ href: '/setting', text: 'Профиль &#62', stylePrefix: 'profile' }),
+      link: new Link({ href: routes.setting, text: 'Профиль &#62', stylePrefix: 'profile' }),
       search: new Search({
         placeholder: 'Поиск',
         name: 'search',

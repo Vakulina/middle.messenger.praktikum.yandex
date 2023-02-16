@@ -21,7 +21,6 @@ export class Button extends Block {
     events = {
       click: (e) => {
         e.preventDefault();
-        console.log('click');
       },
     },
     ...otherProps

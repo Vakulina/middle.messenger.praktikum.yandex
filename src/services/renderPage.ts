@@ -19,8 +19,6 @@ const renderPage = () => {
       .use(routes.serverError, getServerErrorPage())
       .use(routes.notFound, getNotFoundPage())
       .use(routes.setting, getSettingPage())
-      .use(routes.setRegInfo, getSettingPage())
-      .use(routes.setSafety, getSettingPage())
       .start()
   }  )
  

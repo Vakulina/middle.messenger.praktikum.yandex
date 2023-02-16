@@ -16,43 +16,60 @@ class Router {
     this.history = window.history;
     this._currentRoute = null;
     Router.__instance = this;
+    console.log(this)
   }
 
-  use(pathname:string, block: Block) {
+  use(pathname: string, block: Block) {
     const route = new Route(pathname, block);
+    console.log('pathname:',pathname,'block:', block)
     this.routes.push(route);
-   return this;
-}
+    return this;
+  }
 
-  start() {
+  /*start() {
     // Реагируем на изменения в адресной строке и вызываем перерисовку
     window.onpopstate = (event) => {
     if(event.currentTarget)  this._onRoute((event.currentTarget as Window).location.pathname);
     };
 
     this._onRoute(window.location.pathname);
+  }*/
+  public start() {
+    window.onpopstate = (event: PopStateEvent) => {
+      const target = event.currentTarget as Window;
+
+      this._onRoute(target.location.pathname);
+    }
+
+    this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname:string) {
+
+  private _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
+    console.log("pathname", pathname, "route", route, "this._currentRoute", this._currentRoute)
     if (!route) {
       return;
     }
 
-    if (this._currentRoute) {
+    if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();
     }
 
-    route.render(route, pathname);
+    this._currentRoute = route;
+
+    route.render();
   }
 
-  go(pathname:string) {
+  go(pathname: string) {
     this.history.pushState({}, "", pathname);
     this._onRoute(pathname);
   }
 
-  getRoute(pathname:string) {
-    return this.routes.find(route => route.match(pathname));
+  getRoute(pathname: string) {
+    console.log("this.routes", this.routes, "pathname:", pathname, this.routes.find(route => route.match(pathname)) )
+    return this.routes.find(route => {
+      return route.match(pathname)});
   }
 }
 const router = new Router();

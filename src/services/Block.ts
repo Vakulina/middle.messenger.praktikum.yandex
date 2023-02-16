@@ -104,6 +104,7 @@ abstract class Block {
   }
 
   private _createDocumentElement(tagName: string) {
+   
     return document.createElement(tagName);
   }
 
