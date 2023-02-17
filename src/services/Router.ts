@@ -1,3 +1,4 @@
+import { routes as ROUTES } from "~src/utiles/constants";
 import Block from "./Block";
 import Route from "./Route";
 
@@ -16,12 +17,10 @@ class Router {
     this.history = window.history;
     this._currentRoute = null;
     Router.__instance = this;
-    console.log(this)
   }
 
   use(pathname: string, block: Block) {
     const route = new Route(pathname, block);
-    console.log('pathname:',pathname,'block:', block)
     this.routes.push(route);
     return this;
   }
@@ -37,10 +36,8 @@ class Router {
   public start() {
     window.onpopstate = (event: PopStateEvent) => {
       const target = event.currentTarget as Window;
-
-      this._onRoute(target.location.pathname);
+      if (target) this._onRoute(target.location.pathname);
     }
-
     this._onRoute(window.location.pathname);
   }
 
@@ -67,9 +64,8 @@ class Router {
   }
 
   getRoute(pathname: string) {
-    console.log("this.routes", this.routes, "pathname:", pathname, this.routes.find(route => route.match(pathname)) )
-    return this.routes.find(route => {
-      return route.match(pathname)});
+    console.log(this.routes)
+    return this.routes.find(route => route.match(pathname)) || this.routes.find(route => route.match(ROUTES.notFound))
   }
 }
 const router = new Router();

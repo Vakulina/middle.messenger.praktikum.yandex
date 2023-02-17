@@ -17,7 +17,7 @@ abstract class Block {
 
   private _element: HTMLElement;
 
-  protected props: Record<string, string>;
+  props: Record<string, string>;
 
   protected eventBus: () => IEventBus;
 
@@ -47,7 +47,7 @@ abstract class Block {
     const children: ChildrenType = {};
 
     Object.entries(propsWithChildren).forEach(([key, value]) => {
-      ((value instanceof Block) || (value instanceof Array<Block>)) ? children[key] = value : props[key] = value;
+      ( !(value instanceof Block) && !(value instanceof Array<Block>)) ?  props[key] = value: children[key] = value ;
     });
     return { props, children };
   }
@@ -104,7 +104,6 @@ abstract class Block {
   }
 
   private _createDocumentElement(tagName: string) {
-   
     return document.createElement(tagName);
   }
 

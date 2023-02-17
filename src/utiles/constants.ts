@@ -8,8 +8,8 @@ export const routes = {
   setSafety: '/settings/safety',
   authorization: '/sign-in',
   registration: '/sign-up',
-  notFound: '/not-found',
   serverError: '/error',
+  notFound: '/not-found',
 };
 
 export const VALIDATION_ERROR = {

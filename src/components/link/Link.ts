@@ -3,16 +3,15 @@ import * as s from "./style.module.scss";
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 import { withRouter } from '~src/hocs/withRouter';
-import router from '~src/services/Router';
 
 interface LinkProps {
   href: string,
   text: string,
   stylePrefix?: string | null,
-  active?:boolean,
+  active?: boolean,
 }
 
-export class Link extends Block {
+class LinkBase extends Block {
   constructor({
     stylePrefix = null,
     ...otherProps
@@ -30,12 +29,11 @@ export class Link extends Block {
   }
 
   navigate() {
-
-   router.go(this.props.href);
+    this.props.router.go(this.props.href);
   }
 
   protected render() {
     return this.compile(tpl, this.props);
   }
 }
-//export const Link = withRouter(BaseLink);
+export const Link = withRouter(LinkBase);
