@@ -25,7 +25,7 @@ export interface UserDTO {
   avatar: string;
 }
 
-export class AuthAPI extends BaseAPI {
+export class AuthApi extends BaseAPI {
   constructor() {
     super('/auth');
   }
@@ -52,4 +52,4 @@ export class AuthAPI extends BaseAPI {
   read = undefined;
 }
 
-export default new AuthAPI();
+export default new AuthApi();

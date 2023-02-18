@@ -1,3 +1,4 @@
+import { UserDTO } from '~src/api/Auth';
 import { EventBus } from './EventBus';
 
 export enum StoreEvents {
@@ -5,7 +6,11 @@ export enum StoreEvents {
   Remove = 'remove'
 }
 
-export default class Store extends EventBus {
+type State ={
+  user: UserDTO
+}
+
+class Store extends EventBus {
 
   static _instance: Store;
   static STORE_NAME = 'myAppStore';
@@ -40,9 +45,11 @@ export default class Store extends EventBus {
     this.emit(StoreEvents.Remove);
   }
 
-  set(nextState: Partial<Store>) {
+  set(nextState: Partial<State>) {
     const prevState = { ...this._state };
     this._state = { ...this._state, ...nextState };
     this.emit(StoreEvents.Updated, prevState, nextState);
   }
 }
+
+export default new Store();
