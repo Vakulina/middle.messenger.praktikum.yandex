@@ -25,7 +25,9 @@ export class HTTPTransport {
   protected url: string;
 
   constructor(endpoint: string) {
+
     this.url = `${HTTPTransport.API_URL}${endpoint}`;
+
   }
 
   get = (url: string, options = {}): Promise<unknown> => {
@@ -58,8 +60,8 @@ export class HTTPTransport {
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-
-      xhr.open(method, url + query);
+      console.log(method, this.url + url + query)
+      xhr.open(method, this.url + url + query);
 
       Object.entries(headers).forEach(([key, value]) => {
         xhr.setRequestHeader(key, value);
@@ -84,6 +86,7 @@ export class HTTPTransport {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
+        console.log(JSON.stringify(data))
         xhr.send(JSON.stringify(data));
       }
     });

@@ -4,6 +4,7 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import { Input } from '../input';
 import { Textarea } from '../textarea';
+import { AuthData } from '~src/api/Auth';
 
 type FormProps = {
   title?: string,
@@ -19,7 +20,7 @@ export abstract class Form extends Block {
     });
   }
 
-  protected getValues() {
+  protected getValues(): AuthData|{} {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
 
       if ((child instanceof Input) || (child instanceof Textarea)) {

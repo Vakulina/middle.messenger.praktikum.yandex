@@ -5,6 +5,8 @@ import { Input } from '../input';
 import { Link } from '../link';
 import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import { VALIDATION_ERROR } from '~src/utiles/constants';
+import AuthAction from '~src/actions/AuthAction';
+import { AuthData } from '~src/api/Auth';
 
 const loginInput = new Input({
   name: 'login',
@@ -46,7 +48,11 @@ export class AuthForm extends Form {
 
   private submit(e: BtnEventType) {
     e.preventDefault();
-    if (this.validateForm()) console.log(this.getValues());
+    const isValid = (data: {} | AuthData): data is AuthData => {
+      return this.validateForm()
+    }
+    const data = this.getValues()
+    if (isValid(data)) AuthAction.signin(data)
   }
 
   render(): DocumentFragment {
