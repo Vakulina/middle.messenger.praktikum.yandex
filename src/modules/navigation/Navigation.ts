@@ -23,7 +23,7 @@ const navigation = new Navigation({
   chats: new Link({ href: routes.chats, text: 'Список чатов' }),
   setting: new Link({ href: routes.setting, text: 'Настройки профиля' }),
   'sign-in': new Link({ href: routes.authorization, text: 'Авторизация' }),
-  'sign-up': new Link({ href: routes.authorization, text: 'Регистрация' }),
+  'sign-up': new Link({ href: routes.registration, text: 'Регистрация' }),
   'not-found': new Link({ href: routes.notFound, text: '404' }),
   error: new Link({ href: routes.serverError, text: 'Ошибка сервера' }),
 });
