@@ -5,7 +5,7 @@ import Route from "./Route";
 class Router {
   routes: Array<any>;
   history: History;
-  private _currentRoute: any;
+  _currentRoute: any;
   private static __instance: Router;
 
   constructor() {
@@ -19,20 +19,12 @@ class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: Block) {
+  use(pathname: string, block: Block, ) {
     const route = new Route(pathname, block);
-    this.routes.push(route);
+    this.routes.unshift(route);
     return this;
   }
 
-  /*start() {
-    // Реагируем на изменения в адресной строке и вызываем перерисовку
-    window.onpopstate = (event) => {
-    if(event.currentTarget)  this._onRoute((event.currentTarget as Window).location.pathname);
-    };
-
-    this._onRoute(window.location.pathname);
-  }*/
   public start() {
     window.onpopstate = (event: PopStateEvent) => {
       const target = event.currentTarget as Window;
@@ -44,7 +36,6 @@ class Router {
 
   private _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
-    console.log("pathname", pathname, "route", route, "this._currentRoute", this._currentRoute)
     if (!route) {
       return;
     }
@@ -54,7 +45,6 @@ class Router {
     }
 
     this._currentRoute = route;
-
     route.render();
   }
 
@@ -64,7 +54,6 @@ class Router {
   }
 
   getRoute(pathname: string) {
-    console.log(this.routes)
     return this.routes.find(route => route.match(pathname)) || this.routes.find(route => route.match(ROUTES.notFound))
   }
 }

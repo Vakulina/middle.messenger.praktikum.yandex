@@ -114,6 +114,7 @@ abstract class Block {
     this._element!.innerHTML = '';
     this._element!.append(fragment);
     this.addAttribute(null);
+    this.addGlobalEvents();
     this._addEvents();
   }
 
@@ -137,10 +138,14 @@ abstract class Block {
       autofocus: this.props.autofocus || null,
       src: this.props.src || null,
       alt: this.props.alt || null,
+      id: this.props.id || null,
     };
     Object.entries({ ...attr, ...newAttr }).forEach(([key, value]) => {
       if (value) this.element!.setAttribute(key, value);
     });
+  }
+  public addGlobalEvents(){
+
   }
 
   _removeEventListeners() {

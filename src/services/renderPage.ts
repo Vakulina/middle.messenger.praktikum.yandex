@@ -18,14 +18,16 @@ const renderPage = () => {
       .use(routes.registration, getRegistrationForm())
       .use(routes.serverError, getServerErrorPage())
       .use(routes.notFound, getNotFoundPage())
-      .use(routes.setting, getSettingPage())
 
-    /*  .use(routes.setAvatar, getSettingPage())
-      .use(routes.setRegInfo, getSettingPage())
-      .use(routes.setSafety, getSettingPage())*/
+
+  
+      .use(routes.setRegInfo, getSettingPage(routes.setRegInfo))
+      .use(routes.setAvatar, getSettingPage(routes.setAvatar))
+      .use(routes.setSafety, getSettingPage(routes.setSafety))
+     .use(routes.setting, getSettingPage())
       .start()
-  }  )
- 
+  })
+
 };
 
 export default renderPage;

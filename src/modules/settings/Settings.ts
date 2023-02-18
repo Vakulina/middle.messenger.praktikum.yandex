@@ -6,7 +6,6 @@ import tpl from './tpl.hbs';
 import { PageLayout } from '~src/components/pageLayout';
 import * as style from './style.module.scss';
 import { Tabs } from '~src/components/tabs';
-import { Link } from '~src/components/link';
 
 export type Tab = {
   name: string,
@@ -36,21 +35,23 @@ export const tabsConfig: Tab[] = [
 ];
 
 class Settings extends Block {
-  constructor({ tabs, ...otherProps }: any) {
+  constructor({ tabs,
+    ...otherProps }: any) {
     super(
       'section',
-      { tabs, class: style.setting, ...otherProps },
+      { tabs, class: style.setting, 'id': 'settings', ...otherProps },
     );
   }
-
   protected render() {
     return this.compile(tpl, this.props);
   }
 }
-const settingTabs = new Tabs({ tabsConfig, rootPathname: '/settings' });
+const getSettingTabs = (activeLink?: string) => new Tabs({ activeLink, tabsConfig, rootPathname: '/settings' });
 
-const settingLayout = new Settings({ tabs: settingTabs, title: 'Настройки профиля' });
+const getSettingLayout = (activeLink?: string) => new Settings({ tabs: getSettingTabs(activeLink), title: 'Настройки профиля' })
 
-
-
-export const getSettingPage = () => new PageLayout({ content: settingLayout });
+export const getSettingPage = (activeLink?: string) => {
+  return new PageLayout({
+    content: getSettingLayout(activeLink || tabsConfig[0].pathRoute)
+  })
+};

@@ -1,7 +1,6 @@
 import Block from "./Block";
 import { render } from "./renderBlock";
 
-
 function isEqual(lhs: string, rhs: string): boolean {
   return lhs === rhs;
 }
@@ -9,15 +8,14 @@ function isEqual(lhs: string, rhs: string): boolean {
 class Route {
   private _block: Block | null
   private _rootQuery: string
-  constructor(private _pathname: string, private _blockClass: Block,  _rootQuery='root') {
-    this._rootQuery=_rootQuery
-    // this._props = props;
+  constructor(private _pathname: string, private _blockClass: Block, _rootQuery = 'root') {
+    this._rootQuery = _rootQuery
   }
 
   navigate(pathname: string) {
     if (this.match(pathname)) {
-
       this._pathname = pathname;
+      console.log("Navigate  ROUTE")
       this.render();
     }
   }
@@ -35,7 +33,6 @@ class Route {
   render() {
     if (!this._block) {
       this._block = this._blockClass;
-      console.log(this._rootQuery)
       render(this._block, this._rootQuery);
       return;
     }
