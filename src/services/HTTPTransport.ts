@@ -20,7 +20,14 @@ function queryStringify(data: Record<string, unknown>) {
   }, '?');
 }
 
-export abstract class HTTPTransport {
+export class HTTPTransport {
+  static API_URL = 'https://ya-praktikum.tech/api/v2';
+  protected url: string;
+
+  constructor(endpoint: string) {
+    this.url = `${HTTPTransport.API_URL}${endpoint}`;
+  }
+
   get = (url: string, options = {}): Promise<unknown> => {
     return this.request(url, { ...options, method: METHODS.GET });
   };
@@ -56,16 +63,23 @@ export abstract class HTTPTransport {
 
       Object.entries(headers).forEach(([key, value]) => {
         xhr.setRequestHeader(key, value);
+
       });
 
+
+      if (Object.entries(headers).length === 0) xhr.setRequestHeader('Content-Type', 'application/json');
+      //??? Для аватара тип заголовка указать в объекте heaers
       xhr.onload = function () {
         resolve(xhr);
       };
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.timeout = timeout;
-      xhr.ontimeout = reject;
+      xhr.onabort = () => reject({ reason: 'abort' });
+      xhr.onerror = () => reject({ reason: 'network error' });
+      xhr.ontimeout = () => reject({ reason: 'timeout' });
+
+
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
 
       if (method === METHODS.GET || !data) {
         xhr.send();
