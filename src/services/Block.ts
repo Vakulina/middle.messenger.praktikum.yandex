@@ -99,7 +99,7 @@ abstract class Block {
         ) {
           this.eventBus().emit(Block.EVENTS.FLOW_CDM);
         }
-      }, 100);
+      }, 200);
     }
 
     return this.element!;
@@ -199,42 +199,47 @@ abstract class Block {
     Object.assign(this.props, nextProps);
   }
 
+
   protected compile(template: (context: any) => string, context: any) {
-    const contextAndStubs = { ...context };
+    const contextAndStubs = {...context};
 
     Object.entries(this.children).forEach(([name, component]) => {
-      if (component instanceof Block) {
+      if (Array.isArray(component)) {
+        contextAndStubs[name] = component.map(child => `<div data-id="${child.id}"></div>`)
+      } else {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
       }
-      if (Array.isArray(component)) {
-        contextAndStubs[name] = component.map((item) => {
-          return `<div data-id=${item.id}></div>`;
-        });
-      }
     });
+
     const html = template(contextAndStubs);
 
     const temp = document.createElement('template');
+
     temp.innerHTML = html;
 
-    Object.values(this.children).forEach((component) => {
+    const replaceStub = (component: Block) => {
+      const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+
+      if (!stub) {
+        return;
+      }
+
+      component.getContent()?.append(...Array.from(stub.childNodes));
+
+      stub.replaceWith(component.getContent()!);
+    }
+
+    Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
-        component.forEach((item) => {
-          const stub = temp.content.querySelector(
-            `[data-id="${item.id}"]`,
-          );
-          stub?.replaceWith(item.getContent());
-        });
+        component.forEach(replaceStub);
       } else {
-        const stub = temp.content.querySelector(
-          `[data-id="${component.id}"]`,
-        );
-        stub?.replaceWith(component.getContent());
+        replaceStub(component);
       }
     });
 
     return temp.content;
   }
+
 
   show() {
     if (this.getContent()) this.getContent()!.style.display = 'block';

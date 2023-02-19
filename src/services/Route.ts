@@ -8,6 +8,7 @@ function isEqual(lhs: string, rhs: string): boolean {
 class Route {
   private _block: Block | null
   private _rootQuery: string
+  
   constructor(private _pathname: string, private _blockClass: Block, _rootQuery = 'root') {
     this._rootQuery = _rootQuery
   }
@@ -15,7 +16,6 @@ class Route {
   navigate(pathname: string) {
     if (this.match(pathname)) {
       this._pathname = pathname;
-      console.log("Navigate  ROUTE")
       this.render();
     }
   }
@@ -31,12 +31,8 @@ class Route {
   }
 
   render() {
-    if (!this._block) {
       this._block = this._blockClass;
       render(this._block, this._rootQuery);
-      return;
-    }
-
   }
 }
 export default Route
