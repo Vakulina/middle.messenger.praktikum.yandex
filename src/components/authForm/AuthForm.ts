@@ -7,6 +7,7 @@ import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import { VALIDATION_ERROR } from '~src/utiles/constants';
 import AuthAction from '~src/actions/AuthAction';
 import { AuthData } from '~src/api/Auth';
+import { ErrorType } from '~src/services';
 
 const loginInput = new Input({
   name: 'login',
@@ -27,6 +28,7 @@ const passwordInput = new Input({
 });
 
 export class AuthForm extends Form {
+
   initChildren() {
     this.children = {
       ...this.children,
@@ -46,13 +48,19 @@ export class AuthForm extends Form {
     };
   }
 
-  private submit(e: BtnEventType) {
+  private async submit(e: BtnEventType) {
     e.preventDefault();
-    const isValid = (data: {} | AuthData): data is AuthData => {
+    
+    const isValidValues = (data: {} | AuthData): data is AuthData => {
       return this.validateForm()
     }
+    
     const data = this.getValues()
-    if (isValid(data)) AuthAction.signin(data)
+
+    if (isValidValues(data)) {
+      await AuthAction.signin(data)
+        .catch((err) => console.log(err))
+    }
   }
 
   render(): DocumentFragment {

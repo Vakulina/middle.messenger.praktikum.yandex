@@ -13,11 +13,13 @@ type FormProps = {
   class?: string
 };
 export abstract class Form extends Block {
+  serverError: string|null
   constructor(props: FormProps) {
     super('form', {
       class: props.class ? props.class : `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
       ...props,
-    });
+    })
+    this.serverError = null
   }
 
   protected getValues(): AuthData|{} {

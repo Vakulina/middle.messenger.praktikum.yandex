@@ -12,6 +12,9 @@ export type RequestOptionsType = {
   headers?: Record<string, string>,
   timeout?: number
 };
+export type ErrorType = {
+  message: string, status: number
+}
 
 function queryStringify(data: Record<string, unknown>) {
   if (!data) return '';
@@ -19,6 +22,7 @@ function queryStringify(data: Record<string, unknown>) {
     return `${acc}${key}=${value}${index < arr.length - 1 ? '&' : ''}`;
   }, '?');
 }
+
 
 export class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
@@ -60,7 +64,7 @@ export class HTTPTransport {
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      console.log(method, this.url + url + query)
+
       xhr.open(method, this.url + url + query);
 
       Object.entries(headers).forEach(([key, value]) => {
@@ -72,11 +76,16 @@ export class HTTPTransport {
       if (Object.entries(headers).length === 0) xhr.setRequestHeader('Content-Type', 'application/json');
       //??? Для аватара тип заголовка указать в объекте heaers
       xhr.onload = function () {
-        resolve(xhr);
+        if (xhr.status >= 400) {
+          reject({ message: xhr.response.reason, status: xhr.status })
+        }
+        else {
+          resolve(xhr);
+        }
       };
 
       xhr.onabort = () => reject({ reason: 'abort' });
-      xhr.onerror = () => reject({ reason: 'network error' });
+      xhr.onerror = () => reject({ message: xhr.response.reason, status: xhr.response.status });
       xhr.ontimeout = () => reject({ reason: 'timeout' });
 
 
@@ -86,7 +95,6 @@ export class HTTPTransport {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        console.log(JSON.stringify(data))
         xhr.send(JSON.stringify(data));
       }
     });

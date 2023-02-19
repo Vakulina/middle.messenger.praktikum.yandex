@@ -30,7 +30,7 @@ export class AuthApi extends BaseAPI {
     super('/auth');
   }
 
-  signin(data: AuthData) {
+  async signin(data: AuthData) {
     return this.http.post('/signin', {data});
   }
 
