@@ -1,6 +1,7 @@
 import { v4 as makeUUID } from 'uuid';
 
 import { EventBus, IEventBus } from './EventBus';
+import { State } from './Store';
 
 export type PropsType = Record<string, string | Record<string, Function> | boolean>;
 export type ChildrenType = Record<string, Block | Block[] | any>;
@@ -24,7 +25,7 @@ abstract class Block {
   protected children: ChildrenType;
 
   public id: string = makeUUID();
-  private _state: {} = {};
+  private _state: Partial<State> ={};
 
   constructor(tagName = 'div', propsWithChildren = {}) {
     const eventBus = new EventBus();
@@ -80,6 +81,15 @@ abstract class Block {
   get element() {
     return this._element;
   }
+
+  get state() {
+    return this._state;
+  }
+
+  set state(data) {
+    this._state = data
+  }
+
 
   getContent(): HTMLElement {
     if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {

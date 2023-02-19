@@ -29,4 +29,19 @@
   &_reg {
     @include centralContent(810px);
   }
+
+  &[data-server-error="true"] input,
+  textarea {
+    border-color: red;
+  }
+
+  &__error {
+    display: none;
+    color: $attantionColor;
+    color: red;
+  }
+
+  &[data-server-error="true"] &__error {
+    display: block;
+  }
 }

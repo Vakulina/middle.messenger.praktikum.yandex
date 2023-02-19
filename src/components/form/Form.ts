@@ -6,23 +6,24 @@ import { Input } from '../input';
 import { Textarea } from '../textarea';
 import { AuthData } from '~src/api/Auth';
 
-type FormProps = {
+export type FormProps = {
   title?: string,
   stylePrefix?: string | null,
   image?: any,
   class?: string
 };
 export abstract class Form extends Block {
-  serverError: string|null
+  serverError: string | null
   constructor(props: FormProps) {
     super('form', {
-      class: props.class ? props.class : `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
+      class: s.form ? s.form : `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
+      className: s.form,
       ...props,
     })
     this.serverError = null
   }
 
-  protected getValues(): AuthData|{} {
+  protected getValues(): AuthData | {} {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
 
       if ((child instanceof Input) || (child instanceof Textarea)) {
@@ -41,10 +42,10 @@ export abstract class Form extends Block {
         acc = (acc && isValideChild);
         if (!isValideChild) child.checkInputValidity();
       }
-
       return acc;
     }, true);
   }
+
 
   protected render() {
     return this.compile(tpl, this.props);
