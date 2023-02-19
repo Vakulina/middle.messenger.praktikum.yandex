@@ -1,5 +1,4 @@
 import AuthAPI, { AuthApi, AuthData, RegistrationData } from '../api/Auth';
-import store from '../services/Store';
 import router from '../services/Router';
 import { routes } from '~src/utiles/constants';
 import Store from '../services/Store';
@@ -13,7 +12,8 @@ export class AuthActions {
 
   async signin(data: AuthData) {
     await this.api.signin(data)
-      .then(() => store.set({ isLogin: true }))
+      .then(() => Store.set({ isLogin: true }))
+      .then(() => Store.set({ isAuthError: null }))
       .then(() => this.getUser())
       .then(() => router.go(routes.chats))
 
@@ -51,12 +51,12 @@ export class AuthActions {
 
   async getUser() {
     const user = await this.api.getUser();
-    store.set({ user });
+    Store.set({ user });
   }
 
   async logout() {
     await this.api.logout()
-      .then((res) => store.set({ isLogin: false }))
+      .then((res) => Store.set({ isLogin: false }))
       .then((res) => router.go(routes.authorization))
       .catch((e: any) => {
         console.error(e.message);

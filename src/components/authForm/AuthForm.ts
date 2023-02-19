@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import { Form } from '../form';
+import { Form, FormProps } from '../form';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Link } from '../link';
@@ -8,6 +8,7 @@ import { VALIDATION_ERROR } from '~src/utiles/constants';
 import AuthAction from '~src/actions/AuthAction';
 import { AuthData } from '~src/api/Auth';
 import connectWithStore from '~src/services/connectWithStore';
+import Store from '~src/services/Store';
 
 const loginInput = new Input({
   name: 'login',
@@ -28,6 +29,20 @@ const passwordInput = new Input({
 });
 
 class AuthFormBase extends Form {
+  constructor(props: FormProps) {
+    super({
+      events: {
+        focusin: () => {
+          if (this.state.isAuthError) {
+            Store.set({ isAuthError: null })
+            this.addAttribute({ 'data-server-error': 'false' });
+          }
+        },
+      },
+      ...props,
+    })
+  }
+
 
   initChildren() {
     this.children = {
@@ -59,7 +74,7 @@ class AuthFormBase extends Form {
     if (isValidValues(data)) {
       await AuthAction.signin(data)
       this.addAttribute({ 'data-server-error': this.props.isAuthError ? 'true' : 'false' });
-      this.setProps({ serverError: `Ошибка сервера: ${this.state.isAuthError!.message}` })
+      if (this.state.isAuthError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isAuthError!.message}` })
     }
   }
 

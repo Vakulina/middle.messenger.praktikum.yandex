@@ -5,12 +5,16 @@ import Block from '~src/services/Block';
 import { Input } from '../input';
 import { Textarea } from '../textarea';
 import { AuthData } from '~src/api/Auth';
+import Store from '~src/services/Store';
 
 export type FormProps = {
   title?: string,
   stylePrefix?: string | null,
   image?: any,
-  class?: string
+  class?: string,
+  events?: {
+    focusin?: () => void;
+  }
 };
 export abstract class Form extends Block {
   serverError: string | null
