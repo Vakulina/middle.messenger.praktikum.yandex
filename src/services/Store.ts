@@ -6,8 +6,10 @@ export enum StoreEvents {
   Remove = 'remove'
 }
 
-type State ={
-  user: UserDTO
+export type State = {
+  user: UserDTO,
+  isAuthError: string | null,
+  isLogin: boolean
 }
 
 class Store extends EventBus {

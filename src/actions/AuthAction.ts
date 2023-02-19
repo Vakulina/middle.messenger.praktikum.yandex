@@ -2,6 +2,7 @@ import AuthAPI, { AuthApi, AuthData, RegistrationData } from '../api/Auth';
 import store from '../services/Store';
 import router from '../services/Router';
 import { routes } from '~src/utiles/constants';
+import Store from '../services/Store';
 
 export class AuthActions {
   private readonly api: AuthApi;
@@ -12,6 +13,7 @@ export class AuthActions {
 
   async signin(data: AuthData) {
     await this.api.signin(data)
+      .then(() => store.set({ isLogin: true }))
       .then(() => this.getUser())
       .then(() => router.go(routes.chats))
 
@@ -20,12 +22,17 @@ export class AuthActions {
           this.logout()
             .then(() => {
               document.cookie = 'expires=0'
+
               this.signin(data)
-              return null
+                .catch((err) => {
+                  //установить ошибку authForm
+                  Store.set({ isAuthError: err })
+                })
             })
         }
         else {
-          throw err
+          //установить ошибку authForm
+          Store.set({ isAuthError: err })
         }
       })
   }
@@ -48,12 +55,12 @@ export class AuthActions {
   }
 
   async logout() {
-    try {
-      await this.api.logout();
-      router.go(routes.authorization);
-    } catch (e: any) {
-      console.error(e.message);
-    }
+    await this.api.logout()
+      .then((res) => store.set({ isLogin: false }))
+      .then((res) => router.go(routes.authorization))
+      .catch((e: any) => {
+        console.error(e.message);
+      })
   }
 }
 

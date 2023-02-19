@@ -24,6 +24,7 @@ abstract class Block {
   protected children: ChildrenType;
 
   public id: string = makeUUID();
+  private _state: {} = {};
 
   constructor(tagName = 'div', propsWithChildren = {}) {
     const eventBus = new EventBus();
@@ -47,7 +48,7 @@ abstract class Block {
     const children: ChildrenType = {};
 
     Object.entries(propsWithChildren).forEach(([key, value]) => {
-      ( !(value instanceof Block) && !(value instanceof Array<Block>)) ?  props[key] = value: children[key] = value ;
+      (!(value instanceof Block) && !(value instanceof Array<Block>)) ? props[key] = value : children[key] = value;
     });
     return { props, children };
   }
@@ -144,7 +145,7 @@ abstract class Block {
       if (value) this.element!.setAttribute(key, value);
     });
   }
-  public addGlobalEvents(){
+  public addGlobalEvents() {
 
   }
 
@@ -181,7 +182,7 @@ abstract class Block {
     return false;
   }
 
-  setProps(nextProps: PropsType) {
+  setProps(nextProps: ChildrenType) {
     if (!nextProps) {
       return;
     }

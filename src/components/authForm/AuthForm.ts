@@ -7,7 +7,9 @@ import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import { VALIDATION_ERROR } from '~src/utiles/constants';
 import AuthAction from '~src/actions/AuthAction';
 import { AuthData } from '~src/api/Auth';
-import { ErrorType } from '~src/services';
+import withStore from '~src/services/connectWithStore';
+import connectWithStore from '~src/services/connectWithStore';
+import Block from '~src/services/Block';
 
 const loginInput = new Input({
   name: 'login',
@@ -27,7 +29,7 @@ const passwordInput = new Input({
   textError: VALIDATION_ERROR.UNCORRECT_PASSWORD,
 });
 
-export class AuthForm extends Form {
+export class AuthFormBase extends Form {
 
   initChildren() {
     this.children = {
@@ -50,16 +52,15 @@ export class AuthForm extends Form {
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    
-    const isValidValues = (data: {} | AuthData): data is AuthData => {
+
+    const isValidValues = (_data: {} | AuthData): _data is AuthData => {
       return this.validateForm()
     }
-    
+
     const data = this.getValues()
 
     if (isValidValues(data)) {
       await AuthAction.signin(data)
-        .catch((err) => console.log(err))
     }
   }
 
@@ -67,3 +68,8 @@ export class AuthForm extends Form {
     return this.compile(tpl, this.props);
   }
 }
+
+export const AuthForm = connectWithStore(AuthFormBase,(state) => {
+  const { isAuthError, isLogin } = state
+  return { isAuthError, isLogin }
+})
