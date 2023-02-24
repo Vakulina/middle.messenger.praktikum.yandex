@@ -7,7 +7,7 @@ export enum StoreEvents {
 }
 
 export type State = {
-  user: UserDTO,
+  user: Omit<UserDTO,"password">,
   isAuthError: { message: string, status: number } | null,
   isLogin: boolean
 }

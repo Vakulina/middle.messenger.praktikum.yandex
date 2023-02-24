@@ -22,8 +22,8 @@ export interface UserDTO {
   email: string;
   password: string;
   phone: string;
-  avatar: string;
-}
+}   
+
 
 export class AuthApi extends BaseAPI {
   constructor() {

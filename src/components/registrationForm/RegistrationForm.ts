@@ -4,6 +4,7 @@ import { Button } from '../button';
 import { Input } from '../input';
 import { Link } from '../link';
 import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
+import connectWithStore from '~src/services/connectWithStore';
 
 type RegistrationValuesType = {
   password: string,
@@ -15,7 +16,7 @@ type RegistrationValuesType = {
   phone: string,
 };
 
-export class RegistrationForm extends Form {
+class RegistrationFormBase extends Form {
   initChildren() {
     this.children = {
       ...this.children,
@@ -98,3 +99,10 @@ export class RegistrationForm extends Form {
     return this.compile(tpl, this.props);
   }
 }
+
+export const RegistrationForm = connectWithStore('form', RegistrationFormBase, (state) => {
+  const { user } = state;
+  return { user }
+}
+)
+

@@ -31,6 +31,7 @@ const passwordInput = new Input({
 class AuthFormBase extends Form {
   constructor(props: FormProps) {
     super({
+     title: 'Вход', stylePrefix: 'auth',
       events: {
         focusin: () => {
           if (this.state.isAuthError) {
@@ -83,7 +84,7 @@ class AuthFormBase extends Form {
   }
 }
 
-export const AuthForm = connectWithStore(AuthFormBase, { title: 'Вход', stylePrefix: 'auth' }, (state) => {
+export const AuthForm = connectWithStore('form', AuthFormBase,  (state) => {
   const { isAuthError, isLogin } = state;
   return { isAuthError, isLogin }
 })

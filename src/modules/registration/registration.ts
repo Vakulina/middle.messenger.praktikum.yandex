@@ -1,9 +1,12 @@
 import { PageLayout } from '~src/components/pageLayout';
 import { RegistrationForm } from '../../components/registrationForm';
 
-const form = new RegistrationForm({ title: 'Регистрация', stylePrefix: 'reg' });
+
+
+const form = RegistrationForm;
 const registrationPage = new PageLayout({ content: form });
 
-export const getRegistrationForm = () => {
+export const  getRegistrationForm = () => {
   return registrationPage;
 };
+

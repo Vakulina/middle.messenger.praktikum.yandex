@@ -52,7 +52,6 @@ const getSettingTabs = (activeLink?: string) => new Tabs({ activeLink, tabsConfi
 const getSettingLayout = (activeLink?: string) => new Settings({ tabs: getSettingTabs(activeLink), title: 'Настройки профиля' })
 
 export const getSettingPage = (activeLink?: string) => {
- // console.log(activeLink , getSettingLayout(activeLink || tabsConfig[0].pathRoute).getContent())
   return new PageLayout({
     content: getSettingLayout(activeLink || tabsConfig[0].pathRoute)
   })

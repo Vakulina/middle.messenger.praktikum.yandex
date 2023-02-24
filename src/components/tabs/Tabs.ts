@@ -3,7 +3,6 @@ import styles from '../../utiles/styles';
 import * as s from "./style.module.scss";
 import Block, { ChildrenType } from '~src/services/Block';
 import { Link } from '../link/Link';
-import { withRouter } from '~src/hocs/withRouter';
 
 type TabsProps = {
   tabsConfig: Tab[],

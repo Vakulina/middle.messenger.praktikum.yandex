@@ -4,7 +4,7 @@ import Block from '~src/services/Block';
 import { Link } from '../link';
 
 interface ServerErrorProps {
-  code: string, message: string, link: Link
+  code: string, message: string, link: typeof Link
 }
 
 export class ServerError extends Block {
