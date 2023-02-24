@@ -5,7 +5,7 @@ import { Input } from '../input';
 import { Link } from '../link';
 import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import { VALIDATION_ERROR } from '~src/utiles/constants';
-import AuthAction from '~src/actions/AuthAction';
+import AuthAction from '~src/actions/AuthActions';
 import { AuthData } from '~src/api/Auth';
 import connectWithStore from '~src/services/connectWithStore';
 import Store from '~src/services/Store';

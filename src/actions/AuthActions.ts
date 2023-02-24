@@ -3,7 +3,7 @@ import router from '../services/Router';
 import { routes } from '~src/utiles/constants';
 import Store from '../services/Store';
 
-export class AuthActions {
+class AuthActions {
   private readonly api: AuthApi;
 
   constructor() {

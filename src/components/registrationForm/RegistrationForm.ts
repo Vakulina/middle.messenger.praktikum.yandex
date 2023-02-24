@@ -5,6 +5,8 @@ import { Input } from '../input';
 import { Link } from '../link';
 import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore';
+import AuthActions from '~src/actions/AuthActions';
+import { RegistrationData } from '~src/api/Auth';
 
 type RegistrationValuesType = {
   password: string,
@@ -90,9 +92,19 @@ class RegistrationFormBase extends Form {
     };
   }
 
-  private submit(e: BtnEventType) {
+  private async submit(e: BtnEventType) {
     e.preventDefault();
-    if (this.validateForm()) console.log(this.getValues());
+
+    const isValidValues = (_data: {} | RegistrationData): _data is RegistrationData => {
+      return this.validateForm()
+    }
+
+    const data = this.getValues()
+    if (isValidValues(data)) {
+      await AuthActions.signup(data)
+      this.addAttribute({ 'data-server-error': this.props.isAuthError ? 'true' : 'false' });
+      if (this.state.isAuthError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isAuthError!.message}` })
+    }
   }
 
   render(): DocumentFragment {
