@@ -2,6 +2,7 @@ import AuthAPI, { AuthApi, AuthData, RegistrationData } from '../api/Auth';
 import router from '../services/Router';
 import { routes } from '~src/utiles/constants';
 import Store from '../services/Store';
+import { ErrorType } from '~src/services';
 
 class AuthActions {
   private readonly api: AuthApi;
@@ -17,7 +18,7 @@ class AuthActions {
       .then(() => this.getUser())
       .then(() => router.go(routes.chats))
 
-      .catch((err: any) => {
+      .catch((err: ErrorType) => {
         if (err.status === 400) {
           this.logout()
             .then(() => {
@@ -38,15 +39,17 @@ class AuthActions {
   }
 
   async signup(data: RegistrationData) {
-    try {
-      await this.api.signup(data);
+    await this.api.signup(data)
+      .then(() => Store.set({ isRegistrationError: null }))
+      .then(() => this.getUser())
+      .then(()=>router.go('/profile'))
+      .catch((err: ErrorType) => {
+        Store.set({ isRegistrationError: err })
+      })
 
-      await this.getUser();
+   // await this.getUser();
 
-      router.go('/profile');
-    } catch (e: any) {
-      console.error(e.message);
-    }
+
   }
 
   async getUser() {

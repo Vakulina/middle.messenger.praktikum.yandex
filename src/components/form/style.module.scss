@@ -44,4 +44,11 @@
   &[data-server-error="true"] &__error {
     display: block;
   }
+
+  &[data-password-error="true"] &__error {
+    display: block;
+  }
+  &[data-password-error="true"] input[type="password"]{
+    border-color: red;
+  }
 }

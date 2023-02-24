@@ -14,6 +14,17 @@ export interface RegistrationData {
   phone: string;
 }
 
+export type RegistrationValuesType = {
+  password: string,
+  repeated_password: string,
+  first_name: string,
+  second_name: string,
+  login: string,
+  email: string,
+  phone: string,
+};
+
+
 export interface UserDTO {
   id: number;
   first_name: string;

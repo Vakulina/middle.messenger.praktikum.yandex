@@ -4,7 +4,7 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import { Input } from '../input';
 import { Textarea } from '../textarea';
-import { AuthData } from '~src/api/Auth';
+import { AuthData, RegistrationValuesType } from '~src/api/Auth';
 import Store from '~src/services/Store';
 
 export type FormProps = {
@@ -14,6 +14,7 @@ export type FormProps = {
   class?: string,
   events?: {
     focusin?: () => void;
+    focusout?:()=>void
   }
 };
 export abstract class Form extends Block {
@@ -27,7 +28,7 @@ export abstract class Form extends Block {
     this.serverError = null
   }
 
-  protected getValues(): AuthData | {} {
+  protected getValues(): AuthData | RegistrationValuesType | {} {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
 
       if ((child instanceof Input) || (child instanceof Textarea)) {
