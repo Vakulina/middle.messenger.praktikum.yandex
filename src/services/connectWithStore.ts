@@ -4,10 +4,11 @@ export default function connectWithStore(
   tag: string,
   Component: any,
   mapStateToProps: (state: State) => Partial<State>,
-  ) {
-  class ConnectedComponent extends Component {
+  props?: any,
 
-    constructor(tag: string, props = {}) {
+) {
+  class ConnectedComponent extends Component {
+    constructor(tag: string, props?: object) {
       super(tag, { ...props, ...mapStateToProps(Store.getState() as State) });
 
       Store.on(StoreEvents.Updated, () => {
@@ -16,5 +17,5 @@ export default function connectWithStore(
       });
     }
   }
-  return new ConnectedComponent(tag)
+  return new ConnectedComponent(tag, props)
 }

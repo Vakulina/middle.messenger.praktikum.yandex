@@ -6,6 +6,7 @@ import tpl from './tpl.hbs';
 import { PageLayout } from '~src/components/pageLayout';
 import * as style from './style.module.scss';
 import { Tabs } from '~src/components/tabs';
+import connectWithStore from '~src/services/connectWithStore';
 
 export type Tab = {
   name: string,
@@ -34,22 +35,32 @@ export const tabsConfig: Tab[] = [
   },
 ];
 
-class Settings extends Block {
-  constructor({ tabs,
-    ...otherProps }: any) {
+class SettingsBase extends Block {
+  constructor(tag = 'section', {tabs , otherProps}: any) {
     super(
       'section',
       { tabs, class: style.setting, 'id': 'settings', ...otherProps },
     );
+    /*this.setProps({
+      user: () => this.props.store.getState().authError,
+      avatar: () => this.props.store.getState().user?.avatar,
+  });*/
   }
   protected render() {
     return this.compile(tpl, this.props);
   }
 }
 
-const getSettingTabs = (activeLink?: string) => new Tabs({ activeLink, tabsConfig, rootPath: '/settings'  });
 
-const getSettingLayout = (activeLink?: string) => new Settings({ tabs: getSettingTabs(activeLink), title: 'Настройки профиля' })
+
+const getSettingTabs = (activeLink: string) => new Tabs({ activeLink, tabsConfig, rootPath: '/settings'  });
+
+const getSettingLayout = (activeLink: string) => connectWithStore('section', SettingsBase,  (state) => {
+  const { user, isLogin } = state;
+  return { user, isLogin }
+},
+{ tabs: getSettingTabs(activeLink), title: 'Настройки профиля' }
+)
 
 export const getSettingPage = (activeLink?: string) => {
   return new PageLayout({
