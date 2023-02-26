@@ -19,14 +19,13 @@ class UsersActions {
   }
 
   public changeAvatar() {
-    const myForm = document.querySelector('form') || undefined
-    const avatar = myForm!.querySelector('input')
-
     const form = new FormData();
+    const state = Store.getState()
 
-    form.append('avatar', avatar!.files![0], 'avatar.png');
-
-
+    if ('avatar' in state) {
+      const avatar = state.avatar
+      form.append('avatar', avatar, 'avatar.png');
+    }
     //  formData.set('avatar', file);
     // console.log({ file });
     UsersAPI.changeAvatar(form);

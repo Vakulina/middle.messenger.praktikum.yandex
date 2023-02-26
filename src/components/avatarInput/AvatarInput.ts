@@ -3,6 +3,9 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import { InputEventType } from '~src/utiles';
 import styles from '~src/utiles/styles';
+import connectWithStore from '~src/services/connectWithStore';
+import Store from '~src/services/Store';
+
 
 interface FileInputProps {
   label?: string,
@@ -16,19 +19,19 @@ interface FileInputProps {
   name?: string,
   type?: 'file',
   fileName?: string,
-  text:string | Block
+  text: string | Block
 }
 
-export class FileInput extends Block {
+class AvatarInputBase extends Block {
   constructor({
     type = 'file',
     stylePrefix = null,
     text = 'Обзор...',
     events = {
       change: (e) => {
-       /* if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name });
-        if (e.target.files) this.setProps({ file: e.target.files[0]});
-        this.eventBus().emit(Block.EVENTS.FLOW_CDU);*/
+        Store.set({ avatarName: e.target.files![0].name })
+        Store.set({ avatar: e.target.files![0] })
+        this.setProps({fileName: e.target.files![0].name})
       },
     },
     ...otherProps
@@ -38,15 +41,33 @@ export class FileInput extends Block {
       {
         type,
         text,
-        class: !stylePrefix ? s.fileInput : `${s.fileInput} ${styles.getClassWithPrefix(s, 'fileInput', stylePrefix)}`,
         events,
+        class: !stylePrefix ? s.fileInput : `${s.fileInput} ${styles.getClassWithPrefix(s, 'fileInput', stylePrefix)}`,
         ...otherProps,
       },
     );
+
+  }
+  initChildren() {
+
+    super.initChildren()
   }
 
   protected render() {
+
     return this.compile(tpl, this.props);
   }
 }
 
+export const avatarInput = connectWithStore('fieldset', AvatarInputBase as any,
+  (state) => {
+    const { avatar, avatarName } = state;
+    return { avatar, avatarName }
+  },
+  {
+    name: 'avatar',
+    type: 'file',
+    accept: 'image/*',
+    text: 'Обзор...',
+  }
+)

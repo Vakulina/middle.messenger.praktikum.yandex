@@ -1,6 +1,6 @@
 import UsersActions from '~src/actions/UsersActions';
 import { Button } from '~src/components/button';
-import { FileInput } from '~src/components/fileInput';
+import { avatarInput } from '~src/components/avatarInput';
 import { Form } from '~src/components/form';
 import { Image } from '~src/components/image';
 import Block from '~src/services/Block';
@@ -16,12 +16,8 @@ export class AvatarTemplateBase extends Form {
     this.children = {
       ...this.children,
       image: new Image({ alt: 'аватар', stylePrefix: 'avatar', src: avatar }),
-      avatar: new FileInput({
-        name: 'avatar',
-        type: 'file',
-        accept: 'image/*',
-        text: 'Обзор...',
-      }),
+
+      avatar: avatarInput,
       'save-avatar': new Button({
         text: 'Сохранить',
         stylePrefix: 'save-avatar',
@@ -37,7 +33,7 @@ export class AvatarTemplateBase extends Form {
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-   
+
 
     UsersActions.changeAvatar()
   }

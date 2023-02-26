@@ -11,7 +11,8 @@ export type State = {
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
   isLogin: boolean,
-  avatar: string,
+  avatar: any,
+  avatarName:string,
   isRegistrationSettingsError: { message: string, status: number } | null,
   isPasswordSettingsError:{ message: string, status: number } | null,
 }
@@ -19,7 +20,7 @@ export type State = {
 class Store extends EventBus {
 
   static _instance: Store;
-  state = {};
+  state:State|{} = {};
 
   constructor() {
     if (Store._instance) return Store._instance;
@@ -28,7 +29,7 @@ class Store extends EventBus {
     return Store._instance;
   }
 
-  getState() {
+  getState(): State|{} {
     return this.state;
   }
 

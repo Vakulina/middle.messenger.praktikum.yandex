@@ -27,15 +27,12 @@ function queryStringify(data: Record<string, unknown>) {
   );
 }
 
-
 export class HTTPTransport {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
   protected url: string;
 
   constructor(endpoint: string) {
-
     this.url = `${HTTPTransport.API_URL}${endpoint}`;
-
   }
 
   get = async (url: string, options = {}): Promise<unknown> => {
@@ -47,17 +44,14 @@ export class HTTPTransport {
   };
 
   put = (url: string, options = {}): Promise<unknown> => {
-
     return this.request(url, { ...options, method: METHODS.PUT });
   };
-
 
   delete = (url: string, options = {}): Promise<unknown> => {
     return this.request(url, { ...options, method: METHODS.DELETE });
   };
 
   request = (url: string, options: RequestOptionsType): Promise<unknown> => {
-    console.log(options)
     const {
       method = METHODS.GET,
       data,
@@ -65,8 +59,7 @@ export class HTTPTransport {
       isFormData = false,
     } = options;
 
-    // Если метод GET и передана data, трансформировать data в query запрос
-    const query = (data && (method === METHODS.GET)) ? queryStringify(data) : '';
+    const query = (data && (method === METHODS.GET)) ? queryStringify(data as Record<string, unknown>) : '';
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
