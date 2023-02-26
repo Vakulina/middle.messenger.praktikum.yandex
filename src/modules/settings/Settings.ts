@@ -7,6 +7,7 @@ import { PageLayout } from '~src/components/pageLayout';
 import * as style from './style.module.scss';
 import { Tabs } from '~src/components/tabs';
 import connectWithStore from '~src/services/connectWithStore';
+import AuthActions from '~src/actions/AuthActions';
 
 export type Tab = {
   name: string,
@@ -38,13 +39,14 @@ export const tabsConfig: Tab[] = [
 class SettingsBase extends Block {
   constructor(tag = 'section', {tabs , otherProps}: any) {
     super(
-      'section',
+      tag,
       { tabs, class: style.setting, 'id': 'settings', ...otherProps },
     );
-    /*this.setProps({
-      user: () => this.props.store.getState().authError,
-      avatar: () => this.props.store.getState().user?.avatar,
-  });*/
+    this.setProps({
+      user: () => this.state.isLogin,
+      avatar: () => this.state.avatar,
+  });
+  AuthActions.getUser();
   }
   protected render() {
     return this.compile(tpl, this.props);

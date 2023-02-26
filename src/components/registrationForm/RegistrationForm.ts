@@ -8,6 +8,7 @@ import connectWithStore from '~src/services/connectWithStore';
 import AuthActions from '~src/actions/AuthActions';
 import { RegistrationData, RegistrationValuesType } from '~src/api/Auth';
 import Store from '~src/services/Store';
+import Block from '~src/services/Block';
 
 const first_name = new Input({
   name: 'first_name',
@@ -147,7 +148,7 @@ class RegistrationFormBase extends Form {
   }
 }
 
-export const RegistrationForm = connectWithStore('form', RegistrationFormBase, (state) => {
+export const RegistrationForm = connectWithStore('form', RegistrationFormBase as typeof Block, (state) => {
   const { user, isRegistrationError } = state;
   return { user, isRegistrationError }
 }

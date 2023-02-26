@@ -34,8 +34,8 @@ export class HTTPTransport {
 
   }
 
-  get = (url: string, options = {}): Promise<unknown> => {
-    return this.request(url, { ...options, method: METHODS.GET });
+  get = async (url: string, options = {}): Promise<unknown> => {
+    return await this.request(url, { ...options, method: METHODS.GET });
   };
 
   post = (url: string, options = {}): Promise<unknown> => {
@@ -80,7 +80,7 @@ export class HTTPTransport {
           reject({ message: xhr.response.reason, status: xhr.status })
         }
         else {
-          resolve(xhr);
+          resolve(xhr.response);
         }
       };
 

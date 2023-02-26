@@ -25,7 +25,6 @@ const renderPage = () => {
       .use(routes.setting, getSettingPage(routes.setRegInfo))
 
       .start()
-      console.log(router.routes)
   })
 
 };

@@ -25,7 +25,6 @@ interface InputProps {
 
 export class Input extends Block {
   isValid: boolean;
-
   valueState: string;
 
   constructor({
@@ -58,7 +57,7 @@ export class Input extends Block {
       },
     );
     this.isValid = true;
-    this.valueState = '';
+    this.valueState = this.props.value||'';
   }
 
   checkInputValidity(e?: InputEventType) {

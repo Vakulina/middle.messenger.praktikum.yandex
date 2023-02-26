@@ -15,7 +15,7 @@ class AuthActions {
     await this.api.signin(data)
       .then(() => Store.set({ isLogin: true }))
       .then(() => Store.set({ isAuthError: null }))
-      //.then(() => this.getUser())
+      .then(() => this.getUser())
       .then(() => router.go(routes.chats))
 
       .catch((err: ErrorType) => {
@@ -41,7 +41,7 @@ class AuthActions {
   async signup(data: RegistrationData) {
     await this.api.signup(data)
       .then(() => Store.set({ isRegistrationError: null }))
-    //  .then(() => this.getUser())
+     .then(() => this.getUser())
       .then(()=>router.go(routes.setting))
       .catch((err: ErrorType) => {
         Store.set({ isRegistrationError: err })
@@ -53,8 +53,8 @@ class AuthActions {
   }
 
   async getUser() {
-    const user = await this.api.getUser();
-    Store.set({ user });
+    await this.api.getUser()
+    .then(res => Store.set({ user: res }))   
   }
 
   async logout() {

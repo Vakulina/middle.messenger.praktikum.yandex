@@ -132,7 +132,9 @@ abstract class Block {
   protected render() {
     return new DocumentFragment();
   }
+init(){
 
+}
   _addEvents() {
     const { events = {} } = this.props as PropsType & { events: Record<string, () => void> };
     Object.keys(events).forEach((eventName) => {

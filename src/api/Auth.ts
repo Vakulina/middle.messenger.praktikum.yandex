@@ -33,6 +33,7 @@ export interface UserDTO {
   email: string;
   password: string;
   phone: string;
+  display_name?:string
 }   
 
 
@@ -50,7 +51,9 @@ export class AuthApi extends BaseAPI {
   }
 
   getUser(): Promise<UserDTO> {
-    return this.http.get('/user') as Promise<UserDTO>;
+    const res= this.http.get('/user') 
+
+    return res as Promise<UserDTO>;
   }
 
   logout() {

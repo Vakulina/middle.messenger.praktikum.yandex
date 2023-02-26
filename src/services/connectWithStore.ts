@@ -1,8 +1,9 @@
+import Block from './Block';
 import Store, { State, StoreEvents } from './Store';
 
 export default function connectWithStore(
   tag: string,
-  Component: any,
+  Component: typeof Block,
   mapStateToProps: (state: State) => Partial<State>,
   props?: any,
 
@@ -16,6 +17,7 @@ export default function connectWithStore(
         this.state = { ...mapStateToProps(Store.getState() as State) };
       });
     }
+
   }
   return new ConnectedComponent(tag, props)
 }

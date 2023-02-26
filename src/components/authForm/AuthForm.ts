@@ -9,6 +9,7 @@ import AuthAction from '~src/actions/AuthActions';
 import { AuthData } from '~src/api/Auth';
 import connectWithStore from '~src/services/connectWithStore';
 import Store from '~src/services/Store';
+import Block from '~src/services/Block';
 
 const loginInput = new Input({
   name: 'login',
@@ -84,7 +85,7 @@ class AuthFormBase extends Form {
   }
 }
 
-export const AuthForm = connectWithStore('form', AuthFormBase,  (state) => {
+export const AuthForm = connectWithStore('form', AuthFormBase as typeof Block,  (state) => {
   const { isAuthError, isLogin } = state;
   return { isAuthError, isLogin }
 })

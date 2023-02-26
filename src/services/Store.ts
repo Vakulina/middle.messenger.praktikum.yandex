@@ -1,3 +1,4 @@
+import AuthActions from '~src/actions/AuthActions';
 import { UserDTO } from '~src/api/Auth';
 import { EventBus } from './EventBus';
 
@@ -10,7 +11,8 @@ export type State = {
   user: Omit<UserDTO, "password">,
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
-  isLogin: boolean
+  isLogin: boolean,
+  avatar?: string
 }
 
 class Store extends EventBus {
@@ -20,11 +22,9 @@ class Store extends EventBus {
   _state = {};
 
   constructor() {
-
     if (Store._instance) return Store._instance;
-
     super();
-    const savedState = localStorage.getItem(Store.STORE_NAME);
+    const savedState = undefined //localStorage.getItem(Store.STORE_NAME);
     this._state = savedState ? (JSON.parse(savedState) ?? {}) : {}
     Store._instance = this;
 
@@ -36,6 +36,7 @@ class Store extends EventBus {
       StoreEvents.Remove,
       () => { localStorage.removeItem(Store.STORE_NAME); }
     );
+    return Store._instance;
   }
 
   getState() {

@@ -1,10 +1,21 @@
 import tpl from './tpl.hbs';
-import { Form } from '~src/components/form';
+import { Form, FormProps } from '~src/components/form';
 import { Button } from '~src/components/button';
 import { Input } from '~src/components/input';
 import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
+import connectWithStore from '~src/services/connectWithStore';
+import Block from '~src/services/Block';
+import AuthActions from '~src/actions/AuthActions';
 
-export class RegistrationInfoTemplate extends Form {
+export class RegistrationInfoTemplateBase extends Form {
+  constructor(props: FormProps) {
+    super(props);
+    this.setProps({
+      user: () => this.state.user,
+    });
+  }
+ 
+  
   initChildren() {
     this.children = {
       ...this.children,
@@ -15,6 +26,7 @@ export class RegistrationInfoTemplate extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.name[0],
         textError: VALIDATION_REGEXES.name[1],
+        value: this.state.user?.first_name
       }),
       second_name: new Input({
         name: 'second_name',
@@ -23,6 +35,7 @@ export class RegistrationInfoTemplate extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.name[0],
         textError: VALIDATION_REGEXES.name[1],
+        value: this.state.user?.second_name
       }),
       login: new Input({
         name: 'login',
@@ -31,9 +44,11 @@ export class RegistrationInfoTemplate extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.login[0],
         textError: VALIDATION_REGEXES.login[1],
+        value: this.state.user?.login
       }),
       display_name: new Input({
-        name: 'display_name', label: 'Имя в чате', placeholder: 'Вакулина', stylePrefix: 'setting',
+        name: 'display_name', label: 'Имя в чате', placeholder: 'Укажите имя в чате', stylePrefix: 'setting',
+        value: this.state.user?.display_name
       }),
       email: new Input({
         name: 'email',
@@ -43,6 +58,7 @@ export class RegistrationInfoTemplate extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.email[0],
         textError: VALIDATION_REGEXES.email[1],
+        value: this.state.user?.email
       }),
       phone: new Input({
         name: 'phone',
@@ -52,6 +68,7 @@ export class RegistrationInfoTemplate extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.phone[0],
         textError: VALIDATION_REGEXES.phone[1],
+        value: this.state.user?.phone
       }),
       button: new Button({
         text: 'Сохранить',
@@ -72,10 +89,13 @@ export class RegistrationInfoTemplate extends Form {
   }
 
   render(): DocumentFragment {
+
     return this.compile(tpl, this.props);
   }
 }
 
-const form = new RegistrationInfoTemplate({ title: 'Личные данные', stylePrefix: 'tabs' });
-
-export const registrationInfoTemplate = form;
+export const registrationInfoTemplate = connectWithStore('form', RegistrationInfoTemplateBase as typeof Block, (state) => {
+  const { user, isLogin, } = state;
+  return { user, isLogin, }
+},
+  { title: 'Личные данные', stylePrefix: 'tabs' })
