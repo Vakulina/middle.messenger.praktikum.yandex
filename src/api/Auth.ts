@@ -26,6 +26,7 @@ export type RegistrationValuesType = {
 
 
 export interface UserDTO {
+  avatar?: string;
   id: number;
   first_name: string;
   second_name: string;

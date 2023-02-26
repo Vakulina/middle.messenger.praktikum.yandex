@@ -7,7 +7,7 @@ const METHODS = {
 
 export type RequestOptionsType = {
   method?: string,
-  data?: Record<string, unknown>,
+  data?: Record<string, unknown> | FormData,
   isFormData?: boolean,
   headers?: Record<string, string>,
   timeout?: number
@@ -17,10 +17,14 @@ export type ErrorType = {
 }
 
 function queryStringify(data: Record<string, unknown>) {
-  if (!data) return '';
-  return Object.entries(data).reduce((acc, [key, value], index, arr) => {
-    return `${acc}${key}=${value}${index < arr.length - 1 ? '&' : ''}`;
-  }, '?');
+  if (!data) {
+    return false;
+  }
+  const keys = Object.keys(data);
+  return Object.keys(data).reduce(
+    (acc, key, index) => `${acc}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`,
+    '?'
+  );
 }
 
 
@@ -43,6 +47,7 @@ export class HTTPTransport {
   };
 
   put = (url: string, options = {}): Promise<unknown> => {
+
     return this.request(url, { ...options, method: METHODS.PUT });
   };
 
@@ -52,11 +57,12 @@ export class HTTPTransport {
   };
 
   request = (url: string, options: RequestOptionsType): Promise<unknown> => {
+    console.log(options)
     const {
       method = METHODS.GET,
-      headers = {},
       data,
-      timeout = 5000,
+      headers,
+      isFormData = false,
     } = options;
 
     // Если метод GET и передана data, трансформировать data в query запрос
@@ -67,16 +73,22 @@ export class HTTPTransport {
 
       xhr.open(method, this.url + url + query);
 
-      Object.entries(headers).forEach(([key, value]) => {
-        xhr.setRequestHeader(key, value);
+      if (headers && Object.keys(headers).length) {
+        Object.entries(headers).forEach(([key, value]) => {
+          xhr.setRequestHeader(key, value);
 
-      });
+        });
+      }
+      if (!isFormData) {
+        xhr.setRequestHeader('Content-Type', 'application/json');
+      }
 
 
-      if (Object.entries(headers).length === 0) xhr.setRequestHeader('Content-Type', 'application/json');
-      //??? Для аватара тип заголовка указать в объекте heaers
       xhr.onload = function () {
-        if (xhr.status >= 400) {
+        if (xhr.status === 500) {
+          reject({ message: "Ошибка сервера!", status: xhr.status })
+        }
+        if ((xhr.status !== 500) && (xhr.status >= 400)) {
           reject({ message: xhr.response.reason, status: xhr.status })
         }
         else {
@@ -93,7 +105,10 @@ export class HTTPTransport {
       xhr.responseType = 'json';
 
       if (method === METHODS.GET || !data) {
-        xhr.send();
+        xhr.send()
+      } else if (options?.isFormData) {
+        console.log(data)
+        xhr.send(data as FormData);
       } else {
         xhr.send(JSON.stringify(data));
       }

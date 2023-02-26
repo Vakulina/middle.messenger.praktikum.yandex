@@ -32,13 +32,15 @@
 
   &[data-server-error="true"] input,
   textarea {
-    border-color: red;
+    border-color: $attantionColor;
   }
 
   &__error {
     display: none;
     color: $attantionColor;
-    color: red;
+  }
+  &__success{
+    display: none;
   }
 
   &[data-server-error="true"] &__error {
@@ -50,5 +52,9 @@
   }
   &[data-password-error="true"] input[type="password"]{
     border-color: red;
+  }
+  &[data-success="true"] &__success{
+    display: block;
+    color: $primary-color;
   }
 }

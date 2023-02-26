@@ -17,11 +17,13 @@ export class PasswordTemplateBase extends Form {
         focusin: () => {
           this.addAttribute({ 'data-password-error': 'false' });
           this.addAttribute({ 'data-server-error': 'false' });
+          this.addAttribute({ 'data-success': 'false' });
           if (this.state.isPasswordSettingsError) {
             Store.set({ isPasswordSettingsError: null })
           }
         },
       },
+      title:'Пароль',
       ...props
     })
   }
@@ -66,6 +68,7 @@ export class PasswordTemplateBase extends Form {
         },
       }),
     };
+
   }
   private async submit(e: BtnEventType) {
     e.preventDefault();
@@ -76,6 +79,7 @@ export class PasswordTemplateBase extends Form {
       const { oldPassword, password } = data;
       await UsersActions.changePassword(oldPassword, password);
       this.addAttribute({ 'data-server-error': this.props.isPasswordSettingsError ? 'true' : 'false' });
+      this.addAttribute({ 'data-success': this.props.isRegistrationSettingsError ? 'false' : 'true' });
       if (this.state.isPasswordSettingsError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isPasswordSettingsError!.message}` })
     }
   }

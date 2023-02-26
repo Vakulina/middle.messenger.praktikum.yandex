@@ -51,7 +51,10 @@ class AuthActions {
 
   async getUser() {
     await this.api.getUser()
-      .then(res => Store.set({ user: res }))
+      .then(res => {
+        Store.set({ user: res })
+        Store.set({ avatar: res.avatar })
+      })
   }
 
   async logout() {

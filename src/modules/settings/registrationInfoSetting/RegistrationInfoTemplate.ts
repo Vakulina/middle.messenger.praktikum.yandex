@@ -9,7 +9,7 @@ import UsersActions from '~src/actions/UsersActions';
 
 export class RegistrationInfoTemplateBase extends Form {
   constructor(props: FormProps) {
-    super(props);
+    super({ title: 'Личные данные', ...props });
     this.setProps({
       user: () => this.state.user,
     });
@@ -93,6 +93,7 @@ export class RegistrationInfoTemplateBase extends Form {
       if (this.state.isRegistrationSettingsError) {
         this.setProps({ serverError: `Ошибка сервера: ${this.state.isRegistrationSettingsError!.message}` })
       }
+      
     }
   }
 

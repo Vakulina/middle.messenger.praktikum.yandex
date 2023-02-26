@@ -26,8 +26,9 @@ export class FileInput extends Block {
     text = 'Обзор...',
     events = {
       change: (e) => {
-        if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name });
-        this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+       /* if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name });
+        if (e.target.files) this.setProps({ file: e.target.files[0]});
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU);*/
       },
     },
     ...otherProps

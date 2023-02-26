@@ -18,13 +18,21 @@ class UsersActions {
       })
   }
 
-  public async changeAvatar(file: File) {
-    const formData = new FormData();
-    formData.append('avatar', file, file.name);
-    console.log({ file });
-    const response = await UsersAPI.changeAvatar(formData);
-    await AuthActions.getUser();
-    return response;
+  public changeAvatar() {
+    const myForm = document.querySelector('form') || undefined
+    const avatar = myForm!.querySelector('input')
+
+    const form = new FormData();
+
+    form.append('avatar', avatar!.files![0], 'avatar.png');
+
+
+    //  formData.set('avatar', file);
+    // console.log({ file });
+    UsersAPI.changeAvatar(form);
+    // console.log(response)
+    //await AuthActions.getUser();
+    // return response;
   }
 
   public searchUser(login: string) {

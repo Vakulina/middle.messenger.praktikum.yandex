@@ -23,8 +23,9 @@ export class UsersApi extends BaseAPI {
   }
   async changeAvatar(formData: FormData) {
     return this.http.put('/profile/avatar', {
+      isFormData: true,
       data: formData,
-      headers: { 'content-type': 'multipart/form-data' },
+ 
     });
   }
   async searchUser(login: string) {

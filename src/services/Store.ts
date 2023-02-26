@@ -11,7 +11,7 @@ export type State = {
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
   isLogin: boolean,
-  avatar?: string,
+  avatar: string,
   isRegistrationSettingsError: { message: string, status: number } | null,
   isPasswordSettingsError:{ message: string, status: number } | null,
 }
