@@ -1,3 +1,4 @@
+import { ErrorType } from '~src/services';
 import UsersAPI from '../api/Users';
 import Store from '../services/Store';
 import AuthActions from './AuthActions';
@@ -9,8 +10,12 @@ class UsersActions {
       .then(res => Store.set({ user: res }))
   }
 
-  public changePassword(oldPassword: string, newPassword: string) {
-    return UsersAPI.updatePassword(oldPassword, newPassword);
+  public async changePassword(oldPassword: string, newPassword: string) {
+    await UsersAPI.updatePassword(oldPassword, newPassword)
+      .then(() => Store.set({ isPasswordSettingsError: null }))
+      .catch((err: ErrorType) => {
+        Store.set({ isPasswordSettingsError: err })
+      })
   }
 
   public async changeAvatar(file: File) {

@@ -16,8 +16,8 @@ export class PasswordTemplateBase extends Form {
       events: {
         focusin: () => {
           this.addAttribute({ 'data-password-error': 'false' });
+          this.addAttribute({ 'data-server-error': 'false' });
           if (this.state.isPasswordSettingsError) {
-            this.addAttribute({ 'data-server-error': 'false' });
             Store.set({ isPasswordSettingsError: null })
           }
         },

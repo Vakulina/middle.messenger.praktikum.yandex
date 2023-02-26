@@ -23,16 +23,13 @@ class AuthActions {
           this.logout()
             .then(() => {
               document.cookie = 'expires=0'
-
               this.signin(data)
                 .catch((err) => {
-                  //установить ошибку authForm
                   Store.set({ isAuthError: err })
                 })
             })
         }
         else {
-          //установить ошибку authForm
           Store.set({ isAuthError: err })
         }
       })
@@ -41,20 +38,20 @@ class AuthActions {
   async signup(data: RegistrationData) {
     await this.api.signup(data)
       .then(() => Store.set({ isRegistrationError: null }))
-     .then(() => this.getUser())
-      .then(()=>router.go(routes.setting))
+      .then(() => this.getUser())
+      .then(() => router.go(routes.setting))
       .catch((err: ErrorType) => {
         Store.set({ isRegistrationError: err })
       })
 
-   // await this.getUser();
+    // await this.getUser();
 
 
   }
 
   async getUser() {
     await this.api.getUser()
-    .then(res => Store.set({ user: res }))   
+      .then(res => Store.set({ user: res }))
   }
 
   async logout() {
