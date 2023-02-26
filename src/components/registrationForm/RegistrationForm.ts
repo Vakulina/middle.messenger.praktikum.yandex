@@ -3,7 +3,7 @@ import { Form, FormProps } from '../form';
 import { Button } from '../button';
 import { Input } from '../input';
 import { Link } from '../link';
-import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
+import { BtnEventType, getPasswordValidation, VALIDATION_REGEXES } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore';
 import AuthActions from '~src/actions/AuthActions';
 import { RegistrationData, RegistrationValuesType } from '~src/api/Auth';
@@ -122,22 +122,14 @@ class RegistrationFormBase extends Form {
   protected validateForm() {
     const values = this.getValues();
     this.addAttribute({ 'data-password-error': 'false' });
-    const getPasswordValidation = () => {
-      if (('password' in values) && ('repeated_password' in values)) {
-        return (values.password === values.repeated_password);
-      }
-      else {
-        return false;
-      }
-    }
-
-    if (!getPasswordValidation()) {
+   
+    if (!getPasswordValidation(values)) {
       this.addAttribute({ 'data-password-error': 'true' });
       this.setProps({ serverError: `Ошибка ввода паролей!` })
       return false;
     }
     else {
-      return super.validateForm() && getPasswordValidation();
+      return super.validateForm();
     }
 
   }

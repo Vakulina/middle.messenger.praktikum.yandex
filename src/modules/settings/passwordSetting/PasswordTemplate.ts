@@ -2,24 +2,28 @@ import tpl from './tpl.hbs';
 import { Form, FormProps } from '~src/components/form';
 import { Button } from '~src/components/button';
 import { Input } from '~src/components/input';
-import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
+import { BtnEventType, getPasswordValidation, VALIDATION_REGEXES } from '~src/utiles';
 import { VALIDATION_ERROR } from '~src/utiles/constants';
 import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
 import Block from '~src/services/Block';
+import UsersActions from '~src/actions/UsersActions';
+import { ChangePasswordType } from '~src/api/Users';
 
 export class PasswordTemplateBase extends Form {
-  constructor(props:FormProps){
-    super({      events: {
-      focusin: () => {
-        this.addAttribute({ 'data-password-error': 'false' });
-        if (this.state.isPasswordSettingsError) {
-          this.addAttribute({ 'data-server-error': 'false' });
-          Store.set({ isPasswordSettingsError: null })
-        }
+  constructor(props: FormProps) {
+    super({
+      events: {
+        focusin: () => {
+          this.addAttribute({ 'data-password-error': 'false' });
+          if (this.state.isPasswordSettingsError) {
+            this.addAttribute({ 'data-server-error': 'false' });
+            Store.set({ isPasswordSettingsError: null })
+          }
+        },
       },
-    },
-  ...props})
+      ...props
+    })
   }
   initChildren() {
     this.children = {
@@ -33,8 +37,8 @@ export class PasswordTemplateBase extends Form {
         pattern: VALIDATION_REGEXES.password[0],
         textError: VALIDATION_ERROR.UNCORRECT_PASSWORD,
       }),
-      newPassword: new Input({
-        name: 'newPassword',
+      password: new Input({
+        name: 'password',
         label: 'Новый пароль',
         placeholder: '',
         stylePrefix: 'setting',
@@ -63,10 +67,32 @@ export class PasswordTemplateBase extends Form {
       }),
     };
   }
-
-  private submit(e: BtnEventType) {
+  private async submit(e: BtnEventType) {
     e.preventDefault();
-    if (this.validateForm()) console.log(this.getValues());
+    document.querySelector('form')?.blur()
+    const isValid = this.validateForm()
+    const data = this.getValues() as ChangePasswordType;
+    if (isValid) {
+      const { oldPassword, password } = data;
+      await UsersActions.changePassword(oldPassword, password);
+      this.addAttribute({ 'data-server-error': this.props.isPasswordSettingsError ? 'true' : 'false' });
+      if (this.state.isPasswordSettingsError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isPasswordSettingsError!.message}` })
+    }
+  }
+
+  protected validateForm() {
+    const values = this.getValues();
+    this.addAttribute({ 'data-password-error': 'false' });
+
+    if (!getPasswordValidation(values)) {
+      this.addAttribute({ 'data-password-error': 'true' });
+      this.setProps({ serverError: `Ошибка ввода паролей!` })
+      return false;
+    }
+    else {
+      return super.validateForm();
+    }
+
   }
 
   render(): DocumentFragment {
@@ -76,8 +102,8 @@ export class PasswordTemplateBase extends Form {
 
 export const passwordTemplate = connectWithStore('form', PasswordTemplateBase as typeof Block,
   (state) => {
-    const { user, isLogin, isRegistrationSettingsError } = state;
-    return { user, isLogin, isRegistrationSettingsError }
+    const { user, isLogin, isPasswordSettingsError } = state;
+    return { user, isLogin, isPasswordSettingsError }
   },
   { title: 'Безопасность', stylePrefix: 'tabs' }
 )

@@ -6,6 +6,7 @@ import { Input } from '../input';
 import { Textarea } from '../textarea';
 import { AuthData, RegistrationValuesType } from '~src/api/Auth';
 import Store from '~src/services/Store';
+import { ChangePasswordType } from '~src/api/Users';
 
 export type FormProps = {
   title?: string,
@@ -28,7 +29,7 @@ export abstract class Form extends Block {
     this.serverError = null
   }
 
-  protected getValues(): AuthData | RegistrationValuesType | {} {
+  protected getValues(): AuthData | RegistrationValuesType |ChangePasswordType| {} {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
 
       if ((child instanceof Input) || (child instanceof Textarea)) {

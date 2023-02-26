@@ -2,14 +2,10 @@ import { UserDTO } from './Auth';
 import BaseAPI from './BaseAPI';
 
 
-export type RegistrationValuesType = {
-  password: string,
+export type ChangePasswordType = {
+  oldPassword: string,
   repeated_password: string,
-  first_name: string,
-  second_name: string,
-  login: string,
-  email: string,
-  phone: string,
+  password: string
 };
 
 export class UsersApi extends BaseAPI {
@@ -20,9 +16,9 @@ export class UsersApi extends BaseAPI {
   async updateUserProfile(data: any) {
     return this.http.put('/profile', { data }) as Promise<UserDTO>
   }
-  async updatePassword(prevPassword: string, newPassword: string) {
+  async updatePassword(oldPassword: string, newPassword: string) {
     return this.http.put('/password', {
-      data: { prevPassword, newPassword },
+      data: { oldPassword, newPassword },
     });
   }
   async changeAvatar(formData: FormData) {
