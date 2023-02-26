@@ -1,3 +1,4 @@
+import { UserDTO } from './Auth';
 import BaseAPI from './BaseAPI';
 
 
@@ -17,7 +18,7 @@ export class UsersApi extends BaseAPI {
   }
 
   async updateUserProfile(data: any) {
-    return this.http.put('/profile', { data });
+    return this.http.put('/profile', { data }) as Promise<UserDTO>
   }
   async updatePassword(prevPassword: string, newPassword: string) {
     return this.http.put('/password', {
