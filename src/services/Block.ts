@@ -25,7 +25,7 @@ abstract class Block {
   protected children: ChildrenType;
 
   public id: string = makeUUID();
-  private _state: Partial<State> ={};
+  private _state: Partial<State> = {};
 
   constructor(tagName = 'div', propsWithChildren = {}) {
     const eventBus = new EventBus();
@@ -132,9 +132,9 @@ abstract class Block {
   protected render() {
     return new DocumentFragment();
   }
-init(){
+  init() {
 
-}
+  }
   _addEvents() {
     const { events = {} } = this.props as PropsType & { events: Record<string, () => void> };
     Object.keys(events).forEach((eventName) => {
@@ -190,7 +190,7 @@ init(){
   }
 
   componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
-    if (!props.oldProps && !props.oldProps) return true;
+    if (!props.oldProps && !props.newProps) return true;
     return false;
   }
 
@@ -198,12 +198,14 @@ init(){
     if (!nextProps) {
       return;
     }
-    Object.assign(this.props, nextProps);
+    Object.assign(this.props, this.children, nextProps);
+    this._state = nextProps;
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   }
 
 
   protected compile(template: (context: any) => string, context: any) {
-    const contextAndStubs = {...context};
+    const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {

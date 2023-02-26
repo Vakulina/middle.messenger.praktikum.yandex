@@ -77,7 +77,7 @@ class RegistrationFormBase extends Form {
             this.addAttribute({ 'data-server-error': 'false' });
             Store.set({ isRegistrationError: null })
           }
-        },        
+        },
       },
       ...props,
     })
@@ -98,12 +98,13 @@ class RegistrationFormBase extends Form {
       'sign-in': new Link({ href: '/sign-in', text: 'Войти' }),
       first_name,
       second_name,
-      login, 
+      login,
       email,
       phone,
       password,
       repeated_password,
     };
+    
   }
 
   private async submit(e: BtnEventType) {
@@ -120,9 +121,7 @@ class RegistrationFormBase extends Form {
 
   protected validateForm() {
     const values = this.getValues();
-     this.addAttribute({ 'data-password-error': 'false' });
-
-
+    this.addAttribute({ 'data-password-error': 'false' });
     const getPasswordValidation = () => {
       if (('password' in values) && ('repeated_password' in values)) {
         return (values.password === values.repeated_password);

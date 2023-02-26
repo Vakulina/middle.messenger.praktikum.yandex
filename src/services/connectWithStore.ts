@@ -6,7 +6,6 @@ export default function connectWithStore(
   Component: typeof Block,
   mapStateToProps: (state: State) => Partial<State>,
   props?: any,
-
 ) {
   class ConnectedComponent extends Component {
     constructor(tag: string, props?: object) {
@@ -16,6 +15,8 @@ export default function connectWithStore(
         this.setProps({ ...mapStateToProps(Store.getState() as State) });
         this.state = { ...mapStateToProps(Store.getState() as State) };
       });
+      
+
     }
 
   }

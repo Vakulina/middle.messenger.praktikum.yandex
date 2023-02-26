@@ -25,13 +25,13 @@ export class UsersApi extends BaseAPI {
       data: { prevPassword, newPassword },
     });
   }
-  changeAvatar(formData: FormData) {
+  async changeAvatar(formData: FormData) {
     return this.http.put('/profile/avatar', {
       data: formData,
       headers: { 'content-type': 'multipart/form-data' },
     });
   }
-  searchUser(login: string) {
+  async searchUser(login: string) {
     return this.http.post('/search', { data: { login } });
   }
 

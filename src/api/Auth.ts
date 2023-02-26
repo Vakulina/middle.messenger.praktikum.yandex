@@ -52,7 +52,6 @@ export class AuthApi extends BaseAPI {
 
   getUser(): Promise<UserDTO> {
     const res= this.http.get('/user') 
-
     return res as Promise<UserDTO>;
   }
 

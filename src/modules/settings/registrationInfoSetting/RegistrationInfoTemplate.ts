@@ -5,17 +5,18 @@ import { Input } from '~src/components/input';
 import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore';
 import Block from '~src/services/Block';
-import AuthActions from '~src/actions/AuthActions';
+import UsersActions from '~src/actions/UsersActions';
 
 export class RegistrationInfoTemplateBase extends Form {
   constructor(props: FormProps) {
     super(props);
-    this.setProps({
+
+
+     this.setProps({
       user: () => this.state.user,
     });
   }
- 
-  
+
   initChildren() {
     this.children = {
       ...this.children,
@@ -81,21 +82,31 @@ export class RegistrationInfoTemplateBase extends Form {
         },
       }),
     };
+    
   }
 
-  private submit(e: BtnEventType) {
+  private async submit(e: BtnEventType) {
     e.preventDefault();
-    if (this.validateForm()) console.log(this.getValues());
+    //document.querySelector('form')?.blur()
+    const isValid = this.validateForm()
+    const data = this.getValues();
+    if (isValid) {
+      await UsersActions.updateUserProfile(data)
+      this.addAttribute({ 'data-server-error': this.props.isRegistrationSettingsError ? 'true' : 'false' });
+      if (this.state.isRegistrationSettingsError) {
+        this.setProps({ serverError: `Ошибка сервера: ${this.state.isRegistrationSettingsError!.message}` })
+      }
+    }
   }
-
+  
   render(): DocumentFragment {
-
     return this.compile(tpl, this.props);
   }
 }
 
 export const registrationInfoTemplate = connectWithStore('form', RegistrationInfoTemplateBase as typeof Block, (state) => {
-  const { user, isLogin, } = state;
-  return { user, isLogin, }
+
+  const { user, isLogin, isRegistrationSettingsError } = state;
+  return { user, isLogin, isRegistrationSettingsError }
 },
   { title: 'Личные данные', stylePrefix: 'tabs' })

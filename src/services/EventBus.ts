@@ -16,7 +16,6 @@ class EventBus implements IEventBus {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
-
     this.listeners[event].push(callback);
   }
 
