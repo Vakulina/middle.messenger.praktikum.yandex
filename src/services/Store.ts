@@ -13,6 +13,7 @@ export type State = {
   isLogin: boolean,
   avatar?: string,
   isRegistrationSettingsError: { message: string, status: number } | null,
+  isPasswordSettingsError:{ message: string, status: number } | null,
 }
 
 class Store extends EventBus {
@@ -39,9 +40,7 @@ class Store extends EventBus {
 
   set(nextState: Partial<State>) {
     const prevState = { ...this.state };
-    
     this.state = { ...prevState, ...nextState };
-
     this.emit(StoreEvents.Updated);
   }
 }

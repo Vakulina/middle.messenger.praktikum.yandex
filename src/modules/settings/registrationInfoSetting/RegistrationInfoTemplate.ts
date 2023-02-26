@@ -10,9 +10,7 @@ import UsersActions from '~src/actions/UsersActions';
 export class RegistrationInfoTemplateBase extends Form {
   constructor(props: FormProps) {
     super(props);
-
-
-     this.setProps({
+    this.setProps({
       user: () => this.state.user,
     });
   }
@@ -82,12 +80,11 @@ export class RegistrationInfoTemplateBase extends Form {
         },
       }),
     };
-    
+
   }
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    //document.querySelector('form')?.blur()
     const isValid = this.validateForm()
     const data = this.getValues();
     if (isValid) {
@@ -98,15 +95,16 @@ export class RegistrationInfoTemplateBase extends Form {
       }
     }
   }
-  
+
   render(): DocumentFragment {
     return this.compile(tpl, this.props);
   }
 }
 
-export const registrationInfoTemplate = connectWithStore('form', RegistrationInfoTemplateBase as typeof Block, (state) => {
-
-  const { user, isLogin, isRegistrationSettingsError } = state;
-  return { user, isLogin, isRegistrationSettingsError }
-},
-  { title: 'Личные данные', stylePrefix: 'tabs' })
+export const registrationInfoTemplate = connectWithStore('form', RegistrationInfoTemplateBase as typeof Block,
+  (state) => {
+    const { user, isLogin, isRegistrationSettingsError } = state;
+    return { user, isLogin, isRegistrationSettingsError }
+  },
+  { title: 'Личные данные', stylePrefix: 'tabs' }
+)

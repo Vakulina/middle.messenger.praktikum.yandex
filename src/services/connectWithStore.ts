@@ -15,8 +15,6 @@ export default function connectWithStore(
         this.setProps({ ...mapStateToProps(Store.getState() as State) });
         this.state = { ...mapStateToProps(Store.getState() as State) };
       });
-      
-
     }
 
   }
