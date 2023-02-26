@@ -1,4 +1,3 @@
-import AuthActions from '~src/actions/AuthActions';
 import { UserDTO } from '~src/api/Auth';
 import { EventBus } from './EventBus';
 
