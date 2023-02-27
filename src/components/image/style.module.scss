@@ -7,6 +7,7 @@
     display: block;
     margin-left: 150px;
     margin-bottom: 50px;
+    object-fit: cover;
   }
 
   &_chatItems {
@@ -15,5 +16,6 @@
     height: 48px;
     border-radius: 50%;
     margin-right: 10px;
+    object-fit: cover;
   }
 }
