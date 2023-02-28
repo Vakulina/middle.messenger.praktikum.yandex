@@ -51,9 +51,9 @@ class AuthActions {
 
   async getUser() {
     await this.api.getUser()
-      .then(res => {
-        Store.set({ user: res })
-        Store.set({ avatar: res.avatar })
+      .then(response => {
+        Store.set({ user: response})
+        Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` })
       })
   }
 

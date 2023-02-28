@@ -2,7 +2,6 @@ import { v4 as makeUUID } from 'uuid';
 
 import { EventBus, IEventBus } from './EventBus';
 import { State } from './Store';
-import { isEqual } from '~src/utiles';
 
 export type PropsType = Record<string, string | Record<string, Function> | boolean>;
 export type ChildrenType = Record<string, Block | Block[] | any>;

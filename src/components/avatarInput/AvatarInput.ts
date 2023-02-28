@@ -35,7 +35,6 @@ class AvatarInputBase extends Block {
     },
     ...otherProps
   }: FileInputProps) {
-    console.log('sdgfdg')
     super(
       'fieldset',
       {
@@ -43,6 +42,7 @@ class AvatarInputBase extends Block {
         text,
         class: !stylePrefix ? s.fileInput : `${s.fileInput} ${styles.getClassWithPrefix(s, 'fileInput', stylePrefix)}`,
         events,
+        accept: 'image/*',
         ...otherProps,
       },
     );

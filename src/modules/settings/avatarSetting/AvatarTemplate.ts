@@ -2,14 +2,13 @@ import UsersActions from '~src/actions/UsersActions';
 import { Button } from '~src/components/button';
 import {avatarInput } from '~src/components/avatarInput';
 import { Form, FormProps } from '~src/components/form';
-import { Image } from '~src/components/image';
+import { avatarImage } from '~src/components/avatarImage';
 import Block from '~src/services/Block';
 import connectWithStore from '~src/services/connectWithStore';
-import { BtnEventType, InputEventType } from '~src/utiles';
-import avatar from '../../../../static/avatar.jpg';
+import { BtnEventType } from '~src/utiles';
+
 import tpl from './tpl.hbs';
 import Store from '~src/services/Store';
-import { FileInput } from '~src/components/fileInput';
 
 export class AvatarTemplateBase extends Form {
   constructor(tag:string, props: FormProps) {
@@ -31,7 +30,7 @@ export class AvatarTemplateBase extends Form {
   initChildren() {
     this.children = {
       ...this.children,
-      image: new Image({ alt: 'аватар', stylePrefix: 'avatar', src: avatar }),
+      image: avatarImage,
       avatar: avatarInput,
       
       'save-avatar': new Button({

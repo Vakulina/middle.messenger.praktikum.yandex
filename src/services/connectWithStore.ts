@@ -12,8 +12,12 @@ export default function connectWithStore(
       super(tag, { ...props, ...mapStateToProps(Store.getState() as State) });
 
       Store.on(StoreEvents.Updated, () => {
+
         this.setProps({ ...mapStateToProps(Store.getState() as State) });
+
         this.state = { ...mapStateToProps(Store.getState() as State) };
+        
+
       });
     }
 

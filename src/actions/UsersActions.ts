@@ -18,20 +18,18 @@ class UsersActions {
       })
   }
 
-  public changeAvatar() {
+  public async changeAvatar() {
     const form = new FormData();
     const state = Store.getState()
     if ('avatar' in state) {
-    
       const avatar = state.avatar
       form.append('avatar', avatar, 'avatar.png');
     }
-    //  formData.set('avatar', file);
-    // console.log({ file });
-    UsersAPI.changeAvatar(form);
-    // console.log(response)
+   const response = await UsersAPI.changeAvatar(form);
+   Store.set({avatarName: ''})
+   Store.set({user: response })
+   Store.set({avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` })
     //await AuthActions.getUser();
-    // return response;
   }
 
   public searchUser(login: string) {

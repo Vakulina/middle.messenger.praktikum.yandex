@@ -26,7 +26,7 @@ export class UsersApi extends BaseAPI {
       isFormData: true,
       data: formData,
  
-    });
+    }) as Promise<UserDTO>
   }
   async searchUser(login: string) {
     return this.http.post('/search', { data: { login } });
