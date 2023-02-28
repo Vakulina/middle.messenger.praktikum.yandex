@@ -21,8 +21,8 @@ class UsersActions {
   public changeAvatar() {
     const form = new FormData();
     const state = Store.getState()
-
     if ('avatar' in state) {
+    
       const avatar = state.avatar
       form.append('avatar', avatar, 'avatar.png');
     }

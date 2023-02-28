@@ -31,7 +31,7 @@ const passwordInput = new Input({
 
 class AuthFormBase extends Form {
   constructor(props: FormProps) {
-    super({
+    super('form', {
      title: 'Вход', stylePrefix: 'auth',
       events: {
         focusin: () => {

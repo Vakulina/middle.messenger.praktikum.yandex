@@ -9,10 +9,7 @@ import UsersActions from '~src/actions/UsersActions';
 
 export class RegistrationInfoTemplateBase extends Form {
   constructor(props: FormProps) {
-    super({ title: 'Личные данные', ...props });
-    this.setProps({
-      user: () => this.state.user,
-    });
+    super('section',{ title: 'Личные данные', ...props });
   }
 
   initChildren() {

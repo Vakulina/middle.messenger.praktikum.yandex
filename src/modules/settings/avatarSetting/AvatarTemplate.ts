@@ -1,23 +1,39 @@
 import UsersActions from '~src/actions/UsersActions';
 import { Button } from '~src/components/button';
-import { avatarInput } from '~src/components/avatarInput';
-import { Form } from '~src/components/form';
+import {avatarInput } from '~src/components/avatarInput';
+import { Form, FormProps } from '~src/components/form';
 import { Image } from '~src/components/image';
 import Block from '~src/services/Block';
 import connectWithStore from '~src/services/connectWithStore';
-import { BtnEventType } from '~src/utiles';
+import { BtnEventType, InputEventType } from '~src/utiles';
 import avatar from '../../../../static/avatar.jpg';
 import tpl from './tpl.hbs';
-
-// TODO организовать обновления изображения синхронно с выбором файл. предположительно брать src из глобального стейта
+import Store from '~src/services/Store';
+import { FileInput } from '~src/components/fileInput';
 
 export class AvatarTemplateBase extends Form {
+  constructor(tag:string, props: FormProps) {
+    super(tag = 'section', {
+
+      events: {
+        focusin: () => {
+          if (this.state.isAuthError) {
+            Store.set({ isAuthError: null });
+            this.addAttribute({ 'data-server-error': 'false' });
+          }
+        },
+      },
+      ...props,
+    });
+  }
+
+
   initChildren() {
     this.children = {
       ...this.children,
       image: new Image({ alt: 'аватар', stylePrefix: 'avatar', src: avatar }),
-
       avatar: avatarInput,
+      
       'save-avatar': new Button({
         text: 'Сохранить',
         stylePrefix: 'save-avatar',
@@ -33,8 +49,6 @@ export class AvatarTemplateBase extends Form {
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-
-
     UsersActions.changeAvatar()
   }
 

@@ -79,7 +79,7 @@ export class PasswordTemplateBase extends Form {
       const { oldPassword, password } = data;
       await UsersActions.changePassword(oldPassword, password);
       this.addAttribute({ 'data-server-error': this.props.isPasswordSettingsError ? 'true' : 'false' });
-      this.addAttribute({ 'data-success': this.props.isRegistrationSettingsError ? 'false' : 'true' });
+      this.addAttribute({ 'data-success': this.props.isPasswordSettingsError ? 'false' : 'true' });
       if (this.state.isPasswordSettingsError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isPasswordSettingsError!.message}` })
     }
   }
