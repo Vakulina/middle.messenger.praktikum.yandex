@@ -1,5 +1,5 @@
-import ChatsAPI, { ChatsApi, ChatsDTOType } from 'src/api/Chats';
-import Store from 'src/services/Store';
+import ChatsAPI, { ChatsApi, ChatsDTOType } from '~src/api/Chats';
+import Store from '~src/services/Store';
 
 class ChatsActions {
   private readonly api: ChatsApi;
@@ -10,14 +10,20 @@ class ChatsActions {
 
   async getChats() {
     const response: ChatsDTOType = await this.api.getChats();
+    console.log(response)
     Store.set({ 'chats': response })
   }
 
-  async createChat(title: string) {
+  async createChat(data: { title: string }) {
+    const { title } = data;
     try {
-      await this.api.createChat(title);
-      await this.getChats()
+      await this.api.createChat(title)
+      //await this.getChats()
+      
+      
+      Store.set({isOpenAddNewChatModal:false})
     } catch (e: unknown) {
+
       console.error('createChat:', e);
     }
   }

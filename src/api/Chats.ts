@@ -18,14 +18,14 @@ export class ChatsApi extends BaseAPI {
     super('/chats');
   }
 
-  createChat(title: string) {
-    return this.http.post('', { title });
+async  createChat(title: string) {
+    return this.http.post('',  {data:{title }});
   }
 
 
   async getChats() {
     return this.http.get('')
-      .then((res: string) => JSON.parse(res)) as Promise<ChatsDTOType>
+      .then((res: string) => res) as Promise<ChatsDTOType>
   }
 
   deleteChat(chatId: number) {

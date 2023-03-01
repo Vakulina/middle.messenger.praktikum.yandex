@@ -6,6 +6,8 @@ import Block from '~src/services/Block';
 import * as s from "./style.module.scss";
 import { PageLayout } from '~src/components/pageLayout';
 import { ChatHeader } from '~src/components/chatHeader';
+import connectWithStore from '~src/services/connectWithStore';
+import { NewChatPopup } from '~src/components/newChatPopup';
 
 const message = new Message();
 const sidebar = new ChatSidebar({ items });
@@ -19,14 +21,20 @@ interface ChatsProps {
 }
 
 export class Chats extends Block {
-  constructor(props: ChatsProps) {
+  constructor(tag = 'section', props: ChatsProps) {
     super(
-      'section',
+      tag,
       {
         class: s.chats,
         ...props,
       },
     );
+  }
+  initChildren() {
+    this.children = {
+      ...this.children,
+      newChatPopup: new NewChatPopup({}) 
+    };
   }
 
   protected render() {
@@ -34,6 +42,19 @@ export class Chats extends Block {
   }
 }
 
-const chats = new Chats({ sidebar, message, header });
+export const chats = connectWithStore('form',
+  Chats,
+  (state) => {
+    const { isOpenAddNewChatModal } = state;
+    return { isOpenAddNewChatModal }
+  },
+  { sidebar, message, header }
+)
 
-export const getChats = () => new PageLayout({ content: chats });
+const chatsPage = new PageLayout({ content: chats });
+
+export const getChats = () => {
+  return chatsPage;
+};
+
+

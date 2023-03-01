@@ -40,7 +40,7 @@ export abstract class Form extends Block {
     }, {});
   }
 
-  protected validateForm() {
+  protected validateForm():boolean {
     return Object.entries(this.children).reduce((acc, [_, child]) => {
       if ((child instanceof Input) || (child instanceof Textarea)) {
         const isValideChild = child.isValid && (child.value !== '');

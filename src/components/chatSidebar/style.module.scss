@@ -34,4 +34,11 @@
   align-items: flex-end;
   flex-direction: column;
   gap: 12px;
+
+  &__buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
 }

@@ -32,7 +32,6 @@ export class AvatarImageBase extends Block {
 
 
   public addAttribute(newAttr: Record<string, string> | null): void {
-    console.log(this.props.avatar)
     super.addAttribute(newAttr)
     if (typeof this.props.avatar === 'string') {
       this.element!.setAttribute('src', this.props.avatar);

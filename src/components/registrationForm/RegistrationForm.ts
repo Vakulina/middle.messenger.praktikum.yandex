@@ -68,7 +68,7 @@ const repeated_password = new Input({
 
 class RegistrationFormBase extends Form {
   constructor(props: FormProps) {
-    super({
+    super('form',{
       title: 'Регистрация', stylePrefix: 'reg',
       events: {
         focusin: () => {
