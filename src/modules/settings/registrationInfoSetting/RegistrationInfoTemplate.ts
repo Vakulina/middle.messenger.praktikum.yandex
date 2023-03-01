@@ -6,10 +6,13 @@ import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore';
 import Block from '~src/services/Block';
 import UsersActions from '~src/actions/UsersActions';
+import Store from '~src/services/Store';
 
 export class RegistrationInfoTemplateBase extends Form {
   constructor(props: FormProps) {
+
     super('section',{ title: 'Личные данные', ...props });
+    Store.set({isPasswordSettingsError: null})
   }
 
   initChildren() {

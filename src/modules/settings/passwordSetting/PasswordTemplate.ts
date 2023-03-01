@@ -12,7 +12,8 @@ import { ChangePasswordType } from '~src/api/Users';
 
 export class PasswordTemplateBase extends Form {
   constructor(props: FormProps) {
-    super({
+    Store.set({isPasswordSettingsError: null})
+    super('fildeset', {
       events: {
         focusin: () => {
           this.addAttribute({ 'data-password-error': 'false' });

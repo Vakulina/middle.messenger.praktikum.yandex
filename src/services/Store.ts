@@ -1,4 +1,5 @@
 import { UserDTO } from '~src/api/Auth';
+import { ChatsDTOType } from '~src/api/Chats';
 import { EventBus } from './EventBus';
 
 export enum StoreEvents {
@@ -8,6 +9,7 @@ export enum StoreEvents {
 
 export type State = {
   user: Omit<UserDTO, "password">,
+  chats: Partial<ChatsDTOType>,
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
   isLogin: boolean,
@@ -15,6 +17,7 @@ export type State = {
   avatarName:string,
   isRegistrationSettingsError: { message: string, status: number } | null,
   isPasswordSettingsError:{ message: string, status: number } | null,
+
 }
 
 class Store extends EventBus {

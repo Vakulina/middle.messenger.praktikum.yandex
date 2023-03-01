@@ -1,8 +1,8 @@
-import AuthAPI, { AuthApi, AuthData, RegistrationData } from '../api/Auth';
-import router from '../services/Router';
+import AuthAPI, { AuthApi, AuthData, RegistrationData } from '~src/api/Auth';
+import router from '~src/services/Router';
 import { routes } from '~src/utiles/constants';
-import Store from '../services/Store';
-import { ErrorType } from '~src/services';
+import Store from '~src/services/Store';
+import type { ErrorType } from '~src/services';
 
 class AuthActions {
   private readonly api: AuthApi;
@@ -36,34 +36,38 @@ class AuthActions {
   }
 
   async signup(data: RegistrationData) {
-    await this.api.signup(data)
-      .then(() => Store.set({ isRegistrationError: null }))
-      .then(() => this.getUser())
-      .then(() => router.go(routes.setting))
-      .catch((err: ErrorType) => {
-        Store.set({ isRegistrationError: err })
-      })
-
+    try {
+      await this.api.signup(data)
+      Store.set({ isRegistrationError: null })
+      this.getUser()
+      router.go(routes.setting)
+    }
+    catch (err: unknown) {
+      Store.set({ isRegistrationError: err as ErrorType })
+    }
     // await this.getUser();
-
-
   }
 
   async getUser() {
-    await this.api.getUser()
-      .then(response => {
-        Store.set({ user: response})
-        Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` })
-      })
+    try {
+      const response = await this.api.getUser()
+      Store.set({ user: response })
+      Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` })
+    }
+    catch (err: unknown) {
+      console.error(err)
+    }
   }
 
   async logout() {
-    await this.api.logout()
-      .then((res) => Store.set({ isLogin: false }))
-      .then((res) => router.go(routes.authorization))
-      .catch((e: any) => {
-        console.error(e.message);
-      })
+    try {
+      await this.api.logout()
+      Store.set({ isLogin: false })
+      router.go(routes.authorization)
+    }
+    catch (e: unknown) {
+      console.error(e);
+    }
   }
 }
 
