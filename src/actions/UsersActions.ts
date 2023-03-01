@@ -1,7 +1,6 @@
 import { ErrorType } from '~src/services';
 import UsersAPI from '../api/Users';
 import Store from '../services/Store';
-import AuthActions from './AuthActions';
 
 class UsersActions {
 
@@ -25,15 +24,21 @@ class UsersActions {
       const avatar = state.avatar
       form.append('avatar', avatar, 'avatar.png');
     }
-   const response = await UsersAPI.changeAvatar(form);
-   Store.set({avatarName: ''})
-   Store.set({user: response })
-   Store.set({avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` })
+    const response = await UsersAPI.changeAvatar(form);
+    Store.set({ avatarName: '' })
+    Store.set({ user: response })
+    Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` })
     //await AuthActions.getUser();
   }
 
-  public searchUser(login: string) {
-    return UsersAPI.searchUser(login);
+  public async searchUser(login: string) {
+    try {
+      const res = await UsersAPI.searchUser(login);
+      return JSON.parse(res)
+    } catch (e: unknown) {
+      console.error('createChat:', e);
+      return []
+    }
   }
 }
 
