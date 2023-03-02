@@ -9,7 +9,7 @@ export enum StoreEvents {
 
 export type State = {
   user: Omit<UserDTO, "password">,
-  chats: Partial<ChatsDTOType>,
+  chats: Partial<ChatsDTOType>[],
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
   isLogin: boolean,

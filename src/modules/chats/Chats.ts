@@ -1,6 +1,5 @@
 import tpl from './tpl.hbs';
-import { ChatSidebar } from '../../components/chatSidebar';
-import { items } from './constants';
+import { chatSidebar } from '../../components/chatSidebar';
 import { Message } from '~src/components/message';
 import Block from '~src/services/Block';
 import * as s from "./style.module.scss";
@@ -10,7 +9,7 @@ import connectWithStore from '~src/services/connectWithStore';
 import { NewChatPopup } from '~src/components/newChatPopup';
 
 const message = new Message();
-const sidebar = new ChatSidebar({ items });
+const sidebar = chatSidebar;
 const header = new ChatHeader();
 
 interface ChatsProps {

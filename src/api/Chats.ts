@@ -25,7 +25,7 @@ async  createChat(title: string) {
 
   async getChats() {
     return this.http.get('')
-      .then((res: string) => res) as Promise<ChatsDTOType>
+      .then((res: string) => res) as Promise<ChatsDTOType[]>
   }
 
   deleteChat(chatId: number) {

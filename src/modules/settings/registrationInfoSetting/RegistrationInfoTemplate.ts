@@ -10,7 +10,6 @@ import Store from '~src/services/Store';
 
 export class RegistrationInfoTemplateBase extends Form {
   constructor(props: FormProps) {
-
     super('section',{ title: 'Личные данные', ...props });
     Store.set({isPasswordSettingsError: null})
   }

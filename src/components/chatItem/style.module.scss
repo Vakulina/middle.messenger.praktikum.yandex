@@ -6,6 +6,7 @@
   max-width: 300px;
   height: 70px;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
 
   &__title {
@@ -38,11 +39,12 @@
 
   &__column:last-of-type {
     gap: 14px;
-    align-items: center;
+    align-items:flex-end;
   }
 
   &__column:first-of-type {
     margin-right: 17px;
+    width: 100%;
   }
 
   &__time {

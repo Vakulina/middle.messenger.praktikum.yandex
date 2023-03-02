@@ -51,8 +51,6 @@ export class AvatarTemplateBase extends Form {
     UsersActions.changeAvatar()
   }
 
-  //public async changeAvatar(file: File) {
-
   render(): DocumentFragment {
     return this.compile(tpl, this.props);
   }

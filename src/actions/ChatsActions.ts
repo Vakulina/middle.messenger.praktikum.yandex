@@ -9,8 +9,7 @@ class ChatsActions {
   }
 
   async getChats() {
-    const response: ChatsDTOType = await this.api.getChats();
-    console.log(response)
+    const response: ChatsDTOType[] = await this.api.getChats();
     Store.set({ 'chats': response })
   }
 
