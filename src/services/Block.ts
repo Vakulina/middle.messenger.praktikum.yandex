@@ -142,7 +142,7 @@ abstract class Block {
     });
   }
 
-  public addAttribute(newAttr: Record<string, string> | null) {
+  public addAttribute(newAttr: Record<string, string|boolean> | null) {
     const attr: Record<string, string | null> | undefined = {
       type: this.props.type || null,
       class: this.props.class || null,
@@ -154,7 +154,7 @@ abstract class Block {
       id: this.props.id || null,
     };
     Object.entries({ ...attr, ...newAttr }).forEach(([key, value]) => {
-      if (value) this.element!.setAttribute(key, value);
+      if (value) this.element!.setAttribute(key, value as string);
     });
   }
   public addGlobalEvents() {

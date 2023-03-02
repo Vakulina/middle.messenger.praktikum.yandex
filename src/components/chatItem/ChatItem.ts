@@ -4,7 +4,7 @@ import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 
 interface ChatItemProps {
-  id:number, 
+  id: number,
   name: string,
   text: string,
   time: string | Date,
@@ -14,6 +14,7 @@ interface ChatItemProps {
   events?: {
     click: (e?: Event) => void;
   },
+  isActive: boolean,
 }
 
 export class ChatItem extends Block {
@@ -24,17 +25,19 @@ export class ChatItem extends Block {
         console.log('Выбран чат!');
       },
     },
+    isActive = false,
     ...otherProps
   }: ChatItemProps) {
+
     super(
       'div',
       {
-        class: s.chatItem,
-        stylePrefix: styles.getClassWithPrefix(s, 'chatItem', stylePrefix),
+        class:s.chatItem,
         events,
         ...otherProps,
       },
     );
+    this.addAttribute({'active': isActive})
   }
 
   protected render() {

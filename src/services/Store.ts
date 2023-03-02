@@ -10,20 +10,21 @@ export enum StoreEvents {
 export type State = {
   user: Omit<UserDTO, "password">,
   chats: Partial<ChatsDTOType>[],
+  activeChat: number;
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
   isLogin: boolean,
-  avatar: string|Blob,
-  avatarName:string,
+  avatar: string | Blob,
+  avatarName: string,
   isRegistrationSettingsError: { message: string, status: number } | null,
-  isPasswordSettingsError:{ message: string, status: number } | null,
+  isPasswordSettingsError: { message: string, status: number } | null,
   isOpenAddNewChatModal: boolean;
 }
 
 class Store extends EventBus {
 
   static _instance: Store;
-  state:State|{} = {};
+  state: State | {} = {};
 
   constructor() {
     if (Store._instance) return Store._instance;
@@ -33,7 +34,7 @@ class Store extends EventBus {
     return Store._instance;
   }
 
-  getState(): State|{} {
+  getState(): State | {} {
     return this.state;
   }
 

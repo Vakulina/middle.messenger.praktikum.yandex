@@ -19,12 +19,12 @@ class ChatSidebarBase extends Block {
       },
     );
     chatsActions.getChats()
-    this.setProps({ items: getChatList(this.state.chats || []) })
+    this.setProps({ items: getChatList(this.state.chats || [], props.activeChat) })
   }
 
   initChildren() {
     this.children = {
-      items: getChatList(this.state.chats || []),
+      items: getChatList(this.state.chats || [], this.state.activeChat),
       panel: new Panel(),
     };
   }
@@ -35,7 +35,7 @@ class ChatSidebarBase extends Block {
 }
 
 export const chatSidebar = connectWithStore('sidebar', ChatSidebarBase as typeof Block, (state) => {
-  const { chats } = state;
-  return { chats }
+  const { chats, activeChat } = state;
+  return { chats, activeChat }
 },
 )

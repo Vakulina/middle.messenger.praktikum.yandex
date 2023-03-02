@@ -4,7 +4,7 @@ import { ChatItem } from "../chatItem"
 import { Image } from "../image"
 import avatar from '../../../static/avatar.jpg';
 
-export const getChatList = (items: Partial<ChatsDTOType>[]) => {
+export const getChatList = (items: Partial<ChatsDTOType>[], activeChat?: number) => {
   return items.map((item) => new ChatItem(
     {
       name: item.title || '',
@@ -12,7 +12,8 @@ export const getChatList = (items: Partial<ChatsDTOType>[]) => {
       time: item.last_message?.time ? parseDate(item.last_message?.time) : '',
       avatar: new Image({ alt: 'аватар', stylePrefix: 'chatItems', src: item.avatar || avatar }),
       count: item.unread_count,
-      id: item.id as number, 
+      id: item.id as number,
+      isActive: ((!!activeChat)&&(activeChat===item.id))? true: false,
     },
   ))
 }

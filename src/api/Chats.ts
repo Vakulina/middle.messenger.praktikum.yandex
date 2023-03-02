@@ -19,7 +19,7 @@ export class ChatsApi extends BaseAPI {
   }
 
 async  createChat(title: string) {
-    return this.http.post('',  {data:{title }});
+    return this.http.post('',  {data:{title }}) as Promise<{id:number}>
   }
 
 

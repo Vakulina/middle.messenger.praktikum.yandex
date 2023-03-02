@@ -16,11 +16,9 @@ class ChatsActions {
   async createChat(data: { title: string }) {
     const { title } = data;
     try {
-      await this.api.createChat(title)
-      //await this.getChats()
-      
-      
-      Store.set({isOpenAddNewChatModal:false})
+      const res = await this.api.createChat(title)
+      Store.set({ activeChat: res.id })
+      Store.set({ isOpenAddNewChatModal: false })
     } catch (e: unknown) {
 
       console.error('createChat:', e);

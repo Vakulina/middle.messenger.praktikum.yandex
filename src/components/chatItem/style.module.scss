@@ -1,6 +1,7 @@
 @import "src/assets/stylesheets/reusable";
 
 .chatItem {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   max-width: 300px;
@@ -8,6 +9,12 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  padding: 0 10px;
+
+  &[active="true"]{
+    color: red;
+    background-color: #E6F7F3;
+  }
 
   &__title {
     @include reset-margins;
