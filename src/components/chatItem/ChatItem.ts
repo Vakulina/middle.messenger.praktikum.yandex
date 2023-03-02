@@ -4,6 +4,7 @@ import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 
 interface ChatItemProps {
+  id:number, 
   name: string,
   text: string,
   time: string | Date,
