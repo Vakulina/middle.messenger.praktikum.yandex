@@ -3,6 +3,7 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
+import { ChatsDTOType } from '~src/api/Chats';
 
 interface ChatItemProps {
   chatId: number,
@@ -15,13 +16,15 @@ interface ChatItemProps {
   events?: {
     click: (e?: Event) => void;
   },
-  isActive?: boolean
+  isActive?: boolean,
+  chats?: ChatsDTOType[]
 }
 
 export class ChatItemBase extends Block {
   constructor(tag = 'div', {
     isActive,
     chatId,
+    chats,
     ...otherProps
   }: ChatItemProps) {
     super(
@@ -30,7 +33,8 @@ export class ChatItemBase extends Block {
         class: s.chatItem,
         events: {
           click: (e: any) => {
-            Store.set({ activeChat: Number(e?.currentTarget.getAttribute("data-chatid")) })
+            const activeChat = chats?.filter((item: ChatsDTOType)=> (item.id===Number(e?.currentTarget.getAttribute("data-chatid"))))[0]
+            Store.set({ activeChat })
             this.eventBus().emit(Block.EVENTS.FLOW_CDU);
           },
         },
@@ -39,7 +43,6 @@ export class ChatItemBase extends Block {
       },
     );
     this.addAttribute({ 'data-chatid': chatId })
-    // this.setProps({ isActive: Number(this.props.activeChat) === Number(this.props.chatId) })
     this.addAttribute({ 'active': String(isActive) })
   }
 
@@ -52,7 +55,7 @@ export const getChatItem = (props: Partial<ChatItemProps>) => connectWithStore(
   'div',
   ChatItemBase as typeof Block,
   (state) => {
-    const { activeChat } = state;
-    return { activeChat }
+    const { activeChat,chats } = state;
+    return { activeChat,chats }
   },
   props)

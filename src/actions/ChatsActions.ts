@@ -11,16 +11,19 @@ class ChatsActions {
   async getChats() {
     const response: ChatsDTOType[] = await this.api.getChats();
     Store.set({ 'chats': response })
+    return response
   }
 
   async createChat(data: { title: string }) {
     const { title } = data;
     try {
       const res = await this.api.createChat(title)
-      Store.set({ activeChat: res.id })
+      const chats = await this.getChats()
+      
+      const activeChat = chats.filter((item) => (item.id === res.id))[0]
+      Store.set({ activeChat })
       Store.set({ isOpenAddNewChatModal: false })
     } catch (e: unknown) {
-
       console.error('createChat:', e);
     }
   }

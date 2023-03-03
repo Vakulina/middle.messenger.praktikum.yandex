@@ -6,7 +6,7 @@ import dots from '../../../static/dots.svg';
 import { Image } from '../image';
 import { Button } from '../button';
 import { BtnEventType } from '~src/utiles';
-import connectWithStore from '~src/services/connectWithStore';
+import connectWithStore from '~src/services/connectWithStore'
 
 const dotsButton = new Button({
   text: new Image({
@@ -22,13 +22,28 @@ const dotsButton = new Button({
 });
 
 export class ChatHeaderBase extends Block {
-  constructor() {
-    super('div', {
+  constructor(tag = 'div', {
+    activeChat,
+    ...props }: any
+  ) {
+  console.log( activeChat?.title)
+    super(tag, {
       class: s.header,
-      avatar: new Image({ alt: 'аватар', stylePrefix: 'chatItems', src: avatar }),
-      name: 'Александр',
       button: dotsButton,
+      activeChat,
+      ...props
     });
+  }
+
+  initChildren() {
+    this.children = {
+      ...this.children,
+      avatar: new Image({
+        alt: 'аватар',
+        stylePrefix: 'chatItems',
+        src: this.state?.activeChat?.avatar || avatar
+      }),
+    }
   }
 
   protected render() {
@@ -36,7 +51,7 @@ export class ChatHeaderBase extends Block {
   }
 }
 
-export const chatHeader = connectWithStore('form', ChatHeaderBase as typeof Block,  (state) => {
+export const chatHeader = connectWithStore('div', ChatHeaderBase, (state) => {
   const { activeChat } = state;
   return { activeChat }
 })

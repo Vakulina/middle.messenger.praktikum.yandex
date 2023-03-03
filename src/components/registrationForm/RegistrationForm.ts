@@ -131,7 +131,6 @@ class RegistrationFormBase extends Form {
     else {
       return super.validateForm();
     }
-
   }
 
   render(): DocumentFragment {

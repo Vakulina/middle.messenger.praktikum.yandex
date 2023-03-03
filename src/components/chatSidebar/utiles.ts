@@ -4,9 +4,9 @@ import { getChatItem } from "../chatItem"
 import { Image } from "../image"
 import avatar from '../../../static/avatar.jpg';
 
-export const getChatList = (items: Partial<ChatsDTOType>[], activeChat?: number) => {
+export const getChatList = (items: Partial<ChatsDTOType>[], activeChat?: ChatsDTOType) => {
   return items.map((item) => {
-    const isActive = Number(activeChat) === Number(item.id)
+    const isActive = Number(activeChat?.id) === Number(item.id)
     return getChatItem(
       {
         name: item.title || '',
@@ -16,7 +16,6 @@ export const getChatList = (items: Partial<ChatsDTOType>[], activeChat?: number)
         count: isActive || (item.unread_count === 0) ? null : item.unread_count,
         chatId: item.id as number,
         isActive,
-
       }
     )
   }

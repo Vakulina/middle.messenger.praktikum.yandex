@@ -13,7 +13,6 @@ import Store from '~src/services/Store';
 export class AvatarTemplateBase extends Form {
   constructor(tag:string, props: FormProps) {
     super(tag = 'section', {
-
       events: {
         focusin: () => {
           if (this.state.isAuthError) {

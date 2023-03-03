@@ -20,7 +20,7 @@ export class AvatarImageBase extends Block {
     ...otherProps
   }: ImageProps) {
     super(
-      'img',
+      tag,
       {
         alt,
         src: avatar ? avatar : avatarBase || "",
@@ -29,7 +29,6 @@ export class AvatarImageBase extends Block {
       },
     );
   }
-
 
   public addAttribute(newAttr: Record<string, string> | null): void {
     super.addAttribute(newAttr)
