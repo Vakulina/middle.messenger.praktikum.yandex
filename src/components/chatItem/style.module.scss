@@ -11,9 +11,13 @@
   cursor: pointer;
   padding: 0 10px;
 
+  &:hover{
+    background-color: $ligthestPrimaryColor;
+  }
+
   &[active="true"]{
     color: red;
-    background-color: #E6F7F3;
+    background-color:#E6F7F3;
   }
 
   &__title {

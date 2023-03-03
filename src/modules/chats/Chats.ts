@@ -4,13 +4,13 @@ import { Message } from '~src/components/message';
 import Block from '~src/services/Block';
 import * as s from "./style.module.scss";
 import { PageLayout } from '~src/components/pageLayout';
-import { ChatHeader } from '~src/components/chatHeader';
+import { chatHeader } from '~src/components/chatHeader';
 import connectWithStore from '~src/services/connectWithStore';
 import { NewChatPopup } from '~src/components/newChatPopup';
 
 const message = new Message();
 const sidebar = chatSidebar;
-const header = new ChatHeader();
+const header = chatHeader;
 
 interface ChatsProps {
   sidebar: Block,

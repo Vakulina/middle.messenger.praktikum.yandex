@@ -6,6 +6,7 @@ import dots from '../../../static/dots.svg';
 import { Image } from '../image';
 import { Button } from '../button';
 import { BtnEventType } from '~src/utiles';
+import connectWithStore from '~src/services/connectWithStore';
 
 const dotsButton = new Button({
   text: new Image({
@@ -20,7 +21,7 @@ const dotsButton = new Button({
   name: 'sendMessage',
 });
 
-export class ChatHeader extends Block {
+export class ChatHeaderBase extends Block {
   constructor() {
     super('div', {
       class: s.header,
@@ -34,3 +35,8 @@ export class ChatHeader extends Block {
     return this.compile(tpl, this.props);
   }
 }
+
+export const chatHeader = connectWithStore('form', ChatHeaderBase as typeof Block,  (state) => {
+  const { activeChat } = state;
+  return { activeChat }
+})

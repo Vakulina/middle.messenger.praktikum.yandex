@@ -142,7 +142,7 @@ abstract class Block {
     });
   }
 
-  public addAttribute(newAttr: Record<string, string|boolean> | null) {
+  public addAttribute(newAttr: Record<string, string|boolean|number> | null) {
     const attr: Record<string, string | null> | undefined = {
       type: this.props.type || null,
       class: this.props.class || null,

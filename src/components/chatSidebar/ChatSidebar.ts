@@ -4,7 +4,6 @@ import Block from '~src/services/Block';
 import { Panel } from './controlPanel';
 import connectWithStore from '~src/services/connectWithStore';
 import { getChatList } from './utiles';
-import Store from '~src/services/Store';
 import { chatsActions } from '~src/actions/ChatsActions';
 
 
@@ -19,7 +18,7 @@ class ChatSidebarBase extends Block {
       },
     );
     chatsActions.getChats()
-    this.setProps({ items: getChatList(this.state.chats || [], props.activeChat) })
+    this.setProps({ items: getChatList(this.state.chats || [], this.state.activeChat) },)
   }
 
   initChildren() {
@@ -30,6 +29,7 @@ class ChatSidebarBase extends Block {
   }
 
   protected render() {
+
     return this.compile(tpl, this.props);
   }
 }
