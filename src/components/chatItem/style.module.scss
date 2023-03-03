@@ -16,7 +16,6 @@
   }
 
   &[active="true"]{
-    color: red;
     background-color:#E6F7F3;
   }
 
@@ -51,6 +50,8 @@
   &__column:last-of-type {
     gap: 14px;
     align-items:flex-end;
+    align-self: start;
+    padding: 10px 0;
   }
 
   &__column:first-of-type {

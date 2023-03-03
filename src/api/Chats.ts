@@ -1,10 +1,11 @@
+import { Image } from '~src/components/image';
 import { UserDTO } from './Auth';
 import BaseAPI from './BaseAPI';
 
 export type ChatsDTOType = {
   id: number,
   title: string,
-  avatar: string,
+  avatar: Image,
   unread_count: number,
   last_message: {
     user: Partial<UserDTO>,

@@ -3,14 +3,13 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
-import { ChatsDTOType } from '~src/api/Chats';
 
 interface ChatItemProps {
   chatId: number,
   name: string,
   text: string,
   time: string | Date,
-  count?: number,
+  count?: number|null,
   avatar?: Block,
   stylePrefix?: string | null,
   events?: {
@@ -49,7 +48,7 @@ export class ChatItemBase extends Block {
     return this.compile(tpl, this.props);
   }
 }
-export const getChatItem = (props: Partial<ChatsDTOType>) => connectWithStore(
+export const getChatItem = (props: Partial<ChatItemProps>) => connectWithStore(
   'div',
   ChatItemBase as typeof Block,
   (state) => {
