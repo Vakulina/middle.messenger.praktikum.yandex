@@ -11,7 +11,8 @@ export type ChatsDTOType = {
     user: Partial<UserDTO>,
     time: string,
     content: string
-  }
+  },
+  created_by:number
 }
 
 export class ChatsApi extends BaseAPI {
@@ -30,9 +31,9 @@ async  createChat(title: string) {
   }
 
   deleteChat(chatId: number) {
-    return this.http.delete('', {
-      chatId: chatId,
-    })
+    return this.http.delete('', {data: {
+      'chatId': chatId,
+    }})
   }
 
   addUsers(Usersid: number[], chatId: number) {

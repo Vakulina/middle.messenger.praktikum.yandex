@@ -14,11 +14,11 @@
     margin-top: 10px;
 
     @include lightShadow;
+  }
 
-    &:hover,
-    &:active {
-      background-color: $lightPrimaryColor;
-    }
+  &:hover,
+  &:active {
+    background-color: $lightPrimaryColor;
   }
 
   &_save-avatar {
@@ -39,7 +39,8 @@
     height: 32px;
     padding: 0;
   }
-  &_sidebar{
+
+  &_sidebar {
     box-sizing: border-box;
     font-size: 14px;
     height: 30px;

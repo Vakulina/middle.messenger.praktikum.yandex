@@ -19,22 +19,28 @@ class ChatsActions {
     try {
       const res = await this.api.createChat(title)
       const chats = await this.getChats()
-      
+
       const activeChat = chats.filter((item) => (item.id === res.id))[0]
       Store.set({ activeChat })
       Store.set({ isOpenAddNewChatModal: false })
+      Store.set({ isOpenHeaderMenuModal: false })
     } catch (e: unknown) {
       console.error('createChat:', e);
     }
   }
 
-  async deleteChatById(chat_id: number) {
-    try {
-      const response = await this.api.deleteChat(chat_id);
-      console.log(response);
-      this.getChats()
-    } catch (e: unknown) {
-      console.error('deleteChatById:', e);
+  async deleteChatById() {
+    const state = Store.getState()
+    if (('activeChat' in state) && (state.activeChat) && ('id' in state.activeChat)) {
+      const chat_id = state.activeChat?.id
+      try {
+        const response = await this.api.deleteChat(chat_id);
+        Store.set({ isOpenAddNewChatModal: false })
+        Store.set({ isOpenHeaderMenuModal: false })
+        this.getChats()
+      } catch (e: unknown) {
+        console.error('deleteChatById:', e);
+      }
     }
   }
 

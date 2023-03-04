@@ -2,7 +2,7 @@
 
 .newChat {
   width: 340px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  @include primaryShadow;
   border-radius: 12px;
   padding: 15px 30px 30px;
   box-sizing: border-box;

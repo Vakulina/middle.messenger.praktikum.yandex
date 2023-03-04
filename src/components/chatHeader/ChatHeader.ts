@@ -7,32 +7,22 @@ import { Image } from '../image';
 import { Button } from '../button';
 import { BtnEventType } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore'
-
-const dotsButton = new Button({
-  text: new Image({
-    src: dots,
-    stylePrefix: 'dots',
-  }),
-  stylePrefix: 'withArrow',
-  type: 'button',
-  events: {
-    click: (e: BtnEventType) => console.log('open menu'),
-  },
-  name: 'sendMessage',
-});
+import Store from '~src/services/Store';
+import { getChatHeaderMenu } from './ChatHeaderMenu';
 
 export class ChatHeaderBase extends Block {
   constructor(tag = 'div', {
     activeChat,
+    isOpenHeaderMenuModal,
     ...props }: any
   ) {
-  console.log( activeChat?.title)
     super(tag, {
       class: s.header,
-      button: dotsButton,
+      isOpenHeaderMenuModal,
       activeChat,
       ...props
     });
+
   }
 
   initChildren() {
@@ -43,6 +33,21 @@ export class ChatHeaderBase extends Block {
         stylePrefix: 'chatItems',
         src: this.state?.activeChat?.avatar || avatar
       }),
+      button: new Button({
+        text: new Image({
+          src: dots,
+          stylePrefix: 'dots',
+        }),
+        stylePrefix: 'withArrow',
+        type: 'button',
+        events: {
+          click: (e: BtnEventType) => {
+            Store.set({ isOpenHeaderMenuModal: !(this.state?.isOpenHeaderMenuModal) })
+          }
+        },
+        name: 'sendMessage',
+      }),
+      chatHeaderMenu: getChatHeaderMenu( {isAvailableToDelete: !!this.state?.activeChat&&(this.state.activeChat.created_by == this.state?.user?.id)})
     }
   }
 
@@ -52,6 +57,6 @@ export class ChatHeaderBase extends Block {
 }
 
 export const chatHeader = connectWithStore('div', ChatHeaderBase, (state) => {
-  const { activeChat } = state;
-  return { activeChat }
+  const { activeChat, isOpenHeaderMenuModal } = state;
+  return { activeChat, isOpenHeaderMenuModal }
 })

@@ -35,6 +35,7 @@ export class ChatItemBase extends Block {
           click: (e: any) => {
             const activeChat = chats?.filter((item: ChatsDTOType)=> (item.id===Number(e?.currentTarget.getAttribute("data-chatid"))))[0]
             Store.set({ isOpenAddNewChatModal: false })
+            Store.set({isOpenHeaderMenuModal: false})
             Store.set({ activeChat })
           },
         },

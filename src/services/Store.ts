@@ -19,6 +19,7 @@ export type State = {
   isRegistrationSettingsError: { message: string, status: number } | null,
   isPasswordSettingsError: { message: string, status: number } | null,
   isOpenAddNewChatModal: boolean;
+  isOpenHeaderMenuModal: boolean;
 }
 
 class Store extends EventBus {
