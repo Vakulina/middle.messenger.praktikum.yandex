@@ -4,6 +4,7 @@ import Block from '~src/services/Block';
 import { Button } from '~src/components/button';
 import connectWithStore from '~src/services/connectWithStore'
 import { chatsActions } from '~src/actions/ChatsActions';
+import Store from '~src/services/Store';
 
 export class ChatHeaderMenuBase extends Block {
   constructor(tag = 'div', {
@@ -31,7 +32,8 @@ export class ChatHeaderMenuBase extends Block {
         type: 'button',
         events: {
           click: (e) => {
-            console.log('add user')
+            Store.set({isOpenAddUserModal:true})
+            Store.set({isOpenHeaderMenuModal:false})
           },
         },
       }),
@@ -62,6 +64,6 @@ export class ChatHeaderMenuBase extends Block {
 }
 
 export const getChatHeaderMenu = (props?: { isAvailableToDelete?: boolean }) => connectWithStore('div', ChatHeaderMenuBase, (state) => {
-  const { activeChat, isOpenHeaderMenuModal, user } = state;
-  return { activeChat, isOpenHeaderMenuModal, user }
+  const { activeChat,  user } = state;
+  return { activeChat,  user }
 }, props)

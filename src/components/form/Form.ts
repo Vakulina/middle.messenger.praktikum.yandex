@@ -21,7 +21,7 @@ export abstract class Form extends Block {
   serverError: string | null
   constructor(tag:string, props: FormProps) {
     super(tag='form', {
-      class: s.form ? s.form : `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
+      class:  `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
       className: s.form,
       ...props,
     })

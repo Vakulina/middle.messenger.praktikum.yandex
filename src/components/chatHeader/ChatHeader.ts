@@ -9,16 +9,19 @@ import { BtnEventType } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore'
 import Store from '~src/services/Store';
 import { getChatHeaderMenu } from './ChatHeaderMenu';
+import { addUserPopup } from './AddUserPopup';
 
 export class ChatHeaderBase extends Block {
   constructor(tag = 'div', {
     activeChat,
     isOpenHeaderMenuModal,
+    isOpenAddUserModal,
     ...props }: any
   ) {
     super(tag, {
       class: s.header,
       isOpenHeaderMenuModal,
+      isOpenAddUserModal,
       activeChat,
       ...props
     });
@@ -47,7 +50,8 @@ export class ChatHeaderBase extends Block {
         },
         name: 'sendMessage',
       }),
-      chatHeaderMenu: getChatHeaderMenu( {isAvailableToDelete: !!this.state?.activeChat&&(this.state.activeChat.created_by == this.state?.user?.id)})
+      chatHeaderMenu: getChatHeaderMenu(),
+      addUserPopup: addUserPopup
     }
   }
 
@@ -57,6 +61,6 @@ export class ChatHeaderBase extends Block {
 }
 
 export const chatHeader = connectWithStore('div', ChatHeaderBase, (state) => {
-  const { activeChat, isOpenHeaderMenuModal } = state;
-  return { activeChat, isOpenHeaderMenuModal }
+  const { activeChat, isOpenHeaderMenuModal, isOpenAddUserModal } = state;
+  return { activeChat, isOpenHeaderMenuModal, isOpenAddUserModal }
 })

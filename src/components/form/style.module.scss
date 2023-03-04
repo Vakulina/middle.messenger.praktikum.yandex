@@ -16,6 +16,13 @@
     max-width: 490px;
   }
 
+  &_popup {
+   background-color: $shadeLigthest;
+   padding: 30px;
+   border-radius: 20px;
+   position: relative;
+  }
+
   &_tabs h2 {
     text-align: left;
     margin: 0 auto 50px 0;
@@ -29,7 +36,8 @@
   &_reg {
     @include centralContent(810px);
   }
-  &_newChat{
+
+  &_newChat {
     width: 340px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
     border-radius: 12px;
@@ -46,7 +54,8 @@
     display: none;
     color: $attantionColor;
   }
-  &__success{
+
+  &__success {
     display: none;
   }
 
@@ -57,10 +66,12 @@
   &[data-password-error="true"] &__error {
     display: block;
   }
-  &[data-password-error="true"] input[type="password"]{
+
+  &[data-password-error="true"] input[type="password"] {
     border-color: red;
   }
-  &[data-success="true"] &__success{
+
+  &[data-success="true"] &__success {
     display: block;
     color: $primary-color;
   }

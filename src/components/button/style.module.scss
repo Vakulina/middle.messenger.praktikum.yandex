@@ -3,9 +3,37 @@
 .button {
   @include btn-style;
 
+  &:hover,
+  &:active {
+    background-color: $lightPrimaryColor;
+  }
+
   &_save {
     width: 140px;
     margin-top: 70px;
+  }
+
+  &_cross {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img{
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+    }
   }
 
   &_submit,
@@ -14,11 +42,6 @@
     margin-top: 10px;
 
     @include lightShadow;
-  }
-
-  &:hover,
-  &:active {
-    background-color: $lightPrimaryColor;
   }
 
   &_save-avatar {

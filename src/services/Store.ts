@@ -19,13 +19,15 @@ export type State = {
   isRegistrationSettingsError: { message: string, status: number } | null,
   isPasswordSettingsError: { message: string, status: number } | null,
   isOpenAddNewChatModal: boolean;
+  isOpenAddUserModal:boolean;
   isOpenHeaderMenuModal: boolean;
+  isServerError: { message: string, status: number } | null,
 }
 
 class Store extends EventBus {
 
   static _instance: Store;
-  state: State | {} = {};
+  state: State | {} = {isOpenAddUserModal:true};
 
   constructor() {
     if (Store._instance) return Store._instance;

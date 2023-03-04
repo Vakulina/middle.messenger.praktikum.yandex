@@ -34,9 +34,10 @@ class ChatsActions {
     if (('activeChat' in state) && (state.activeChat) && ('id' in state.activeChat)) {
       const chat_id = state.activeChat?.id
       try {
-        const response = await this.api.deleteChat(chat_id);
-        Store.set({ isOpenAddNewChatModal: false })
+         await this.api.deleteChat(chat_id);
+        Store.set({ isOpenAddNewChatModal: true })
         Store.set({ isOpenHeaderMenuModal: false })
+        Store.set({ activeChat: null})
         this.getChats()
       } catch (e: unknown) {
         console.error('deleteChatById:', e);
