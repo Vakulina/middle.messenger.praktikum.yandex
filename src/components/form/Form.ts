@@ -5,7 +5,6 @@ import Block from '~src/services/Block';
 import { Input } from '../input';
 import { Textarea } from '../textarea';
 import { AuthData, RegistrationValuesType } from '~src/api/Auth';
-import Store from '~src/services/Store';
 import { ChangePasswordType } from '~src/api/Users';
 
 export type FormProps = {

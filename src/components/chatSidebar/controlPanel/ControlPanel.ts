@@ -20,7 +20,10 @@ export class Panel extends Block {
         stylePrefix: "sidebar",
         type: 'button',
         events: {
-          click: (e: BtnEventType) => Store.set({isOpenAddNewChatModal: true})
+          click: (e: BtnEventType) => {
+            Store.set({activeChat: null});
+            Store.set({isOpenAddNewChatModal: true});
+          }
         },
       }),
       link: new Link({ href: routes.setting, text: 'Профиль &#62', stylePrefix: 'profile' }),

@@ -34,8 +34,8 @@ export class ChatItemBase extends Block {
         events: {
           click: (e: any) => {
             const activeChat = chats?.filter((item: ChatsDTOType)=> (item.id===Number(e?.currentTarget.getAttribute("data-chatid"))))[0]
+            Store.set({ isOpenAddNewChatModal: false })
             Store.set({ activeChat })
-            this.eventBus().emit(Block.EVENTS.FLOW_CDU);
           },
         },
         active: isActive,

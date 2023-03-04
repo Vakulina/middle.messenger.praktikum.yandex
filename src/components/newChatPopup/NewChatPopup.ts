@@ -4,6 +4,7 @@ import { Button } from '../button';
 import { Input } from '../input';
 import { BtnEventType } from '~src/utiles';
 import { chatsActions } from '~src/actions/ChatsActions';
+import * as s from "./style.module.scss";
 
 type titleDataType = { titleInput: string }
 
@@ -18,7 +19,7 @@ export class NewChatPopup extends Form {
   constructor(props: FormProps) {
     super('form', {
       title: 'Вход',
-      stylePrefix: 'newChat',
+      class: s.newChat,
       ...props,
     })
   }
