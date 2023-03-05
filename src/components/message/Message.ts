@@ -8,7 +8,6 @@ import clip from '../../../static/clip.svg';
 import arrow from '../../../static/arrow.svg';
 import { FileInput } from '../fileInput';
 import { Form } from '../form';
-import Store from '~src/services/Store';
 import { chatsActions } from '~src/actions/ChatsActions';
 
 const message = new Textarea({
@@ -65,14 +64,10 @@ export class Message extends Form {
     e.preventDefault();
     if (this.validateForm()) {
       const { message } = this.getValues() as { message: string }
-
       chatsActions.sendMessage(message)
-
       const form = this.getContent() as HTMLFormElement
       form.reset()
-
     }
-
   }
 
   protected render() {

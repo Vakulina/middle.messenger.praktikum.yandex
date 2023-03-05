@@ -7,6 +7,7 @@ import { PageLayout } from '~src/components/pageLayout';
 import { chatHeader } from '~src/components/chatHeader';
 import connectWithStore from '~src/services/connectWithStore';
 import { NewChatPopup } from '~src/components/newChatPopup';
+import { messageList } from '~src/components/messageList';
 
 const message = new Message();
 const sidebar = chatSidebar;
@@ -15,8 +16,8 @@ const header = chatHeader;
 interface ChatsProps {
   sidebar: Block,
   header?: Block,
-  chatHistory?: Block,
   message: Block,
+  messageList:Block,
 }
 
 export class Chats extends Block {
@@ -27,13 +28,13 @@ export class Chats extends Block {
         class: s.chats,
         ...props,
       },
-      
+
     );
   }
   initChildren() {
     this.children = {
       ...this.children,
-      newChatPopup: new NewChatPopup({}) 
+      newChatPopup: new NewChatPopup({})
     };
   }
 
@@ -48,7 +49,7 @@ export const chats = connectWithStore('section',
     const { isOpenAddNewChatModal } = state;
     return { isOpenAddNewChatModal }
   },
-  { sidebar, message, header }
+  { sidebar, messageList, message, header }
 )
 
 const chatsPage = new PageLayout({ content: chats });

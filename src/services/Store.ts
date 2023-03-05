@@ -7,7 +7,7 @@ export enum StoreEvents {
   Remove = 'remove'
 }
 
-type messageType = {
+export type messageType = {
   chat_id: number,
   content: string,
   file: null | any,

@@ -41,10 +41,7 @@ export class ChatItemBase extends Block {
             Store.set({ isOpenHeaderMenuModal: false })
             Store.set({ activeChat })
             Store.set({ usersOfActiveChat })
-
             await setWebSocket(chatId)
-             // .then(() => chatsActions.getOldMessagesOfChat())
-            // await chatsActions.getMessagesOfChat( data );
           },
         },
         active: isActive,

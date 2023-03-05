@@ -94,9 +94,7 @@ class ChatsActions {
   }
 
   async getMessagesOfChat(messages: any) {
-    console.log(messages)
     const state = Store.getState()
-
     if (!('chatsData' in state) || !('activeChat' in state)) return
     const chatsDataAtStore = state.chatsData;
     let newChatsData=[]
