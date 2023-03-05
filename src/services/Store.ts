@@ -7,11 +7,21 @@ export enum StoreEvents {
   Remove = 'remove'
 }
 
+type messageType = {
+  chat_id: number,
+  content: string,
+  file: null | any,
+  id: number,
+  is_read: boolean,
+  time: string,
+  type: 'message',
+  user_id: number
+}
 export type State = {
   user: Omit<UserDTO, "password">,
   chats: Partial<ChatsDTOType>[],
-  activeChat: ChatsDTOType|null;
-  usersOfActiveChat:UserDTO[];
+  activeChat: ChatsDTOType | null;
+  usersOfActiveChat: UserDTO[];
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
   isLogin: boolean,
@@ -20,18 +30,17 @@ export type State = {
   isRegistrationSettingsError: { message: string, status: number } | null,
   isPasswordSettingsError: { message: string, status: number } | null,
   isOpenAddNewChatModal: boolean;
-  isOpenAddUserModal:boolean;
-  isOpenDeleteUserModal:boolean;
+  isOpenAddUserModal: boolean;
+  isOpenDeleteUserModal: boolean;
   isOpenHeaderMenuModal: boolean;
   isServerError: { message: string, status: number } | null,
-  chatsData: {messages: any, chatId:number}[],
-  chatMessages:any
+  chatsData: messageType[],
 }
 
 class Store extends EventBus {
 
   static _instance: Store;
-  state: State | {} = {isOpenAddNewChatModal:true, chatsData:[]};
+  state: State | {} = { isOpenAddNewChatModal: true, chatsData: [] };
 
   constructor() {
     if (Store._instance) return Store._instance;

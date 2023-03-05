@@ -93,14 +93,22 @@ class ChatsActions {
     }
   }
 
-  async getMessagesOfChat(messages: any, chatId: number) {
+  async getMessagesOfChat(messages: any) {
+    console.log(messages)
     const state = Store.getState()
-    if (!('chatsData' in state)) return
-    const chatsData = state.chatsData;
-    const chatData = chatsData[chatId]?.messages || [];
-    chatData.push(...messages);
-    console.log(chatData)
-    Store.set({ chatMessages: chatData })
+
+    if (!('chatsData' in state) || !('activeChat' in state)) return
+    const chatsDataAtStore = state.chatsData;
+    let newChatsData=[]
+
+    if(Array.isArray(messages)){
+      newChatsData=[...messages]
+    }
+    else{
+      newChatsData=[messages, ...chatsDataAtStore]
+    }
+
+    Store.set({ chatsData: newChatsData })
   }
 
   async sendMessage(text: string) {
@@ -114,6 +122,20 @@ class ChatsActions {
       ws.sendMessage(text);
     }
   }
+
+  async getOldMessagesOfChat(from = 0) {
+    const state = Store.getState()
+    if (('activeChat' in state) && (state.activeChat) && ('id' in state.activeChat)) {
+      const chatId = state.activeChat?.id
+      const ws = await setWebSocket(chatId);
+      if (!ws) {
+        return;
+      }
+      ws.getOldMessages(from);
+    }
+  }
+
+
 }
 
 export const chatsActions = new ChatsActions();

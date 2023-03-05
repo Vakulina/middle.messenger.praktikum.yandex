@@ -65,14 +65,12 @@ export class WebsocketService extends EventBus {
     this.connection.close(code, reason);
   }
 
-  private loadChat() {
-    console.log("Соединение установлено");
-
-    this.ping();
-    this.getOldMessages();
+  private async loadChat() {
+    await this.ping();
+     this.getOldMessages();
   }
 
-  private ping() {
+  private async ping() {
     let pingInterval: any = setInterval(() => {
       if (!this.connection) {
         throw new Error("WS соединение не установлено");
@@ -82,20 +80,19 @@ export class WebsocketService extends EventBus {
           type: "ping"
         })
       );
-    }, 1000);
+    }, 10000);
 
     this.on(WebsocketService.EVENTS.CLOSE, () => {
       clearInterval(pingInterval);
-
       pingInterval = undefined;
     });
   }
 
-  private getOldMessages(from = 0) {
+  public async getOldMessages(from = 0) {
     if (!this.connection) {
       throw new Error("WS соединение не установлено");
     }
-    this.connection.send(
+   await this.connection.send(
       JSON.stringify({
         content: from,
         type: "get old"

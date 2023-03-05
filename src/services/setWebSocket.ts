@@ -11,6 +11,7 @@ export const  setWebSocket = async (chatId: number) => {
   }
 
   if (webSocketsList&&webSocketsList[chatId]) {
+    await webSocketsList[chatId].getSocket().getOldMessages()
     return webSocketsList[chatId].getSocket();
   }
 
@@ -33,7 +34,7 @@ export const  setWebSocket = async (chatId: number) => {
   webSocket.on(WebsocketService.EVENTS.CLOSE, () => {deleteSoket()});
 
   const getMessagesOfChat = (data: any) => {
-    chatsActions.getMessagesOfChat( data, chatId );
+    chatsActions.getMessagesOfChat( data );
   };
 
   const deleteSoket = () => {

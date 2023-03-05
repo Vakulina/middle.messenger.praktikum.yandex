@@ -8,6 +8,8 @@ import clip from '../../../static/clip.svg';
 import arrow from '../../../static/arrow.svg';
 import { FileInput } from '../fileInput';
 import { Form } from '../form';
+import Store from '~src/services/Store';
+import { chatsActions } from '~src/actions/ChatsActions';
 
 const message = new Textarea({
   name: 'message',
@@ -32,7 +34,7 @@ const addFileInput = new FileInput({
 
 export class Message extends Form {
   constructor() {
-    super({
+    super('div', {
       class: `${s.message}`,
     });
   }
@@ -61,7 +63,15 @@ export class Message extends Form {
 
   private submit(e: BtnEventType) {
     e.preventDefault();
-    if (this.validateForm()) console.log(this.getValues());
+    if (this.validateForm()) {
+      const { message } = this.getValues() as { message: string }
+
+      chatsActions.sendMessage(message)
+      //console.log(this)
+
+
+    }
+
   }
 
   protected render() {

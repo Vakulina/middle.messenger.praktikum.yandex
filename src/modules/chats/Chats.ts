@@ -7,7 +7,6 @@ import { PageLayout } from '~src/components/pageLayout';
 import { chatHeader } from '~src/components/chatHeader';
 import connectWithStore from '~src/services/connectWithStore';
 import { NewChatPopup } from '~src/components/newChatPopup';
-import Store from '~src/services/Store';
 
 const message = new Message();
 const sidebar = chatSidebar;
@@ -32,7 +31,6 @@ export class Chats extends Block {
     );
   }
   initChildren() {
-
     this.children = {
       ...this.children,
       newChatPopup: new NewChatPopup({}) 
@@ -40,7 +38,6 @@ export class Chats extends Block {
   }
 
   protected render() {
-    //Store.set({isOpenAddNewChatModal:true})
     return this.compile(tpl, this.props);
   }
 }
