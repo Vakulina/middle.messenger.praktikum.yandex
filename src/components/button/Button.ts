@@ -1,11 +1,11 @@
 import tpl from './tpl.hbs';
-import s from './style.module.scss';
+import * as s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 import { BtnEventType } from '~src/utiles';
 
 interface ButtonProps {
-  text: string | Block;
+  text: string | Block | HTMLElement;
   stylePrefix?: string | null,
   type?: string,
   events?: {
@@ -21,7 +21,6 @@ export class Button extends Block {
     events = {
       click: (e) => {
         e.preventDefault();
-        console.log('click');
       },
     },
     ...otherProps

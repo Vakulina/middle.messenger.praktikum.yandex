@@ -1,6 +1,7 @@
 import { v4 as makeUUID } from 'uuid';
 
 import { EventBus, IEventBus } from './EventBus';
+import { State } from './Store';
 
 export type PropsType = Record<string, string | Record<string, Function> | boolean>;
 export type ChildrenType = Record<string, Block | Block[] | any>;
@@ -17,13 +18,15 @@ abstract class Block {
 
   private _element: HTMLElement;
 
-  protected props: Record<string, string>;
+  props: Record<string, string>;
 
   protected eventBus: () => IEventBus;
 
   protected children: ChildrenType;
 
   public id: string = makeUUID();
+
+  private _state: Partial<State> = {};
 
   constructor(tagName = 'div', propsWithChildren = {}) {
     const eventBus = new EventBus();
@@ -47,7 +50,7 @@ abstract class Block {
     const children: ChildrenType = {};
 
     Object.entries(propsWithChildren).forEach(([key, value]) => {
-      ((value instanceof Block) || (value instanceof Array<Block>)) ? children[key] = value : props[key] = value;
+      (!(value instanceof Block) && !(value instanceof Array<Block>)) ? props[key] = value : children[key] = value;
     });
     return { props, children };
   }
@@ -80,6 +83,14 @@ abstract class Block {
     return this._element;
   }
 
+  get state() {
+    return this._state;
+  }
+
+  set state(data) {
+    this._state = data;
+  }
+
   getContent(): HTMLElement {
     if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
       setTimeout(() => {
@@ -88,13 +99,13 @@ abstract class Block {
         ) {
           this.eventBus().emit(Block.EVENTS.FLOW_CDM);
         }
-      }, 100);
+      }, 10);
     }
 
     return this.element!;
   }
 
-  private _init() {
+  _init() {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
@@ -110,14 +121,20 @@ abstract class Block {
   private _render() {
     this.initChildren();
     const fragment = this.render();
+    this._removeEventListeners();
     this._element!.innerHTML = '';
     this._element!.append(fragment);
     this.addAttribute(null);
+    this.addGlobalEvents();
     this._addEvents();
   }
 
   protected render() {
     return new DocumentFragment();
+  }
+
+  init() {
+
   }
 
   _addEvents() {
@@ -127,7 +144,7 @@ abstract class Block {
     });
   }
 
-  public addAttribute(newAttr: Record<string, string> | null) {
+  public addAttribute(newAttr: Record<string, string | boolean | number> | null) {
     const attr: Record<string, string | null> | undefined = {
       type: this.props.type || null,
       class: this.props.class || null,
@@ -136,10 +153,15 @@ abstract class Block {
       autofocus: this.props.autofocus || null,
       src: this.props.src || null,
       alt: this.props.alt || null,
+      id: this.props.id || null,
     };
     Object.entries({ ...attr, ...newAttr }).forEach(([key, value]) => {
-      if (value) this.element!.setAttribute(key, value);
+      if (value) this.element!.setAttribute(key, value as string);
     });
+  }
+
+  public addGlobalEvents() {
+
   }
 
   _removeEventListeners() {
@@ -171,48 +193,53 @@ abstract class Block {
   }
 
   componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
-    if (!props.oldProps && !props.oldProps) return true;
+    if (!props.oldProps && !props.newProps) return true;
     return false;
   }
 
-  setProps(nextProps: PropsType) {
+  setProps(nextProps: ChildrenType) {
     if (!nextProps) {
       return;
     }
-    Object.assign(this.props, nextProps);
+    Object.assign(this.props, this.children, nextProps);
+    this._state = nextProps;
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   }
 
   protected compile(template: (context: any) => string, context: any) {
     const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
-      if (component instanceof Block) {
+      if (Array.isArray(component)) {
+        contextAndStubs[name] = component.map((child) => `<div data-id="${child.id}"></div>`);
+      } else {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
       }
-      if (Array.isArray(component)) {
-        contextAndStubs[name] = component.map((item) => {
-          return `<div data-id=${item.id}></div>`;
-        });
-      }
     });
+
     const html = template(contextAndStubs);
 
     const temp = document.createElement('template');
+
     temp.innerHTML = html;
 
-    Object.values(this.children).forEach((component) => {
+    const replaceStub = (component: Block) => {
+      const stub = temp.content.querySelector(`[data-id="${component.id}"]`);
+
+      if (!stub) {
+        return;
+      }
+
+      component.getContent()?.append(...Array.from(stub.childNodes));
+
+      stub.replaceWith(component.getContent()!);
+    };
+
+    Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
-        component.forEach((item) => {
-          const stub = temp.content.querySelector(
-            `[data-id="${item.id}"]`,
-          );
-          stub?.replaceWith(item.getContent());
-        });
+        component.forEach(replaceStub);
       } else {
-        const stub = temp.content.querySelector(
-          `[data-id="${component.id}"]`,
-        );
-        stub?.replaceWith(component.getContent());
+        replaceStub(component);
       }
     });
 

@@ -1,15 +1,15 @@
 export const routes = {
   home: '/',
-  chats: '/chats',
+  chats: '/messenger',
   chat: '/chat',
-  setting: '/setting',
-  setRegInfo: '/setting/reg-info',
-  setAvatar: '/setting/avatar',
-  setSafety: '/setting/safety',
+  setting: '/settings',
+  setRegInfo: '/settings/reg-info',
+  setAvatar: '/settings/avatar',
+  setSafety: '/settings/safety',
   authorization: '/sign-in',
   registration: '/sign-up',
-  notFound: '/not-found',
   serverError: '/error',
+  notFound: '/not-found',
 };
 
 export const VALIDATION_ERROR = {

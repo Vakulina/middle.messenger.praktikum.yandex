@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import s from './style.module.scss';
+import * as s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 import { InputEventType } from '~src/utiles';
@@ -33,6 +33,7 @@ export class Textarea extends Block {
         events: {
           input: (e: InputEventType) => {
             this.checkInputValidity(e);
+            this.valueState = e.target.value;
           },
           change: (e: InputEventType) => {
             this.isValid = true;

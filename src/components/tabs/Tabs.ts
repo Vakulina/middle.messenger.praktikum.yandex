@@ -1,14 +1,14 @@
 import tpl from './tpl.hbs';
 import styles from '../../utiles/styles';
-import s from './style.module.scss';
+import * as s from './style.module.scss';
 import Block, { ChildrenType } from '~src/services/Block';
 import { Link } from '../link/Link';
 
 type TabsProps = {
   tabsConfig: Tab[],
-  globalListerners?: Array<{ targetElement: HTMLElement, event: Event, action: (e: Event) => void }>,
-  rootPathname: string,
-  stylePrefix?: string
+  rootPath: string,
+  stylePrefix?: string,
+  activeLink?: string
 };
 export type Tab = {
   name: string,
@@ -16,46 +16,41 @@ export type Tab = {
   pathRoute: string,
 };
 
-// TODO перенести логику роутинга в Routes, который планируется в 3 спринте
 export class Tabs extends Block {
   pathname: string;
 
-  protected currentTab: string;
-
   protected activeLink: string;
 
-  protected currentPathname: Location;
+  protected _activeLink: string;
 
-  constructor({ globalListerners, rootPathname, ...otherProps }: TabsProps) {
+  constructor({ activeLink, tabsConfig, ...otherProps }: TabsProps) {
     super('div', {
-      globalListerners,
-      rootPathname,
+      activeLink,
+      tabsConfig,
       class: `${s.tabs} ${styles.getClassWithPrefix(s, 'tabs', otherProps.stylePrefix || '')}`,
       ...otherProps,
     });
   }
 
   initChildren() {
-    const currentPathname = window.location.pathname;
-    const activeLink = this.children.tabsConfig.filter((tab: Tab) => {
-      return currentPathname.includes(tab.pathRoute);
-    })[0]?.pathRoute || this.children.tabsConfig[0]?.pathRoute;
+    this._activeLink = this.props.activeLink;
 
     const links = this.children.tabsConfig.map((tab: Tab) => {
       const newLink = new Link({
-        href: tab.pathRoute,
+        href: (tab.pathRoute === this.children.tabsConfig[0].pathRoute) ? this.props.rootPath : tab.pathRoute,
         text: tab.name,
         stylePrefix: 'tabs',
-        active: (tab.pathRoute === activeLink),
+        active: (tab.pathRoute === this._activeLink),
       });
 
       return newLink;
     });
-    const activeTab = this.children.tabsConfig.filter((tab: Tab) => tab.pathRoute === activeLink)[0];
-    const content = activeTab?.content;
+
+    const activeTab = this.children.tabsConfig.filter((tab: Tab) => tab.pathRoute === this._activeLink)[0];
+
+    const { content } = activeTab;
     /* eslint-disable @typescript-eslint/naming-convention */
     const { tabsConfig: _, ...newChildren } = this.children;
-
     this.children = {
       ...newChildren,
       links,

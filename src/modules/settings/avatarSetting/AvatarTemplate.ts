@@ -1,25 +1,52 @@
+import UsersActions from '~src/actions/UsersActions';
 import { Button } from '~src/components/button';
-import { FileInput } from '~src/components/fileInput';
-import { Form } from '~src/components/form';
-import { Image } from '~src/components/image';
-import avatar from '../../../../static/avatar.jpg';
+import { avatarInput } from '~src/components/avatarInput';
+import { Form, FormProps } from '~src/components/form';
+import { avatarImage } from '~src/components/avatarImage';
+import Block from '~src/services/Block';
+import connectWithStore from '~src/services/connectWithStore';
+import { BtnEventType } from '~src/utiles';
+
 import tpl from './tpl.hbs';
+import Store from '~src/services/Store';
 
-// TODO организовать обновления изображения синхронно с выбором файл. предположительно брать src из глобального стейта
+export class AvatarTemplateBase extends Form {
+  constructor(tag:string, props: FormProps) {
+    super(tag = 'section', {
+      events: {
+        focusin: () => {
+          if (this.state.isAuthError) {
+            Store.set({ isAuthError: null });
+            this.addAttribute({ 'data-server-error': 'false' });
+          }
+        },
+      },
+      ...props,
+    });
+  }
 
-export class AvatarTemplate extends Form {
   initChildren() {
     this.children = {
       ...this.children,
-      image: new Image({ alt: 'аватар', stylePrefix: 'avatar', src: avatar }),
-      avatar: new FileInput({
-        name: 'avatar',
-        type: 'file',
-        accept: 'image/*',
-        text: 'Обзор...',
+      image: avatarImage,
+      avatar: avatarInput,
+
+      'save-avatar': new Button({
+        text: 'Сохранить',
+        stylePrefix: 'save-avatar',
+        type: 'submit',
+        events: {
+          click: (e) => {
+            this.submit(e);
+          },
+        },
       }),
-      'save-avatar': new Button({ text: 'Сохранить', stylePrefix: 'save-avatar', type: 'submit' }),
     };
+  }
+
+  private async submit(e: BtnEventType) {
+    e.preventDefault();
+    UsersActions.changeAvatar();
   }
 
   render(): DocumentFragment {
@@ -27,6 +54,12 @@ export class AvatarTemplate extends Form {
   }
 }
 
-const form = new AvatarTemplate({ title: 'Аватар', stylePrefix: 'tabs' });
-
-export const avatarTemplate = form;
+export const avatarTemplate = connectWithStore(
+  'form',
+  AvatarTemplateBase as typeof Block,
+  (state) => {
+    const { avatar } = state;
+    return { avatar };
+  },
+  { title: 'Аватар', stylePrefix: 'tabs' },
+);

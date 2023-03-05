@@ -3,22 +3,46 @@
 .button {
   @include btn-style;
 
+  &:hover,
+  &:active {
+    background-color: $lightPrimaryColor;
+  }
+
   &_save {
     width: 140px;
     margin-top: 70px;
   }
 
+  &_cross {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover,
+    &:active {
+      background-color: transparent;
+    }
+  }
+
   &_submit,
-  &_save {
+  &_save,
+  &_search {
     width: 100%;
     margin-top: 10px;
 
     @include lightShadow;
-
-    &:hover,
-    &:active {
-      background-color: $lightPrimaryColor;
-    }
   }
 
   &_save-avatar {
@@ -38,5 +62,14 @@
     width: 32px;
     height: 32px;
     padding: 0;
+  }
+
+  &_sidebar {
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

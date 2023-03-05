@@ -5,12 +5,17 @@
   max-width: 310px;
   max-height: 100vh;
 
+  li {
+    width: 100%;
+  }
+
   ul {
     @include reset-list;
     @include reset-margins;
 
     max-height: calc(100vh - 102px);
     overflow-y: scroll;
+    width: 100%;
   }
 }
 
@@ -28,10 +33,19 @@
 
 .panel {
   height: 100px;
-  padding: 30px 0 14px;
+  padding: 15px 0;
   box-sizing: border-box;
   display: flex;
   align-items: flex-end;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
+  min-width: 300px;
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
 }
