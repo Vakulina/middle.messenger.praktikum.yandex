@@ -34,7 +34,7 @@ const addFileInput = new FileInput({
 
 export class Message extends Form {
   constructor() {
-    super('div', {
+    super('form', {
       class: `${s.message}`,
     });
   }
@@ -67,8 +67,9 @@ export class Message extends Form {
       const { message } = this.getValues() as { message: string }
 
       chatsActions.sendMessage(message)
-      //console.log(this)
 
+      const form = this.getContent() as HTMLFormElement
+      form.reset()
 
     }
 
