@@ -8,11 +8,12 @@ import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
 import Block from '~src/services/Block';
 import UsersActions from '~src/actions/UsersActions';
-import { ChangePasswordType } from '~src/api/Users';
+import { ChangePasswordType } from '~src/api/UsersApi';
 
 export class PasswordTemplateBase extends Form {
   constructor(props: FormProps) {
-    super({
+    Store.set({isPasswordSettingsError: null})
+    super('fildeset', {
       events: {
         focusin: () => {
           this.addAttribute({ 'data-password-error': 'false' });
@@ -79,7 +80,7 @@ export class PasswordTemplateBase extends Form {
       const { oldPassword, password } = data;
       await UsersActions.changePassword(oldPassword, password);
       this.addAttribute({ 'data-server-error': this.props.isPasswordSettingsError ? 'true' : 'false' });
-      this.addAttribute({ 'data-success': this.props.isRegistrationSettingsError ? 'false' : 'true' });
+      this.addAttribute({ 'data-success': this.props.isPasswordSettingsError ? 'false' : 'true' });
       if (this.state.isPasswordSettingsError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isPasswordSettingsError!.message}` })
     }
   }

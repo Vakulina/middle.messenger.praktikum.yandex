@@ -1,12 +1,23 @@
 @import "src/assets/stylesheets/reusable";
 
 .chatItem {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   max-width: 300px;
   height: 70px;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
+  padding: 0 10px;
+
+  &:hover{
+    background-color: $ligthestPrimaryColor;
+  }
+
+  &[active="true"]{
+    background-color:#E6F7F3;
+  }
 
   &__title {
     @include reset-margins;
@@ -38,11 +49,14 @@
 
   &__column:last-of-type {
     gap: 14px;
-    align-items: center;
+    align-items:flex-end;
+    align-self: start;
+    padding: 10px 0;
   }
 
   &__column:first-of-type {
     margin-right: 17px;
+    width: 100%;
   }
 
   &__time {

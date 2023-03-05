@@ -1,32 +1,41 @@
 import tpl from './tpl.hbs';
-import { ChatSidebar } from '../../components/chatSidebar';
-import { items } from './constants';
+import { chatSidebar } from '../../components/chatSidebar';
 import { Message } from '~src/components/message';
 import Block from '~src/services/Block';
 import * as s from "./style.module.scss";
 import { PageLayout } from '~src/components/pageLayout';
-import { ChatHeader } from '~src/components/chatHeader';
+import { chatHeader } from '~src/components/chatHeader';
+import connectWithStore from '~src/services/connectWithStore';
+import { NewChatPopup } from '~src/components/newChatPopup';
+import { messageList } from '~src/components/messageList';
 
 const message = new Message();
-const sidebar = new ChatSidebar({ items });
-const header = new ChatHeader();
+const sidebar = chatSidebar;
+const header = chatHeader;
 
 interface ChatsProps {
   sidebar: Block,
   header?: Block,
-  chatHistory?: Block,
   message: Block,
+  messageList:Block,
 }
 
 export class Chats extends Block {
-  constructor(props: ChatsProps) {
+  constructor(tag = 'section', props: ChatsProps) {
     super(
-      'section',
+      tag,
       {
         class: s.chats,
         ...props,
       },
+
     );
+  }
+  initChildren() {
+    this.children = {
+      ...this.children,
+      newChatPopup: new NewChatPopup({})
+    };
   }
 
   protected render() {
@@ -34,6 +43,19 @@ export class Chats extends Block {
   }
 }
 
-const chats = new Chats({ sidebar, message, header });
+export const chats = connectWithStore('section',
+  Chats,
+  (state) => {
+    const { isOpenAddNewChatModal } = state;
+    return { isOpenAddNewChatModal }
+  },
+  { sidebar, messageList, message, header }
+)
 
-export const getChats = () => new PageLayout({ content: chats });
+const chatsPage = new PageLayout({ content: chats });
+
+export const getChats = () => {
+  return chatsPage;
+};
+
+

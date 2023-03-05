@@ -6,7 +6,7 @@ import { Link } from '../link';
 import { BtnEventType, getPasswordValidation, VALIDATION_REGEXES } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore';
 import AuthActions from '~src/actions/AuthActions';
-import { RegistrationData, RegistrationValuesType } from '~src/api/Auth';
+import { RegistrationData, RegistrationValuesType } from '~src/api/AuthApi';
 import Store from '~src/services/Store';
 import Block from '~src/services/Block';
 
@@ -68,7 +68,7 @@ const repeated_password = new Input({
 
 class RegistrationFormBase extends Form {
   constructor(props: FormProps) {
-    super({
+    super('form',{
       title: 'Регистрация', stylePrefix: 'reg',
       events: {
         focusin: () => {
@@ -131,7 +131,6 @@ class RegistrationFormBase extends Form {
     else {
       return super.validateForm();
     }
-
   }
 
   render(): DocumentFragment {

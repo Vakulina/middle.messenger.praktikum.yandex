@@ -1,4 +1,4 @@
-import { UserDTO } from './Auth';
+import { UserDTO } from './AuthApi';
 import BaseAPI from './BaseAPI';
 
 
@@ -26,10 +26,10 @@ export class UsersApi extends BaseAPI {
       isFormData: true,
       data: formData,
  
-    });
+    }) as Promise<UserDTO>
   }
-  async searchUser(login: string) {
-    return this.http.post('/search', { data: { login } });
+  async searchUsers(login: string):Promise<UserDTO[]>{
+    return await this.http.post('/search', { data: { login } }) as Promise<UserDTO[]>
   }
 
   create = undefined;

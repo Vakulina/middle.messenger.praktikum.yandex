@@ -5,7 +5,7 @@ import Block from '~src/services/Block';
 import { BtnEventType } from '~src/utiles';
 
 interface ButtonProps {
-  text: string | Block;
+  text: string | Block|HTMLElement;
   stylePrefix?: string | null,
   type?: string,
   events?: {

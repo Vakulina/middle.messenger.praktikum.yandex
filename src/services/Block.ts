@@ -99,13 +99,13 @@ abstract class Block {
         ) {
           this.eventBus().emit(Block.EVENTS.FLOW_CDM);
         }
-      }, 200);
+      }, 10);
     }
 
     return this.element!;
   }
 
-  private _init() {
+  _init() {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
@@ -142,7 +142,7 @@ abstract class Block {
     });
   }
 
-  public addAttribute(newAttr: Record<string, string> | null) {
+  public addAttribute(newAttr: Record<string, string|boolean|number> | null) {
     const attr: Record<string, string | null> | undefined = {
       type: this.props.type || null,
       class: this.props.class || null,
@@ -154,7 +154,7 @@ abstract class Block {
       id: this.props.id || null,
     };
     Object.entries({ ...attr, ...newAttr }).forEach(([key, value]) => {
-      if (value) this.element!.setAttribute(key, value);
+      if (value) this.element!.setAttribute(key, value as string);
     });
   }
   public addGlobalEvents() {
@@ -190,7 +190,7 @@ abstract class Block {
   }
 
   componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
-    if (!props.oldProps && !props.newProps) return true;
+    if(!props.oldProps && !props.newProps) return true;
     return false;
   }
 

@@ -4,9 +4,8 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import { Input } from '../input';
 import { Textarea } from '../textarea';
-import { AuthData, RegistrationValuesType } from '~src/api/Auth';
-import Store from '~src/services/Store';
-import { ChangePasswordType } from '~src/api/Users';
+import { AuthData, RegistrationValuesType, UserDTO } from '~src/api/AuthApi';
+import { ChangePasswordType } from '~src/api/UsersApi';
 
 export type FormProps = {
   title?: string,
@@ -20,16 +19,16 @@ export type FormProps = {
 };
 export abstract class Form extends Block {
   serverError: string | null
-  constructor(props: FormProps) {
-    super('form', {
-      class: s.form ? s.form : `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
+  constructor(tag:string, props: FormProps) {
+    super(tag='form', {
+      class:  `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
       className: s.form,
       ...props,
     })
     this.serverError = null
   }
 
-  protected getValues(): AuthData | RegistrationValuesType |ChangePasswordType| {} {
+  protected getValues(): AuthData | RegistrationValuesType |ChangePasswordType|UserDTO|{} {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
 
       if ((child instanceof Input) || (child instanceof Textarea)) {
@@ -40,7 +39,7 @@ export abstract class Form extends Block {
     }, {});
   }
 
-  protected validateForm() {
+  protected validateForm():boolean {
     return Object.entries(this.children).reduce((acc, [_, child]) => {
       if ((child instanceof Input) || (child instanceof Textarea)) {
         const isValideChild = child.isValid && (child.value !== '');

@@ -6,7 +6,7 @@ import { Link } from '../link';
 import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
 import { VALIDATION_ERROR } from '~src/utiles/constants';
 import AuthAction from '~src/actions/AuthActions';
-import { AuthData } from '~src/api/Auth';
+import { AuthData } from '~src/api/AuthApi';
 import connectWithStore from '~src/services/connectWithStore';
 import Store from '~src/services/Store';
 import Block from '~src/services/Block';
@@ -31,7 +31,7 @@ const passwordInput = new Input({
 
 class AuthFormBase extends Form {
   constructor(props: FormProps) {
-    super({
+    super('form', {
      title: 'Вход', stylePrefix: 'auth',
       events: {
         focusin: () => {

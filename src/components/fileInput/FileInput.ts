@@ -3,11 +3,12 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import { InputEventType } from '~src/utiles';
 import styles from '~src/utiles/styles';
+import Store from '~src/services/Store';
 
 interface FileInputProps {
   label?: string,
   stylePrefix?: string | null,
-  accept: string,
+  accept?: string,
   value?: string,
   events?: {
     change?: (e: InputEventType) => unknown;
@@ -16,7 +17,7 @@ interface FileInputProps {
   name?: string,
   type?: 'file',
   fileName?: string,
-  text:string | Block
+  text?:string | Block
 }
 
 export class FileInput extends Block {
@@ -26,9 +27,10 @@ export class FileInput extends Block {
     text = 'Обзор...',
     events = {
       change: (e) => {
-       /* if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name });
+        if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name });
         if (e.target.files) this.setProps({ file: e.target.files[0]});
-        this.eventBus().emit(Block.EVENTS.FLOW_CDU);*/
+        Store.set({ avatar: e.target.files![0] })
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU);
       },
     },
     ...otherProps

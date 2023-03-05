@@ -1,4 +1,5 @@
-import { UserDTO } from '~src/api/Auth';
+import { UserDTO } from '~src/api/AuthApi';
+import { ChatsDTOType } from '~src/api/ChatsApi';
 import { EventBus } from './EventBus';
 
 export enum StoreEvents {
@@ -6,30 +7,50 @@ export enum StoreEvents {
   Remove = 'remove'
 }
 
+export type messageType = {
+  chat_id: number,
+  content: string,
+  file: null | any,
+  id: number,
+  is_read: boolean,
+  time: string,
+  type: 'message',
+  user_id: number
+}
 export type State = {
   user: Omit<UserDTO, "password">,
+  chats: Partial<ChatsDTOType>[],
+  activeChat: ChatsDTOType | null;
+  usersOfActiveChat: UserDTO[];
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
   isLogin: boolean,
-  avatar: Blob|string,
-  avatarName:string,
+  avatar: string | Blob,
+  avatarName: string,
   isRegistrationSettingsError: { message: string, status: number } | null,
-  isPasswordSettingsError:{ message: string, status: number } | null,
+  isPasswordSettingsError: { message: string, status: number } | null,
+  isOpenAddNewChatModal: boolean;
+  isOpenAddUserModal: boolean;
+  isOpenDeleteUserModal: boolean;
+  isOpenHeaderMenuModal: boolean;
+  isServerError: { message: string, status: number } | null,
+  chatsData: messageType[],
 }
 
 class Store extends EventBus {
 
   static _instance: Store;
-  state:State|{} = {};
+  state: State | {} = { isOpenAddNewChatModal: true, chatsData: [] };
 
   constructor() {
     if (Store._instance) return Store._instance;
     super();
+
     Store._instance = this;
     return Store._instance;
   }
 
-  getState(): State|{} {
+  getState(): State | {} {
     return this.state;
   }
 
