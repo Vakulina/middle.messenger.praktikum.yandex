@@ -4,7 +4,7 @@ import { EventBus } from './EventBus';
 
 export enum StoreEvents {
   Updated = 'updated',
-  Remove = 'remove'
+  Remove = 'remove',
 }
 
 export type messageType = {
@@ -16,9 +16,9 @@ export type messageType = {
   time: string,
   type: 'message',
   user_id: number
-}
+};
 export type State = {
-  user: Omit<UserDTO, "password">,
+  user: Omit<UserDTO, 'password'>,
   chats: Partial<ChatsDTOType>[],
   activeChat: ChatsDTOType | null;
   usersOfActiveChat: UserDTO[];
@@ -35,11 +35,11 @@ export type State = {
   isOpenHeaderMenuModal: boolean;
   isServerError: { message: string, status: number } | null,
   chatsData: messageType[],
-}
+};
 
 class Store extends EventBus {
-
   static _instance: Store;
+
   state: State | {} = { isOpenAddNewChatModal: true, chatsData: [] };
 
   constructor() {
@@ -66,6 +66,5 @@ class Store extends EventBus {
     this.emit(StoreEvents.Updated);
   }
 }
-
 
 export default new Store();

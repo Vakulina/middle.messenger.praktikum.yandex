@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import Block from '~src/services/Block';
 import { InputEventType } from '~src/utiles';
 import styles from '~src/utiles/styles';
@@ -30,7 +30,7 @@ class AvatarInputBase extends Block {
     events = {
       change: (e) => {
         if (e.target.files) Store.set({ avatarName: e.target.files[0]!.name });
-        Store.set({ avatar: e.target.files![0] })       
+        Store.set({ avatar: e.target.files![0] });
       },
     },
     ...otherProps
@@ -46,7 +46,6 @@ class AvatarInputBase extends Block {
         ...otherProps,
       },
     );
-
   }
 
   protected render() {
@@ -54,10 +53,12 @@ class AvatarInputBase extends Block {
   }
 }
 
-export const avatarInput = connectWithStore('fieldset', AvatarInputBase as typeof Block,
+export const avatarInput = connectWithStore(
+  'fieldset',
+  AvatarInputBase as typeof Block,
   (state) => {
     const { avatar, avatarName } = state;
-    return { avatar, avatarName }
+    return { avatar, avatarName };
   },
 
-)
+);

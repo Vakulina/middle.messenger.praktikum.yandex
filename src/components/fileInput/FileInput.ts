@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import Block from '~src/services/Block';
 import { InputEventType } from '~src/utiles';
 import styles from '~src/utiles/styles';
@@ -28,8 +28,8 @@ export class FileInput extends Block {
     events = {
       change: (e) => {
         if (e.target.files) this.setProps({ fileName: e.target.files[0]!.name });
-        if (e.target.files) this.setProps({ file: e.target.files[0]});
-        Store.set({ avatar: e.target.files![0] })
+        if (e.target.files) this.setProps({ file: e.target.files[0] });
+        Store.set({ avatar: e.target.files![0] });
         this.eventBus().emit(Block.EVENTS.FLOW_CDU);
       },
     },
@@ -51,4 +51,3 @@ export class FileInput extends Block {
     return this.compile(tpl, this.props);
   }
 }
-

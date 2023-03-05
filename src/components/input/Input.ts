@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 import { InputEventType } from '~src/utiles';
@@ -25,6 +25,7 @@ interface InputProps {
 
 export class Input extends Block {
   isValid: boolean;
+
   valueState: string;
 
   constructor({
@@ -57,7 +58,7 @@ export class Input extends Block {
       },
     );
     this.isValid = true;
-    this.valueState = this.props.value||'';
+    this.valueState = this.props.value || '';
   }
 
   checkInputValidity(e?: InputEventType) {

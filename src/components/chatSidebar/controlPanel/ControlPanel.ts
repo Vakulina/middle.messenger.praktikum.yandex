@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import * as s from "../style.module.scss";
+import * as s from '../style.module.scss';
 import Block from '~src/services/Block';
 import { Link } from '~src/components/link';
 import { Search } from '~src/components/search';
@@ -16,14 +16,14 @@ export class Panel extends Block {
   initChildren() {
     this.children = {
       button: new Button({
-        text: "Создать чат",
-        stylePrefix: "sidebar",
+        text: 'Создать чат',
+        stylePrefix: 'sidebar',
         type: 'button',
         events: {
           click: (e: BtnEventType) => {
-            Store.set({activeChat: null});
-            Store.set({isOpenAddNewChatModal: true});
-          }
+            Store.set({ activeChat: null });
+            Store.set({ isOpenAddNewChatModal: true });
+          },
         },
       }),
       link: new Link({ href: routes.setting, text: 'Профиль &#62', stylePrefix: 'profile' }),

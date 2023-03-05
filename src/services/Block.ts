@@ -25,6 +25,7 @@ abstract class Block {
   protected children: ChildrenType;
 
   public id: string = makeUUID();
+
   private _state: Partial<State> = {};
 
   constructor(tagName = 'div', propsWithChildren = {}) {
@@ -87,9 +88,8 @@ abstract class Block {
   }
 
   set state(data) {
-    this._state = data
+    this._state = data;
   }
-
 
   getContent(): HTMLElement {
     if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
@@ -132,9 +132,11 @@ abstract class Block {
   protected render() {
     return new DocumentFragment();
   }
+
   init() {
 
   }
+
   _addEvents() {
     const { events = {} } = this.props as PropsType & { events: Record<string, () => void> };
     Object.keys(events).forEach((eventName) => {
@@ -142,7 +144,7 @@ abstract class Block {
     });
   }
 
-  public addAttribute(newAttr: Record<string, string|boolean|number> | null) {
+  public addAttribute(newAttr: Record<string, string | boolean | number> | null) {
     const attr: Record<string, string | null> | undefined = {
       type: this.props.type || null,
       class: this.props.class || null,
@@ -157,6 +159,7 @@ abstract class Block {
       if (value) this.element!.setAttribute(key, value as string);
     });
   }
+
   public addGlobalEvents() {
 
   }
@@ -190,7 +193,7 @@ abstract class Block {
   }
 
   componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
-    if(!props.oldProps && !props.newProps) return true;
+    if (!props.oldProps && !props.newProps) return true;
     return false;
   }
 
@@ -203,13 +206,12 @@ abstract class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_CDU);
   }
 
-
   protected compile(template: (context: any) => string, context: any) {
     const contextAndStubs = { ...context };
 
     Object.entries(this.children).forEach(([name, component]) => {
       if (Array.isArray(component)) {
-        contextAndStubs[name] = component.map(child => `<div data-id="${child.id}"></div>`)
+        contextAndStubs[name] = component.map((child) => `<div data-id="${child.id}"></div>`);
       } else {
         contextAndStubs[name] = `<div data-id="${component.id}"></div>`;
       }
@@ -231,7 +233,7 @@ abstract class Block {
       component.getContent()?.append(...Array.from(stub.childNodes));
 
       stub.replaceWith(component.getContent()!);
-    }
+    };
 
     Object.entries(this.children).forEach(([_, component]) => {
       if (Array.isArray(component)) {
@@ -243,7 +245,6 @@ abstract class Block {
 
     return temp.content;
   }
-
 
   show() {
     if (this.getContent()) this.getContent()!.style.display = 'block';

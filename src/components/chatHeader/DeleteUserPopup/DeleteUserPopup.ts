@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import { Form} from '../../form';
+import { Form } from '../../form';
 import { Button } from '../../button';
 import { BtnEventType } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore';
@@ -9,21 +9,20 @@ import Store from '~src/services/Store';
 import { chatsActions } from '~src/actions/ChatsActions';
 import { getUsersList } from './utiles';
 
-
 class DeleteUserPopupBase extends Form {
-  constructor(tag = 'form', {usersOfActiveChat=[],...props}: any) {
+  constructor(tag = 'form', { usersOfActiveChat = [], ...props }: any) {
     super(tag, {
       title: 'Удалить пользователей из чата',
       stylePrefix: 'popup',
       usersOfActiveChat,
       ...props,
-    })
+    });
   }
 
   initChildren() {
     this.children = {
       ...this.children,
-      users: getUsersList(this.state?.usersOfActiveChat||[]),
+      users: getUsersList(this.state?.usersOfActiveChat || []),
       button: new Button({
         text: 'Удалить выбранных пользователей',
         type: 'button',
@@ -43,17 +42,16 @@ class DeleteUserPopupBase extends Form {
         type: 'button',
         events: {
           click: () => {
-            Store.set({ isOpenDeleteUserModal: false })
-          }
+            Store.set({ isOpenDeleteUserModal: false });
+          },
         },
         name: 'sendMessage',
       }),
     };
-
-
   }
+
   protected getCheckboxesValues() {
-    const form = this.getContent()
+    const form = this.getContent();
     const checkboxes = form?.querySelectorAll('input');
     const checkboxesValues: number[] = [];
 
@@ -62,14 +60,14 @@ class DeleteUserPopupBase extends Form {
         checkboxesValues.push(Number(input.value));
       }
     });
-    return checkboxesValues
+    return checkboxesValues;
   }
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    const data = this.getCheckboxesValues()
-    console.log(data)
-    chatsActions.deleteUsersFromChat(data)
+    const data = this.getCheckboxesValues();
+    console.log(data);
+    chatsActions.deleteUsersFromChat(data);
   }
 
   render(): DocumentFragment {
@@ -77,8 +75,7 @@ class DeleteUserPopupBase extends Form {
   }
 }
 
-export const deleteUserPopup =  connectWithStore('form', DeleteUserPopupBase, (state) => {
+export const deleteUserPopup = connectWithStore('form', DeleteUserPopupBase, (state) => {
   const { activeChat, isOpenDeleteUserModal, usersOfActiveChat } = state;
-  return { activeChat, isOpenDeleteUserModal, usersOfActiveChat }
-})
-
+  return { activeChat, isOpenDeleteUserModal, usersOfActiveChat };
+});

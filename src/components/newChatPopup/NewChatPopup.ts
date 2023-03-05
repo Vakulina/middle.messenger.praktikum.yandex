@@ -4,9 +4,9 @@ import { Button } from '../button';
 import { Input } from '../input';
 import { BtnEventType } from '~src/utiles';
 import { chatsActions } from '~src/actions/ChatsActions';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 
-type titleDataType = { titleInput: string }
+type titleDataType = { titleInput: string };
 
 const titleInput = new Input({
   name: 'title',
@@ -14,14 +14,13 @@ const titleInput = new Input({
   autofocus: true,
 });
 
-
 export class NewChatPopup extends Form {
   constructor(props: FormProps) {
     super('form', {
       title: 'Вход',
       class: s.newChat,
       ...props,
-    })
+    });
   }
 
   initChildren() {
@@ -45,17 +44,16 @@ export class NewChatPopup extends Form {
     e.preventDefault();
 
     const isValidValues = (_data: {} | titleDataType): _data is titleDataType => {
-      return this.validateForm()
-    }
+      return this.validateForm();
+    };
 
-    const data = this.getValues()
+    const data = this.getValues();
     if (isValidValues(data)) {
-      const { titleInput } = data
-      await chatsActions.createChat({ title: titleInput })
-      await chatsActions.getChats()
-    }
-    else {
-      this.setProps({ error: `Название чата не может быть пустым!` })
+      const { titleInput } = data;
+      await chatsActions.createChat({ title: titleInput });
+      await chatsActions.getChats();
+    } else {
+      this.setProps({ error: 'Название чата не может быть пустым!' });
     }
   }
 
@@ -63,5 +61,3 @@ export class NewChatPopup extends Form {
     return this.compile(tpl, this.props);
   }
 }
-
-

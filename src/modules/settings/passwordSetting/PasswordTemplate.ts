@@ -12,7 +12,7 @@ import { ChangePasswordType } from '~src/api/UsersApi';
 
 export class PasswordTemplateBase extends Form {
   constructor(props: FormProps) {
-    Store.set({isPasswordSettingsError: null})
+    Store.set({ isPasswordSettingsError: null });
     super('fildeset', {
       events: {
         focusin: () => {
@@ -20,14 +20,15 @@ export class PasswordTemplateBase extends Form {
           this.addAttribute({ 'data-server-error': 'false' });
           this.addAttribute({ 'data-success': 'false' });
           if (this.state.isPasswordSettingsError) {
-            Store.set({ isPasswordSettingsError: null })
+            Store.set({ isPasswordSettingsError: null });
           }
         },
       },
-      title:'Пароль',
-      ...props
-    })
+      title: 'Пароль',
+      ...props,
+    });
   }
+
   initChildren() {
     this.children = {
       ...this.children,
@@ -69,19 +70,19 @@ export class PasswordTemplateBase extends Form {
         },
       }),
     };
-
   }
+
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    document.querySelector('form')?.blur()
-    const isValid = this.validateForm()
+    document.querySelector('form')?.blur();
+    const isValid = this.validateForm();
     const data = this.getValues() as ChangePasswordType;
     if (isValid) {
       const { oldPassword, password } = data;
       await UsersActions.changePassword(oldPassword, password);
       this.addAttribute({ 'data-server-error': this.props.isPasswordSettingsError ? 'true' : 'false' });
       this.addAttribute({ 'data-success': this.props.isPasswordSettingsError ? 'false' : 'true' });
-      if (this.state.isPasswordSettingsError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isPasswordSettingsError!.message}` })
+      if (this.state.isPasswordSettingsError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isPasswordSettingsError!.message}` });
     }
   }
 
@@ -91,13 +92,11 @@ export class PasswordTemplateBase extends Form {
 
     if (!getPasswordValidation(values)) {
       this.addAttribute({ 'data-password-error': 'true' });
-      this.setProps({ serverError: `Ошибка ввода паролей!` })
+      this.setProps({ serverError: 'Ошибка ввода паролей!' });
       return false;
     }
-    else {
-      return super.validateForm();
-    }
 
+    return super.validateForm();
   }
 
   render(): DocumentFragment {
@@ -105,10 +104,12 @@ export class PasswordTemplateBase extends Form {
   }
 }
 
-export const passwordTemplate = connectWithStore('form', PasswordTemplateBase as typeof Block,
+export const passwordTemplate = connectWithStore(
+  'form',
+  PasswordTemplateBase as typeof Block,
   (state) => {
     const { user, isLogin, isPasswordSettingsError } = state;
-    return { user, isLogin, isPasswordSettingsError }
+    return { user, isLogin, isPasswordSettingsError };
   },
-  { title: 'Безопасность', stylePrefix: 'tabs' }
-)
+  { title: 'Безопасность', stylePrefix: 'tabs' },
+);

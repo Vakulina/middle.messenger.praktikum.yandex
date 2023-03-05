@@ -2,12 +2,12 @@ import { EventBus } from './EventBus';
 
 export class WebsocketService extends EventBus {
   static EVENTS = {
-    OPEN: "open",
-    CONNECTED: "connected",
-    MESSAGE: "message",
-    GET_MESSAGE: "get-message",
-    ERROR: "error",
-    CLOSE: "close"
+    OPEN: 'open',
+    CONNECTED: 'connected',
+    MESSAGE: 'message',
+    GET_MESSAGE: 'get-message',
+    ERROR: 'error',
+    CLOSE: 'close',
   } as const;
 
   protected connection: WebSocket | null = null;
@@ -30,7 +30,7 @@ export class WebsocketService extends EventBus {
     this.on(WebsocketService.EVENTS.CONNECTED, () => this.loadChat());
 
     this.on(WebsocketService.EVENTS.ERROR, (event) => {
-      console.error("Ошибка", event);
+      console.error('Ошибка', event);
     });
   }
 
@@ -42,7 +42,7 @@ export class WebsocketService extends EventBus {
     socket.onmessage = (message: MessageEvent) => {
       const data = JSON.parse(message.data);
 
-      if (data.type && data.type === "pong") {
+      if (data.type && data.type === 'pong') {
         return;
       }
 
@@ -60,25 +60,25 @@ export class WebsocketService extends EventBus {
 
   public close(code?: number, reason?: string) {
     if (!this.connection) {
-      throw new Error("WS соединение не установлено");
+      throw new Error('WS соединение не установлено');
     }
     this.connection.close(code, reason);
   }
 
   private async loadChat() {
     await this.ping();
-     this.getOldMessages();
+    this.getOldMessages();
   }
 
   private async ping() {
     let pingInterval: any = setInterval(() => {
       if (!this.connection) {
-        throw new Error("WS соединение не установлено");
+        throw new Error('WS соединение не установлено');
       }
       this.connection.send(
         JSON.stringify({
-          type: "ping"
-        })
+          type: 'ping',
+        }),
       );
     }, 10000);
 
@@ -90,31 +90,30 @@ export class WebsocketService extends EventBus {
 
   public async getOldMessages(from = 0) {
     if (!this.connection) {
-      throw new Error("WS соединение не установлено");
+      throw new Error('WS соединение не установлено');
     }
-   await this.connection.send(
+    await this.connection.send(
       JSON.stringify({
         content: from,
-        type: "get old"
-      })
+        type: 'get old',
+      }),
     );
   }
 
   public sendMessage(text: string) {
     if (!this.connection) {
-      throw new Error("WS соединение не установлено");
+      throw new Error('WS соединение не установлено');
     }
 
     this.connection.send(
       JSON.stringify({
         content: text,
-        type: "message"
-      })
+        type: 'message',
+      }),
     );
   }
 
   public getSocket() {
-
     if (!this.connection || this.connection.readyState === this.connection.CLOSED) {
       this.connectWS();
     }
@@ -122,4 +121,3 @@ export class WebsocketService extends EventBus {
     return this;
   }
 }
-

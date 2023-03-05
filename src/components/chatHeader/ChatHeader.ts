@@ -1,11 +1,11 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import Block from '~src/services/Block';
 import avatar from '../../../static/avatar.jpg';
 import dots from '../../../static/dots.svg';
 import { Image } from '../image';
 import { Button } from '../button';
-import connectWithStore from '~src/services/connectWithStore'
+import connectWithStore from '~src/services/connectWithStore';
 import Store from '~src/services/Store';
 import { getChatHeaderMenu } from './ChatHeaderMenu';
 import { addUserPopup } from './AddUserPopup';
@@ -17,17 +17,16 @@ export class ChatHeaderBase extends Block {
     isOpenHeaderMenuModal,
     isOpenAddUserModal,
     isOpenDeleteUserModal,
-    ...props }: any
-  ) {
+    ...props
+  }: any) {
     super(tag, {
       class: s.header,
       isOpenHeaderMenuModal,
       isOpenDeleteUserModal,
       isOpenAddUserModal,
       activeChat,
-      ...props
+      ...props,
     });
-
   }
 
   initChildren() {
@@ -36,7 +35,7 @@ export class ChatHeaderBase extends Block {
       avatar: new Image({
         alt: 'аватар',
         stylePrefix: 'chatItems',
-        src: this.state?.activeChat?.avatar || avatar
+        src: this.state?.activeChat?.avatar || avatar,
       }),
       button: new Button({
         text: new Image({
@@ -47,15 +46,15 @@ export class ChatHeaderBase extends Block {
         type: 'button',
         events: {
           click: () => {
-            Store.set({ isOpenHeaderMenuModal: !(this.state?.isOpenHeaderMenuModal) })
-          }
+            Store.set({ isOpenHeaderMenuModal: !(this.state?.isOpenHeaderMenuModal) });
+          },
         },
         name: 'sendMessage',
       }),
       chatHeaderMenu: getChatHeaderMenu(),
       addUserPopup,
-      deleteUserPopup
-    }
+      deleteUserPopup,
+    };
   }
 
   protected render() {
@@ -64,6 +63,10 @@ export class ChatHeaderBase extends Block {
 }
 
 export const chatHeader = connectWithStore('div', ChatHeaderBase, (state) => {
-  const { activeChat, isOpenHeaderMenuModal, isOpenAddUserModal, isOpenDeleteUserModal } = state;
-  return { activeChat, isOpenHeaderMenuModal, isOpenAddUserModal, isOpenDeleteUserModal }
-})
+  const {
+    activeChat, isOpenHeaderMenuModal, isOpenAddUserModal, isOpenDeleteUserModal,
+  } = state;
+  return {
+    activeChat, isOpenHeaderMenuModal, isOpenAddUserModal, isOpenDeleteUserModal,
+  };
+});

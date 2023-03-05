@@ -1,7 +1,6 @@
-import { messageType } from "~src/services";
-import parseDate from "~src/utiles/parseDate";
-import { MessageItem } from "./messageItem";
-
+import { messageType } from '~src/services';
+import parseDate from '~src/utiles/parseDate';
+import { MessageItem } from './messageItem';
 
 export const getMessageList = (items: messageType[]) => {
   return items.map((item) => {
@@ -13,8 +12,7 @@ export const getMessageList = (items: messageType[]) => {
         is_read: item.is_read,
         time: parseDate(item.time),
         user_id: item.user_id,
-      }
-    )
-  }
-  )
-}
+      },
+    );
+  });
+};

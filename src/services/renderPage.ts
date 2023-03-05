@@ -9,7 +9,6 @@ import { getSettingPage } from '../modules/settings';
 import router from './Router';
 
 const renderPage = () => {
-
   window.addEventListener('DOMContentLoaded', async () => {
     router
       .use(routes.home, getNavigationPage())
@@ -18,15 +17,14 @@ const renderPage = () => {
       .use(routes.registration, getRegistrationForm())
       .use(routes.serverError, getServerErrorPage())
       .use(routes.notFound, getNotFoundPage())
-      
+
       .use(routes.setRegInfo, getSettingPage(routes.setRegInfo))
       .use(routes.setAvatar, getSettingPage(routes.setAvatar))
       .use(routes.setSafety, getSettingPage(routes.setSafety))
       .use(routes.setting, getSettingPage(routes.setRegInfo))
 
-      .start()
-  })
-
+      .start();
+  });
 };
 
 export default renderPage;

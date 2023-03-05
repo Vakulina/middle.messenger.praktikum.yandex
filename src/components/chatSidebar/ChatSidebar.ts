@@ -1,11 +1,10 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import Block from '~src/services/Block';
 import { Panel } from './controlPanel';
 import connectWithStore from '~src/services/connectWithStore';
 import { getChatList } from './utiles';
 import { chatsActions } from '~src/actions/ChatsActions';
-
 
 class ChatSidebarBase extends Block {
   constructor(tag = 'sidebar', props: any) {
@@ -16,7 +15,7 @@ class ChatSidebarBase extends Block {
         ...props,
       },
     );
-    chatsActions.getChats()
+    chatsActions.getChats();
   }
 
   initChildren() {
@@ -27,13 +26,11 @@ class ChatSidebarBase extends Block {
   }
 
   protected render() {
-
     return this.compile(tpl, this.props);
   }
 }
 
 export const chatSidebar = connectWithStore('sidebar', ChatSidebarBase as typeof Block, (state) => {
   const { chats, activeChat } = state;
-  return { chats, activeChat }
-},
-)
+  return { chats, activeChat };
+});

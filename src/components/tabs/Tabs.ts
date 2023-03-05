@@ -1,6 +1,6 @@
 import tpl from './tpl.hbs';
 import styles from '../../utiles/styles';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import Block, { ChildrenType } from '~src/services/Block';
 import { Link } from '../link/Link';
 
@@ -18,7 +18,9 @@ export type Tab = {
 
 export class Tabs extends Block {
   pathname: string;
+
   protected activeLink: string;
+
   protected _activeLink: string;
 
   constructor({ activeLink, tabsConfig, ...otherProps }: TabsProps) {
@@ -28,11 +30,10 @@ export class Tabs extends Block {
       class: `${s.tabs} ${styles.getClassWithPrefix(s, 'tabs', otherProps.stylePrefix || '')}`,
       ...otherProps,
     });
-
   }
 
   initChildren() {
-    this._activeLink = this.props.activeLink
+    this._activeLink = this.props.activeLink;
 
     const links = this.children.tabsConfig.map((tab: Tab) => {
       const newLink = new Link({
@@ -47,7 +48,7 @@ export class Tabs extends Block {
 
     const activeTab = this.children.tabsConfig.filter((tab: Tab) => tab.pathRoute === this._activeLink)[0];
 
-    const content = activeTab.content
+    const { content } = activeTab;
     /* eslint-disable @typescript-eslint/naming-convention */
     const { tabsConfig: _, ...newChildren } = this.children;
     this.children = {
@@ -58,7 +59,6 @@ export class Tabs extends Block {
   }
 
   protected render() {
-    return this.compile(tpl, this.props)
+    return this.compile(tpl, this.props);
   }
 }
-

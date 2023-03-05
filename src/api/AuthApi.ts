@@ -24,9 +24,8 @@ export type RegistrationValuesType = {
   phone: string,
 };
 
-
 export interface UserDTO {
-  avatar?: string|File;
+  avatar?: string | File;
   id: number;
   first_name: string;
   second_name: string;
@@ -35,8 +34,7 @@ export interface UserDTO {
   password: string;
   phone: string;
   display_name?:string
-}   
-
+}
 
 export class AuthApi extends BaseAPI {
   constructor() {
@@ -44,26 +42,28 @@ export class AuthApi extends BaseAPI {
   }
 
   async signin(data: AuthData) {
-    return this.http.post('/signin', {data});
+    return this.http.post('/signin', { data });
   }
 
   signup(data: RegistrationData) {
-    return this.http.post('/signup', {data});
+    return this.http.post('/signup', { data });
   }
 
   getUser(): Promise<UserDTO> {
-    const res= this.http.get('/user') 
+    const res = this.http.get('/user');
     return res as Promise<UserDTO>;
   }
 
   logout() {
     return this.http.post('/logout');
   }
-  
 
   create = undefined;
+
   update = undefined;
+
   delete = undefined;
+
   read = undefined;
 }
 

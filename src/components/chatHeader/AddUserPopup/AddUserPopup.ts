@@ -11,7 +11,6 @@ import { chatsActions } from '~src/actions/ChatsActions';
 import { UserDTO } from '~src/api/AuthApi';
 import UsersActions from '~src/actions/UsersActions';
 
-
 const loginInput = new Input({
   name: 'login',
   label: 'Логин',
@@ -34,10 +33,9 @@ class AddUserPopupBase extends Form {
         },
       },
       ...props,
-    })
-    this.addAttribute({ 'data-after-search': 'false' })
+    });
+    this.addAttribute({ 'data-after-search': 'false' });
   }
-
 
   initChildren() {
     this.children = {
@@ -73,8 +71,8 @@ class AddUserPopupBase extends Form {
         type: 'button',
         events: {
           click: () => {
-            Store.set({ isOpenAddUserModal: false })
-          }
+            Store.set({ isOpenAddUserModal: false });
+          },
         },
         name: 'sendMessage',
       }),
@@ -82,18 +80,18 @@ class AddUserPopupBase extends Form {
   }
 
   private async search() {
-    const data: UserDTO = this.getValues() as UserDTO
+    const data: UserDTO = this.getValues() as UserDTO;
     UsersActions.searchUsers(data?.login)
       .then((res) => {
- 
         this.setProps({
-          users: res
-        })
-        this.addAttribute({ 'data-after-search': 'true' })
-      })
+          users: res,
+        });
+        this.addAttribute({ 'data-after-search': 'true' });
+      });
   }
+
   protected getCheckboxesValues() {
-    const form = this.getContent()
+    const form = this.getContent();
     const checkboxes = form?.querySelectorAll('input');
     const checkboxesValues: number[] = [];
     checkboxes?.forEach((input) => {
@@ -101,14 +99,14 @@ class AddUserPopupBase extends Form {
         checkboxesValues.push(Number(input.value));
       }
     });
-    return checkboxesValues
+    return checkboxesValues;
   }
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    const data = this.getCheckboxesValues()
-    chatsActions.addUsersToChat(data )
- //   
+    const data = this.getCheckboxesValues();
+    chatsActions.addUsersToChat(data);
+    //
   }
 
   render(): DocumentFragment {
@@ -118,5 +116,5 @@ class AddUserPopupBase extends Form {
 
 export const addUserPopup = connectWithStore('form', AddUserPopupBase, (state) => {
   const { activeChat, isOpenAddUserModal } = state;
-  return { activeChat, isOpenAddUserModal }
-})
+  return { activeChat, isOpenAddUserModal };
+});

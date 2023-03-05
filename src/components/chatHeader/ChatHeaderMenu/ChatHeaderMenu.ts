@@ -1,8 +1,8 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import Block from '~src/services/Block';
 import { Button } from '~src/components/button';
-import connectWithStore from '~src/services/connectWithStore'
+import connectWithStore from '~src/services/connectWithStore';
 import { chatsActions } from '~src/actions/ChatsActions';
 import Store from '~src/services/Store';
 
@@ -11,20 +11,19 @@ export class ChatHeaderMenuBase extends Block {
     activeChat,
     user,
     isAvailableToDelete,
-    ...props }: any
-  ) {
+    ...props
+  }: any) {
     super(tag, {
       activeChat,
       isAvailableToDelete,
       user,
       class: s.menu,
-      ...props
+      ...props,
     });
-    this.setProps({isAvailableToDelete: (activeChat?.created_by === user?.id)&&(!!activeChat)})
+    this.setProps({ isAvailableToDelete: (activeChat?.created_by === user?.id) && (!!activeChat) });
   }
 
   initChildren() {
-  
     this.children = {
       ...this.children,
       addUser: new Button({
@@ -32,8 +31,8 @@ export class ChatHeaderMenuBase extends Block {
         type: 'button',
         events: {
           click: () => {
-            Store.set({isOpenAddUserModal:true})
-            Store.set({isOpenHeaderMenuModal:false})
+            Store.set({ isOpenAddUserModal: true });
+            Store.set({ isOpenHeaderMenuModal: false });
           },
         },
       }),
@@ -42,8 +41,7 @@ export class ChatHeaderMenuBase extends Block {
         type: 'button',
         events: {
           click: () => {
-
-              Store.set({isOpenDeleteUserModal:true}) 
+            Store.set({ isOpenDeleteUserModal: true });
           },
         },
       }),
@@ -52,11 +50,11 @@ export class ChatHeaderMenuBase extends Block {
         type: 'button',
         events: {
           click: () => {
-             chatsActions.deleteChatById()
+            chatsActions.deleteChatById();
           },
         },
-      })
-    }
+      }),
+    };
   }
 
   protected render() {
@@ -65,6 +63,6 @@ export class ChatHeaderMenuBase extends Block {
 }
 
 export const getChatHeaderMenu = (props?: { isAvailableToDelete?: boolean }) => connectWithStore('div', ChatHeaderMenuBase, (state) => {
-  const { activeChat,  user } = state;
-  return { activeChat,  user }
-}, props)
+  const { activeChat, user } = state;
+  return { activeChat, user };
+}, props);

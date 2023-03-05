@@ -68,20 +68,22 @@ const repeated_password = new Input({
 
 class RegistrationFormBase extends Form {
   constructor(props: FormProps) {
-    super('form',{
-      title: 'Регистрация', stylePrefix: 'reg',
+    super('form', {
+      title: 'Регистрация',
+      stylePrefix: 'reg',
       events: {
         focusin: () => {
           this.addAttribute({ 'data-password-error': 'false' });
           if (this.state.isRegistrationError) {
             this.addAttribute({ 'data-server-error': 'false' });
-            Store.set({ isRegistrationError: null })
+            Store.set({ isRegistrationError: null });
           }
         },
       },
       ...props,
-    })
+    });
   }
+
   initChildren() {
     this.children = {
       ...this.children,
@@ -104,33 +106,31 @@ class RegistrationFormBase extends Form {
       password,
       repeated_password,
     };
-    
   }
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    document.querySelector('form')?.blur()
-    const isValid = this.validateForm()
+    document.querySelector('form')?.blur();
+    const isValid = this.validateForm();
     const data = this.getValues();
     if (isValid) {
-      await AuthActions.signup(data as RegistrationData)
+      await AuthActions.signup(data as RegistrationData);
       this.addAttribute({ 'data-server-error': this.props.isRegistrationError ? 'true' : 'false' });
-      if (this.state.isRegistrationError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isRegistrationError!.message}` })
+      if (this.state.isRegistrationError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isRegistrationError!.message}` });
     }
   }
 
   protected validateForm() {
     const values = this.getValues();
     this.addAttribute({ 'data-password-error': 'false' });
-   
+
     if (!getPasswordValidation(values)) {
       this.addAttribute({ 'data-password-error': 'true' });
-      this.setProps({ serverError: `Ошибка ввода паролей!` })
+      this.setProps({ serverError: 'Ошибка ввода паролей!' });
       return false;
     }
-    else {
-      return super.validateForm();
-    }
+
+    return super.validateForm();
   }
 
   render(): DocumentFragment {
@@ -140,7 +140,5 @@ class RegistrationFormBase extends Form {
 
 export const RegistrationForm = connectWithStore('form', RegistrationFormBase as typeof Block, (state) => {
   const { user, isRegistrationError } = state;
-  return { user, isRegistrationError }
-}
-)
-
+  return { user, isRegistrationError };
+});

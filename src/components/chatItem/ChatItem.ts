@@ -1,11 +1,11 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import Block from '~src/services/Block';
 import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
 import { ChatsDTOType } from '~src/api/ChatsApi';
 import { chatsActions } from '~src/actions/ChatsActions';
-import { setWebSocket } from '~src/services/setWebSocket'
+import { setWebSocket } from '~src/services/setWebSocket';
 
 interface ChatItemProps {
   chatId: number,
@@ -35,21 +35,21 @@ export class ChatItemBase extends Block {
         class: s.chatItem,
         events: {
           click: async (e: any) => {
-            const activeChat = chats?.filter((item: ChatsDTOType) => (item.id === Number(e?.currentTarget.getAttribute("data-chatid"))))[0]
-            const usersOfActiveChat = await chatsActions.getUsersByChat(Number(e?.currentTarget.getAttribute("data-chatid")))
-            Store.set({ isOpenAddNewChatModal: false })
-            Store.set({ isOpenHeaderMenuModal: false })
-            Store.set({ activeChat })
-            Store.set({ usersOfActiveChat })
-            await setWebSocket(chatId)
+            const activeChat = chats?.filter((item: ChatsDTOType) => (item.id === Number(e?.currentTarget.getAttribute('data-chatid'))))[0];
+            const usersOfActiveChat = await chatsActions.getUsersByChat(Number(e?.currentTarget.getAttribute('data-chatid')));
+            Store.set({ isOpenAddNewChatModal: false });
+            Store.set({ isOpenHeaderMenuModal: false });
+            Store.set({ activeChat });
+            Store.set({ usersOfActiveChat });
+            await setWebSocket(chatId);
           },
         },
         active: isActive,
         ...otherProps,
       },
     );
-    this.addAttribute({ 'data-chatid': chatId })
-    this.addAttribute({ 'active': String(isActive) })
+    this.addAttribute({ 'data-chatid': chatId });
+    this.addAttribute({ active: String(isActive) });
   }
 
   protected render() {
@@ -61,6 +61,7 @@ export const getChatItem = (props: Partial<ChatItemProps>) => connectWithStore(
   ChatItemBase as typeof Block,
   (state) => {
     const { activeChat, chats } = state;
-    return { activeChat, chats }
+    return { activeChat, chats };
   },
-  props)
+  props,
+);

@@ -16,7 +16,6 @@ export default function connectWithStore(
         this.state = { ...mapStateToProps(Store.getState() as State) };
       });
     }
-
   }
-  return new ConnectedComponent(tag, props)
+  return new ConnectedComponent(tag, props);
 }

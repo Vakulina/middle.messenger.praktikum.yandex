@@ -22,54 +22,49 @@ class AuthActions {
         if (err.status === 400) {
           this.logout()
             .then(() => {
-              document.cookie = 'expires=0'
+              document.cookie = 'expires=0';
               this.signin(data)
                 .catch((err) => {
-                  Store.set({ isAuthError: err })
-                })
-            })
+                  Store.set({ isAuthError: err });
+                });
+            });
+        } else {
+          Store.set({ isAuthError: err });
         }
-        else {
-          Store.set({ isAuthError: err })
-        }
-      })
+      });
   }
 
   async signup(data: RegistrationData) {
     try {
-      await this.api.signup(data)
-      Store.set({ isRegistrationError: null })
-      this.getUser()
-      router.go(routes.setting)
-    }
-    catch (err: unknown) {
-      Store.set({ isRegistrationError: err as ErrorType })
+      await this.api.signup(data);
+      Store.set({ isRegistrationError: null });
+      this.getUser();
+      router.go(routes.setting);
+    } catch (err: unknown) {
+      Store.set({ isRegistrationError: err as ErrorType });
     }
     // await this.getUser();
   }
 
   async getUser() {
     try {
-      const response = await this.api.getUser()
-      Store.set({ user: response })
-      Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` })
-    }
-    catch (err: unknown) {
-      console.error(err)
+      const response = await this.api.getUser();
+      Store.set({ user: response });
+      Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` });
+    } catch (err: unknown) {
+      console.error(err);
     }
   }
 
   async logout() {
     try {
-      await this.api.logout()
-      Store.set({ isLogin: false })
-      router.go(routes.authorization)
-    }
-    catch (e: unknown) {
+      await this.api.logout();
+      Store.set({ isLogin: false });
+      router.go(routes.authorization);
+    } catch (e: unknown) {
       console.error(e);
     }
   }
-
 }
 
 export default new AuthActions();

@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 import connectWithStore from '~src/services/connectWithStore';
@@ -12,7 +12,6 @@ interface ImageProps {
 }
 
 export class AvatarImageBase extends Block {
-
   constructor(tag = 'img', {
     stylePrefix = 'avatar',
     avatar,
@@ -23,7 +22,7 @@ export class AvatarImageBase extends Block {
       tag,
       {
         alt,
-        src: avatar ? avatar : avatarBase || "",
+        src: avatar || avatarBase || '',
         class: `${s.image} ${styles.getClassWithPrefix(s, 'image', stylePrefix)}`,
         ...otherProps,
       },
@@ -31,16 +30,15 @@ export class AvatarImageBase extends Block {
   }
 
   public addAttribute(newAttr: Record<string, string> | null): void {
-    super.addAttribute(newAttr)
+    super.addAttribute(newAttr);
     if (typeof this.props.avatar === 'string') {
       this.element!.setAttribute('src', this.props.avatar);
-    }
-    else if(typeof this.props.avatar !== 'undefined'){
-      var reader = new FileReader();
+    } else if (typeof this.props.avatar !== 'undefined') {
+      const reader = new FileReader();
       reader.readAsDataURL(this.props.avatar as Blob);
-      reader.onload= () => {
+      reader.onload = () => {
         this.element!.setAttribute('src', `${reader.result}`);
-      }
+      };
     }
   }
 
@@ -49,11 +47,12 @@ export class AvatarImageBase extends Block {
   }
 }
 
-export const avatarImage = connectWithStore('img', AvatarImageBase,
+export const avatarImage = connectWithStore(
+  'img',
+  AvatarImageBase,
   (state) => {
-
     const { avatar } = state;
     //  console.log(avatar)
-    return { avatar }
+    return { avatar };
   },
-)
+);

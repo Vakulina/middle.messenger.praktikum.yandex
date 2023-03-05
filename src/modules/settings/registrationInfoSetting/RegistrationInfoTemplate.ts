@@ -10,8 +10,8 @@ import Store from '~src/services/Store';
 
 export class RegistrationInfoTemplateBase extends Form {
   constructor(props: FormProps) {
-    super('section',{ title: 'Личные данные', ...props });
-    Store.set({isPasswordSettingsError: null})
+    super('section', { title: 'Личные данные', ...props });
+    Store.set({ isPasswordSettingsError: null });
   }
 
   initChildren() {
@@ -24,7 +24,7 @@ export class RegistrationInfoTemplateBase extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.name[0],
         textError: VALIDATION_REGEXES.name[1],
-        value: this.state.user?.first_name
+        value: this.state.user?.first_name,
       }),
       second_name: new Input({
         name: 'second_name',
@@ -33,7 +33,7 @@ export class RegistrationInfoTemplateBase extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.name[0],
         textError: VALIDATION_REGEXES.name[1],
-        value: this.state.user?.second_name
+        value: this.state.user?.second_name,
       }),
       login: new Input({
         name: 'login',
@@ -42,11 +42,14 @@ export class RegistrationInfoTemplateBase extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.login[0],
         textError: VALIDATION_REGEXES.login[1],
-        value: this.state.user?.login
+        value: this.state.user?.login,
       }),
       display_name: new Input({
-        name: 'display_name', label: 'Имя в чате', placeholder: 'Укажите имя в чате', stylePrefix: 'setting',
-        value: this.state.user?.display_name
+        name: 'display_name',
+        label: 'Имя в чате',
+        placeholder: 'Укажите имя в чате',
+        stylePrefix: 'setting',
+        value: this.state.user?.display_name,
       }),
       email: new Input({
         name: 'email',
@@ -56,7 +59,7 @@ export class RegistrationInfoTemplateBase extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.email[0],
         textError: VALIDATION_REGEXES.email[1],
-        value: this.state.user?.email
+        value: this.state.user?.email,
       }),
       phone: new Input({
         name: 'phone',
@@ -66,7 +69,7 @@ export class RegistrationInfoTemplateBase extends Form {
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.phone[0],
         textError: VALIDATION_REGEXES.phone[1],
-        value: this.state.user?.phone
+        value: this.state.user?.phone,
       }),
       button: new Button({
         text: 'Сохранить',
@@ -79,20 +82,18 @@ export class RegistrationInfoTemplateBase extends Form {
         },
       }),
     };
-
   }
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    const isValid = this.validateForm()
+    const isValid = this.validateForm();
     const data = this.getValues();
     if (isValid) {
-      await UsersActions.updateUserProfile(data)
+      await UsersActions.updateUserProfile(data);
       this.addAttribute({ 'data-server-error': this.props.isRegistrationSettingsError ? 'true' : 'false' });
       if (this.state.isRegistrationSettingsError) {
-        this.setProps({ serverError: `Ошибка сервера: ${this.state.isRegistrationSettingsError!.message}` })
+        this.setProps({ serverError: `Ошибка сервера: ${this.state.isRegistrationSettingsError!.message}` });
       }
-      
     }
   }
 
@@ -101,10 +102,12 @@ export class RegistrationInfoTemplateBase extends Form {
   }
 }
 
-export const registrationInfoTemplate = connectWithStore('form', RegistrationInfoTemplateBase as typeof Block,
+export const registrationInfoTemplate = connectWithStore(
+  'form',
+  RegistrationInfoTemplateBase as typeof Block,
   (state) => {
     const { user, isLogin, isRegistrationSettingsError } = state;
-    return { user, isLogin, isRegistrationSettingsError }
+    return { user, isLogin, isRegistrationSettingsError };
   },
-  { title: 'Личные данные', stylePrefix: 'tabs' }
-)
+  { title: 'Личные данные', stylePrefix: 'tabs' },
+);

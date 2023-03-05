@@ -37,35 +37,39 @@ export const tabsConfig: Tab[] = [
 ];
 
 class SettingsBase extends Block {
-  constructor(tag = 'section', {tabs , otherProps}: any) {
+  constructor(tag = 'section', { tabs, otherProps }: any) {
     super(
       tag,
-      { tabs, class: style.setting, 'id': 'settings', ...otherProps },
+      {
+        tabs, class: style.setting, id: 'settings', ...otherProps,
+      },
     );
     this.setProps({
       user: () => this.state.isLogin,
       avatar: () => this.state.avatar,
-  });
-  AuthActions.getUser();
+    });
+    AuthActions.getUser();
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }
 }
 
+const getSettingTabs = (activeLink: string) => new Tabs({ activeLink, tabsConfig, rootPath: '/settings' });
 
-
-const getSettingTabs = (activeLink: string) => new Tabs({ activeLink, tabsConfig, rootPath: '/settings'  });
-
-const getSettingLayout = (activeLink: string) => connectWithStore('section', SettingsBase,  (state) => {
-  const { user, isLogin } = state;
-  return { user, isLogin }
-},
-{ tabs: getSettingTabs(activeLink), title: 'Настройки профиля' }
-)
+const getSettingLayout = (activeLink: string) => connectWithStore(
+  'section',
+  SettingsBase,
+  (state) => {
+    const { user, isLogin } = state;
+    return { user, isLogin };
+  },
+  { tabs: getSettingTabs(activeLink), title: 'Настройки профиля' },
+);
 
 export const getSettingPage = (activeLink?: string) => {
   return new PageLayout({
-    content: getSettingLayout(activeLink || tabsConfig[0].pathRoute)
-  })
+    content: getSettingLayout(activeLink || tabsConfig[0].pathRoute),
+  });
 };

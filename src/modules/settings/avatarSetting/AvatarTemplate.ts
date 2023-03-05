@@ -1,6 +1,6 @@
 import UsersActions from '~src/actions/UsersActions';
 import { Button } from '~src/components/button';
-import {avatarInput } from '~src/components/avatarInput';
+import { avatarInput } from '~src/components/avatarInput';
 import { Form, FormProps } from '~src/components/form';
 import { avatarImage } from '~src/components/avatarImage';
 import Block from '~src/services/Block';
@@ -25,13 +25,12 @@ export class AvatarTemplateBase extends Form {
     });
   }
 
-
   initChildren() {
     this.children = {
       ...this.children,
       image: avatarImage,
       avatar: avatarInput,
-      
+
       'save-avatar': new Button({
         text: 'Сохранить',
         stylePrefix: 'save-avatar',
@@ -47,7 +46,7 @@ export class AvatarTemplateBase extends Form {
 
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    UsersActions.changeAvatar()
+    UsersActions.changeAvatar();
   }
 
   render(): DocumentFragment {
@@ -55,10 +54,12 @@ export class AvatarTemplateBase extends Form {
   }
 }
 
-export const avatarTemplate = connectWithStore('form', AvatarTemplateBase as typeof Block,
+export const avatarTemplate = connectWithStore(
+  'form',
+  AvatarTemplateBase as typeof Block,
   (state) => {
     const { avatar } = state;
-    return { avatar }
+    return { avatar };
   },
-  { title: 'Аватар', stylePrefix: 'tabs' }
-)
+  { title: 'Аватар', stylePrefix: 'tabs' },
+);

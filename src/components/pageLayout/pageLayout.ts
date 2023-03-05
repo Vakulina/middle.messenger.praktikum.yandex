@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import * as style from "./style.module.scss";
+import * as style from './style.module.scss';
 import Block, { ChildrenType, PropsType } from '~src/services/Block';
 
 export class PageLayout extends Block {

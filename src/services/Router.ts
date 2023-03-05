@@ -1,11 +1,14 @@
-import { routes as ROUTES } from "~src/utiles/constants";
-import Block from "./Block";
-import Route from "./Route";
+import { routes as ROUTES } from '~src/utiles/constants';
+import Block from './Block';
+import Route from './Route';
 
 class Router {
   routes: Array<any>;
+
   history: History;
+
   _currentRoute: any;
+
   private static __instance: Router;
 
   constructor() {
@@ -19,7 +22,7 @@ class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: Block, ) {
+  use(pathname: string, block: Block) {
     const route = new Route(pathname, block);
     this.routes.unshift(route);
     return this;
@@ -29,10 +32,9 @@ class Router {
     window.onpopstate = (event: PopStateEvent) => {
       const target = event.currentTarget as Window;
       if (target) this._onRoute(target.location.pathname);
-    }
+    };
     this._onRoute(window.location.pathname);
   }
-
 
   private _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
@@ -49,13 +51,13 @@ class Router {
   }
 
   go(pathname: string) {
-    this.history.pushState({}, "", pathname);
+    this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
 
   getRoute(pathname: string) {
-    return this.routes.find(route => route.match(pathname)) || this.routes.find(route => route.match(ROUTES.notFound))
+    return this.routes.find((route) => route.match(pathname)) || this.routes.find((route) => route.match(ROUTES.notFound));
   }
 }
 
-export default new Router(); 
+export default new Router();

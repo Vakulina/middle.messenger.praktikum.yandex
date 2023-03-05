@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '~src/services/Block';
 import { withRouter } from '~src/hocs/withRouter';
@@ -21,7 +21,7 @@ class LinkBase extends Block {
       {
         class: `${s.link} ${styles.getClassWithPrefix(s, 'link', stylePrefix)}`,
         events: {
-          click: () => this.navigate()
+          click: () => this.navigate(),
         },
         ...otherProps,
       },

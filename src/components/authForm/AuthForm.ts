@@ -32,19 +32,19 @@ const passwordInput = new Input({
 class AuthFormBase extends Form {
   constructor(props: FormProps) {
     super('form', {
-     title: 'Вход', stylePrefix: 'auth',
+      title: 'Вход',
+      stylePrefix: 'auth',
       events: {
         focusin: () => {
           if (this.state.isAuthError) {
-            Store.set({ isAuthError: null })
+            Store.set({ isAuthError: null });
             this.addAttribute({ 'data-server-error': 'false' });
           }
         },
       },
       ...props,
-    })
+    });
   }
-
 
   initChildren() {
     this.children = {
@@ -69,14 +69,14 @@ class AuthFormBase extends Form {
     e.preventDefault();
 
     const isValidValues = (_data: {} | AuthData): _data is AuthData => {
-      return this.validateForm()
-    }
+      return this.validateForm();
+    };
 
-    const data = this.getValues()
+    const data = this.getValues();
     if (isValidValues(data)) {
-      await AuthAction.signin(data)
+      await AuthAction.signin(data);
       this.addAttribute({ 'data-server-error': this.props.isAuthError ? 'true' : 'false' });
-      if (this.state.isAuthError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isAuthError!.message}` })
+      if (this.state.isAuthError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isAuthError!.message}` });
     }
   }
 
@@ -85,7 +85,7 @@ class AuthFormBase extends Form {
   }
 }
 
-export const AuthForm = connectWithStore('form', AuthFormBase as typeof Block,  (state) => {
+export const AuthForm = connectWithStore('form', AuthFormBase as typeof Block, (state) => {
   const { isAuthError, isLogin } = state;
-  return { isAuthError, isLogin }
-})
+  return { isAuthError, isLogin };
+});

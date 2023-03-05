@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import * as s from "./style.module.scss";
+import * as s from './style.module.scss';
 import { Button } from '../button';
 import { Textarea } from '../textarea';
 import { BtnEventType, InputEventType, VALIDATION_REGEXES } from '~src/utiles';
@@ -63,10 +63,10 @@ export class Message extends Form {
   private submit(e: BtnEventType) {
     e.preventDefault();
     if (this.validateForm()) {
-      const { message } = this.getValues() as { message: string }
-      chatsActions.sendMessage(message)
-      const form = this.getContent() as HTMLFormElement
-      form.reset()
+      const { message } = this.getValues() as { message: string };
+      chatsActions.sendMessage(message);
+      const form = this.getContent() as HTMLFormElement;
+      form.reset();
     }
   }
 
