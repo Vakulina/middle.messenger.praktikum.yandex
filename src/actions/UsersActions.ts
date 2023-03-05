@@ -1,4 +1,3 @@
-import { UserDTO } from '~src/api/AuthApi';
 import { ErrorType } from '~src/services';
 import UsersAPI from '../api/UsersApi';
 import Store from '../services/Store';
@@ -32,8 +31,8 @@ class UsersActions {
     //await AuthActions.getUser();
   }
 
-  public async searchUsers(login: string): Promise<UserDTO[]> {
- const result =   await UsersAPI.searchUser(login)
+  public async searchUsers(login: string) {
+ return await UsersAPI.searchUsers(login)
       .then(res => {
         return res
       })
@@ -41,10 +40,7 @@ class UsersActions {
         Store.set({ isServerError: err })
         return []
       })
-      return result as  Promise<UserDTO>
   }
-
-
 }
 
 

@@ -99,7 +99,7 @@ abstract class Block {
         ) {
           this.eventBus().emit(Block.EVENTS.FLOW_CDM);
         }
-      }, 200);
+      }, 10);
     }
 
     return this.element!;

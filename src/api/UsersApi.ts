@@ -28,8 +28,8 @@ export class UsersApi extends BaseAPI {
  
     }) as Promise<UserDTO>
   }
-  async searchUser(login: string){
-    return await this.http.post('/search', { data: { login } }) as Promise<UserDTO>
+  async searchUsers(login: string):Promise<UserDTO[]>{
+    return await this.http.post('/search', { data: { login } }) as Promise<UserDTO[]>
   }
 
   create = undefined;

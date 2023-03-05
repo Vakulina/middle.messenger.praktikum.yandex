@@ -13,12 +13,12 @@ class ChatSidebarBase extends Block {
       tag,
       {
         class: s.sidebar,
-        items: getChatList(props.chats || []),
+       // items: getChatList(props.chats || []),
         ...props,
       },
     );
     chatsActions.getChats()
-    this.setProps({ items: getChatList(this.state.chats || [], this.state.activeChat) },)
+    //this.setProps({ items: getChatList(this.state.chats || [], this.state.activeChat) },)
   }
 
   initChildren() {

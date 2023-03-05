@@ -11,6 +11,7 @@ export type State = {
   user: Omit<UserDTO, "password">,
   chats: Partial<ChatsDTOType>[],
   activeChat: ChatsDTOType|null;
+  usersOfActiveChat:UserDTO[];
   isAuthError: { message: string, status: number } | null,
   isRegistrationError: { message: string, status?: number, name?: string } | null,
   isLogin: boolean,
@@ -20,6 +21,7 @@ export type State = {
   isPasswordSettingsError: { message: string, status: number } | null,
   isOpenAddNewChatModal: boolean;
   isOpenAddUserModal:boolean;
+  isOpenDeleteUserModal:boolean;
   isOpenHeaderMenuModal: boolean;
   isServerError: { message: string, status: number } | null,
 }

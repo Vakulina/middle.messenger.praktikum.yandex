@@ -7,11 +7,10 @@ import connectWithStore from '~src/services/connectWithStore';
 import cross from '../../../../static/cross.svg';
 import { Image } from '../../image';
 import Store from '~src/services/Store';
-import * as s from "../style.module.scss";
 import { chatsActions } from '~src/actions/ChatsActions';
 import { UserDTO } from '~src/api/AuthApi';
 import UsersActions from '~src/actions/UsersActions';
-import Block from '~src/services/Block';
+
 
 const loginInput = new Input({
   name: 'login',
@@ -48,8 +47,8 @@ class AddUserPopupBase extends Form {
         type: 'button',
         stylePrefix: 'search',
         events: {
-          click: (e) => {
-            this.search(e);
+          click: () => {
+            this.search();
           },
         },
       }),
@@ -73,7 +72,7 @@ class AddUserPopupBase extends Form {
         stylePrefix: 'cross',
         type: 'button',
         events: {
-          click: (e: BtnEventType) => {
+          click: () => {
             Store.set({ isOpenAddUserModal: false })
           }
         },
@@ -82,10 +81,11 @@ class AddUserPopupBase extends Form {
     };
   }
 
-  private async search(e: BtnEventType) {
+  private async search() {
     const data: UserDTO = this.getValues() as UserDTO
     UsersActions.searchUsers(data?.login)
       .then((res) => {
+ 
         this.setProps({
           users: res
         })

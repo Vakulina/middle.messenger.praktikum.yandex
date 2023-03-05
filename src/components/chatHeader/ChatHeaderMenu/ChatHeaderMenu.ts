@@ -31,7 +31,7 @@ export class ChatHeaderMenuBase extends Block {
         text: 'Добавить пользователя',
         type: 'button',
         events: {
-          click: (e) => {
+          click: () => {
             Store.set({isOpenAddUserModal:true})
             Store.set({isOpenHeaderMenuModal:false})
           },
@@ -41,8 +41,9 @@ export class ChatHeaderMenuBase extends Block {
         text: 'Удалить пользователя',
         type: 'button',
         events: {
-          click: (e) => {
-            console.log('delete user')
+          click: () => {
+
+              Store.set({isOpenDeleteUserModal:true}) 
           },
         },
       }),
@@ -50,7 +51,7 @@ export class ChatHeaderMenuBase extends Block {
         text: 'Удалить чат',
         type: 'button',
         events: {
-          click: (e) => {
+          click: () => {
              chatsActions.deleteChatById()
           },
         },

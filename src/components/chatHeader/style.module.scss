@@ -40,6 +40,12 @@
     color: $shadeDark;
   }
 
+  form {
+    label {
+      display: block;
+    }
+  }
+
   form[data-after-search="false"] {
 
     button:first-of-type {
@@ -50,10 +56,12 @@
       display: none;
     }
   }
+
   form[data-after-search="true"] {
-    label{
+    label {
       display: block;
     }
+
     button:first-of-type {
       display: none;
     }

@@ -1,6 +1,6 @@
+import { UserDTO } from '~src/api/AuthApi';
 import ChatsAPI, { ChatsApi, ChatsDTOType } from '~src/api/ChatsApi';
 import Store from '~src/services/Store';
-import UsersActions from './UsersActions';
 
 class ChatsActions {
   private readonly api: ChatsApi;
@@ -54,20 +54,34 @@ class ChatsActions {
       try {
         await this.api.addUsers(users, chat_id);
         await this.getChats()
-        Store.set({isOpenAddUserModal:false})
+        Store.set({ isOpenAddUserModal: false })
       } catch (e: unknown) {
         console.error('addUsersToChat:', e);
       }
     }
   }
 
-  async deleteUsersFromChat(users_id: number[], chat_id: number) {
-    try {
-      await this.api.deleteUsers(users_id, chat_id);
-      await this.getChats()
-    } catch (e: unknown) {
-      console.error('deleteUsersFromChat:', e);
+  async deleteUsersFromChat(users: number[]) {
+    const state = Store.getState()
+    if ('activeChat' in state) {
+      const chat_id = state!.activeChat!.id
+
+      try {
+        await this.api.deleteUsers(users, chat_id);
+        await this.getChats()
+        Store.set({ isOpenDeleteUserModal: false })
+        Store.set({ isOpenHeaderMenuModal: false })
+
+        if (!(state.chats.includes(state.activeChat as ChatsDTOType))) Store.set({ isOpenAddNewChatModal: true })
+      } catch (e: unknown) {
+        console.error('deleteUsersFromChat:', e);
+      }
     }
+  }
+
+  async getUsersByChat(id: number): Promise<UserDTO[]> {
+    console.log("Action get users by id ", id)
+    return this.api.getUsersByChat(id) as Promise<UserDTO[]>
   }
 
   async getToken(chat_id: number) {

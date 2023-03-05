@@ -5,22 +5,24 @@ import avatar from '../../../static/avatar.jpg';
 import dots from '../../../static/dots.svg';
 import { Image } from '../image';
 import { Button } from '../button';
-import { BtnEventType } from '~src/utiles';
 import connectWithStore from '~src/services/connectWithStore'
 import Store from '~src/services/Store';
 import { getChatHeaderMenu } from './ChatHeaderMenu';
 import { addUserPopup } from './AddUserPopup';
+import { deleteUserPopup } from './DeleteUserPopup';
 
 export class ChatHeaderBase extends Block {
   constructor(tag = 'div', {
     activeChat,
     isOpenHeaderMenuModal,
     isOpenAddUserModal,
+    isOpenDeleteUserModal,
     ...props }: any
   ) {
     super(tag, {
       class: s.header,
       isOpenHeaderMenuModal,
+      isOpenDeleteUserModal,
       isOpenAddUserModal,
       activeChat,
       ...props
@@ -44,14 +46,15 @@ export class ChatHeaderBase extends Block {
         stylePrefix: 'withArrow',
         type: 'button',
         events: {
-          click: (e: BtnEventType) => {
+          click: () => {
             Store.set({ isOpenHeaderMenuModal: !(this.state?.isOpenHeaderMenuModal) })
           }
         },
         name: 'sendMessage',
       }),
       chatHeaderMenu: getChatHeaderMenu(),
-      addUserPopup: addUserPopup
+      addUserPopup,
+      deleteUserPopup
     }
   }
 
@@ -61,6 +64,6 @@ export class ChatHeaderBase extends Block {
 }
 
 export const chatHeader = connectWithStore('div', ChatHeaderBase, (state) => {
-  const { activeChat, isOpenHeaderMenuModal, isOpenAddUserModal } = state;
-  return { activeChat, isOpenHeaderMenuModal, isOpenAddUserModal }
+  const { activeChat, isOpenHeaderMenuModal, isOpenAddUserModal, isOpenDeleteUserModal } = state;
+  return { activeChat, isOpenHeaderMenuModal, isOpenAddUserModal, isOpenDeleteUserModal }
 })

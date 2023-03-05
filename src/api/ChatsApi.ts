@@ -12,7 +12,7 @@ export type ChatsDTOType = {
     time: string,
     content: string
   },
-  created_by:number
+  created_by: number
 }
 
 export class ChatsApi extends BaseAPI {
@@ -20,8 +20,8 @@ export class ChatsApi extends BaseAPI {
     super('/chats');
   }
 
-async  createChat(title: string) {
-    return this.http.post('',  {data:{title }}) as Promise<{id:number}>
+  async createChat(title: string) {
+    return this.http.post('', { data: { title } }) as Promise<{ id: number }>
   }
 
 
@@ -31,23 +31,27 @@ async  createChat(title: string) {
   }
 
   deleteChat(chatId: number) {
-    return this.http.delete('', {data: {
-      'chatId': chatId,
-    }})
+    return this.http.delete('', {
+      data: {
+        'chatId': chatId,
+      }
+    })
   }
 
   addUsers(Usersid: number[], chatId: number) {
-    return this.http.put('/users', {data:{
-      users: [...Usersid],
-      chatId: chatId,
-    }})
+    return this.http.put('/users', {
+      data: {
+        users: [...Usersid],
+        chatId: chatId,
+      }
+    })
   }
 
-  deleteUsers(Usersid: number[], chatId: number) {
-    return this.http.delete('/users', {
-      users: [Usersid],
+  deleteUsers(users: number[], chatId: number) {
+    return this.http.delete('/users', {data: {
+      users,
       chatId: chatId,
-    })
+    }})
   }
 
   getNewMessagesCount(id: number): Promise<any> {
@@ -57,6 +61,9 @@ async  createChat(title: string) {
   getChatToken(chat_id: number) {
     return this.http.post(`/token/${chat_id}`)
       .then((res: string) => JSON.parse(res))
+  }
+  async getUsersByChat(id: number) {
+    return this.http.get(`/${id}/users`, {})
   }
 
   create = undefined;
