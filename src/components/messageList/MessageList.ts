@@ -5,7 +5,7 @@ import { getMessageList } from './utiles';
 import Block from '~src/services/Block';
 
 class messageListBase extends Block {
-  constructor(tag = 'div', {chatsData=[],...props}: any) {
+  constructor(tag = 'div', {chatsData=[], ...props}: any) {
     super(tag, {
       class: s.messageList,
       chatsData,
