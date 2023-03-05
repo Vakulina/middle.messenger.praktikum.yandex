@@ -80,7 +80,6 @@ class ChatsActions {
   }
 
   async getUsersByChat(id: number): Promise<UserDTO[]> {
-    console.log("Action get users by id ", id)
     return this.api.getUsersByChat(id) as Promise<UserDTO[]>
   }
 
