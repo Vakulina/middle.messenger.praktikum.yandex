@@ -1,4 +1,4 @@
-import { chatsActions } from "./ChatsActions";
+import { chatsActions } from "../actions/ChatsActions";
 import Store from "~src/services/Store";
 import { WebsocketService } from "~src/services/WebsocketService";
 

@@ -5,7 +5,7 @@ import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
 import { ChatsDTOType } from '~src/api/ChatsApi';
 import { chatsActions } from '~src/actions/ChatsActions';
-import {setWebSocket} from '~src/actions/setWebSocket'
+import {setWebSocket} from '~src/services/setWebSocket'
 
 interface ChatItemProps {
   chatId: number,
@@ -41,7 +41,7 @@ export class ChatItemBase extends Block {
             Store.set({ isOpenHeaderMenuModal: false })
             Store.set({ activeChat })
             Store.set({ usersOfActiveChat })
-            
+
             await setWebSocket(chatId);
           },
         },

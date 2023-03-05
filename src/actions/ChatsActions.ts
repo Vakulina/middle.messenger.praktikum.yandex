@@ -1,5 +1,6 @@
 import { UserDTO } from '~src/api/AuthApi';
 import ChatsAPI, { ChatsApi, ChatsDTOType } from '~src/api/ChatsApi';
+import { setWebSocket } from '~src/services/setWebSocket';
 import Store from '~src/services/Store';
 
 class ChatsActions {
@@ -99,8 +100,20 @@ class ChatsActions {
     const chatData = chatsData[chatId]?.messages || [];
     chatData.push(...messages);
     console.log(chatData)
-    Store.set({chatMessages:chatData})
-  };
+    Store.set({ chatMessages: chatData })
+  }
+
+  async sendMessage(text: string) {
+    const state = Store.getState()
+    if (('activeChat' in state) && (state.activeChat) && ('id' in state.activeChat)) {
+      const chatId = state.activeChat?.id
+      const ws = await setWebSocket(chatId);
+      if (!ws) {
+        return;
+      }
+      ws.sendMessage(text);
+    }
+  }
 }
 
 export const chatsActions = new ChatsActions();
