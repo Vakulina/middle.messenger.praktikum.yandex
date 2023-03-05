@@ -88,9 +88,19 @@ class ChatsActions {
       const response = await this.api.getChatToken(chat_id)
       return response.token
     } catch (err: unknown) {
-      console.error('addUsersToChat:', err);
+      console.error(err);
     }
   }
+
+  async getMessagesOfChat(messages: any, chatId: number) {
+    const state = Store.getState()
+    if (!('chatsData' in state)) return
+    const chatsData = state.chatsData;
+    const chatData = chatsData[chatId]?.messages || [];
+    chatData.push(...messages);
+    console.log(chatData)
+    Store.set({chatMessages:chatData})
+  };
 }
 
 export const chatsActions = new ChatsActions();

@@ -5,6 +5,7 @@ import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
 import { ChatsDTOType } from '~src/api/ChatsApi';
 import { chatsActions } from '~src/actions/ChatsActions';
+import {setWebSocket} from '~src/actions/setWebSocket'
 
 interface ChatItemProps {
   chatId: number,
@@ -34,13 +35,14 @@ export class ChatItemBase extends Block {
         class: s.chatItem,
         events: {
           click: async (e: any) => {
-
             const activeChat = chats?.filter((item: ChatsDTOType) => (item.id === Number(e?.currentTarget.getAttribute("data-chatid"))))[0]
             const usersOfActiveChat = await chatsActions.getUsersByChat(Number(e?.currentTarget.getAttribute("data-chatid")))
             Store.set({ isOpenAddNewChatModal: false })
             Store.set({ isOpenHeaderMenuModal: false })
             Store.set({ activeChat })
             Store.set({ usersOfActiveChat })
+            
+            await setWebSocket(chatId);
           },
         },
         active: isActive,

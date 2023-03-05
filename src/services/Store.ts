@@ -24,12 +24,14 @@ export type State = {
   isOpenDeleteUserModal:boolean;
   isOpenHeaderMenuModal: boolean;
   isServerError: { message: string, status: number } | null,
+  chatsData: {messages: any, chatId:number}[],
+  chatMessages:any
 }
 
 class Store extends EventBus {
 
   static _instance: Store;
-  state: State | {} = {isOpenAddNewChatModal:true};
+  state: State | {} = {isOpenAddNewChatModal:true, chatsData:[]};
 
   constructor() {
     if (Store._instance) return Store._instance;

@@ -3,11 +3,11 @@ import { EventBus } from './EventBus';
 export class WebsocketService extends EventBus {
   static EVENTS = {
     OPEN: "open",
-    CLOSE: "close",
     CONNECTED: "connected",
     MESSAGE: "message",
     GET_MESSAGE: "get-message",
     ERROR: "error",
+    CLOSE: "close"
   } as const;
 
   protected connection: WebSocket | null = null;

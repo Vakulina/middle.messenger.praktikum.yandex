@@ -59,8 +59,7 @@ export class ChatsApi extends BaseAPI {
   }
 
   getChatToken(chat_id: number) {
-    return this.http.post(`/token/${chat_id}`)
-      .then((res: string) => JSON.parse(res))
+    return this.http.post(`/token/${chat_id}`) as Promise<{token:string}>
   }
   async getUsersByChat(id: number) {
     return this.http.get(`/${id}/users`, {})
