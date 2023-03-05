@@ -33,20 +33,24 @@
     "@typescript-eslint/no-unused-vars": "warn",
     "class-methods-use-this": "off",
     "max-params": [
-      2,
-      3
+      2, 4
     ],
+    "@typescript-eslint/no-shadow": "off",
     "import/prefer-default-export": [
       "off"
     ],
+    "no-constructor-return": "off",
+    "prefer-promise-reject-errors":"warn",
+    "@typescript-eslint/naming-convention":"warn",
+    "no-param-reassign":"off",
     "import/extensions": "off",
     "arrow-body-style": [
       "off"
     ],
+    "consistent-return":"warn",
     "semi": [
       "warn",
       "always"
     ]
-
   }
 }

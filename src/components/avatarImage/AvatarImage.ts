@@ -12,14 +12,14 @@ interface ImageProps {
 }
 
 export class AvatarImageBase extends Block {
-  constructor(tag = 'img', {
+  constructor(tag:string, {
     stylePrefix = 'avatar',
     avatar,
     alt = 'аватар',
     ...otherProps
   }: ImageProps) {
     super(
-      tag,
+      tag = 'img',
       {
         alt,
         src: avatar || avatarBase || '',

@@ -21,9 +21,9 @@ interface ChatsProps {
 }
 
 export class Chats extends Block {
-  constructor(tag = 'section', props: ChatsProps) {
+  constructor(tag:string, props: ChatsProps) {
     super(
-      tag,
+      tag = 'section',
       {
         class: s.chats,
         ...props,

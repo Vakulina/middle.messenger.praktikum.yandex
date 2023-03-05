@@ -14,12 +14,14 @@
   top: 60px;
   padding: 10px;
   gap: 10px;
+
   @include primaryShadow;
 
-  button{
+  button {
     width: 100%;
   }
 }
-.hide{
+
+.hide {
   display: none;
 }

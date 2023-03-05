@@ -1,5 +1,5 @@
 import { ChildrenType } from '~src/services/Block';
-import router from '~src/services/Router';
+import { router } from '~src/services/Router';
 
 interface WithRouterProps extends ChildrenType {
   router?: typeof router

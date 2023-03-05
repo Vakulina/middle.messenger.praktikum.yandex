@@ -21,8 +21,8 @@ const loginInput = new Input({
 });
 
 class AddUserPopupBase extends Form {
-  constructor(tag = 'form', props: FormProps) {
-    super(tag, {
+  constructor(tag: string, props: FormProps) {
+    super(tag = 'form', {
       title: 'Добавить пользователя в чат',
       stylePrefix: 'popup',
       events: {

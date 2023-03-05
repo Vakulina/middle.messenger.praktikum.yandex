@@ -6,7 +6,7 @@ import { getNotFoundPage } from '../modules/notFoundPage';
 import { getNavigationPage } from '~src/modules/navigation';
 import { routes } from '../utiles/constants';
 import { getSettingPage } from '../modules/settings';
-import router from './Router';
+import { router } from './Router';
 
 const renderPage = () => {
   window.addEventListener('DOMContentLoaded', async () => {

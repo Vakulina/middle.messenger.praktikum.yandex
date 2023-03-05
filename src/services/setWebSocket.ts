@@ -7,7 +7,7 @@ const WS_ENDPOINT = 'wss://ya-praktikum.tech/ws/chats/';
 
 export const setWebSocket = async (chatId: number) => {
   if (!chatId) {
-    return;
+    return new Error('Ошибка WS соединения');
   }
 
   if (webSocketsList && webSocketsList[chatId]) {
@@ -18,20 +18,17 @@ export const setWebSocket = async (chatId: number) => {
   const token = await chatsActions.getToken(chatId);
 
   if (!token) {
-    return;
+    return new Error('Ошибка WS соединения');
   }
 
   const state = Store.getState();
 
-  if (!('user' in state)) return;
+  if (!('user' in state)) return new Error('Ошибка WS соединения');
   const userId = state.user?.id;
 
   const wsURL = `${WS_ENDPOINT}/${userId}/${chatId}/${token}`;
 
   const webSocket = await new WebsocketService(wsURL);
-
-  webSocket.on(WebsocketService.EVENTS.GET_MESSAGE, (data) => getMessagesOfChat(data));
-  webSocket.on(WebsocketService.EVENTS.CLOSE, () => { deleteSoket(); });
 
   const getMessagesOfChat = (data: any) => {
     chatsActions.getMessagesOfChat(data);
@@ -40,6 +37,9 @@ export const setWebSocket = async (chatId: number) => {
   const deleteSoket = () => {
     return delete webSocketsList[chatId];
   };
+
+  webSocket.on(WebsocketService.EVENTS.GET_MESSAGE, (data) => getMessagesOfChat(data));
+  webSocket.on(WebsocketService.EVENTS.CLOSE, () => { deleteSoket(); });
 
   webSocketsList[chatId] = webSocket;
 

@@ -2,6 +2,7 @@ import { UserDTO } from '~src/api/AuthApi';
 import ChatsAPI, { ChatsApi, ChatsDTOType } from '~src/api/ChatsApi';
 import { setWebSocket } from '~src/services/setWebSocket';
 import Store from '~src/services/Store';
+import { WebsocketService } from '~src/services/WebsocketService';
 
 class ChatsActions {
   private readonly api: ChatsApi;
@@ -113,9 +114,8 @@ class ChatsActions {
       const chatId = state.activeChat?.id;
       const ws = await setWebSocket(chatId);
       if (!ws) {
-        return;
-      }
-      ws.sendMessage(text);
+
+      } else if (ws instanceof WebsocketService) ws.sendMessage(text);
     }
   }
 
@@ -127,7 +127,7 @@ class ChatsActions {
       if (!ws) {
         return;
       }
-      ws.getOldMessages(from);
+      if (ws instanceof WebsocketService) ws.getOldMessages(from);
     }
   }
 }

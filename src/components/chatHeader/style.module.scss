@@ -19,7 +19,7 @@
     bottom: 0;
     right: 0;
     padding: 20px;
-    background: rgba(0, 0, 0, 45%);
+    background: rgb(0 0 0 / 45%);
     z-index: 100;
   }
 
@@ -47,7 +47,6 @@
   }
 
   form[data-after-search="false"] {
-
     button:first-of-type {
       display: block;
     }

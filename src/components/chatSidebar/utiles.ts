@@ -1,5 +1,5 @@
 import { ChatsDTOType } from '~src/api/ChatsApi';
-import parseDate from '~src/utiles/parseDate';
+import { parseDate } from '~src/utiles/parseDate';
 import { getChatItem } from '../chatItem';
 import { Image } from '../image';
 import avatar from '../../../static/avatar.jpg';

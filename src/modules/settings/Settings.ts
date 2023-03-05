@@ -37,9 +37,9 @@ export const tabsConfig: Tab[] = [
 ];
 
 class SettingsBase extends Block {
-  constructor(tag = 'section', { tabs, otherProps }: any) {
+  constructor(tag: string, { tabs, otherProps }: any) {
     super(
-      tag,
+      tag = 'section',
       {
         tabs, class: style.setting, id: 'settings', ...otherProps,
       },

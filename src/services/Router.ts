@@ -59,5 +59,4 @@ class Router {
     return this.routes.find((route) => route.match(pathname)) || this.routes.find((route) => route.match(ROUTES.notFound));
   }
 }
-
-export default new Router();
+export const router = new Router();

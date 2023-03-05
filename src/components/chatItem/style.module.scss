@@ -11,12 +11,12 @@
   cursor: pointer;
   padding: 0 10px;
 
-  &:hover{
+  &:hover {
     background-color: $ligthestPrimaryColor;
   }
 
-  &[active="true"]{
-    background-color:#E6F7F3;
+  &[active="true"] {
+    background-color: #e6f7f3;
   }
 
   &__title {
@@ -49,7 +49,7 @@
 
   &__column:last-of-type {
     gap: 14px;
-    align-items:flex-end;
+    align-items: flex-end;
     align-self: start;
     padding: 10px 0;
   }

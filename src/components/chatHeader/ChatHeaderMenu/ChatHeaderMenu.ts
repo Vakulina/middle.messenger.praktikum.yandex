@@ -7,13 +7,13 @@ import { chatsActions } from '~src/actions/ChatsActions';
 import Store from '~src/services/Store';
 
 export class ChatHeaderMenuBase extends Block {
-  constructor(tag = 'div', {
+  constructor(tag:string, {
     activeChat,
     user,
     isAvailableToDelete,
     ...props
   }: any) {
-    super(tag, {
+    super(tag = 'div', {
       activeChat,
       isAvailableToDelete,
       user,

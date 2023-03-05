@@ -7,7 +7,7 @@ export enum StoreEvents {
   Remove = 'remove',
 }
 
-export type messageType = {
+export type MessageType = {
   chat_id: number,
   content: string,
   file: null | any,
@@ -34,7 +34,7 @@ export type State = {
   isOpenDeleteUserModal: boolean;
   isOpenHeaderMenuModal: boolean;
   isServerError: { message: string, status: number } | null,
-  chatsData: messageType[],
+  chatsData: MessageType[],
 };
 
 class Store extends EventBus {

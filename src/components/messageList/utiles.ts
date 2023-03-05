@@ -1,5 +1,5 @@
 import { messageType } from '~src/services';
-import parseDate from '~src/utiles/parseDate';
+import { parseDate } from '~src/utiles/parseDate';
 import { MessageItem } from './messageItem';
 
 export const getMessageList = (items: messageType[]) => {

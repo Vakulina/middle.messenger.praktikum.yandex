@@ -12,14 +12,14 @@ import { addUserPopup } from './AddUserPopup';
 import { deleteUserPopup } from './DeleteUserPopup';
 
 export class ChatHeaderBase extends Block {
-  constructor(tag = 'div', {
+  constructor(tag:string, {
     activeChat,
     isOpenHeaderMenuModal,
     isOpenAddUserModal,
     isOpenDeleteUserModal,
     ...props
   }: any) {
-    super(tag, {
+    super(tag = 'div', {
       class: s.header,
       isOpenHeaderMenuModal,
       isOpenDeleteUserModal,

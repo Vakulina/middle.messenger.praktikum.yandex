@@ -7,9 +7,9 @@ import { getChatList } from './utiles';
 import { chatsActions } from '~src/actions/ChatsActions';
 
 class ChatSidebarBase extends Block {
-  constructor(tag = 'sidebar', props: any) {
+  constructor(tag:string, props: any) {
     super(
-      tag,
+      tag = 'sidebar',
       {
         class: s.sidebar,
         ...props,

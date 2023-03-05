@@ -23,14 +23,14 @@ interface ChatItemProps {
 }
 
 export class ChatItemBase extends Block {
-  constructor(tag = 'div', {
+  constructor(tag:string, {
     isActive,
     chatId,
     chats,
     ...otherProps
   }: ChatItemProps) {
     super(
-      tag,
+      tag = 'div',
       {
         class: s.chatItem,
         events: {

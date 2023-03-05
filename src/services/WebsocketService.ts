@@ -113,11 +113,10 @@ export class WebsocketService extends EventBus {
     );
   }
 
-  public getSocket() {
+  public getSocket():WebsocketService {
     if (!this.connection || this.connection.readyState === this.connection.CLOSED) {
       this.connectWS();
     }
-
     return this;
   }
 }

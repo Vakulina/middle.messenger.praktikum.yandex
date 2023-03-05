@@ -1,10 +1,10 @@
 import tpl from './tpl.hbs';
 import Block from '~src/services/Block';
-import { messageType } from '~src/services';
+import { MessageType } from '~src/services';
 import * as s from '../style.module.scss';
 
 export class MessageItem extends Block {
-  constructor({ is_read, ...props }: Omit<messageType, 'file' | 'type'>) {
+  constructor({ is_read, ...props }: Omit<MessageType, 'file' | 'type'>) {
     super(
       'li',
       {

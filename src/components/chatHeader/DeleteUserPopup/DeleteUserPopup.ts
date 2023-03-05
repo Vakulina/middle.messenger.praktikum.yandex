@@ -10,8 +10,8 @@ import { chatsActions } from '~src/actions/ChatsActions';
 import { getUsersList } from './utiles';
 
 class DeleteUserPopupBase extends Form {
-  constructor(tag = 'form', { usersOfActiveChat = [], ...props }: any) {
-    super(tag, {
+  constructor(tag:string, { usersOfActiveChat = [], ...props }: any) {
+    super(tag = 'form', {
       title: 'Удалить пользователей из чата',
       stylePrefix: 'popup',
       usersOfActiveChat,

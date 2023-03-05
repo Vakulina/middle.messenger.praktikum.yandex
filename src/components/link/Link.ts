@@ -29,7 +29,7 @@ class LinkBase extends Block {
   }
 
   navigate() {
-    this.props.router.go(this.props.href);
+    this.props.router!.go(this.props.href);
   }
 
   protected render() {
