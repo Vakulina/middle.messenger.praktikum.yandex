@@ -3,7 +3,7 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
-import { ChatsDTOType } from '~src/api/Chats';
+import { ChatsDTOType } from '~src/api/ChatsApi';
 
 interface ChatItemProps {
   chatId: number,

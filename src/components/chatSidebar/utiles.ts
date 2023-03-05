@@ -1,10 +1,10 @@
-import { ChatsDTOType } from "~src/api/Chats"
+import { ChatsDTOType } from "~src/api/ChatsApi"
 import parseDate from "~src/utiles/parseDate"
 import { getChatItem } from "../chatItem"
 import { Image } from "../image"
 import avatar from '../../../static/avatar.jpg';
 
-export const getChatList = (items: Partial<ChatsDTOType>[], activeChat?: ChatsDTOType) => {
+export const getChatList = (items: Partial<ChatsDTOType>[], activeChat?: ChatsDTOType|null) => {
   return items.map((item) => {
     const isActive = Number(activeChat?.id) === Number(item.id)
     return getChatItem(

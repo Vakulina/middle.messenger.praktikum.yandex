@@ -10,8 +10,9 @@
   box-sizing: border-box;
   position: relative;
 
-  &__wrapper{
-    display: block;
+  &__wrapper {
+    display: flex;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -37,5 +38,28 @@
     font-size: 13px;
     line-height: 13px;
     color: $shadeDark;
+  }
+
+  form[data-after-search="false"] {
+
+    button:first-of-type {
+      display: block;
+    }
+
+    button:nth-of-type(2) {
+      display: none;
+    }
+  }
+  form[data-after-search="true"] {
+    label{
+      display: block;
+    }
+    button:first-of-type {
+      display: none;
+    }
+
+    button:nth-of-type(2) {
+      display: block;
+    }
   }
 }

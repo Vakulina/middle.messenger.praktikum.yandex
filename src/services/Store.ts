@@ -1,5 +1,5 @@
-import { UserDTO } from '~src/api/Auth';
-import { ChatsDTOType } from '~src/api/Chats';
+import { UserDTO } from '~src/api/AuthApi';
+import { ChatsDTOType } from '~src/api/ChatsApi';
 import { EventBus } from './EventBus';
 
 export enum StoreEvents {
@@ -27,7 +27,7 @@ export type State = {
 class Store extends EventBus {
 
   static _instance: Store;
-  state: State | {} = {isOpenAddUserModal:true};
+  state: State | {} = {isOpenAddNewChatModal:true};
 
   constructor() {
     if (Store._instance) return Store._instance;

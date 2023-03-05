@@ -1,5 +1,5 @@
 import { Image } from '~src/components/image';
-import { UserDTO } from './Auth';
+import { UserDTO } from './AuthApi';
 import BaseAPI from './BaseAPI';
 
 export type ChatsDTOType = {
@@ -37,10 +37,10 @@ async  createChat(title: string) {
   }
 
   addUsers(Usersid: number[], chatId: number) {
-    return this.http.put('/users', {
-      users: [Usersid],
+    return this.http.put('/users', {data:{
+      users: [...Usersid],
       chatId: chatId,
-    })
+    }})
   }
 
   deleteUsers(Usersid: number[], chatId: number) {

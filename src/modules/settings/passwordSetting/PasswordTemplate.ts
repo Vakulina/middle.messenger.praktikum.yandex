@@ -8,7 +8,7 @@ import Store from '~src/services/Store';
 import connectWithStore from '~src/services/connectWithStore';
 import Block from '~src/services/Block';
 import UsersActions from '~src/actions/UsersActions';
-import { ChangePasswordType } from '~src/api/Users';
+import { ChangePasswordType } from '~src/api/UsersApi';
 
 export class PasswordTemplateBase extends Form {
   constructor(props: FormProps) {

@@ -7,6 +7,11 @@ import connectWithStore from '~src/services/connectWithStore';
 import cross from '../../../../static/cross.svg';
 import { Image } from '../../image';
 import Store from '~src/services/Store';
+import * as s from "../style.module.scss";
+import { chatsActions } from '~src/actions/ChatsActions';
+import { UserDTO } from '~src/api/AuthApi';
+import UsersActions from '~src/actions/UsersActions';
+import Block from '~src/services/Block';
 
 const loginInput = new Input({
   name: 'login',
@@ -18,10 +23,10 @@ const loginInput = new Input({
 });
 
 class AddUserPopupBase extends Form {
-  constructor(tag='form', props: FormProps) {
+  constructor(tag = 'form', props: FormProps) {
     super(tag, {
-     title: 'Добавить пользователя в чат', 
-     stylePrefix:'popup',
+      title: 'Добавить пользователя в чат',
+      stylePrefix: 'popup',
       events: {
         focusin: () => {
           if (this.state.isServerError) {
@@ -31,6 +36,7 @@ class AddUserPopupBase extends Form {
       },
       ...props,
     })
+    this.addAttribute({ 'data-after-search': 'false' })
   }
 
 
@@ -38,8 +44,18 @@ class AddUserPopupBase extends Form {
     this.children = {
       ...this.children,
       button: new Button({
-        text: 'Добавить пользователя',
-        type: 'submit',
+        text: 'Найти пользователя',
+        type: 'button',
+        stylePrefix: 'search',
+        events: {
+          click: (e) => {
+            this.search(e);
+          },
+        },
+      }),
+      submitButton: new Button({
+        text: 'Добавить пользователей',
+        type: 'button',
         stylePrefix: 'submit',
         events: {
           click: (e) => {
@@ -66,14 +82,33 @@ class AddUserPopupBase extends Form {
     };
   }
 
+  private async search(e: BtnEventType) {
+    const data: UserDTO = this.getValues() as UserDTO
+    UsersActions.searchUsers(data?.login)
+      .then((res) => {
+        this.setProps({
+          users: res
+        })
+        this.addAttribute({ 'data-after-search': 'true' })
+      })
+  }
+  protected getCheckboxesValues() {
+    const form = this.getContent()
+    const checkboxes = form?.querySelectorAll('input');
+    const checkboxesValues: number[] = [];
+    checkboxes?.forEach((input) => {
+      if (input.checked) {
+        checkboxesValues.push(Number(input.value));
+      }
+    });
+    return checkboxesValues
+  }
+
   private async submit(e: BtnEventType) {
     e.preventDefault();
-    const data = this.getValues()
-    console.log(data)
-/*
-      await AuthAction.signin(data)
-      this.addAttribute({ 'data-server-error': this.props.isAuthError ? 'true' : 'false' });
-      if (this.state.isAuthError) this.setProps({ serverError: `Ошибка сервера: ${this.state.isAuthError!.message}` })*/
+    const data = this.getCheckboxesValues()
+    chatsActions.addUsersToChat(data )
+ //   
   }
 
   render(): DocumentFragment {
@@ -81,7 +116,7 @@ class AddUserPopupBase extends Form {
   }
 }
 
-export const addUserPopup = connectWithStore('form', AddUserPopupBase,  (state) => {
+export const addUserPopup = connectWithStore('form', AddUserPopupBase, (state) => {
   const { activeChat, isOpenAddUserModal } = state;
-  return { activeChat, isOpenAddUserModal}
+  return { activeChat, isOpenAddUserModal }
 })

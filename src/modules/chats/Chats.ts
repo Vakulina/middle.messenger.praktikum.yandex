@@ -45,7 +45,7 @@ export class Chats extends Block {
   }
 }
 
-export const chats = connectWithStore('form',
+export const chats = connectWithStore('section',
   Chats,
   (state) => {
     const { isOpenAddNewChatModal } = state;

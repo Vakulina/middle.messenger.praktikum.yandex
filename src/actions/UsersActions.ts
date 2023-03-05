@@ -1,5 +1,6 @@
+import { UserDTO } from '~src/api/AuthApi';
 import { ErrorType } from '~src/services';
-import UsersAPI from '../api/Users';
+import UsersAPI from '../api/UsersApi';
 import Store from '../services/Store';
 
 class UsersActions {
@@ -31,15 +32,20 @@ class UsersActions {
     //await AuthActions.getUser();
   }
 
-  public async searchUser(login: string) {
-    try {
-      const res = await UsersAPI.searchUser(login);
-      return JSON.parse(res)
-    } catch (e: unknown) {
-      console.error('createChat:', e);
-      return []
-    }
+  public async searchUsers(login: string): Promise<UserDTO[]> {
+ const result =   await UsersAPI.searchUser(login)
+      .then(res => {
+        return res
+      })
+      .catch((err: ErrorType) => {
+        Store.set({ isServerError: err })
+        return []
+      })
+      return result as  Promise<UserDTO>
   }
+
+
 }
+
 
 export default new UsersActions();

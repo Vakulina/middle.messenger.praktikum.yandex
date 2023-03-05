@@ -4,8 +4,8 @@ import * as s from "./style.module.scss";
 import Block from '~src/services/Block';
 import { Input } from '../input';
 import { Textarea } from '../textarea';
-import { AuthData, RegistrationValuesType } from '~src/api/Auth';
-import { ChangePasswordType } from '~src/api/Users';
+import { AuthData, RegistrationValuesType, UserDTO } from '~src/api/AuthApi';
+import { ChangePasswordType } from '~src/api/UsersApi';
 
 export type FormProps = {
   title?: string,
@@ -28,7 +28,7 @@ export abstract class Form extends Block {
     this.serverError = null
   }
 
-  protected getValues(): AuthData | RegistrationValuesType |ChangePasswordType| {} {
+  protected getValues(): AuthData | RegistrationValuesType |ChangePasswordType|UserDTO|{} {
     return Object.entries(this.children).reduce((acc, [key, child]) => {
 
       if ((child instanceof Input) || (child instanceof Textarea)) {

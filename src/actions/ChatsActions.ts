@@ -1,5 +1,6 @@
-import ChatsAPI, { ChatsApi, ChatsDTOType } from '~src/api/Chats';
+import ChatsAPI, { ChatsApi, ChatsDTOType } from '~src/api/ChatsApi';
 import Store from '~src/services/Store';
+import UsersActions from './UsersActions';
 
 class ChatsActions {
   private readonly api: ChatsApi;
@@ -34,10 +35,10 @@ class ChatsActions {
     if (('activeChat' in state) && (state.activeChat) && ('id' in state.activeChat)) {
       const chat_id = state.activeChat?.id
       try {
-         await this.api.deleteChat(chat_id);
+        await this.api.deleteChat(chat_id);
         Store.set({ isOpenAddNewChatModal: true })
         Store.set({ isOpenHeaderMenuModal: false })
-        Store.set({ activeChat: null})
+        Store.set({ activeChat: null })
         this.getChats()
       } catch (e: unknown) {
         console.error('deleteChatById:', e);
@@ -45,12 +46,18 @@ class ChatsActions {
     }
   }
 
-  async addUsersToChat(users_id: number[], chat_id: number) {
-    try {
-      await this.api.addUsers(users_id, chat_id);
-      await this.getChats()
-    } catch (e: unknown) {
-      console.error('addUsersToChat:', e);
+
+  async addUsersToChat(users: number[]) {
+    const state = Store.getState()
+    if ('activeChat' in state) {
+      const chat_id = state.activeChat!.id
+      try {
+        await this.api.addUsers(users, chat_id);
+        await this.getChats()
+        Store.set({isOpenAddUserModal:false})
+      } catch (e: unknown) {
+        console.error('addUsersToChat:', e);
+      }
     }
   }
 
