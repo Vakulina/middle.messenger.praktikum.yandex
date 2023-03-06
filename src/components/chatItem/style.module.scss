@@ -45,18 +45,18 @@
     gap: 4px;
     flex-direction: column;
     justify-content: start;
-  }
 
-  &__column:last-of-type {
-    gap: 14px;
-    align-items: flex-end;
-    align-self: start;
-    padding: 10px 0;
-  }
+    &:last-of-type {
+      gap: 14px;
+      align-items: flex-end;
+      align-self: start;
+      padding: 10px 0;
+    }
 
-  &__column:first-of-type {
-    margin-right: 17px;
-    width: 100%;
+    &:first-of-type {
+      margin-right: 17px;
+      width: 100%;
+    }
   }
 
   &__time {

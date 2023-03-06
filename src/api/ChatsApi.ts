@@ -1,6 +1,6 @@
 import { Image } from '~src/components/image';
 import { UserDTO } from './AuthApi';
-import BaseAPI from './BaseAPI';
+import BaseAPI from './BaseApi';
 
 export type ChatsDTOType = {
   id: number,

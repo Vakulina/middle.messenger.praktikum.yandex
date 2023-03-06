@@ -28,7 +28,6 @@ export class Chats extends Block {
         class: s.chats,
         ...props,
       },
-
     );
   }
 
