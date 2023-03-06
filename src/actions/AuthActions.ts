@@ -1,5 +1,5 @@
 import AuthAPI, { AuthApi, AuthData, RegistrationData } from '~src/api/AuthApi';
-import router from '~src/services/Router';
+import { router } from '~src/services/Router';
 import { routes } from '~src/utiles/constants';
 import Store from '~src/services/Store';
 import type { ErrorType } from '~src/services';
