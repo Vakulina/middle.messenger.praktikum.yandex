@@ -1,5 +1,5 @@
 import { UserDTO } from './AuthApi';
-import BaseAPI from './BaseAPI';
+import BaseAPI from './BaseApi';
 
 export type ChangePasswordType = {
   oldPassword: string,
