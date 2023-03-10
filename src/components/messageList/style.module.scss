@@ -1,0 +1,29 @@
+@import "src/assets/stylesheets/reusable";
+
+.messageList {
+  display: flex;
+  gap: 10px;
+  flex-direction: column-reverse;
+  max-height: calc(100vh - 200px);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: scroll;
+}
+
+.message {
+  border-radius: 20px;
+  background-color: $shadeLigthest;
+  padding: 20px;
+  color: $shadeDark;
+  box-sizing: border-box;
+
+  &__time {
+    color: $shadeLight;
+  }
+
+  &[data-isread="false"] {
+    background-color: #00cb9f53;
+  }
+}

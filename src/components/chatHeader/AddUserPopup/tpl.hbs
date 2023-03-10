@@ -1,0 +1,14 @@
+<h2>
+  {{title}}
+</h2>
+{{{login}}}
+<span class={{className}}__error> {{{serverError}}} </span>
+{{#each users}}
+<label>
+  <input type="checkbox" value="{{this.id}}" />
+  {{this.first_name}} {{this.second_name}} (@{{this.login}})
+</label>
+{{/each}}
+{{{button}}}
+{{{submitButton}}}
+{{{closeButton}}}

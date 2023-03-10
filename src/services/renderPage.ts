@@ -6,46 +6,25 @@ import { getNotFoundPage } from '../modules/notFoundPage';
 import { getNavigationPage } from '~src/modules/navigation';
 import { routes } from '../utiles/constants';
 import { getSettingPage } from '../modules/settings';
-import { render } from './renderBlock';
+import { router } from './Router';
 
 const renderPage = () => {
-  const { pathname } = window.location;
+  window.addEventListener('DOMContentLoaded', async () => {
+    router
+      .use(routes.home, getNavigationPage())
+      .use(routes.chats, getChats())
+      .use(routes.authorization, getAuthForm())
+      .use(routes.registration, getRegistrationForm())
+      .use(routes.serverError, getServerErrorPage())
+      .use(routes.notFound, getNotFoundPage())
 
-  switch (pathname) {
-    case routes.home:
-      render(getNavigationPage().getContent());
-      break;
-    case routes.chats:
-      render(getChats().getContent());
-      break;
-    case routes.authorization:
-      render(getAuthForm().getContent());
-      break;
-    case routes.registration:
-      render(getRegistrationForm().getContent());
-      break;
-    case routes.serverError:
-      render(getServerErrorPage().getContent());
-      break;
-    case routes.notFound:
-      render(getNotFoundPage().getContent());
-      break;
-    case routes.setting:
-      render(getSettingPage().getContent());
-      break;
-    case routes.setAvatar:
-      render(getSettingPage().getContent());
-      break;
-    case routes.setRegInfo:
-      render(getSettingPage().getContent());
-      break;
-    case routes.setSafety:
-      render(getSettingPage().getContent());
-      break;
-    default:
-      render(getNotFoundPage().getContent());
-      break;
-  }
+      .use(routes.setRegInfo, getSettingPage(routes.setRegInfo))
+      .use(routes.setAvatar, getSettingPage(routes.setAvatar))
+      .use(routes.setSafety, getSettingPage(routes.setSafety))
+      .use(routes.setting, getSettingPage(routes.setRegInfo))
+
+      .start();
+  });
 };
 
 export default renderPage;

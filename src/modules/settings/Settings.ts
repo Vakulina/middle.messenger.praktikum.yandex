@@ -4,8 +4,10 @@ import { registrationInfoTemplate } from './registrationInfoSetting';
 import Block, { PropsType } from '~src/services/Block';
 import tpl from './tpl.hbs';
 import { PageLayout } from '~src/components/pageLayout';
-import style from './style.module.scss';
+import * as style from './style.module.scss';
 import { Tabs } from '~src/components/tabs';
+import connectWithStore from '~src/services/connectWithStore';
+import AuthActions from '~src/actions/AuthActions';
 
 export type Tab = {
   name: string,
@@ -20,34 +22,54 @@ export const tabsConfig: Tab[] = [
   {
     name: 'Личные данные',
     content: registrationInfoTemplate,
-    pathRoute: '/setting/reg-info',
+    pathRoute: '/settings/reg-info',
   },
   {
     name: 'Аватар',
     content: avatarTemplate,
-    pathRoute: '/setting/avatar',
+    pathRoute: '/settings/avatar',
   },
   {
     name: 'Безопасность',
     content: passwordTemplate,
-    pathRoute: '/setting/safety',
+    pathRoute: '/settings/safety',
   },
 ];
 
-class Settings extends Block {
-  constructor({ tabs, ...otherProps }: SettingsType) {
+class SettingsBase extends Block {
+  constructor(tag: string, { tabs, otherProps }: any) {
     super(
-      'section',
-      { tabs, class: style.setting, ...otherProps },
+      tag = 'section',
+      {
+        tabs, class: style.setting, id: 'settings', ...otherProps,
+      },
     );
+    this.setProps({
+      user: () => this.state.isLogin,
+      avatar: () => this.state.avatar,
+    });
+    AuthActions.getUser();
   }
 
   protected render() {
     return this.compile(tpl, this.props);
   }
 }
-const settingTabs = new Tabs({ tabsConfig, rootPathname: '/setting' });
 
-const settingLayout = new Settings({ tabs: settingTabs, title: 'Настройки профиля' });
+const getSettingTabs = (activeLink: string) => new Tabs({ activeLink, tabsConfig, rootPath: '/settings' });
 
-export const getSettingPage = () => new PageLayout({ content: settingLayout });
+const getSettingLayout = (activeLink: string) => connectWithStore(
+  'section',
+  SettingsBase,
+  (state) => {
+    const { user, isLogin } = state;
+    return { user, isLogin };
+  },
+  { tabs: getSettingTabs(activeLink), title: 'Настройки профиля' },
+);
+
+export const getSettingPage = (activeLink?: string) => {
+  return new PageLayout({
+    content: getSettingLayout(activeLink || tabsConfig[0].pathRoute),
+  });
+};

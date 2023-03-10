@@ -1,6 +1,11 @@
 {{{sidebar}}}
 <div class={{class}}__wrapper>
-{{{header}}}
-{{{chatHistory}}}
-{{{message}}}
+
+  {{#if isOpenAddNewChatModal}}
+  {{{newChatPopup}}}
+  {{else}}
+  {{{header}}}
+  {{{messageList}}}
+  {{{message}}}
+  {{/if}}
 </div>

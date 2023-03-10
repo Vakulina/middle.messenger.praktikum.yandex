@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import s from './style.module.scss';
+import * as s from './style.module.scss';
 import Block from '~src/services/Block';
 import { InputEventType } from '~src/utiles';
 

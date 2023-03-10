@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import s from './style.module.scss';
+import * as s from './style.module.scss';
 import { Button } from '../button';
 import { Textarea } from '../textarea';
 import { BtnEventType, InputEventType, VALIDATION_REGEXES } from '~src/utiles';
@@ -8,6 +8,7 @@ import clip from '../../../static/clip.svg';
 import arrow from '../../../static/arrow.svg';
 import { FileInput } from '../fileInput';
 import { Form } from '../form';
+import { chatsActions } from '~src/actions/ChatsActions';
 
 const message = new Textarea({
   name: 'message',
@@ -32,7 +33,7 @@ const addFileInput = new FileInput({
 
 export class Message extends Form {
   constructor() {
-    super({
+    super('form', {
       class: `${s.message}`,
     });
   }
@@ -61,7 +62,12 @@ export class Message extends Form {
 
   private submit(e: BtnEventType) {
     e.preventDefault();
-    if (this.validateForm()) console.log(this.getValues());
+    if (this.validateForm()) {
+      const { message } = this.getValues() as { message: string };
+      chatsActions.sendMessage(message);
+      const form = this.getContent() as HTMLFormElement;
+      form.reset();
+    }
   }
 
   protected render() {
