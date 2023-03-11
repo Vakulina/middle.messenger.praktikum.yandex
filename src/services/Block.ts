@@ -4,7 +4,7 @@ import { EventBus, IEventBus } from './EventBus';
 import { router } from './Router';
 import { State } from './Store';
 
-export type PropsType = Record<string, string | Record<string, Function> | boolean| typeof router>;
+export type PropsType = Record<string, string | Record<string, Function> | boolean|  Record<string,typeof router>>;
 export type ChildrenType = Record<string, Block | Block[] | any>;
 
 abstract class Block {

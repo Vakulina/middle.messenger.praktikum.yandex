@@ -1,18 +1,16 @@
 import { ChildrenType } from '../services/Block';
 import { router } from '../services/Router';
 
+export interface PropsWithRouter {
+  router: typeof router;
+}
 
 export function withRouter(Component: any) {
+  type Props = any;
   return class WithRouter extends Component<ChildrenType> {
-    protected props: ChildrenType;
-
-    constructor(props: ChildrenType) {
-      const propsWithChildren = { ...props, router };
-      super(propsWithChildren);
+    constructor(props: Props & PropsWithRouter) {
+      super({ ...props, router: router });
     }
   };
 }
 
-export interface PropsWithRouter {
-  router: typeof router;
-}
