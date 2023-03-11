@@ -16,7 +16,7 @@ class EventBus implements IEventBus {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
-    this.listeners[event].push(callback);
+    this.listeners[event]!.push(callback);
   }
 
   off(event: string, callback: (...args: unknown[]) => void) {
@@ -24,7 +24,7 @@ class EventBus implements IEventBus {
       throw new Error(`Нет события: ${event}`);
     }
 
-    this.listeners[event] = this.listeners[event].filter(
+    this.listeners[event] = this.listeners[event]!.filter(
       (listener) => listener !== callback,
     );
   }
@@ -34,7 +34,7 @@ class EventBus implements IEventBus {
       throw new Error(`Нет события: ${event}`);
     }
 
-    this.listeners[event].forEach((listener) => {
+    this.listeners[event]!.forEach((listener) => {
       listener(...args);
     });
   }

@@ -1,8 +1,8 @@
-import { UserDTO } from '~src/api/AuthApi';
-import ChatsAPI, { ChatsApi, ChatsDTOType } from '~src/api/ChatsApi';
-import { setWebSocket } from '~src/services/setWebSocket';
-import Store from '~src/services/Store';
-import { WebsocketService } from '~src/services/WebsocketService';
+import { UserDTO } from '../api/AuthApi';
+import ChatsAPI, { ChatsApi, ChatsDTOType } from '../api/ChatsApi';
+import { setWebSocket } from '../services/setWebSocket';
+import Store from '../services/Store';
+import { WebsocketService } from '../services/WebsocketService';
 
 class ChatsActions {
   private readonly api: ChatsApi;
@@ -84,12 +84,13 @@ class ChatsActions {
     return this.api.getUsersByChat(id) as Promise<UserDTO[]>;
   }
 
-  async getToken(chat_id: number) {
+  async getToken(chat_id: number):Promise<unknown> {
     try {
       const response = await this.api.getChatToken(chat_id);
       return response.token;
     } catch (err: unknown) {
       console.error(err);
+      return err
     }
   }
 

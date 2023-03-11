@@ -1,11 +1,11 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
-import Block from '~src/services/Block';
-import Store from '~src/services/Store';
-import connectWithStore from '~src/services/connectWithStore';
-import { ChatsDTOType } from '~src/api/ChatsApi';
-import { chatsActions } from '~src/actions/ChatsActions';
-import { setWebSocket } from '~src/services/setWebSocket';
+import s from './style.module.scss';
+import Block from '../../services/Block';
+import Store from '../../services/Store';
+import connectWithStore from '../../services/connectWithStore';
+import { ChatsDTOType } from '../../api/ChatsApi';
+import { chatsActions } from '../../actions/ChatsActions';
+import { setWebSocket } from '../../services/setWebSocket';
 
 interface ChatItemProps {
   chatId: number,
@@ -23,14 +23,14 @@ interface ChatItemProps {
 }
 
 export class ChatItemBase extends Block {
-  constructor(tag:string, {
+  constructor(tag = 'div', {
     isActive,
     chatId,
     chats,
     ...otherProps
   }: ChatItemProps) {
     super(
-      tag = 'div',
+      tag,
       {
         class: s.chatItem,
         events: {

@@ -1,6 +1,6 @@
 import { chatsActions } from '../actions/ChatsActions';
-import Store from '~src/services/Store';
-import { WebsocketService } from '~src/services/WebsocketService';
+import Store from '../services/Store';
+import { WebsocketService } from '../services/WebsocketService';
 
 const webSocketsList: Record<number, WebsocketService> = {};
 const WS_ENDPOINT = 'wss://ya-praktikum.tech/ws/chats/';
@@ -11,8 +11,8 @@ export const setWebSocket = async (chatId: number) => {
   }
 
   if (webSocketsList && webSocketsList[chatId]) {
-    await webSocketsList[chatId].getSocket().getOldMessages();
-    return webSocketsList[chatId].getSocket();
+    await webSocketsList[chatId]!.getSocket().getOldMessages();
+    return webSocketsList[chatId]!.getSocket();
   }
 
   const token = await chatsActions.getToken(chatId);
@@ -43,5 +43,5 @@ export const setWebSocket = async (chatId: number) => {
 
   webSocketsList[chatId] = webSocket;
 
-  return webSocketsList[chatId].getSocket();
+  return webSocketsList[chatId]!.getSocket();
 };

@@ -1,19 +1,19 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
-import Block from '~src/services/Block';
-import { Button } from '~src/components/button';
-import connectWithStore from '~src/services/connectWithStore';
-import { chatsActions } from '~src/actions/ChatsActions';
-import Store from '~src/services/Store';
+import s from './style.module.scss';
+import Block from '../../services/Block';
+import { Button } from '../Button';
+import connectWithStore from '../../services/connectWithStore';
+import { chatsActions } from '../../actions/ChatsActions';
+import Store from '../../services/Store';
 
 export class ChatHeaderMenuBase extends Block {
-  constructor(tag:string, {
+  constructor(tag = 'div', {
     activeChat,
     user,
     isAvailableToDelete,
     ...props
   }: any) {
-    super(tag = 'div', {
+    super(tag, {
       activeChat,
       isAvailableToDelete,
       user,

@@ -1,23 +1,30 @@
 {
+  "include": [
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules/**/*"
+  ],
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "es2016",
-    "declaration": false,
-    "noImplicitAny": true,
+    "lib": [
+      "ESNext",
+      "dom"
+    ],
+    "outDir": "lib",
+    "removeComments": true,
+    "target": "ES6",
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "paths": {},
+    "sourceMap": true,
+    "sourceRoot": "/",
+    "alwaysStrict": true,
+    "allowUnreachableCode": false,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "sourceMap": true,
-    "strictNullChecks": true,
-    "module": "commonjs",
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "paths": {
-      "~*": [
-        "*/."
-      ]
-    }
-  },
-  "exclude": [
-    "node_modules"
-  ]
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true
+  }
 }

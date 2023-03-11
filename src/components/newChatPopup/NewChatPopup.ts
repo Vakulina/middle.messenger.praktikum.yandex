@@ -1,10 +1,10 @@
 import tpl from './tpl.hbs';
-import { Form, FormProps } from '../form';
-import { Button } from '../button';
-import { Input } from '../input';
-import { BtnEventType } from '~src/utiles';
-import { chatsActions } from '~src/actions/ChatsActions';
-import * as s from './style.module.scss';
+import { Form, FormProps } from '../Form';
+import { Button } from '../Button';
+import { Input } from '../Input';
+import { BtnEventType } from '../../utiles';
+import { chatsActions } from '../../actions/ChatsActions';
+import  s from './style.module.scss';
 
 type titleDataType = { titleInput: string };
 

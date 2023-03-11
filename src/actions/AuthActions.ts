@@ -1,8 +1,8 @@
-import AuthAPI, { AuthApi, AuthData, RegistrationData } from '~src/api/AuthApi';
-import { router } from '~src/services/Router';
-import { routes } from '~src/utiles/constants';
-import Store from '~src/services/Store';
-import type { ErrorType } from '~src/services';
+import AuthAPI, { AuthApi, AuthData, RegistrationData } from '../api/AuthApi';
+import { router } from '../services/Router';
+import { routes } from '../utiles/constants';
+import Store from '../services/Store';
+import type { ErrorType } from '../services';
 
 class AuthActions {
   private readonly api: AuthApi;

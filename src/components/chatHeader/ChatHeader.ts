@@ -1,25 +1,25 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
-import Block from '~src/services/Block';
+import s from './style.module.scss';
+import Block from '../../services/Block';
 import avatar from '../../../static/avatar.jpg';
 import dots from '../../../static/dots.svg';
-import { Image } from '../image';
-import { Button } from '../button';
-import connectWithStore from '~src/services/connectWithStore';
-import Store from '~src/services/Store';
-import { getChatHeaderMenu } from './ChatHeaderMenu';
-import { addUserPopup } from './AddUserPopup';
-import { deleteUserPopup } from './DeleteUserPopup';
+import { Image } from '../Image';
+import { Button } from '../Button';
+import connectWithStore from '../../services/connectWithStore';
+import Store from '../../services/Store';
+import { getChatHeaderMenu } from '../ChatHeaderMenu';
+import { addUserPopup } from '../AddUserPopup';
+import { deleteUserPopup } from '../DeleteUserPopup';
 
 export class ChatHeaderBase extends Block {
-  constructor(tag:string, {
+  constructor(tag= 'div', {
     activeChat,
     isOpenHeaderMenuModal,
     isOpenAddUserModal,
     isOpenDeleteUserModal,
     ...props
   }: any) {
-    super(tag = 'div', {
+    super(tag , {
       class: s.header,
       isOpenHeaderMenuModal,
       isOpenDeleteUserModal,

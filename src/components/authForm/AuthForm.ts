@@ -1,15 +1,15 @@
 import tpl from './tpl.hbs';
-import { Form, FormProps } from '../form';
-import { Button } from '../button';
-import { Input } from '../input';
-import { Link } from '../link';
-import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
-import { VALIDATION_ERROR } from '~src/utiles/constants';
-import AuthAction from '~src/actions/AuthActions';
-import { AuthData } from '~src/api/AuthApi';
-import connectWithStore from '~src/services/connectWithStore';
-import Store from '~src/services/Store';
-import Block from '~src/services/Block';
+import { Form, FormProps } from '../Form';
+import { Button } from '../Button';
+import { Input } from '../Input';
+import { Link } from '../Link';
+import { BtnEventType, VALIDATION_REGEXES } from '../../utiles';
+import { VALIDATION_ERROR } from '../../utiles/constants';
+import AuthAction from '../../actions/AuthActions';
+import { AuthData } from '../../api/AuthApi';
+import connectWithStore from '../../services/connectWithStore';
+import Store from '../../services/Store';
+import Block from '../../services/Block';
 
 const loginInput = new Input({
   name: 'login',

@@ -1,5 +1,5 @@
-import { UserDTO } from '~src/api/AuthApi';
-import { ChatsDTOType } from '~src/api/ChatsApi';
+import { UserDTO } from '../api/AuthApi';
+import { ChatsDTOType } from '../api/ChatsApi';
 import { EventBus } from './EventBus';
 
 export enum StoreEvents {

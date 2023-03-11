@@ -1,17 +1,17 @@
 import tpl from './tpl.hbs';
-import { Form } from '../../form';
-import { Button } from '../../button';
-import { BtnEventType } from '~src/utiles';
-import connectWithStore from '~src/services/connectWithStore';
-import cross from '../../../../static/cross.svg';
-import { Image } from '../../image';
-import Store from '~src/services/Store';
-import { chatsActions } from '~src/actions/ChatsActions';
+import { Form } from '../Form';
+import { Button } from '../Button';
+import { BtnEventType } from '../../utiles';
+import connectWithStore from '../../services/connectWithStore';
+import cross from '../../../static/cross.svg';
+import { Image } from '../Image';
+import Store from '../../services/Store';
+import { chatsActions } from '../../actions/ChatsActions';
 import { getUsersList } from './utiles';
 
 class DeleteUserPopupBase extends Form {
-  constructor(tag:string, { usersOfActiveChat = [], ...props }: any) {
-    super(tag = 'form', {
+  constructor(tag= 'form', { usersOfActiveChat = [], ...props }: any) {
+    super(tag , {
       title: 'Удалить пользователей из чата',
       stylePrefix: 'popup',
       usersOfActiveChat,

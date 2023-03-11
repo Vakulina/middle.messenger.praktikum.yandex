@@ -1,14 +1,14 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
-import { Button } from '../button';
-import { Textarea } from '../textarea';
-import { BtnEventType, InputEventType, VALIDATION_REGEXES } from '~src/utiles';
-import { Image } from '../image';
+import  s from './style.module.scss';
+import { Button } from '../Button';
+import { Textarea } from '../Textarea';
+import { BtnEventType, VALIDATION_REGEXES } from '../../utiles';
+import { Image } from '../Image';
 import clip from '../../../static/clip.svg';
 import arrow from '../../../static/arrow.svg';
-import { FileInput } from '../fileInput';
-import { Form } from '../form';
-import { chatsActions } from '~src/actions/ChatsActions';
+import { FileInput } from '../FileInput';
+import { Form } from '../Form';
+import { chatsActions } from '../../actions/ChatsActions';
 
 const message = new Textarea({
   name: 'message',
@@ -25,13 +25,13 @@ const addFileInput = new FileInput({
   stylePrefix: 'clip',
   type: 'file',
   events: {
-    change: (e: InputEventType) => console.log('Выбрать файл'),
+    change: () => console.log('Выбрать файл'),
   },
   name: 'clipBtn',
   accept: 'video/*, image/*',
 });
 
-export class Message extends Form {
+export class MessageForm extends Form {
   constructor() {
     super('form', {
       class: `${s.message}`,

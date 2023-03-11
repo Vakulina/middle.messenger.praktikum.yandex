@@ -1,29 +1,33 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
+import s from './style.module.scss';
 import styles from '../../utiles/styles';
-import Block from '~src/services/Block';
-import { withRouter } from '~src/hocs/withRouter';
+import Block from '../../services/Block';
+import { withRouter } from '../../hocs/withRouter';
+import { router } from '../../services/Router';
 
 interface LinkProps {
   href: string,
   text: string,
   stylePrefix?: string | null,
   active?: boolean,
+  router?: typeof router
 }
 
 class LinkBase extends Block {
   constructor({
     stylePrefix = null,
-    ...otherProps
+ 
+    ...props
   }: LinkProps) {
     super(
       'span',
       {
         class: `${s.link} ${styles.getClassWithPrefix(s, 'link', stylePrefix)}`,
+
         events: {
           click: () => this.navigate(),
         },
-        ...otherProps,
+        ...props,
       },
     );
   }

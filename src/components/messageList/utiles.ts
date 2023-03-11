@@ -1,8 +1,8 @@
-import { messageType } from '~src/services';
-import { parseDate } from '~src/utiles/parseDate';
-import { MessageItem } from './messageItem';
+import {MessageType } from '../../services/Store';
+import { parseDate } from '../../utiles/parseDate';
+import { MessageItem } from './MessageItem';
 
-export const getMessageList = (items: messageType[]) => {
+export const getMessageList = (items:MessageType[]) => {
   return items.map((item) => {
     return new MessageItem(
       {

@@ -1,9 +1,10 @@
 import { v4 as makeUUID } from 'uuid';
 
 import { EventBus, IEventBus } from './EventBus';
+import { router } from './Router';
 import { State } from './Store';
 
-export type PropsType = Record<string, string | Record<string, Function> | boolean>;
+export type PropsType = Record<string, string | Record<string, Function> | boolean| typeof router>;
 export type ChildrenType = Record<string, Block | Block[] | any>;
 
 abstract class Block {
@@ -138,9 +139,16 @@ abstract class Block {
   }
 
   _addEvents() {
-    const { events = {} } = this.props as PropsType & { events: Record<string, () => void> };
-    Object.keys(events).forEach((eventName) => {
-      this._element?.addEventListener(eventName, events[eventName]);
+    const { events = {} } = this.props as PropsType& {
+      events: Record<string, () => void>;
+    };
+
+    if (!events) {
+      return;
+    }
+
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element!.addEventListener(event, listener);
     });
   }
 
@@ -165,15 +173,18 @@ abstract class Block {
   }
 
   _removeEventListeners() {
-    const { events } = this.props as PropsType & { events: Record<string, () => void> };
+    const { events } = this.props as PropsType  & {
+      events: Record<string, () => void>;
+    };
     if (!events) {
-
+      return;
     } else {
-      Object.keys(events).forEach((eventName) => {
-        this._element?.removeEventListener(eventName, events[eventName]);
+      Object.entries(events).forEach(([event, listener]) => {
+        this._element!.removeEventListener(event, listener);
       });
     }
   }
+
 
   _componentDidMount() {
     this.componentDidMount();

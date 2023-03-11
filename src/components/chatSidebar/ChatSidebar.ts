@@ -1,15 +1,15 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
-import Block from '~src/services/Block';
-import { Panel } from './controlPanel';
-import connectWithStore from '~src/services/connectWithStore';
+import  s from './style.module.scss';
+import Block from '../../services/Block';
+import { Panel } from './ControlPanel';
+import connectWithStore from '../../services/connectWithStore';
 import { getChatList } from './utiles';
-import { chatsActions } from '~src/actions/ChatsActions';
+import { chatsActions } from '../../actions/ChatsActions';
 
 class ChatSidebarBase extends Block {
-  constructor(tag:string, props: any) {
+  constructor(tag = 'sidebar', props: any) {
     super(
-      tag = 'sidebar',
+      tag,
       {
         class: s.sidebar,
         ...props,

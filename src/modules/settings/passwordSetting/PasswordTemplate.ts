@@ -1,14 +1,14 @@
 import tpl from './tpl.hbs';
-import { Form, FormProps } from '~src/components/form';
-import { Button } from '~src/components/button';
-import { Input } from '~src/components/input';
-import { BtnEventType, getPasswordValidation, VALIDATION_REGEXES } from '~src/utiles';
-import { VALIDATION_ERROR } from '~src/utiles/constants';
-import Store from '~src/services/Store';
-import connectWithStore from '~src/services/connectWithStore';
-import Block from '~src/services/Block';
-import UsersActions from '~src/actions/UsersActions';
-import { ChangePasswordType } from '~src/api/UsersApi';
+import { Form, FormProps } from '../../../components/Form';
+import { Button } from '../../../components/Button';
+import { Input } from '../../../components/Input';
+import { BtnEventType, getPasswordValidation, VALIDATION_REGEXES } from '../../../utiles';
+import { VALIDATION_ERROR } from '../../../utiles/constants';
+import Store from '../../../services/Store';
+import connectWithStore from '../../../services/connectWithStore';
+import Block from '../../../services/Block';
+import UsersActions from '../../../actions/UsersActions';
+import { ChangePasswordType } from '../../../api/UsersApi';
 
 export class PasswordTemplateBase extends Form {
   constructor(props: FormProps) {

@@ -1,3 +1,5 @@
+import { Request, Response } from "express";
+
 const express = require('express');
 const path = require('path');
 
@@ -11,6 +13,6 @@ app.listen(PORT, () => {
 
 app.use(express.static(rootPath));
 
-app.use('/', (req, res) => {
+app.use('/', (_:Request, res:Response) => {
   res.sendFile((path.join(rootPath, 'index.html')));
 });

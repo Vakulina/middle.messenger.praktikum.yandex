@@ -1,12 +1,11 @@
 import tpl from './tpl.hbs';
-import * as s from '../style.module.scss';
-import Block from '~src/services/Block';
-import { Link } from '~src/components/link';
-import { Search } from '~src/components/search';
-import { routes } from '~src/utiles/constants';
-import { Button } from '~src/components/button';
-import { BtnEventType } from '~src/utiles';
-import Store from '~src/services/Store';
+import  s from '../style.module.scss';
+import Block from '../../../services/Block';
+import { Link } from '../../Link';
+import { Search } from '../../Search';
+import { routes } from '../../../utiles/constants';
+import { Button } from '../../Button';
+import Store from '../../../services/Store';
 
 export class Panel extends Block {
   constructor() {
@@ -20,7 +19,7 @@ export class Panel extends Block {
         stylePrefix: 'sidebar',
         type: 'button',
         events: {
-          click: (e: BtnEventType) => {
+          click: () => {
             Store.set({ activeChat: null });
             Store.set({ isOpenAddNewChatModal: true });
           },

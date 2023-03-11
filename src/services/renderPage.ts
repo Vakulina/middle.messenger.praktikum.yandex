@@ -1,11 +1,11 @@
-import { getChats } from '~src/modules/chats';
-import { getAuthForm } from '../modules/auth';
-import { getRegistrationForm } from '../modules/registration';
-import { getServerErrorPage } from '../modules/serverErrorPage';
-import { getNotFoundPage } from '../modules/notFoundPage';
-import { getNavigationPage } from '~src/modules/navigation';
+import { getChats } from '../modules/Chats';
+import { getAuthForm } from '../modules/Auth';
+import { getRegistrationForm } from '../modules/Registration';
+import { getServerErrorPage } from '../modules/ServerErrorPage';
+import { getNotFoundPage } from '../modules/NotFoundPage';
+import { getNavigationPage } from '../modules/Navigation';
 import { routes } from '../utiles/constants';
-import { getSettingPage } from '../modules/settings';
+import { getSettingPage } from '../modules/Settings';
 import { router } from './Router';
 
 const renderPage = () => {

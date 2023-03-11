@@ -1,13 +1,13 @@
 import { avatarTemplate } from './avatarSetting';
-import { passwordTemplate } from './passwordSetting';
-import { registrationInfoTemplate } from './registrationInfoSetting';
-import Block, { PropsType } from '~src/services/Block';
+import { passwordTemplate } from './PasswordSetting';
+import { registrationInfoTemplate } from './RegistrationInfoSetting';
+import Block, { PropsType } from '../../services/Block';
 import tpl from './tpl.hbs';
-import { PageLayout } from '~src/components/pageLayout';
-import * as style from './style.module.scss';
-import { Tabs } from '~src/components/tabs';
-import connectWithStore from '~src/services/connectWithStore';
-import AuthActions from '~src/actions/AuthActions';
+import { PageLayout } from '../../components/PageLayout';
+import style from './style.module.scss';
+import { Tabs } from '../../components/Tabs';
+import connectWithStore from '../../services/connectWithStore';
+import AuthActions from '../../actions/AuthActions';
 
 export type Tab = {
   name: string,
@@ -37,9 +37,9 @@ export const tabsConfig: Tab[] = [
 ];
 
 class SettingsBase extends Block {
-  constructor(tag: string, { tabs, otherProps }: any) {
+  constructor(tag = 'section', { tabs, otherProps }: any) {
     super(
-      tag = 'section',
+      tag,
       {
         tabs, class: style.setting, id: 'settings', ...otherProps,
       },
@@ -70,6 +70,6 @@ const getSettingLayout = (activeLink: string) => connectWithStore(
 
 export const getSettingPage = (activeLink?: string) => {
   return new PageLayout({
-    content: getSettingLayout(activeLink || tabsConfig[0].pathRoute),
+    content: getSettingLayout(activeLink || tabsConfig[0]!.pathRoute),
   });
 };

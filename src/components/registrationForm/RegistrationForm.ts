@@ -1,14 +1,14 @@
 import tpl from './tpl.hbs';
-import { Form, FormProps } from '../form';
-import { Button } from '../button';
-import { Input } from '../input';
-import { Link } from '../link';
-import { BtnEventType, getPasswordValidation, VALIDATION_REGEXES } from '~src/utiles';
-import connectWithStore from '~src/services/connectWithStore';
-import AuthActions from '~src/actions/AuthActions';
-import { RegistrationData, RegistrationValuesType } from '~src/api/AuthApi';
-import Store from '~src/services/Store';
-import Block from '~src/services/Block';
+import { Form, FormProps } from '../Form';
+import { Button } from '../Button';
+import { Input } from '../Input';
+import { Link } from '../Link';
+import { BtnEventType, getPasswordValidation, VALIDATION_REGEXES } from '../../utiles';
+import connectWithStore from '../../services/connectWithStore';
+import AuthActions from '../../actions/AuthActions';
+import { RegistrationData } from '../../api/AuthApi';
+import Store from '../../services/Store';
+import Block from '../../services/Block';
 
 const first_name = new Input({
   name: 'first_name',

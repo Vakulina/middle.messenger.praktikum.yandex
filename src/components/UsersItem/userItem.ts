@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import Block from '~src/services/Block';
+import Block from '../../services/Block';
 
 interface UserItemProps {
   id: string | number,

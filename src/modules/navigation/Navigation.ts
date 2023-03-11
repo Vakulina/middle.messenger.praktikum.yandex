@@ -1,8 +1,8 @@
 import tpl from './tpl.hbs';
-import { Link } from '~src/components/link';
-import Block, { ChildrenType } from '~src/services/Block';
-import * as s from './style.module.scss';
-import { routes } from '~src/utiles/constants';
+import { Link } from '../../components/Link';
+import Block, { ChildrenType } from '../../services/Block';
+import  s from './style.module.scss';
+import { routes } from '../../utiles/constants';
 
 export class Navigation extends Block {
   constructor(props: ChildrenType) {

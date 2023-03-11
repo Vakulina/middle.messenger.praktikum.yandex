@@ -1,1 +1,1 @@
-export * from './Form';
+export {Form, FormProps} from './Form';

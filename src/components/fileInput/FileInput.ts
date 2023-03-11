@@ -1,9 +1,9 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
-import Block from '~src/services/Block';
-import { InputEventType } from '~src/utiles';
-import styles from '~src/utiles/styles';
-import Store from '~src/services/Store';
+import  s from './style.module.scss';
+import Block from '../../services/Block';
+import { InputEventType } from '../../utiles';
+import styles from '../../utiles/styles';
+import Store from '../../services/Store';
 
 interface FileInputProps {
   label?: string,

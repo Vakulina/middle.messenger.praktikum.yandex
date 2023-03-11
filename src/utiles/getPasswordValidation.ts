@@ -1,4 +1,4 @@
-import { AuthData, RegistrationValuesType } from '~src/api/AuthApi';
+import { AuthData, RegistrationValuesType } from '../api/AuthApi';
 
 export const getPasswordValidation = (values: AuthData | RegistrationValuesType | {}): boolean => {
   if (('password' in values) && ('repeated_password' in values)) {

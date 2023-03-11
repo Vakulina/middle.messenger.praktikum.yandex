@@ -1,11 +1,11 @@
 import tpl from './tpl.hbs';
 import styles from '../../utiles/styles';
-import * as s from './style.module.scss';
-import Block from '~src/services/Block';
-import { Input } from '../input';
-import { Textarea } from '../textarea';
-import { AuthData, RegistrationValuesType, UserDTO } from '~src/api/AuthApi';
-import { ChangePasswordType } from '~src/api/UsersApi';
+import Block from '../../services/Block';
+import { Input } from '../Input';
+import { Textarea } from '../Textarea';
+import { AuthData, RegistrationValuesType, UserDTO } from '../../api/AuthApi';
+import { ChangePasswordType } from '../../api/UsersApi';
+import s from './style.module.scss';
 
 export type FormProps = {
   title?: string,
@@ -20,8 +20,8 @@ export type FormProps = {
 export abstract class Form extends Block {
   serverError: string | null;
 
-  constructor(tag:string, props: FormProps) {
-    super(tag = 'form', {
+  constructor(tag= 'form', props: FormProps) {
+    super(tag , {
       class: `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
       className: s.form,
       ...props,

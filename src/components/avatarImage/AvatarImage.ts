@@ -1,9 +1,9 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
+import s from './style.module.scss';
 import styles from '../../utiles/styles';
-import Block from '~src/services/Block';
-import connectWithStore from '~src/services/connectWithStore';
-import avatarBase from '../../../static/avatar.jpg';
+import Block from '../../services/Block';
+import connectWithStore from '../../services/connectWithStore';
+import avatarBase from '../../../static/avatar.jpg'
 
 interface ImageProps {
   avatar?: any,
@@ -12,14 +12,14 @@ interface ImageProps {
 }
 
 export class AvatarImageBase extends Block {
-  constructor(tag:string, {
+  constructor(tag = 'img', {
     stylePrefix = 'avatar',
     avatar,
     alt = 'аватар',
     ...otherProps
   }: ImageProps) {
     super(
-      tag = 'img',
+      tag,
       {
         alt,
         src: avatar || avatarBase || '',

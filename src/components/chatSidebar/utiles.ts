@@ -1,7 +1,7 @@
-import { ChatsDTOType } from '~src/api/ChatsApi';
-import { parseDate } from '~src/utiles/parseDate';
-import { getChatItem } from '../chatItem';
-import { Image } from '../image';
+import { ChatsDTOType } from '../../api/ChatsApi';
+import { parseDate } from '../../utiles/parseDate';
+import { getChatItem } from '../ChatItem';
+import { Image } from '../Image';
 import avatar from '../../../static/avatar.jpg';
 
 export const getChatList = (items: Partial<ChatsDTOType>[], activeChat?: ChatsDTOType | null) => {
