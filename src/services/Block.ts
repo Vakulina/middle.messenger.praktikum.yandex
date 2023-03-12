@@ -1,11 +1,12 @@
+import { isEqual } from '../utiles';
 import { v4 as makeUUID } from 'uuid';
 
 import { EventBus, IEventBus } from './EventBus';
 import { router } from './Router';
 import { State } from './Store';
 
-export type PropsType = Record<string, string | Record<string, Function> | boolean|  Record<string, typeof router>>;
-export type ChildrenType = Record<string, Block | Block[] | any| typeof router>;
+export type PropsType = Record<string, string | Record<string, Function> | boolean | Record<string, typeof router>>;
+export type ChildrenType = Record<string, Block | Block[] | any | typeof router>;
 
 abstract class Block {
   static EVENTS = {
@@ -139,7 +140,7 @@ abstract class Block {
   }
 
   _addEvents() {
-    const { events = {} } = this.props as PropsType& {
+    const { events = {} } = this.props as PropsType & {
       events: Record<string, () => void>;
     };
 
@@ -173,7 +174,7 @@ abstract class Block {
   }
 
   _removeEventListeners() {
-    const { events } = this.props as PropsType  & {
+    const { events } = this.props as PropsType & {
       events: Record<string, () => void>;
     };
     if (!events) {
@@ -204,8 +205,14 @@ abstract class Block {
   }
 
   componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
-    if (!props.oldProps && !props.newProps) return true;
-    return false;
+    if (!props.oldProps || !props.newProps) return true
+
+    if (isEqual(props.oldProps, props.newProps)) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   setProps(nextProps: ChildrenType) {
