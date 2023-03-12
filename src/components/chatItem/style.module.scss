@@ -19,11 +19,6 @@
     background-color: #e6f7f3;
   }
 
-  &__title {
-    @include reset-margins;
-    @include subtitle;
-  }
-
   &__avatar {
     width: 48px;
     min-width: 48px;
@@ -31,47 +26,52 @@
     border-radius: 50%;
     margin-right: 10px;
   }
+}
 
-  &__text {
-    @include reset-margins;
-    @include text;
-    @include ellipsis-overflow;
+.title {
+  @include reset-margins;
+  @include subtitle;
+}
 
-    height: 30px;
+.text {
+  @include reset-margins;
+  @include text;
+  @include ellipsis-overflow;
+
+  height: 30px;
+}
+
+.count {
+  font-size: 11px;
+  color: $lightTextColor;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: $primary-color;
+  text-align: center;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.column {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  justify-content: start;
+
+  &:last-of-type {
+    gap: 14px;
+    align-items: flex-end;
+    align-self: start;
+    padding: 10px 0;
   }
 
-  &__column {
-    display: flex;
-    gap: 4px;
-    flex-direction: column;
-    justify-content: start;
-
-    &:last-of-type {
-      gap: 14px;
-      align-items: flex-end;
-      align-self: start;
-      padding: 10px 0;
-    }
-
-    &:first-of-type {
-      margin-right: 17px;
-      width: 100%;
-    }
+  &:first-of-type {
+    margin-right: 17px;
+    width: 100%;
   }
+}
 
-  &__time {
-    font-size: 9px;
-  }
-
-  &__count {
-    font-size: 11px;
-    color: $lightTextColor;
-    min-width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    background-color: $primary-color;
-    text-align: center;
-    padding: 4px;
-    box-sizing: border-box;
-  }
+.time {
+  font-size: 9px;
 }

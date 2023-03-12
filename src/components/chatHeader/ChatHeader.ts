@@ -10,6 +10,7 @@ import Store from '../../services/Store';
 import { getChatHeaderMenu } from '../ChatHeaderMenu';
 import { addUserPopup } from '../AddUserPopup';
 import { deleteUserPopup } from '../DeleteUserPopup';
+import style from './style.module.scss'
 
 export class ChatHeaderBase extends Block {
   constructor(tag= 'div', {
@@ -25,6 +26,7 @@ export class ChatHeaderBase extends Block {
       isOpenDeleteUserModal,
       isOpenAddUserModal,
       activeChat,
+      style,
       ...props,
     });
   }

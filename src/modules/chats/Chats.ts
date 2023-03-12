@@ -24,8 +24,10 @@ export class Chats extends Block {
   constructor(tag= 'section', props: ChatsProps) {
     super(
       tag ,
+
       {
         class: s.chats,
+        style:s,
         ...props,
       },
     );

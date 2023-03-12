@@ -8,12 +8,6 @@ import  s from './style.module.scss';
 
 type titleDataType = { titleInput: string };
 
-const titleInput = new Input({
-  name: 'title',
-  label: 'Введите название нового чата',
-  autofocus: true,
-});
-
 export class NewChatPopup extends Form {
   constructor(props: FormProps) {
     super('form', {
@@ -36,7 +30,11 @@ export class NewChatPopup extends Form {
           },
         },
       }),
-      titleInput,
+      titleInput: new Input({
+        name: 'title',
+        label: 'Введите название нового чата',
+        autofocus: true,
+      }),
     };
   }
 
@@ -52,9 +50,7 @@ export class NewChatPopup extends Form {
       const { titleInput } = data;
       await chatsActions.createChat({ title: titleInput });
       await chatsActions.getChats();
-    } else {
-      this.setProps({ error: 'Название чата не может быть пустым!' });
-    }
+    } 
   }
 
   render(): DocumentFragment {

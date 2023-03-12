@@ -62,12 +62,10 @@ export class Input extends Block {
   }
 
   checkInputValidity(e?: InputEventType) {
-    if (this.props.pattern){
     const regexp = new RegExp(this.props.pattern);
     this.isValid = e ? regexp.test(e.target.value) : false;
-    const attrValue = this.isValid ? 'false' : 'true';
+    const attrValue = !this.isValid;
     this.addAttribute({ 'data-error': attrValue });
-    }
   }
 
   get value() {

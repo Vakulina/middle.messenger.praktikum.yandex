@@ -21,10 +21,11 @@ const loginInput = new Input({
 });
 
 class AddUserPopupBase extends Form {
-  constructor(tag= 'form', props: FormProps) {
-    super(tag , {
+  constructor(tag = 'form', props: FormProps) {
+    super(tag, {
       title: 'Добавить пользователя в чат',
       stylePrefix: 'popup',
+
       events: {
         focusin: () => {
           if (this.state.isServerError) {

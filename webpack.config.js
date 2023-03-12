@@ -36,7 +36,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+         isProdaction? MiniCssExtractPlugin.loader: 'style-loader',
           'css-loader',
           'sass-loader',
         ],
@@ -103,7 +103,8 @@ module.exports = {
       cleanAfterEveryBuildPatterns: ['!*.woff', '!*.woff2', '!*.ttf', '!*.eot', '!*.svg', '!*.png']
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:5].css'
+      filename: '[name].[contenthash:5].css',
+      chunkFilename: !isProdaction ? "[id].css" : "[id].[contenthash].css",
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
