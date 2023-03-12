@@ -10,6 +10,7 @@ import connectWithStore from '../../services/connectWithStore';
 import AuthActions from '../../actions/AuthActions';
 import { Link } from '../../components/Link';
 import { routes } from '../../utiles/constants';
+import { Button } from '../../components/Button';
 
 export type Tab = {
   name: string,
@@ -55,9 +56,22 @@ class SettingsBase extends Block {
 
   protected initChildren(): void {
     this.children={
-      button: new Link({ href: routes.chats, text: '<-', stylePrefix:'settings' }),
+      toChats: new Link({ href: routes.chats, text: '<-', stylePrefix:'settings' }),
+      exit:  new Button({
+        text: 'Выйти из системы',
+        stylePrefix: 'logout',
+        type: 'button',
+        events: {
+          click: () => {
+            this.logout();
+          },
+        },
+      }),
       ...this.children
     }
+  }
+  async logout(){
+    await AuthActions.logout();
   }
   protected render() {
     return this.compile(tpl, this.props);
