@@ -40,6 +40,7 @@ export class FileInput extends Block {
       {
         type,
         text,
+        style:s,
         class: !stylePrefix ? s.fileInput : `${s.fileInput} ${styles.getClassWithPrefix(s, 'fileInput', stylePrefix)}`,
         events,
         ...otherProps,

@@ -84,13 +84,17 @@
     background-color: $lightPrimaryColor;
   }
 
-  input:hover + label,
-  input:focus + label {
+  input:hover+label,
+  input:focus+label {
     background-color: $lightPrimaryColor;
   }
 
   span:last-of-type[data-style="placeholder"] {
     color: $secondaryDark;
     font-weight: 400;
+  }
+
+  span[data-style="text"] {
+    display: block;
   }
 }

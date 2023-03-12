@@ -8,6 +8,8 @@ import style from './style.module.scss';
 import { Tabs } from '../../components/Tabs';
 import connectWithStore from '../../services/connectWithStore';
 import AuthActions from '../../actions/AuthActions';
+import { Link } from '../../components/Link';
+import { routes } from '../../utiles/constants';
 
 export type Tab = {
   name: string,
@@ -51,6 +53,12 @@ class SettingsBase extends Block {
     AuthActions.getUser();
   }
 
+  protected initChildren(): void {
+    this.children={
+      button: new Link({ href: routes.chats, text: '<-', stylePrefix:'settings' }),
+      ...this.children
+    }
+  }
   protected render() {
     return this.compile(tpl, this.props);
   }
