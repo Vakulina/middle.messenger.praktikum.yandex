@@ -67,7 +67,6 @@ class AuthFormBase extends Form {
       password:passwordInput,
       ...this.children,
     };
-    console.log(this.children.link, this.children.password)
   }
 
   private async submit(e: BtnEventType) {

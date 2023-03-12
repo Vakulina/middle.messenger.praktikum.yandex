@@ -66,7 +66,6 @@ class DeleteUserPopupBase extends Form {
   private async submit(e: BtnEventType) {
     e.preventDefault();
     const data = this.getCheckboxesValues();
-    console.log(data);
     chatsActions.deleteUsersFromChat(data);
   }
 

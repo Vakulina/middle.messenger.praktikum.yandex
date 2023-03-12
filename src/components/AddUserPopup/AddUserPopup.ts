@@ -31,6 +31,7 @@ class AddUserPopupBase extends Form {
           if (this.state.isServerError) {
             this.addAttribute({ 'data-server-error': 'false' });
           }
+
         },
       },
       ...props,
@@ -72,7 +73,11 @@ class AddUserPopupBase extends Form {
         type: 'button',
         events: {
           click: () => {
+            this.props.users = null;
+            const form = this.getContent() as HTMLFormElement;
+            form.reset();
             Store.set({ isOpenAddUserModal: false });
+            this.addAttribute({ 'data-after-search': 'false' });
           },
         },
         name: 'sendMessage',
@@ -107,7 +112,6 @@ class AddUserPopupBase extends Form {
     e.preventDefault();
     const data = this.getCheckboxesValues();
     chatsActions.addUsersToChat(data);
-    //
   }
 
   render(): DocumentFragment {

@@ -52,7 +52,6 @@ export const avatarImage = connectWithStore(
   AvatarImageBase,
   (state) => {
     const { avatar } = state;
-    //  console.log(avatar)
     return { avatar };
   },
 );

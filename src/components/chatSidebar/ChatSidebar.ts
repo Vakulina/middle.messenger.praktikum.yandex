@@ -15,7 +15,6 @@ class ChatSidebarBase extends Block {
         ...props,
       },
     );
-    console.log('sidebar',s)
     chatsActions.getChats();
   }
 
