@@ -11,7 +11,7 @@ import tpl from './tpl.hbs';
 import Store from '../../../services/Store';
 
 export class AvatarTemplateBase extends Form {
-  constructor(tag= 'section', props: FormProps) {
+  constructor(tag= 'form', props: FormProps) {
     super(tag, {
       events: {
         focusin: () => {

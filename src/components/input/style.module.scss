@@ -41,22 +41,24 @@
   }
 
   &_setting {
-    flex-direction: row;
-    align-items: center;
+    width: 100%;
+
   }
 
   &_setting label {
     color: $secondaryDark;
     font-size: 16px;
-    max-width: 514px;
+    max-width: 900px;
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-    align-items: baseline;
+    gap: 30px;
+    position: relative;
   }
 
   &_setting input {
-    width: 100%;
-    max-width: 340px;
+    width: 340px;
     margin-top: 0;
   }
 
@@ -77,10 +79,11 @@
     border-color: red;
   }
 
-  & > label > span {
+  &>label>span {
     display: none;
     color: $attantionColor;
   }
+  
 
   &[data-error="true"] input {
     border-color: $attantionColor;
@@ -90,4 +93,15 @@
   &[data-error="true"] span {
     display: block;
   }
+  &_setting[data-error="true"] {
+    height: 80px;
+  }
+
+  &_setting[data-error="true"] span  {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    display: block;
+    z-index: 10;
+}
 }
