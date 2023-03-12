@@ -15,13 +15,14 @@ class ChatSidebarBase extends Block {
         ...props,
       },
     );
+    console.log('sidebar',s)
     chatsActions.getChats();
   }
 
   initChildren() {
     this.children = {
       items: getChatList(this.state.chats || [], this.state.activeChat),
-      panel: new Panel(),
+      panel: new Panel({ class: s.panel }),
     };
   }
 

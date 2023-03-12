@@ -1,5 +1,4 @@
 import tpl from './tpl.hbs';
-import  s from '../style.module.scss';
 import Block from '../../../services/Block';
 import { Link } from '../../Link';
 import { Search } from '../../Search';
@@ -8,8 +7,9 @@ import { Button } from '../../Button';
 import Store from '../../../services/Store';
 
 export class Panel extends Block {
-  constructor() {
-    super('div', { class: s.panel });
+  
+  constructor(props:{class:string}) {
+    super('div', { class: props.class });
   }
 
   initChildren() {

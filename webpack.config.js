@@ -15,6 +15,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/index.ts'),
   output: {
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'static/[name].[contenthash][ext]',
     filename: '[name].js',
     chunkFilename: '[name].js',
     publicPath: '/',
@@ -34,7 +35,11 @@ module.exports = {
 
       {
         test: /\.scss$/,
-        use: ["css-loader", "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
         exclude: /(node_modules)/,
       },
 
@@ -43,14 +48,13 @@ module.exports = {
         use: "html-loader",
         exclude: /(node_modules)/,
       },
+
       {
         test: /\.(png|jpg|svg|gif)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[contenthash:8].[ext]',
-          },
-        }
+        type: 'asset/resource',
+        generator: {
+          filename:  'static/[name].[contenthash:8].[ext]',
+        },
       },
       {
         test: /\.ts?$/,
@@ -67,14 +71,8 @@ module.exports = {
 
       {
         test: /\.(ttf|woff|woff2|eot)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-          },
-        }
-      },
-
+        type: 'asset/resource',
+      }
     ]
   },
   devServer: {
@@ -83,7 +81,7 @@ module.exports = {
     hot: !isProdaction,
     historyApiFallback: true
   },
-  devtool: isProdaction ? false : 'source-map',
+
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -105,8 +103,7 @@ module.exports = {
       cleanAfterEveryBuildPatterns: ['!*.woff', '!*.woff2', '!*.ttf', '!*.eot', '!*.svg', '!*.png']
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[name].css',
+      filename: '[name].[contenthash:5].css'
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
