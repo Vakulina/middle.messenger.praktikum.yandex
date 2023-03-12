@@ -3,7 +3,7 @@ import { router } from '../services/Router';
 import { routes } from '../utiles/constants';
 import Store from '../services/Store';
 import type { ErrorType } from '../services';
-import {chatsActions} from './ChatsActions';
+import { chatsActions } from './ChatsActions';
 
 class AuthActions {
   private readonly api: AuthApi;
@@ -14,6 +14,7 @@ class AuthActions {
 
   async signin(data: AuthData) {
     await this.api.signin(data)
+      .then(() => chatsActions.getChats())
       .then(() => Store.set({ isLogin: true }))
       .then(() => Store.set({ isAuthError: null }))
       .then(() => this.getUser())
