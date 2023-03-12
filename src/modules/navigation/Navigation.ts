@@ -26,6 +26,7 @@ const navigation = new Navigation({
   'sign-up': new Link({ href: routes.registration, text: 'Регистрация' }),
   'not-found': new Link({ href: routes.notFound, text: '404' }),
   error: new Link({ href: routes.serverError, text: 'Ошибка сервера' }),
+ linkComponent: new Link({ href: routes.registration, text: 'Нет аккаунта?', stylePrefix: 'profile' })
 });
 
 export const getNavigationPage = () => {

@@ -17,7 +17,7 @@ class LinkBase extends Block {
     ...props
   }: LinkProps) {
     super(
-      'span',
+      'button',
       {
         class: `${s.link} ${styles.getClassWithPrefix(s, 'link', stylePrefix)}`,
         events: {

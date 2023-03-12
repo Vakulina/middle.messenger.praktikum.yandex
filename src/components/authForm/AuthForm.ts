@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Input } from '../Input';
 import { Link } from '../Link';
 import { BtnEventType, VALIDATION_REGEXES } from '../../utiles';
-import { VALIDATION_ERROR } from '../../utiles/constants';
+import { routes, VALIDATION_ERROR } from '../../utiles/constants';
 import AuthAction from '../../actions/AuthActions';
 import { AuthData } from '../../api/AuthApi';
 import connectWithStore from '../../services/connectWithStore';
@@ -29,7 +29,10 @@ const passwordInput = new Input({
   textError: VALIDATION_ERROR.UNCORRECT_PASSWORD,
 });
 
+const linkComponent =new Link({ href: routes.registration, text: 'Нет аккаунта?' })
+
 class AuthFormBase extends Form {
+ 
   constructor(props: FormProps) {
     super('form', {
       title: 'Вход',
@@ -42,13 +45,14 @@ class AuthFormBase extends Form {
           }
         },
       },
+   
       ...props,
     });
   }
 
   initChildren() {
     this.children = {
-      ...this.children,
+      link: linkComponent,
       button: new Button({
         text: 'Вход',
         type: 'submit',
@@ -60,9 +64,10 @@ class AuthFormBase extends Form {
         },
       }),
       login: loginInput,
-      password: passwordInput,
-      link: new Link({ href: '/sign-up', text: 'Нет аккаунта?' }),
+      password:passwordInput,
+      ...this.children,
     };
+    console.log(this.children.link, this.children.password)
   }
 
   private async submit(e: BtnEventType) {

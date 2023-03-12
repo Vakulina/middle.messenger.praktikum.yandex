@@ -73,6 +73,7 @@ export class PasswordTemplateBase extends Form {
   }
 
   private async submit(e: BtnEventType) {
+    console.log(this.props.isPasswordSettingsError)
     e.preventDefault();
     document.querySelector('form')?.blur();
     const isValid = this.validateForm();
