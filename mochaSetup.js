@@ -1,6 +1,6 @@
-const { JSDOM } = require('jsdom');
-const Handlebars = require('handlebars');
-const fs = require('fs');
+const { JSDOM } = require("jsdom");
+const Handlebars = require("handlebars");
+const fs = require("fs");
 
 const dom = new JSDOM('<div id="root"><div>', { url: 'http://localhost:3000' });
 
@@ -13,4 +13,8 @@ require.extensions['.hbs'] = function (module, filename) {
   const contents = fs.readFileSync(filename, 'utf-8');
   /* eslint-disable  no-param-reassign */
   module.exports = Handlebars.compile(contents);
+};
+
+require.extensions[".scss"] = function () {
+  module.exports = () => ({});
 };
