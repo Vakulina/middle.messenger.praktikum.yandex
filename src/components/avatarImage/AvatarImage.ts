@@ -3,7 +3,7 @@ import s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '../../services/Block';
 import connectWithStore from '../../services/connectWithStore';
-import avatarBase from '../../../static/avatar.jpg'
+import avatarBase from '../../../static/avatar.jpg';
 
 interface ImageProps {
   avatar?: any,

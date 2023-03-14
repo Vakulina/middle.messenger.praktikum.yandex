@@ -8,7 +8,7 @@ import { API_BASE_URL } from '../../utiles/constants';
 export const getChatList = (items: Partial<ChatsDTOType>[], activeChat?: ChatsDTOType | null) => {
   return items.map((item) => {
     const isActive = Number(activeChat?.id) === Number(item.id);
-    const srcItem =item.avatar ? `${API_BASE_URL}/resources${item.avatar}`: avatar;
+    const srcItem = item.avatar ? `${API_BASE_URL}/resources${item.avatar}` : avatar;
     return getChatItem(
       {
         name: item.title || '',

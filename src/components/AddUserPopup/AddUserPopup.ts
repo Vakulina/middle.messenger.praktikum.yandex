@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Input } from '../Input';
 import { BtnEventType, VALIDATION_REGEXES } from '../../utiles';
 import connectWithStore from '../../services/connectWithStore';
-import cross from '../../../static/cross.svg'
+import cross from '../../../static/cross.svg';
 import { Image } from '../Image';
 import Store from '../../services/Store';
 import { chatsActions } from '../../actions/ChatsActions';
@@ -31,7 +31,6 @@ class AddUserPopupBase extends Form {
           if (this.state.isServerError) {
             this.addAttribute({ 'data-server-error': 'false' });
           }
-
         },
       },
       ...props,

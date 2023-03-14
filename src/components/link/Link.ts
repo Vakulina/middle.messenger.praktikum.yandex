@@ -28,12 +28,12 @@ class LinkBase extends Block {
     );
   }
 
-protected initChildren(): void {
+  protected initChildren(): void {
     this.children = {
       ...this.children,
-      router:this.props.router
-    }
-}
+      router: this.props.router,
+    };
+  }
 
   navigate() {
     this.children.router.go(this.props.href);

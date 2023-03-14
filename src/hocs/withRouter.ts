@@ -9,8 +9,7 @@ export function withRouter(Component: any) {
   type Props = any;
   return class WithRouter extends Component<ChildrenType> {
     constructor(props: Props & PropsWithRouter) {
-      super({ ...props, router: router });
+      super({ ...props, router });
     }
   };
 }
-

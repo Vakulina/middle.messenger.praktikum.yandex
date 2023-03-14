@@ -9,9 +9,8 @@ export default function connectWithStore(
   props?: any,
 ) {
   class ConnectedComponent extends Component {
-
     constructor(tag: string, props?: object) {
-      let prevState
+      let prevState;
       prevState = mapStateToProps(Store.getState() as State);
 
       super(tag, { ...props, ...prevState });

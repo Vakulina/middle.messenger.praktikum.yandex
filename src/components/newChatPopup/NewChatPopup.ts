@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Input } from '../Input';
 import { BtnEventType } from '../../utiles';
 import { chatsActions } from '../../actions/ChatsActions';
-import  s from './style.module.scss';
+import s from './style.module.scss';
 
 type titleDataType = { titleInput: string };
 
@@ -50,7 +50,7 @@ export class NewChatPopup extends Form {
       const { titleInput } = data;
       await chatsActions.createChat({ title: titleInput });
       await chatsActions.getChats();
-    } 
+    }
   }
 
   render(): DocumentFragment {

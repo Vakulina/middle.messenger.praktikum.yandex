@@ -1,5 +1,4 @@
-@import "../../assets/stylesheets/reusable.scss";
-
+@import "../../assets/stylesheets/reusable";
 
 .form {
   width: 100%;
@@ -56,11 +55,11 @@
     color: $attantionColor;
   }
 
-  span{
+  span {
     display: none;
   }
 
-  &[data-server-error="true"]>span:first-of-type {
+  &[data-server-error="true"] > span:first-of-type {
     display: block;
     color: $attantionColor;
   }

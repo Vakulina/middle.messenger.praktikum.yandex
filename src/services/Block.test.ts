@@ -1,19 +1,16 @@
-import Block from "./Block";
-import { expect } from "chai";
-import sinon from "sinon";
+import { expect } from 'chai';
+import sinon from 'sinon';
+import Block from './Block';
 
 const eventBusMock = {
   on: sinon.fake(),
   emit: sinon.fake(),
   off: sinon.fake(),
-  listeners: {}
+  listeners: {},
 };
 
-
 describe('Block', () => {
-
-
-  const tmp = () => `<div>TEST</div>`;
+  const tmp = () => '<div>TEST</div>';
 
   class Component extends Block {
     constructor(tagName, props) {
@@ -21,17 +18,21 @@ describe('Block', () => {
 
       this.eventBus = () => new class {
         emit = eventBusMock.emit;
+
         on = eventBusMock.on;
+
         off = eventBusMock.off;
-        listeners: {}
-      }
+
+        listeners: {};
+      }();
     }
+
     render() {
       return this.compile(tmp, {});
     }
   }
   const block = new Component('div', { attributes: { class: 'test-class' } });
-  
+
   it('render() возвращает нужный фрагмент', () => {
     expect(block.element.innerHTML).to.eq('<div>TEST</div>');
   });
@@ -46,9 +47,9 @@ describe('Block', () => {
     expect(props).to.eq('test');
   });
 
-  describe('setProps() обновляет пропсы новыми значениями', function () {
+  describe('setProps() обновляет пропсы новыми значениями', () => {
     before(() => {
-      block.props = { test: 'test' }
+      block.props = { test: 'test' };
     });
     it('При добавлении новых пропсов срабатывает событие "flow:component-did-update"', () => {
       block.setProps({ test: 'testNew' });
@@ -58,7 +59,7 @@ describe('Block', () => {
   });
 
   it('addAttribute() добавляет атрибут', () => {
-    block.addAttribute({ 'data-attribute': 'test-attr' })
+    block.addAttribute({ 'data-attribute': 'test-attr' });
     expect(block.element.getAttribute('data-attribute')).to.eq('test-attr');
   });
 
@@ -66,4 +67,4 @@ describe('Block', () => {
     block.setProps({ test: 'test' });
     expect(eventBusMock.emit.calledWith('flow:component-did-update')).to.eq(true);
   });
-})
+});

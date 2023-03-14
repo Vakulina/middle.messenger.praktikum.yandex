@@ -1,5 +1,4 @@
 import tpl from './tpl.hbs';
-import s from './style.module.scss';
 import Block from '../../services/Block';
 import avatar from '../../../static/avatar.jpg';
 import dots from '../../../static/dots.svg';
@@ -10,19 +9,19 @@ import Store from '../../services/Store';
 import { getChatHeaderMenu } from '../ChatHeaderMenu';
 import { addUserPopup } from '../AddUserPopup';
 import { deleteUserPopup } from '../DeleteUserPopup';
-import style from './style.module.scss'
+import style from './style.module.scss';
 import { API_BASE_URL } from '../../utiles/constants';
 
 export class ChatHeaderBase extends Block {
-  constructor(tag= 'div', {
+  constructor(tag = 'div', {
     activeChat,
     isOpenHeaderMenuModal,
     isOpenAddUserModal,
     isOpenDeleteUserModal,
     ...props
   }: any) {
-    super(tag , {
-      class: s.header,
+    super(tag, {
+      class: style.header,
       isOpenHeaderMenuModal,
       isOpenDeleteUserModal,
       isOpenAddUserModal,
@@ -38,7 +37,7 @@ export class ChatHeaderBase extends Block {
       avatar: new Image({
         alt: 'аватар',
         stylePrefix: 'chatItems',
-        src:  this.state?.activeChat?.avatar ? `${API_BASE_URL}/resources${ this.state?.activeChat?.avatar}`: avatar
+        src: this.state?.activeChat?.avatar ? `${API_BASE_URL}/resources${this.state?.activeChat?.avatar}` : avatar,
       }),
       button: new Button({
         text: new Image({

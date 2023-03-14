@@ -84,8 +84,8 @@
     background-color: $lightPrimaryColor;
   }
 
-  input:hover+label,
-  input:focus+label {
+  input:hover + label,
+  input:focus + label {
     background-color: $lightPrimaryColor;
   }
 

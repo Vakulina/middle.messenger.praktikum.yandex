@@ -1,4 +1,4 @@
-import {MessageType } from '../../services/Store';
+import { MessageType } from '../../services/Store';
 import { parseDate } from '../../utiles/parseDate';
 import { MessageItem } from './MessageItem';
 

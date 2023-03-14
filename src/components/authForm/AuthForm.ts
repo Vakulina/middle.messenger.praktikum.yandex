@@ -29,10 +29,9 @@ const passwordInput = new Input({
   textError: VALIDATION_ERROR.UNCORRECT_PASSWORD,
 });
 
-const linkComponent =new Link({ href: routes.registration, text: 'Нет аккаунта?' })
+const linkComponent = new Link({ href: routes.registration, text: 'Нет аккаунта?' });
 
 class AuthFormBase extends Form {
- 
   constructor(props: FormProps) {
     super('form', {
       title: 'Вход',
@@ -45,7 +44,7 @@ class AuthFormBase extends Form {
           }
         },
       },
-   
+
       ...props,
     });
   }
@@ -64,7 +63,7 @@ class AuthFormBase extends Form {
         },
       }),
       login: loginInput,
-      password:passwordInput,
+      password: passwordInput,
       ...this.children,
     };
   }

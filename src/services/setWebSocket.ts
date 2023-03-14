@@ -1,6 +1,6 @@
 import { chatsActions } from '../actions/ChatsActions';
-import Store from '../services/Store';
-import { WebsocketService } from '../services/WebsocketService';
+import Store from './Store';
+import { WebsocketService } from './WebsocketService';
 
 const webSocketsList: Record<number, WebsocketService> = {};
 const WS_ENDPOINT = 'wss://ya-praktikum.tech/ws/chats/';

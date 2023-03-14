@@ -7,8 +7,7 @@ import { Button } from '../../Button';
 import Store from '../../../services/Store';
 
 export class Panel extends Block {
-  
-  constructor(props:{class:string}) {
+  constructor(props:{ class:string }) {
     super('div', { class: props.class });
   }
 

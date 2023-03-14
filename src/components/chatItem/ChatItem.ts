@@ -33,7 +33,7 @@ export class ChatItemBase extends Block {
       tag,
       {
         class: s.chatItem,
-        styles:s,
+        styles: s,
         events: {
           click: async (e: any) => {
             const activeChat = chats?.filter((item: ChatsDTOType) => (item.id === Number(e?.currentTarget.getAttribute('data-chatid'))))[0];

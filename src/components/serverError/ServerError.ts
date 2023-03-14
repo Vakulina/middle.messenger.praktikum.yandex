@@ -23,14 +23,15 @@ export class ServerErrorBase extends Block {
       },
     );
   }
+
   protected initChildren(): void {
     this.children = {
       ...this.children,
       link: new Link({
         href: this.state?.user?.id ? routes.chats : routes.authorization,
-        text: this.state?.user?.id ? 'Назад к чатам' : 'Назад'
-      })
-    }
+        text: this.state?.user?.id ? 'Назад к чатам' : 'Назад',
+      }),
+    };
   }
 
   protected render() {
@@ -38,8 +39,12 @@ export class ServerErrorBase extends Block {
   }
 }
 
-export const serverError = (props: Partial<ServerErrorProps>) => connectWithStore('section', ServerErrorBase, (state) => {
-  const {  user } = state;
-  return {  user };
-},
-  props);
+export const serverError = (props: Partial<ServerErrorProps>) => connectWithStore(
+  'section',
+  ServerErrorBase,
+  (state) => {
+    const { user } = state;
+    return { user };
+  },
+  props,
+);

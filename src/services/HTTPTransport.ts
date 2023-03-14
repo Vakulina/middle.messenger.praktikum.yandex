@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../utiles/constants";
+import { API_BASE_URL } from '../utiles/constants';
 
 const METHODS = {
   GET: 'GET',

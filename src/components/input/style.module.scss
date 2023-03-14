@@ -42,7 +42,6 @@
 
   &_setting {
     width: 100%;
-
   }
 
   &_setting label {
@@ -79,11 +78,10 @@
     border-color: red;
   }
 
-  &>label>span {
+  & > label > span {
     display: none;
     color: $attantionColor;
   }
-  
 
   &[data-error="true"] input {
     border-color: $attantionColor;
@@ -93,15 +91,16 @@
   &[data-error="true"] span {
     display: block;
   }
+
   &_setting[data-error="true"] {
     height: 80px;
   }
 
-  &_setting[data-error="true"] span  {
+  &_setting[data-error="true"] span {
     position: absolute;
     top: 45px;
     right: 0;
     display: block;
     z-index: 10;
-}
+  }
 }

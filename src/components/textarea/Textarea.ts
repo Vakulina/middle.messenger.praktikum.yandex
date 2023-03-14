@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import  s from './style.module.scss';
+import s from './style.module.scss';
 import styles from '../../utiles/styles';
 import Block from '../../services/Block';
 import { InputEventType } from '../../utiles';
@@ -50,11 +50,11 @@ export class Textarea extends Block {
   }
 
   checkInputValidity(e?: InputEventType) {
-    if(this.props.pattern){
-    const regexp = new RegExp(this.props.pattern);
-    this.isValid = e ? regexp.test(e.target.value) : false;
-    const attrValue = this.isValid ? 'false' : 'true';
-    this.addAttribute({ 'data-error': attrValue });
+    if (this.props.pattern) {
+      const regexp = new RegExp(this.props.pattern);
+      this.isValid = e ? regexp.test(e.target.value) : false;
+      const attrValue = this.isValid ? 'false' : 'true';
+      this.addAttribute({ 'data-error': attrValue });
     }
   }
 

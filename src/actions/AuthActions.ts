@@ -41,7 +41,7 @@ class AuthActions {
       await this.api.signup(data);
       Store.set({ isRegistrationError: null });
       this.getUser();
-      chatsActions.getChats()
+      chatsActions.getChats();
       router.go(routes.setting);
     } catch (err: unknown) {
       Store.set({ isRegistrationError: err as ErrorType });
@@ -54,10 +54,10 @@ class AuthActions {
       const response = await this.api.getUser();
       Store.set({ user: response });
       Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` });
-      return response
+      return response;
     } catch (err: unknown) {
       console.error(err);
-      return new Error(err as string)
+      return new Error(err as string);
     }
   }
 

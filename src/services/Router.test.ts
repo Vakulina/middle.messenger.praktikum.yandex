@@ -1,7 +1,7 @@
-import { router } from './Router'
 import { expect } from 'chai';
+import { router } from './Router';
 import Block from './Block';
-import Route from './Route'
+import Route from './Route';
 
 describe('Router', () => {
   const BlockMock = class {} as unknown as Block;

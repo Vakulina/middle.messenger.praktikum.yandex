@@ -1,12 +1,12 @@
 import sinon, { SinonFakeXMLHttpRequest, SinonFakeXMLHttpRequestStatic } from 'sinon';
-import { HTTPTransport } from './HTTPTransport';
 import { expect } from 'chai';
+import { HTTPTransport } from './HTTPTransport';
 
 describe('HTTPTransport', () => {
   const requests: SinonFakeXMLHttpRequest[] = [];
   const client = new HTTPTransport('/auth');
   let xhr: SinonFakeXMLHttpRequestStatic;
-  
+
   beforeEach(() => {
     xhr = sinon.useFakeXMLHttpRequest();
     // @ts-ignore
@@ -39,7 +39,6 @@ describe('HTTPTransport', () => {
 
   afterEach(() => {
     requests.length = 0;
-    xhr.restore()
-  })
-
+    xhr.restore();
+  });
 });

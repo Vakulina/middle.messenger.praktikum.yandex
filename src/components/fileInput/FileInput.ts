@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import  s from './style.module.scss';
+import s from './style.module.scss';
 import Block from '../../services/Block';
 import { InputEventType } from '../../utiles';
 import styles from '../../utiles/styles';
@@ -40,7 +40,7 @@ export class FileInput extends Block {
       {
         type,
         text,
-        style:s,
+        style: s,
         class: !stylePrefix ? s.fileInput : `${s.fileInput} ${styles.getClassWithPrefix(s, 'fileInput', stylePrefix)}`,
         events,
         ...otherProps,

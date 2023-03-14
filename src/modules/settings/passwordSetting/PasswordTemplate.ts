@@ -11,7 +11,7 @@ import UsersActions from '../../../actions/UsersActions';
 import { ChangePasswordType } from '../../../api/UsersApi';
 
 export class PasswordTemplateBase extends Form {
-  constructor(tag= 'form', props: FormProps) {
+  constructor(tag = 'form', props: FormProps) {
     Store.set({ isPasswordSettingsError: null });
     super(tag, {
       events: {
@@ -73,7 +73,7 @@ export class PasswordTemplateBase extends Form {
   }
 
   private async submit(e: BtnEventType) {
-    console.log(this.props.isPasswordSettingsError)
+    console.log(this.props.isPasswordSettingsError);
     e.preventDefault();
     document.querySelector('form')?.blur();
     const isValid = this.validateForm();

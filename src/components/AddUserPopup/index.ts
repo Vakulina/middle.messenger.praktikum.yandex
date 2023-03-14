@@ -1,1 +1,1 @@
-export {addUserPopup} from './AddUserPopup';
+export { addUserPopup } from './AddUserPopup';

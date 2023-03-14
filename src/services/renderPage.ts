@@ -22,7 +22,7 @@ const renderPage = async () => {
       .use(routes.setRegInfo, getSettingPage(routes.setRegInfo))
       .use(routes.setAvatar, getSettingPage(routes.setAvatar))
       .use(routes.setSafety, getSettingPage(routes.setSafety))
-      .use(routes.setting, getSettingPage(routes.setRegInfo))
+      .use(routes.setting, getSettingPage(routes.setRegInfo));
 
     const unprotectedRoutes = [
       routes.authorization,
@@ -32,15 +32,13 @@ const renderPage = async () => {
     const currentUrl = window.location.pathname;
 
     if (Object.values(routes).includes(currentUrl)) {
-
       const res = await AuthActions.getUser();
       if ('id' in res) {
         router.start();
         if (unprotectedRoutes.includes(currentUrl)) {
           router.go(routes.chats);
         }
-      }
-      else {
+      } else {
         router.start();
         router.go(routes.authorization);
       }

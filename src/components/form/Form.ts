@@ -20,8 +20,8 @@ export type FormProps = {
 export abstract class Form extends Block {
   serverError: string | null;
 
-  constructor(tag= 'form', props: FormProps) {
-    super(tag , {
+  constructor(tag = 'form', props: FormProps) {
+    super(tag, {
       class: `${s.form} ${styles.getClassWithPrefix(s, 'form', props?.stylePrefix || '')}`,
       className: s.form,
       ...props,

@@ -55,9 +55,9 @@ class SettingsBase extends Block {
   }
 
   protected initChildren(): void {
-    this.children={
-      toChats: new Link({ href: routes.chats, text: '<-', stylePrefix:'settings' }),
-      exit:  new Button({
+    this.children = {
+      toChats: new Link({ href: routes.chats, text: '<-', stylePrefix: 'settings' }),
+      exit: new Button({
         text: 'Выйти из системы',
         stylePrefix: 'logout',
         type: 'button',
@@ -67,12 +67,14 @@ class SettingsBase extends Block {
           },
         },
       }),
-      ...this.children
-    }
+      ...this.children,
+    };
   }
-  async logout(){
+
+  async logout() {
     await AuthActions.logout();
   }
+
   protected render() {
     return this.compile(tpl, this.props);
   }

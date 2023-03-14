@@ -1,5 +1,5 @@
 import tpl from './tpl.hbs';
-import  s from './style.module.scss';
+import s from './style.module.scss';
 import { Button } from '../Button';
 import { Textarea } from '../Textarea';
 import { BtnEventType, VALIDATION_REGEXES } from '../../utiles';

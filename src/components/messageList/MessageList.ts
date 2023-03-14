@@ -1,12 +1,12 @@
 import tpl from './tpl.hbs';
 import connectWithStore from '../../services/connectWithStore';
-import  s from './style.module.scss';
+import s from './style.module.scss';
 import { getMessageList } from './utiles';
 import Block from '../../services/Block';
 
 class messageListBase extends Block {
-  constructor(tag= 'div', { chatsData = [], ...props }: any) {
-    super(tag , {
+  constructor(tag = 'div', { chatsData = [], ...props }: any) {
+    super(tag, {
       class: s.messageList,
       chatsData,
       ...props,

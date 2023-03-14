@@ -1,5 +1,5 @@
-import { isEqual } from '../utiles';
 import { v4 as makeUUID } from 'uuid';
+import { isEqual } from '../utiles';
 
 import { EventBus, IEventBus } from './EventBus';
 import { router } from './Router';
@@ -178,14 +178,13 @@ abstract class Block {
       events: Record<string, () => void>;
     };
     if (!events) {
-      return;
+
     } else {
       Object.entries(events).forEach(([event, listener]) => {
         this._element!.removeEventListener(event, listener);
       });
     }
   }
-
 
   _componentDidMount() {
     this.componentDidMount();
@@ -205,14 +204,13 @@ abstract class Block {
   }
 
   componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
-    if (!props.oldProps || !props.newProps) return true
+    if (!props.oldProps || !props.newProps) return true;
 
     if (isEqual(props.oldProps, props.newProps)) {
       return false;
     }
-    else {
-      return true;
-    }
+
+    return true;
   }
 
   setProps(nextProps: ChildrenType) {
