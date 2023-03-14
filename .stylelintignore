@@ -1,0 +1,6 @@
+/dist
+**/*.min.js
+/node_modules 
+**/*test.ts
+webpack.config.js
+mochaSetup.js

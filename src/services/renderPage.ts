@@ -4,7 +4,7 @@ import { getRegistrationForm } from '../modules/Registration';
 import { getServerErrorPage } from '../modules/ServerErrorPage';
 import { getNotFoundPage } from '../modules/NotFoundPage';
 import { routes } from '../utiles/constants';
-import { getSettingPage } from '../modules/Settings';
+import { getSettingPage } from '../modules/settings';
 import { router } from './Router';
 import AuthActions from '../actions/AuthActions';
 
