@@ -7,6 +7,7 @@ const dom = new JSDOM('<div id="root"><div>', { url: 'http://localhost:3000' });
 global.window = dom.window;
 global.document = dom.window.document;
 global.DocumentFragment = window.DocumentFragment;
+global.Node= dom.window.Node
 
 /* eslint-disable  func-names */
 require.extensions['.hbs'] = function (module, filename) {
