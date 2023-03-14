@@ -46,11 +46,15 @@ describe('Block', () => {
     expect(props).to.eq('test');
   });
 
-  it('setProps() обновляет пропсы новыми значениями', () => {
-    block.setProps({ test: 'test' });
-    block.setProps({ test: 'testNew' });
-    const props = block.props.test;
-    expect(props).to.eq('testNew');
+  describe('setProps() обновляет пропсы новыми значениями', function () {
+    before(() => {
+      block.props = { test: 'test' }
+    });
+    it('При добавлении новых пропсов срабатывает событие "flow:component-did-update"', () => {
+      block.setProps({ test: 'testNew' });
+      const props = block.props.test;
+      expect(props).to.eq('testNew');
+    });
   });
 
   it('addAttribute() добавляет атрибут', () => {
