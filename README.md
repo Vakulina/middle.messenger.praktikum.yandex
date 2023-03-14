@@ -9,8 +9,8 @@
 ## Команды
 
 - npm i - инициализация проекта
-- npm run start - запуск проекта 
-- npm run dev - запуск проекта в режиме разработки
+- npm run start - запуск проекта в режиме разработки на dev-сервере
+- npm run build && node server.js - локальный запуск проекта 
 
 ### Спринт 1 
 - разработан [макет приложения в Figma](https://www.figma.com/file/bb2uxusIP7DzcWLj5qITnJ/Chat_external_link-(Copy)?node-id=0%3A1&t=BECpoojdFInoPUYE-1) (улучшен [стандартный прототип](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1))
