@@ -1,6 +1,6 @@
 import Block from './Block';
-import Store, { State, StoreEvents } from './Store';
-import { isEqual } from '../utiles';
+import Store, { StoreEvents } from './Store';
+import { State, isEqual } from '../utiles';
 
 export default function connectWithStore(
   tag: string,

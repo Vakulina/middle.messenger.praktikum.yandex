@@ -79,7 +79,6 @@ module.exports = {
     hot: !isProdaction,
     historyApiFallback: true
   },
-
   optimization: {
     splitChunks: {
       chunks: 'all',

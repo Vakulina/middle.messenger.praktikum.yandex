@@ -3,7 +3,7 @@ import { isEqual } from '../utiles';
 
 import { EventBus, IEventBus } from './EventBus';
 import { router } from './Router';
-import { State } from './Store';
+import { State } from '../utiles/types';
 
 export type PropsType = Record<string, string | Record<string, Function> | boolean | Record<string, typeof router>>;
 export type ChildrenType = Record<string, Block | Block[] | any | typeof router>;

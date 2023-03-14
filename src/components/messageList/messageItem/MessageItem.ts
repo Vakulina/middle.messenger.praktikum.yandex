@@ -1,6 +1,6 @@
 import tpl from './tpl.hbs';
 import Block from '../../../services/Block';
-import { MessageType } from '../../../services';
+import { MessageType } from '../../../utiles/types';
 import s from '../style.module.scss';
 
 export class MessageItem extends Block {

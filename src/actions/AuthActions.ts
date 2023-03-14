@@ -2,7 +2,7 @@ import AuthAPI, { AuthApi, AuthData, RegistrationData } from '../api/AuthApi';
 import { router } from '../services/Router';
 import { routes } from '../utiles/constants';
 import Store from '../services/Store';
-import type { ErrorType } from '../services';
+import type { ErrorType } from '../services/HTTPTransport';
 import { chatsActions } from './ChatsActions';
 
 class AuthActions {
