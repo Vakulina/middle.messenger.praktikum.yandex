@@ -1,12 +1,12 @@
 {
-  "name": "my-webpack-project",
+  "name": "my-messeger-project",
   "sideEffects": [
     "*.css",
     "*.scss",
     "*.sass"
   ],
   "version": "1.0.0",
-  "description": "My webpack project",
+  "description": "My messeger project",
   "main": "index.js",
   "directories": {
     "test": "test"
