@@ -1,41 +1,10 @@
-import { UserDTO } from '../api/AuthApi';
-import { ChatsDTOType } from '../api/ChatsApi';
+import { State } from '../utiles';
 import { EventBus } from './EventBus';
 
 export enum StoreEvents {
   Updated = 'updated',
   Remove = 'remove',
 }
-
-export type MessageType = {
-  chat_id: number,
-  content: string,
-  file: null | any,
-  id: number,
-  is_read: boolean,
-  time: string,
-  type: 'message',
-  user_id: number
-};
-export type State = {
-  user: Omit<UserDTO, 'password'>,
-  chats: Partial<ChatsDTOType>[],
-  activeChat: ChatsDTOType | null;
-  usersOfActiveChat: UserDTO[];
-  isAuthError: { message: string, status: number } | null,
-  isRegistrationError: { message: string, status?: number, name?: string } | null,
-  isLogin: boolean,
-  avatar: string | Blob,
-  avatarName: string,
-  isRegistrationSettingsError: { message: string, status: number } | null,
-  isPasswordSettingsError: { message: string, status: number } | null,
-  isOpenAddNewChatModal: boolean;
-  isOpenAddUserModal: boolean;
-  isOpenDeleteUserModal: boolean;
-  isOpenHeaderMenuModal: boolean;
-  isServerError: { message: string, status: number } | null,
-  chatsData: MessageType[],
-};
 
 class Store extends EventBus {
   static _instance: Store;

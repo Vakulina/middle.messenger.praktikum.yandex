@@ -48,7 +48,6 @@
     "arrow-body-style": [
       "off"
     ],
-    "import/no-cycle":"warn",
     "consistent-return":"warn",
     "semi": [
       "warn",

@@ -73,7 +73,12 @@ module.exports = {
       }
     ]
   },
-
+  devServer: {
+    port: 3000,
+    open: true,
+    hot: !isProdaction,
+    historyApiFallback: true
+  },
   optimization: {
     splitChunks: {
       chunks: 'all',
