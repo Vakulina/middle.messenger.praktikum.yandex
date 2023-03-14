@@ -16,8 +16,7 @@
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack-dev-server --mode=development --open",
     "lint:ts": "eslint .  --fix",
-    "lint:styles": "npx stylelint \"**/*.scss\" --fix",
-    "prepare": "husky install"
+    "lint:styles": "npx stylelint \"**/*.scss\" --fix"
   },
   "lint-staged": {
     "*.ts": "eslint .",
