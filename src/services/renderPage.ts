@@ -2,7 +2,7 @@ import { getChats } from '../modules/Chats';
 import { getAuthForm } from '../modules/Auth';
 import { getRegistrationForm } from '../modules/Registration';
 import { getServerErrorPage } from '../modules/ServerErrorPage';
-import { getNotFoundPage } from '../modules/NotFoundPage';
+import { getNotFoundPage } from '../modules/NotFoundPage/NotFoundPage';
 import { routes } from '../utiles/constants';
 import { getSettingPage } from '../modules/settings';
 import { router } from './Router';
