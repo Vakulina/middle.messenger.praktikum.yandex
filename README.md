@@ -41,4 +41,4 @@
 - Настроен precommit на проект
 - Проведен аудит пакетов
 - Настроена Docker-сборка статического приложения и запуска сервера на Node.js
-- Деплой на Render.com
+- Деплой на [Render.com](https://messeger3.onrender.com/)
