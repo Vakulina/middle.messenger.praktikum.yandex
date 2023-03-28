@@ -1,15 +1,15 @@
 import tpl from './tpl.hbs';
-import { Form, FormProps } from '../../form';
-import { Button } from '../../button';
-import { Input } from '../../input';
-import { BtnEventType, VALIDATION_REGEXES } from '~src/utiles';
-import connectWithStore from '~src/services/connectWithStore';
-import cross from '../../../../static/cross.svg';
-import { Image } from '../../image';
-import Store from '~src/services/Store';
-import { chatsActions } from '~src/actions/ChatsActions';
-import { UserDTO } from '~src/api/AuthApi';
-import UsersActions from '~src/actions/UsersActions';
+import { Form, FormProps } from '../Form';
+import { Button } from '../Button';
+import { Input } from '../Input';
+import { BtnEventType, VALIDATION_REGEXES } from '../../utiles';
+import connectWithStore from '../../services/connectWithStore';
+import cross from '../../../static/cross.svg';
+import { Image } from '../Image';
+import Store from '../../services/Store';
+import { chatsActions } from '../../actions/ChatsActions';
+import { UserDTO } from '../../api/AuthApi';
+import UsersActions from '../../actions/UsersActions';
 
 const loginInput = new Input({
   name: 'login',
@@ -21,10 +21,11 @@ const loginInput = new Input({
 });
 
 class AddUserPopupBase extends Form {
-  constructor(tag: string, props: FormProps) {
-    super(tag = 'form', {
+  constructor(tag = 'form', props: FormProps) {
+    super(tag, {
       title: 'Добавить пользователя в чат',
       stylePrefix: 'popup',
+
       events: {
         focusin: () => {
           if (this.state.isServerError) {
@@ -71,7 +72,11 @@ class AddUserPopupBase extends Form {
         type: 'button',
         events: {
           click: () => {
+            this.props.users = null;
+            const form = this.getContent() as HTMLFormElement;
+            form.reset();
             Store.set({ isOpenAddUserModal: false });
+            this.addAttribute({ 'data-after-search': 'false' });
           },
         },
         name: 'sendMessage',
@@ -106,7 +111,6 @@ class AddUserPopupBase extends Form {
     e.preventDefault();
     const data = this.getCheckboxesValues();
     chatsActions.addUsersToChat(data);
-    //
   }
 
   render(): DocumentFragment {

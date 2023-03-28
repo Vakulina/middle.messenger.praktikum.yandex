@@ -1,5 +1,5 @@
-import { PageLayout } from '~src/components/pageLayout';
-import { RegistrationForm } from '../../components/registrationForm';
+import { PageLayout } from '../../components/PageLayout';
+import { RegistrationForm } from '../../components/RegistrationForm';
 
 const form = RegistrationForm;
 const registrationPage = new PageLayout({ content: form });

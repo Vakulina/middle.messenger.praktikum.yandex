@@ -1,15 +1,15 @@
 import tpl from './tpl.hbs';
-import { chatSidebar } from '../../components/chatSidebar';
-import { Message } from '~src/components/message';
-import Block from '~src/services/Block';
-import * as s from './style.module.scss';
-import { PageLayout } from '~src/components/pageLayout';
-import { chatHeader } from '~src/components/chatHeader';
-import connectWithStore from '~src/services/connectWithStore';
-import { NewChatPopup } from '~src/components/newChatPopup';
-import { messageList } from '~src/components/messageList';
+import { chatSidebar } from '../../components/ChatSidebar';
+import { MessageForm } from '../../components/MessageForm';
+import Block from '../../services/Block';
+import s from './style.module.scss';
+import { PageLayout } from '../../components/PageLayout';
+import { chatHeader } from '../../components/ChatHeader';
+import connectWithStore from '../../services/connectWithStore';
+import { NewChatPopup } from '../../components/NewChatPopup';
+import { messageList } from '../../components/MessageList';
 
-const message = new Message();
+const message = new MessageForm();
 const sidebar = chatSidebar;
 const header = chatHeader;
 
@@ -21,11 +21,13 @@ interface ChatsProps {
 }
 
 export class Chats extends Block {
-  constructor(tag:string, props: ChatsProps) {
+  constructor(tag = 'section', props: ChatsProps) {
     super(
-      tag = 'section',
+      tag,
+
       {
         class: s.chats,
+        style: s,
         ...props,
       },
     );

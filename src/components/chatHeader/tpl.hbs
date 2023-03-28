@@ -1,21 +1,23 @@
-<div class={{class}}__group>
+{{#if activeChat}}
+<div class={{{style.group}}}>
   {{{avatar}}}
-  <span class={{class}}__name>{{activeChat.title}}</span>
+  <span class={{{style.name}}}>{{activeChat.title}}</span>
 </div>
 {{{button}}}
+{{/if}}
 
 {{#if isOpenHeaderMenuModal}}
 {{{chatHeaderMenu}}}
 {{/if}}
 
 {{#if isOpenAddUserModal}}
-<div class={{class}}__wrapper>
+<div class={{{style.wrapper}}}>
 {{{addUserPopup }}}
 </div>
 {{/if}}
 
 {{#if isOpenDeleteUserModal}}
-<div class={{class}}__wrapper>
+<div class={{{style.wrapper}}}>
 {{{deleteUserPopup }}}
 </div>
 {{/if}}

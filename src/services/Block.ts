@@ -1,10 +1,12 @@
 import { v4 as makeUUID } from 'uuid';
+import { isEqual } from '../utiles';
 
 import { EventBus, IEventBus } from './EventBus';
-import { State } from './Store';
+import { router } from './Router';
+import { State } from '../utiles/types';
 
-export type PropsType = Record<string, string | Record<string, Function> | boolean>;
-export type ChildrenType = Record<string, Block | Block[] | any>;
+export type PropsType = Record<string, string | Record<string, Function> | boolean | Record<string, typeof router>>;
+export type ChildrenType = Record<string, Block | Block[] | any | typeof router>;
 
 abstract class Block {
   static EVENTS = {
@@ -138,9 +140,16 @@ abstract class Block {
   }
 
   _addEvents() {
-    const { events = {} } = this.props as PropsType & { events: Record<string, () => void> };
-    Object.keys(events).forEach((eventName) => {
-      this._element?.addEventListener(eventName, events[eventName]);
+    const { events = {} } = this.props as PropsType & {
+      events: Record<string, () => void>;
+    };
+
+    if (!events) {
+      return;
+    }
+
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element!.addEventListener(event, listener);
     });
   }
 
@@ -165,12 +174,14 @@ abstract class Block {
   }
 
   _removeEventListeners() {
-    const { events } = this.props as PropsType & { events: Record<string, () => void> };
+    const { events } = this.props as PropsType & {
+      events: Record<string, () => void>;
+    };
     if (!events) {
 
     } else {
-      Object.keys(events).forEach((eventName) => {
-        this._element?.removeEventListener(eventName, events[eventName]);
+      Object.entries(events).forEach(([event, listener]) => {
+        this._element!.removeEventListener(event, listener);
       });
     }
   }
@@ -193,8 +204,13 @@ abstract class Block {
   }
 
   componentDidUpdate(props: { oldProps?: ChildrenType, newProps?: ChildrenType } = {}) {
-    if (!props.oldProps && !props.newProps) return true;
-    return false;
+    if (!props.oldProps || !props.newProps) return true;
+
+    if (isEqual(props.oldProps, props.newProps)) {
+      return false;
+    }
+
+    return true;
   }
 
   setProps(nextProps: ChildrenType) {

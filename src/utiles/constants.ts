@@ -15,3 +15,4 @@ export const routes = {
 export const VALIDATION_ERROR = {
   UNCORRECT_PASSWORD: 'Введите корректный пароль',
 };
+export const API_BASE_URL = 'https://ya-praktikum.tech/api/v2';

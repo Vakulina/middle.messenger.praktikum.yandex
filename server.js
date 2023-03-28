@@ -11,6 +11,6 @@ app.listen(PORT, () => {
 
 app.use(express.static(rootPath));
 
-app.use('/', (req, res) => {
+app.use('/', (_, res) => {
   res.sendFile((path.join(rootPath, 'index.html')));
 });

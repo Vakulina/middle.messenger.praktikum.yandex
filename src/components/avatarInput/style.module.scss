@@ -93,4 +93,8 @@
     color: $secondaryDark;
     font-weight: 400;
   }
+
+  span[data-style="text"] {
+    display: block;
+  }
 }

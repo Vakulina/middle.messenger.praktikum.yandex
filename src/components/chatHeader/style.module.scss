@@ -10,36 +10,6 @@
   box-sizing: border-box;
   position: relative;
 
-  &__wrapper {
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding: 20px;
-    background: rgb(0 0 0 / 45%);
-    z-index: 100;
-  }
-
-  &__group {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    box-sizing: border-box;
-  }
-
-  &__name {
-    @include inter;
-
-    font-style: normal;
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 13px;
-    color: $shadeDark;
-  }
-
   form {
     label {
       display: block;
@@ -69,4 +39,34 @@
       display: block;
     }
   }
+}
+
+.group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.name {
+  @include inter;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 13px;
+  color: $shadeDark;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  background: rgb(0 0 0 / 45%);
+  z-index: 100;
 }

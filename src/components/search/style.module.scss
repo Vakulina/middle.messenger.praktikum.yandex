@@ -4,7 +4,7 @@
   position: relative;
   width: 100%;
 
-  &__input {
+  input {
     padding-left: 33px;
     box-sizing: border-box;
     height: 32px;
@@ -15,8 +15,9 @@
     width: 100%;
   }
 
-  &__loup {
+  span {
     background-image: url("../../../static/loup.svg");
+    background-size: cover;
     height: 20px;
     width: 20px;
     top: 6;

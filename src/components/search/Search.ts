@@ -1,7 +1,7 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
-import Block from '~src/services/Block';
-import { InputEventType } from '~src/utiles';
+import s from './style.module.scss';
+import Block from '../../services/Block';
+import { InputEventType } from '../../utiles';
 
 interface SearchProps {
   label?: string,

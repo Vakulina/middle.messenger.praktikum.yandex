@@ -1,8 +1,8 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
+import s from './style.module.scss';
 import styles from '../../utiles/styles';
-import Block from '~src/services/Block';
-import { InputEventType } from '~src/utiles';
+import Block from '../../services/Block';
+import { InputEventType } from '../../utiles';
 
 interface TextareaProps {
   name: string
@@ -35,7 +35,7 @@ export class Textarea extends Block {
             this.checkInputValidity(e);
             this.valueState = e.target.value;
           },
-          change: (e: InputEventType) => {
+          change: () => {
             this.isValid = true;
             const attrValue = this.isValid ? 'false' : 'true';
             this.addAttribute({ 'data-error': attrValue });
@@ -50,10 +50,12 @@ export class Textarea extends Block {
   }
 
   checkInputValidity(e?: InputEventType) {
-    const regexp = new RegExp(this.props.pattern);
-    this.isValid = e ? regexp.test(e.target.value) : false;
-    const attrValue = this.isValid ? 'false' : 'true';
-    this.addAttribute({ 'data-error': attrValue });
+    if (this.props.pattern) {
+      const regexp = new RegExp(this.props.pattern);
+      this.isValid = e ? regexp.test(e.target.value) : false;
+      const attrValue = this.isValid ? 'false' : 'true';
+      this.addAttribute({ 'data-error': attrValue });
+    }
   }
 
   get value() {

@@ -1,10 +1,10 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
+import s from './style.module.scss';
 import styles from '../../utiles/styles';
-import Block from '~src/services/Block';
-import { withRouter } from '~src/hocs/withRouter';
+import Block from '../../services/Block';
+import { PropsWithRouter, withRouter } from '../../hocs/withRouter';
 
-interface LinkProps {
+interface LinkProps extends PropsWithRouter {
   href: string,
   text: string,
   stylePrefix?: string | null,
@@ -14,22 +14,29 @@ interface LinkProps {
 class LinkBase extends Block {
   constructor({
     stylePrefix = null,
-    ...otherProps
+    ...props
   }: LinkProps) {
     super(
-      'span',
+      'button',
       {
         class: `${s.link} ${styles.getClassWithPrefix(s, 'link', stylePrefix)}`,
         events: {
           click: () => this.navigate(),
         },
-        ...otherProps,
+        ...props,
       },
     );
   }
 
+  protected initChildren(): void {
+    this.children = {
+      ...this.children,
+      router: this.props.router,
+    };
+  }
+
   navigate() {
-    this.props.router!.go(this.props.href);
+    this.children.router.go(this.props.href);
   }
 
   protected render() {

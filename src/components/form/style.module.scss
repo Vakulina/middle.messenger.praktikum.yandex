@@ -1,4 +1,4 @@
-@import "src/assets/stylesheets/reusable";
+@import "../../assets/stylesheets/reusable";
 
 .form {
   width: 100%;
@@ -55,12 +55,13 @@
     color: $attantionColor;
   }
 
-  &__success {
+  span {
     display: none;
   }
 
-  &[data-server-error="true"] &__error {
+  &[data-server-error="true"] > span:first-of-type {
     display: block;
+    color: $attantionColor;
   }
 
   &[data-password-error="true"] &__error {
@@ -68,7 +69,7 @@
   }
 
   &[data-password-error="true"] input[type="password"] {
-    border-color: red;
+    border-color: $attantionColor;
   }
 
   &[data-success="true"] &__success {

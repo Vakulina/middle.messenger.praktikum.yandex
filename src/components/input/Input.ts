@@ -1,8 +1,8 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
+import s from './style.module.scss';
 import styles from '../../utiles/styles';
-import Block from '~src/services/Block';
-import { InputEventType } from '~src/utiles';
+import Block from '../../services/Block';
+import { InputEventType } from '../../utiles';
 
 interface InputProps {
   label?: string,
@@ -64,7 +64,7 @@ export class Input extends Block {
   checkInputValidity(e?: InputEventType) {
     const regexp = new RegExp(this.props.pattern);
     this.isValid = e ? regexp.test(e.target.value) : false;
-    const attrValue = this.isValid ? 'false' : 'true';
+    const attrValue = !this.isValid;
     this.addAttribute({ 'data-error': attrValue });
   }
 

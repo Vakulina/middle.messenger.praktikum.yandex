@@ -1,4 +1,4 @@
-import { routes as ROUTES } from '~src/utiles/constants';
+import { routes as ROUTES } from '../utiles/constants';
 import Block from './Block';
 import Route from './Route';
 

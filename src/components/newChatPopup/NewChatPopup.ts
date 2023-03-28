@@ -1,18 +1,12 @@
 import tpl from './tpl.hbs';
-import { Form, FormProps } from '../form';
-import { Button } from '../button';
-import { Input } from '../input';
-import { BtnEventType } from '~src/utiles';
-import { chatsActions } from '~src/actions/ChatsActions';
-import * as s from './style.module.scss';
+import { Form, FormProps } from '../Form';
+import { Button } from '../Button';
+import { Input } from '../Input';
+import { BtnEventType } from '../../utiles';
+import { chatsActions } from '../../actions/ChatsActions';
+import s from './style.module.scss';
 
 type titleDataType = { titleInput: string };
-
-const titleInput = new Input({
-  name: 'title',
-  label: 'Введите название нового чата',
-  autofocus: true,
-});
 
 export class NewChatPopup extends Form {
   constructor(props: FormProps) {
@@ -36,7 +30,11 @@ export class NewChatPopup extends Form {
           },
         },
       }),
-      titleInput,
+      titleInput: new Input({
+        name: 'title',
+        label: 'Введите название нового чата',
+        autofocus: true,
+      }),
     };
   }
 
@@ -52,8 +50,6 @@ export class NewChatPopup extends Form {
       const { titleInput } = data;
       await chatsActions.createChat({ title: titleInput });
       await chatsActions.getChats();
-    } else {
-      this.setProps({ error: 'Название чата не может быть пустым!' });
     }
   }
 

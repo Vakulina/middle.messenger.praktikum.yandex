@@ -1,11 +1,11 @@
 {{{avatar}}}
-<div class={{class}}__column>
-  <h3 class={{class}}__title>{{{name}}}</h3>
-  <p class={{class}}__text>{{{text}}}</p>
+<div class={{{styles.column}}}>
+  <h3 class={{{styles.title}}}>{{{name}}}</h3>
+  <p class={{{styles.text}}}>{{{text}}}</p>
 </div>
-<div class={{class}}__column>
-  <span class={{class}}__time>{{{time}}}</span>
+<div class={{{styles.column}}}>
+  <span class={{{styles.time}}}>{{{time}}}</span>
   {{#if count}}
-  <div class={{class}}__count>{{{count}}}</div>
+  <div class={{{styles.count}}}>{{{count}}}</div>
   {{/if}}
 </div>

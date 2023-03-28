@@ -1,7 +1,12 @@
 import Block from './Block';
-import { render } from './renderBlock';
 
-function isEqual(lhs: string, rhs: string): boolean {
+export function render(pageTemplate: Block, rootQuery:string) {
+  const root = document.getElementById(rootQuery);
+  root!.innerHTML = '';
+  root!.appendChild(pageTemplate.getContent()!);
+}
+
+function isEqualURL(lhs: string, rhs: string): boolean {
   return lhs === rhs;
 }
 
@@ -28,7 +33,7 @@ class Route {
   }
 
   match(pathname: string) {
-    return isEqual(pathname, this._pathname);
+    return isEqualURL(pathname, this._pathname);
   }
 
   render() {

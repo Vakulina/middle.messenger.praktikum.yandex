@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '../utiles/constants';
+
 const METHODS = {
   GET: 'GET',
   PUT: 'PUT',
@@ -28,7 +30,7 @@ function queryStringify(data: Record<string, unknown>) {
 }
 
 export class HTTPTransport {
-  static API_URL = 'https://ya-praktikum.tech/api/v2';
+  static API_URL = API_BASE_URL;
 
   protected url: string;
 

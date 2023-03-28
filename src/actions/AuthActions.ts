@@ -1,8 +1,9 @@
-import AuthAPI, { AuthApi, AuthData, RegistrationData } from '~src/api/AuthApi';
-import { router } from '~src/services/Router';
-import { routes } from '~src/utiles/constants';
-import Store from '~src/services/Store';
-import type { ErrorType } from '~src/services';
+import AuthAPI, { AuthApi, AuthData, RegistrationData } from '../api/AuthApi';
+import { router } from '../services/Router';
+import { routes } from '../utiles/constants';
+import Store from '../services/Store';
+import type { ErrorType } from '../services/HTTPTransport';
+import { chatsActions } from './ChatsActions';
 
 class AuthActions {
   private readonly api: AuthApi;
@@ -13,6 +14,7 @@ class AuthActions {
 
   async signin(data: AuthData) {
     await this.api.signin(data)
+      .then(() => chatsActions.getChats())
       .then(() => Store.set({ isLogin: true }))
       .then(() => Store.set({ isAuthError: null }))
       .then(() => this.getUser())
@@ -39,6 +41,7 @@ class AuthActions {
       await this.api.signup(data);
       Store.set({ isRegistrationError: null });
       this.getUser();
+      chatsActions.getChats();
       router.go(routes.setting);
     } catch (err: unknown) {
       Store.set({ isRegistrationError: err as ErrorType });
@@ -51,8 +54,10 @@ class AuthActions {
       const response = await this.api.getUser();
       Store.set({ user: response });
       Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` });
+      return response;
     } catch (err: unknown) {
       console.error(err);
+      return new Error(err as string);
     }
   }
 

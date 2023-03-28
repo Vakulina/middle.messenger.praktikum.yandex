@@ -1,8 +1,8 @@
-import { UserDTO } from '~src/api/AuthApi';
-import ChatsAPI, { ChatsApi, ChatsDTOType } from '~src/api/ChatsApi';
-import { setWebSocket } from '~src/services/setWebSocket';
-import Store from '~src/services/Store';
-import { WebsocketService } from '~src/services/WebsocketService';
+import { UserDTO } from '../api/AuthApi';
+import ChatsAPI, { ChatsApi, ChatsDTOType } from '../api/ChatsApi';
+import { setWebSocket } from '../services/setWebSocket';
+import Store from '../services/Store';
+import { WebsocketService } from '../services/WebsocketService';
 
 class ChatsActions {
   private readonly api: ChatsApi;
@@ -13,6 +13,13 @@ class ChatsActions {
 
   async getChats() {
     const response: ChatsDTOType[] = await this.api.getChats();
+
+    const state = Store.getState();
+    if (('activeChat' in state) && (state.activeChat) && ('id' in state.activeChat)) {
+      const activeChat = response.filter((item) => (item.id === state.activeChat.id))[0];
+      Store.set({ activeChat });
+      if (!activeChat) Store.set({ isOpenAddNewChatModal: true });
+    }
     Store.set({ chats: response });
     return response;
   }
@@ -55,6 +62,7 @@ class ChatsActions {
       try {
         await this.api.addUsers(users, chat_id);
         await this.getChats();
+        await this.getUsersByChat(chat_id);
         Store.set({ isOpenAddUserModal: false });
       } catch (e: unknown) {
         console.error('addUsersToChat:', e);
@@ -70,6 +78,7 @@ class ChatsActions {
       try {
         await this.api.deleteUsers(users, chat_id);
         await this.getChats();
+        await this.getUsersByChat(chat_id);
         Store.set({ isOpenDeleteUserModal: false });
         Store.set({ isOpenHeaderMenuModal: false });
 
@@ -84,12 +93,13 @@ class ChatsActions {
     return this.api.getUsersByChat(id) as Promise<UserDTO[]>;
   }
 
-  async getToken(chat_id: number) {
+  async getToken(chat_id: number): Promise<unknown> {
     try {
       const response = await this.api.getChatToken(chat_id);
       return response.token;
     } catch (err: unknown) {
       console.error(err);
+      return err;
     }
   }
 

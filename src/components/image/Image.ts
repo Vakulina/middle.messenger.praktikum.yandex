@@ -1,7 +1,7 @@
 import tpl from './tpl.hbs';
-import * as s from './style.module.scss';
+import s from './style.module.scss';
 import styles from '../../utiles/styles';
-import Block from '~src/services/Block';
+import Block from '../../services/Block';
 
 interface ImageProps {
   src?: any,

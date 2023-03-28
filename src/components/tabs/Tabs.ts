@@ -1,8 +1,8 @@
 import tpl from './tpl.hbs';
 import styles from '../../utiles/styles';
-import * as s from './style.module.scss';
-import Block, { ChildrenType } from '~src/services/Block';
-import { Link } from '../link/Link';
+import s from './style.module.scss';
+import Block, { ChildrenType } from '../../services/Block';
+import { Link } from '../Link';
 
 type TabsProps = {
   tabsConfig: Tab[],
@@ -33,7 +33,7 @@ export class Tabs extends Block {
   }
 
   initChildren() {
-    this._activeLink = this.props.activeLink;
+    this._activeLink = this.props.activeLink!;
 
     const links = this.children.tabsConfig.map((tab: Tab) => {
       const newLink = new Link({

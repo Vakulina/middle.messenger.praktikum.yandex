@@ -1,4 +1,4 @@
-import { ErrorType } from '~src/services';
+import { ErrorType } from '../services/HTTPTransport';
 import UsersAPI from '../api/UsersApi';
 import Store from '../services/Store';
 

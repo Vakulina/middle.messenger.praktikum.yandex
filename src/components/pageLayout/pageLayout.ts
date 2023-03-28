@@ -1,6 +1,6 @@
 import tpl from './tpl.hbs';
-import * as style from './style.module.scss';
-import Block, { ChildrenType, PropsType } from '~src/services/Block';
+import style from './style.module.scss';
+import Block, { ChildrenType, PropsType } from '../../services/Block';
 
 export class PageLayout extends Block {
   constructor(props:PropsType | ChildrenType) {

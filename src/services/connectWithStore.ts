@@ -1,5 +1,6 @@
 import Block from './Block';
-import Store, { State, StoreEvents } from './Store';
+import Store, { StoreEvents } from './Store';
+import { State, isEqual } from '../utiles';
 
 export default function connectWithStore(
   tag: string,
@@ -9,11 +10,20 @@ export default function connectWithStore(
 ) {
   class ConnectedComponent extends Component {
     constructor(tag: string, props?: object) {
-      super(tag, { ...props, ...mapStateToProps(Store.getState() as State) });
+      let prevState;
+      prevState = mapStateToProps(Store.getState() as State);
+
+      super(tag, { ...props, ...prevState });
 
       Store.on(StoreEvents.Updated, () => {
-        this.setProps({ ...mapStateToProps(Store.getState() as State) });
-        this.state = { ...mapStateToProps(Store.getState() as State) };
+        const stateProps = mapStateToProps(Store.getState() as State);
+
+        if (isEqual(prevState, stateProps)) {
+          return;
+        }
+        prevState = stateProps;
+
+        this.setProps({ ...stateProps });
       });
     }
   }

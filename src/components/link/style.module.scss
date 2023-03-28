@@ -2,13 +2,16 @@
 
 .link {
   color: $primary-color;
-  background-color: transparent;
   display: block;
   margin: 0 auto;
   text-decoration: none;
   text-align: center;
   margin-top: 14px;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
 
   @include inter;
 
@@ -26,7 +29,18 @@
     @include text;
 
     margin: 0;
+    margin-right: 0;
     margin-left: auto;
+  }
+
+  &_settings {
+    position: fixed;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    border-right: 1px solid #d0d4d8;
+    font-size: 20px;
+    margin-top: 0;
   }
 
   &_tabs {

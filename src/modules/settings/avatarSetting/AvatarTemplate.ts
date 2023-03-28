@@ -1,18 +1,18 @@
-import UsersActions from '~src/actions/UsersActions';
-import { Button } from '~src/components/button';
-import { avatarInput } from '~src/components/avatarInput';
-import { Form, FormProps } from '~src/components/form';
-import { avatarImage } from '~src/components/avatarImage';
-import Block from '~src/services/Block';
-import connectWithStore from '~src/services/connectWithStore';
-import { BtnEventType } from '~src/utiles';
+import UsersActions from '../../../actions/UsersActions';
+import { Button } from '../../../components/Button';
+import { avatarInput } from '../../../components/AvatarInput';
+import { Form, FormProps } from '../../../components/Form';
+import { avatarImage } from '../../../components/AvatarImage';
+import Block from '../../../services/Block';
+import connectWithStore from '../../../services/connectWithStore';
+import { BtnEventType } from '../../../utiles';
 
 import tpl from './tpl.hbs';
-import Store from '~src/services/Store';
+import Store from '../../../services/Store';
 
 export class AvatarTemplateBase extends Form {
-  constructor(tag:string, props: FormProps) {
-    super(tag = 'section', {
+  constructor(tag = 'form', props: FormProps) {
+    super(tag, {
       events: {
         focusin: () => {
           if (this.state.isAuthError) {

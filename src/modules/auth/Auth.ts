@@ -1,5 +1,5 @@
-import { PageLayout } from '~src/components/pageLayout';
-import { AuthForm } from '../../components/authForm';
+import { PageLayout } from '../../components/PageLayout';
+import { AuthForm } from '../../components/AuthForm';
 
 const form = AuthForm;
 const authPage = new PageLayout({ content: form });

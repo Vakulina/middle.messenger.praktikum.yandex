@@ -1,13 +1,16 @@
 import { avatarTemplate } from './avatarSetting';
-import { passwordTemplate } from './passwordSetting';
-import { registrationInfoTemplate } from './registrationInfoSetting';
-import Block, { PropsType } from '~src/services/Block';
+import { passwordTemplate } from './PasswordSetting';
+import { registrationInfoTemplate } from './RegistrationInfoSetting';
+import Block, { PropsType } from '../../services/Block';
 import tpl from './tpl.hbs';
-import { PageLayout } from '~src/components/pageLayout';
-import * as style from './style.module.scss';
-import { Tabs } from '~src/components/tabs';
-import connectWithStore from '~src/services/connectWithStore';
-import AuthActions from '~src/actions/AuthActions';
+import { PageLayout } from '../../components/PageLayout';
+import style from './style.module.scss';
+import { Tabs } from '../../components/Tabs';
+import connectWithStore from '../../services/connectWithStore';
+import AuthActions from '../../actions/AuthActions';
+import { Link } from '../../components/Link';
+import { routes } from '../../utiles/constants';
+import { Button } from '../../components/Button';
 
 export type Tab = {
   name: string,
@@ -37,9 +40,9 @@ export const tabsConfig: Tab[] = [
 ];
 
 class SettingsBase extends Block {
-  constructor(tag: string, { tabs, otherProps }: any) {
+  constructor(tag = 'section', { tabs, otherProps }: any) {
     super(
-      tag = 'section',
+      tag,
       {
         tabs, class: style.setting, id: 'settings', ...otherProps,
       },
@@ -49,6 +52,27 @@ class SettingsBase extends Block {
       avatar: () => this.state.avatar,
     });
     AuthActions.getUser();
+  }
+
+  protected initChildren(): void {
+    this.children = {
+      toChats: new Link({ href: routes.chats, text: '<-', stylePrefix: 'settings' }),
+      exit: new Button({
+        text: 'Выйти из системы',
+        stylePrefix: 'logout',
+        type: 'button',
+        events: {
+          click: () => {
+            this.logout();
+          },
+        },
+      }),
+      ...this.children,
+    };
+  }
+
+  async logout() {
+    await AuthActions.logout();
   }
 
   protected render() {
@@ -70,6 +94,6 @@ const getSettingLayout = (activeLink: string) => connectWithStore(
 
 export const getSettingPage = (activeLink?: string) => {
   return new PageLayout({
-    content: getSettingLayout(activeLink || tabsConfig[0].pathRoute),
+    content: getSettingLayout(activeLink || tabsConfig[0]!.pathRoute),
   });
 };

@@ -41,12 +41,14 @@
     ],
     "no-constructor-return": "off",
     "prefer-promise-reject-errors":"warn",
-    "@typescript-eslint/naming-convention":"warn",
+    "@typescript-eslint/naming-convention":"off",
     "no-param-reassign":"off",
     "import/extensions": "off",
+    "@typescript-eslint/default-param-last":"off",
     "arrow-body-style": [
       "off"
     ],
+    "import/no-cycle":"warn",
     "consistent-return":"warn",
     "semi": [
       "warn",

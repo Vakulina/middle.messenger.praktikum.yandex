@@ -1,4 +1,4 @@
-import { UserDTO } from '~src/api/AuthApi';
+import { UserDTO } from '../../api/AuthApi';
 import { UserItem } from '../UsersItem';
 
 export const getUsersList = (items: UserDTO[]) => {
