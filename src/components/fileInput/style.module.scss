@@ -1,3 +1,4 @@
+@use 'src/assets/stylesheets/media';
 @import "src/assets/stylesheets/reusable";
 
 .fileInput {
@@ -51,6 +52,7 @@
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
+  
   }
 
   &_clip {
@@ -84,8 +86,8 @@
     background-color: $lightPrimaryColor;
   }
 
-  input:hover + label,
-  input:focus + label {
+  input:hover+label,
+  input:focus+label {
     background-color: $lightPrimaryColor;
   }
 

@@ -34,6 +34,7 @@ class ChatsActions {
       Store.set({ activeChat });
       Store.set({ isOpenAddNewChatModal: false });
       Store.set({ isOpenHeaderMenuModal: false });
+      Store.set({ chatsData: [] });
     } catch (e: unknown) {
       console.error('createChat:', e);
     }

@@ -1,3 +1,4 @@
+@use 'src/assets/stylesheets/media';
 @import "src/assets/stylesheets/reusable";
 
 .field {
@@ -54,11 +55,23 @@
     justify-content: space-between;
     gap: 30px;
     position: relative;
+
+    @include media.max-width(small) {
+      flex-direction: column;
+      width:100%;
+      gap: 4px;
+      align-items: start;
+    }
+
   }
 
   &_setting input {
     width: 320px;
     margin-top: 0;
+
+    @include media.max-width(small) {
+      width: 100%;
+    }
   }
 
   input:focus {
@@ -78,7 +91,7 @@
     border-color: red;
   }
 
-  & > label > span {
+  &>label>span {
     display: none;
     color: $attantionColor;
   }

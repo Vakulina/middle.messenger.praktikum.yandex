@@ -1,0 +1,21 @@
+$breakpoint-xsmall: 320px;
+$breakpoint-small: 650px;
+$breakpoint-medium: 850px;
+
+@mixin max-width($breakpoint) {
+  @if ($breakpoint == xsmall) {
+    @media (max-width: $breakpoint-xsmall) {
+      @content;
+    }
+  } @else if ($breakpoint == small) {
+    @media (max-width: $breakpoint-small) {
+      @content;
+    }
+  } @else if ($breakpoint == medium) {
+    @media (max-width: $breakpoint-medium) {
+      @content;
+    }
+  } @else {
+    @error "UNKNOWN MEDIA BREAKPOINT #{$breakpoint}";
+  }
+}

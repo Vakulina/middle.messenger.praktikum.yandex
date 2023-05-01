@@ -1,3 +1,5 @@
+@use 'src/assets/stylesheets/media';
+
 .image {
   &_avatar {
     border-radius: 50%;
@@ -8,6 +10,9 @@
     margin-left: 150px;
     margin-bottom: 50px;
     object-fit: cover;
+    @include media.max-width(small) {
+      margin: 0 auto 35px auto;
+    }
   }
 
   &_chatItems {

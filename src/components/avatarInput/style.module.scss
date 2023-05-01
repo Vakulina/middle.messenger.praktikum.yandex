@@ -1,3 +1,4 @@
+@use 'src/assets/stylesheets/media';
 @import "src/assets/stylesheets/reusable";
 
 .fileInput {
@@ -18,7 +19,6 @@
 
   label {
     @include btn-style;
-
     display: block;
     position: relative;
     width: 115px;
@@ -28,6 +28,19 @@
     transition: transform 0.2s ease-out;
 
     @include lightShadow;
+
+    @include media.max-width(small) {
+      width: 0;
+      height: 0;
+      background-color: transparent;
+
+    }
+  }
+
+  span:first-of-type {
+    @include media.max-width(small) {
+      display: none;
+    }
   }
 
   span:last-of-type {
@@ -51,6 +64,24 @@
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
+
+    @media (max-width: 600px) {
+      min-width: 220px;
+    }
+
+    @include media.max-width(small) {
+      top: 0;
+      left: 0;
+      z-index: 100;
+      background-color: $lightPrimaryColor;
+      color: white;
+      @include btn-style;
+      @include lightShadow;
+      @include montserrat;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
   }
 
   &_clip {
@@ -84,14 +115,18 @@
     background-color: $lightPrimaryColor;
   }
 
-  input:hover + label,
-  input:focus + label {
+  input:hover+label,
+  input:focus+label {
     background-color: $lightPrimaryColor;
   }
 
   span:last-of-type[data-style="placeholder"] {
     color: $secondaryDark;
     font-weight: 400;
+
+    @include media.max-width(small) {
+      color: white;
+    }
   }
 
   span[data-style="text"] {
