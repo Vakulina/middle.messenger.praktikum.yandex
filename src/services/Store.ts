@@ -6,10 +6,12 @@ export enum StoreEvents {
   Remove = 'remove',
 }
 
+const isSmallScreen =(()=> window.screen.availWidth < 750)()
+
 class Store extends EventBus {
   static _instance: Store;
 
-  state: State | {} = { isOpenAddNewChatModal: true, chatsData: [] };
+  state: State | {} = { isOpenAddNewChatModal: isSmallScreen ? false : true, chatsData: [] };
 
   constructor() {
     if (Store._instance) return Store._instance;

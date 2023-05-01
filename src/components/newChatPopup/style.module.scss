@@ -11,4 +11,10 @@
   color: $shadeDark;
   align-self: center;
   margin-top: 50px;
+
+  @media (max-width: 750px) {
+    padding: 10px;
+    gap: 10px;
+    background-color: #fff;
+  }
 }

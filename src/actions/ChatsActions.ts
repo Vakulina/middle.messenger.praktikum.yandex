@@ -4,6 +4,8 @@ import { setWebSocket } from '../services/setWebSocket';
 import Store from '../services/Store';
 import { WebsocketService } from '../services/WebsocketService';
 
+const isSmallScreen =(()=> window.screen.availWidth < 750)()
+
 class ChatsActions {
   private readonly api: ChatsApi;
 
@@ -18,7 +20,7 @@ class ChatsActions {
     if (('activeChat' in state) && (state.activeChat) && ('id' in state.activeChat)) {
       const activeChat = response.filter((item) => (item.id === state.activeChat.id))[0];
       Store.set({ activeChat });
-      if (!activeChat) Store.set({ isOpenAddNewChatModal: true });
+      if (!activeChat && !isSmallScreen) Store.set({ isOpenAddNewChatModal: true });
     }
     Store.set({ chats: response });
     return response;

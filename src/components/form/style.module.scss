@@ -53,7 +53,10 @@
     border-radius: 12px;
     padding: 15px 30px 30px;
     box-sizing: border-box;
+
+
   }
+
 
   &[data-server-error="true"] input,
   textarea {
@@ -87,3 +90,5 @@
     color: $primary-color;
   }
 }
+
+

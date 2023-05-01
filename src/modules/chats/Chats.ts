@@ -1,4 +1,5 @@
 import tpl from './tpl.hbs';
+import tpl_small from './tpl_small.hbs';
 import { chatSidebar } from '../../components/ChatSidebar';
 import { MessageForm } from '../../components/MessageForm';
 import Block from '../../services/Block';
@@ -12,6 +13,7 @@ import { messageList } from '../../components/MessageList';
 const message = new MessageForm();
 const sidebar = chatSidebar;
 const header = chatHeader;
+const isSmallScreen =(()=> window.screen.availWidth < 750)()
 
 interface ChatsProps {
   sidebar: Block,
@@ -40,8 +42,8 @@ export class Chats extends Block {
     };
   }
 
-  protected render() {
-    return this.compile(tpl, this.props);
+    protected render() {
+    return this.compile(isSmallScreen ? tpl_small: tpl, this.props);
   }
 }
 
@@ -49,13 +51,15 @@ export const chats = connectWithStore(
   'section',
   Chats,
   (state) => {
-    const { isOpenAddNewChatModal } = state;
-    return { isOpenAddNewChatModal };
+    const { isOpenAddNewChatModal, activeChat } = state;
+    return { isOpenAddNewChatModal, activeChat
+    };
   },
   {
     sidebar, messageList, message, header,
   },
 );
+
 
 const chatsPage = new PageLayout({ content: chats });
 

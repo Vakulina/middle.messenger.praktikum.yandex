@@ -1,10 +1,22 @@
-{{{sidebar}}}
 <div class={{{style.wrapper}}}>
-  {{#if isOpenAddNewChatModal}}
-  {{{newChatPopup}}}
+
+  {{#if activeChat}}
   {{else}}
+  {{{sidebar}}}
+  {{/if}}
+
+  {{#if isOpenAddNewChatModal}}
+  <div class={{{style.wrapper__background}}}>
+  {{{newChatPopup}}}
+  </div>
+  {{else}}
+  {{/if}}
+
+
+  {{#if activeChat}}
   {{{header}}}
   {{{messageList}}}
   {{{message}}}
+  {{else}}
   {{/if}}
 </div>

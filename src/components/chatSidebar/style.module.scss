@@ -5,8 +5,18 @@
   max-width: 310px;
   max-height: 100vh;
 
+  @media (max-width: 750px) {
+    max-width: 100%;
+  }
+
   li {
     width: 100%;
+    div{
+      @media (max-width: 750px) {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
   }
 
   ul {
