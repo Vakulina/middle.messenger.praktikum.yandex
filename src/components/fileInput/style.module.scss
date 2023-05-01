@@ -25,7 +25,8 @@
     width: 115px;
     height: 41px;
     line-height: 1.1;
-    cursor: pointer;
+    //TODO delete when adding this function
+    cursor: not-allowed;
     transition: transform 0.2s ease-out;
 
     @include lightShadow;
@@ -52,7 +53,7 @@
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
-  
+
   }
 
   &_clip {
@@ -81,15 +82,16 @@
     }
   }
 
+  /*
   label:hover,
   label:active {
-    background-color: $lightPrimaryColor;
+   background-color: $lightPrimaryColor;
   }
 
   input:hover+label,
   input:focus+label {
-    background-color: $lightPrimaryColor;
-  }
+   background-color: $lightPrimaryColor;
+  }*/
 
   span:last-of-type[data-style="placeholder"] {
     color: $secondaryDark;
