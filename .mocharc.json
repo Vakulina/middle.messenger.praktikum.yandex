@@ -1,7 +1,0 @@
-{
-  "extension": ["ts"],
-  "spec": "./src/**/*.test.ts",
-  "require": "./mochaSetup.js",
-  "loader": "ts-node/register"
-} 
-
