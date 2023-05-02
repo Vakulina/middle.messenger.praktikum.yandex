@@ -1,3 +1,3 @@
-import renderPage from './services/renderPage';
+import renderPage from './services/myRenderPage';
 
 renderPage();

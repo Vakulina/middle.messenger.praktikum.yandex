@@ -14,3 +14,7 @@ app.use(express.static(rootPath));
 app.use('/', (_, res) => {
   res.sendFile((path.join(rootPath, 'index.html')));
 });
+
+app.use("/*", (_, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
