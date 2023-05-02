@@ -10,6 +10,7 @@ import AuthActions from '../actions/AuthActions';
 
 const renderPage = async () => {
   window.addEventListener('DOMContentLoaded', async () => {
+
     router
       .use(routes.home, getChats())
       .use(routes.chats, getChats())

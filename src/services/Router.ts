@@ -23,6 +23,7 @@ class Router {
   }
 
   use(pathname: string, block: Block) {
+
     const route = new Route(pathname, block);
     this.routes.unshift(route);
     return this;
@@ -56,6 +57,7 @@ class Router {
   }
 
   getRoute(pathname: string) {
+    console.log(this.routes, pathname)
     return this.routes.find((route) => route.match(pathname)) || this.routes.find((route) => route.match(ROUTES.notFound));
   }
 }
