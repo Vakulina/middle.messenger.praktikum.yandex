@@ -3,12 +3,12 @@
 
 Самостоятельный проект, разработанный в рамках курса Яндекс.Практикум "Мидл фронтенд разработчик". 
 
-- Деплой [messeger](https://my-messager.onrender.com)
+- Деплой **[messeger](https://my-messager.onrender.com)**
 - [Макет figma](https://www.figma.com/file/bb2uxusIP7DzcWLj5qITnJ/Chat_external_link-(Copy)?node-id=0%3A1&t=BECpoojdFInoPUYE-1)
 
 ## Тестовые данные для входа без регистрации
-- Логин ### Tester ###
-- Пароль ### Test2023 ###
+- Логин **Tester**
+- Пароль **Test2023**
 
 ## Команды
 
