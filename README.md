@@ -3,7 +3,7 @@
 
 Самостоятельный проект, разработанный в рамках курса Яндекс.Практикум "Мидл фронтенд разработчик". 
 
-- ## Деплой [messeger](https://my-messager.onrender.com) ##
+- Деплой [messeger](https://my-messager.onrender.com)
 - [Макет figma](https://www.figma.com/file/bb2uxusIP7DzcWLj5qITnJ/Chat_external_link-(Copy)?node-id=0%3A1&t=BECpoojdFInoPUYE-1)
 
 ## Тестовые данные для входа без регистрации
@@ -19,8 +19,7 @@
 ### Спринт 1 
 - разработан [макет приложения в Figma](https://www.figma.com/file/bb2uxusIP7DzcWLj5qITnJ/Chat_external_link-(Copy)?node-id=0%3A1&t=BECpoojdFInoPUYE-1) (улучшен [стандартный прототип](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1))
 - свёрстаны основные страницы приложения с использованием шаблонизатора handlebars
-- настроена сборка приложения с помощью Parcel![Messager - Google Chrome 2023-08-08 15-34-36 (1)](https://github.com/Vakulina/middle.messenger.praktikum.yandex/assets/80524794/28e283a5-bc62-493b-ac98-9203df0f7b43)
-
+- настроена сборка приложения с помощью Parcel![Messager - Google Chrome 2023-08-08 15-34-36 (1)]
 - написан легкий сервер на Express для раздачи статики 
 - настроен [автодеплой верстки на Netlify](https://63c0419acf5bc33db6300d3c--glowing-crisp-5ef741.netlify.app/) из ветки deploy
 
@@ -48,5 +47,4 @@
 - Настроена Docker-сборка статического приложения и запуска сервера на Node.js
 - Деплой на Render.com https://my-messager.onrender.com/sign-in
 
-![Uploading Messager - Google Chrome 2023-08-08 15-34-36 (1).gif…]()
-
+![Messager - Google Chrome 2023-08-08 15-34-36 (1)](https://github.com/Vakulina/middle.messenger.praktikum.yandex/assets/80524794/45f55a54-480d-4172-ab1b-d9e9d0dbba1c)
