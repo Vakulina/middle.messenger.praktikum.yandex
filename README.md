@@ -1,9 +1,9 @@
 
 ## Описание
 
-Самостоятельный проект, разработанный в рамках курса Яндекс.Практикум. 
+Самостоятельный проект, разработанный в рамках курса Яндекс.Практикум "Мидл фронтенд разработчик". 
 
-- Деплой [messeger](https://messeger3.onrender.com/)
+- Деплой [messeger](https://my-messager.onrender.com)
 - [Макет figma](https://www.figma.com/file/bb2uxusIP7DzcWLj5qITnJ/Chat_external_link-(Copy)?node-id=0%3A1&t=BECpoojdFInoPUYE-1)
 
 ## Команды
