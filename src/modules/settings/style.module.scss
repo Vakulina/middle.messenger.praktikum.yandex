@@ -34,5 +34,8 @@
       margin-left: 0;
       font-size: large;
     }
+    @include media.max-width(small) {
+      margin-left: 50px;
+    }
   }
 }

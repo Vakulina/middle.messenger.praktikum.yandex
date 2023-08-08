@@ -52,14 +52,12 @@ export const chats = connectWithStore(
   Chats,
   (state) => {
     const { isOpenAddNewChatModal, activeChat } = state;
-    return { isOpenAddNewChatModal, activeChat
-    };
+    return { isOpenAddNewChatModal, activeChat };
   },
   {
     sidebar, messageList, message, header,
   },
 );
-
 
 const chatsPage = new PageLayout({ content: chats });
 

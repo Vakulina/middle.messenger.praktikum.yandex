@@ -20,10 +20,11 @@ html {
    * Remove the margin in all browsers.
    */
 
-body {
-  margin: 0;
-}
-
+   body {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    margin: 0;
+   }
 /**
    * Render the `main` element consistently in IE.
    */

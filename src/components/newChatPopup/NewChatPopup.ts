@@ -1,3 +1,4 @@
+import Store from '../../services/Store'
 import tpl from './tpl.hbs';
 import { Form, FormProps } from '../Form';
 import { Button } from '../Button';
@@ -5,6 +6,8 @@ import { Input } from '../Input';
 import { BtnEventType } from '../../utiles';
 import { chatsActions } from '../../actions/ChatsActions';
 import s from './style.module.scss';
+import cross from '../../../static/cross.svg';
+import { Image } from '../Image';
 
 type titleDataType = { titleInput: string };
 
@@ -30,6 +33,22 @@ export class NewChatPopup extends Form {
           },
         },
       }),
+
+      closeButton: new Button({
+        text: new Image({
+          src: cross,
+          stylePrefix: 'cross',
+        }),
+        stylePrefix: 'cross',
+        type: 'button',
+        events: {
+          click: () => {
+            Store.set({ isOpenAddNewChatModal: false });
+          },
+        },
+        name: 'sendMessage',
+      }),
+
       titleInput: new Input({
         name: 'title',
         label: 'Введите название нового чата',

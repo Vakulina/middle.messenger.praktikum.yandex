@@ -64,7 +64,7 @@ export class ChatsApi extends BaseAPI {
   }
 
   async getUsersByChat(id: number) {
-    return this.http.get(`/${id}/users`, {});
+    return this.http.get(`/${id}/users`, {}) as Promise<UserDTO[]>;
   }
 
   create = undefined;

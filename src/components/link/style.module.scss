@@ -42,8 +42,17 @@
     border-right: 1px solid #d0d4d8;
     font-size: 20px;
     margin-top: 0;
+
     @include media.max-width(small) {
-      display: none;
+      height: 40px;
+      top: 18px;
+      border: none;
+      width: 40px;
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
 

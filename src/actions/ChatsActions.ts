@@ -79,12 +79,11 @@ class ChatsActions {
       const chat_id = state!.activeChat!.id;
 
       try {
+        Store.set({ isOpenDeleteUserModal: false });
         await this.api.deleteUsers(users, chat_id);
         await this.getChats();
         await this.getUsersByChat(chat_id);
-        Store.set({ isOpenDeleteUserModal: false });
         Store.set({ isOpenHeaderMenuModal: false });
-
         if (!(state.chats.includes(state.activeChat as ChatsDTOType))) Store.set({ isOpenAddNewChatModal: true });
       } catch (e: unknown) {
         console.error('deleteUsersFromChat:', e);
@@ -92,8 +91,10 @@ class ChatsActions {
     }
   }
 
-  async getUsersByChat(id: number): Promise<UserDTO[]> {
-    return this.api.getUsersByChat(id) as Promise<UserDTO[]>;
+  async getUsersByChat(id: number) {
+    const response : UserDTO[] = await this.api.getUsersByChat(id);
+    if (response) Store.set({ usersOfActiveChat: response });
+    return response
   }
 
   async getToken(chat_id: number): Promise<unknown> {
