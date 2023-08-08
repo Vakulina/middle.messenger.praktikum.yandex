@@ -17,7 +17,7 @@
 - свёрстаны основные страницы приложения с использованием шаблонизатора handlebars
 - настроена сборка приложения с помощью Parcel
 - написан легкий сервер на Express для раздачи статики 
-- настроен [автодеплой на Netlify](https://63c0419acf5bc33db6300d3c--glowing-crisp-5ef741.netlify.app/) из ветки deploy
+- настроен [автодеплой верстки на Netlify](https://63c0419acf5bc33db6300d3c--glowing-crisp-5ef741.netlify.app/) из ветки deploy
 
 ### Спринт 2 
 - перенос на typescript
@@ -41,4 +41,4 @@
 - Настроен precommit на проект
 - Проведен аудит пакетов
 - Настроена Docker-сборка статического приложения и запуска сервера на Node.js
-- Деплой на [Render.com](https://messeger3.onrender.com/)
+- Деплой на Render.com https://my-messager.onrender.com/sign-in
