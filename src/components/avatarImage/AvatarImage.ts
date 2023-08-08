@@ -22,7 +22,7 @@ export class AvatarImageBase extends Block {
       tag,
       {
         alt,
-        src: avatar || avatarBase || '',
+        src: avatarBase || '',
         class: `${s.image} ${styles.getClassWithPrefix(s, 'image', stylePrefix)}`,
         ...otherProps,
       },
@@ -32,7 +32,9 @@ export class AvatarImageBase extends Block {
   public addAttribute(newAttr: Record<string, string> | null): void {
     super.addAttribute(newAttr);
     if (typeof this.props.avatar === 'string') {
-      this.element!.setAttribute('src', this.props.avatar);
+      // сохранение локально обусловлено некорректной работой стороннего API
+      const avatar = localStorage.getItem('avatar') || null;
+      this.element!.setAttribute('src', avatar);
     } else if (typeof this.props.avatar !== 'undefined') {
       const reader = new FileReader();
       reader.readAsDataURL(this.props.avatar as Blob);

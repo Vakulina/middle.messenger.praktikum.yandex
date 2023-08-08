@@ -53,7 +53,10 @@ class AuthActions {
     try {
       const response = await this.api.getUser();
       Store.set({ user: response });
-      Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` });
+      const avatar = localStorage.getItem('avatar');
+      if (avatar) {
+        Store.set({ avatar });
+      }
       return response;
     } catch (err: unknown) {
       console.error(err);

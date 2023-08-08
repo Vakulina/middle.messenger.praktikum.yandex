@@ -26,6 +26,7 @@ class UsersActions {
     const response = await UsersAPI.changeAvatar(form);
     Store.set({ avatarName: '' });
     Store.set({ user: response });
+    localStorage.setItem('avatar', `https://ya-praktikum.tech/api/v2/resources${response.avatar}`);
     Store.set({ avatar: `https://ya-praktikum.tech/api/v2/resources${response.avatar}` });
     // await AuthActions.getUser();
   }
