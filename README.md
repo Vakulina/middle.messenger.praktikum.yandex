@@ -1,6 +1,6 @@
 
 ## Описание
-Реализация небольшого онлайн-мессенджера на чистом ***typescript***. 
+Небольшой онлайн-мессенджер на чистом ***typescript***. 
 Для реактивного рендера компонентов используется абстрактный класс  [Block](https://github.com/Vakulina/middle.messenger.praktikum.yandex/blob/29d05459fce863bbcc4bfba7ebe6e40f556f4e1b/src/services/Block.ts). В нем реализован минимальный  жизненный цикл компонента. Применение паттерна ***Event Bus*** позволяет подписаться на нужные события - изменения пропсов и события.
 
 Для запросов к серверу используется класс [HTTPTranspor](https://github.com/Vakulina/middle.messenger.praktikum.yandex/blob/29d05459fce863bbcc4bfba7ebe6e40f556f4e1b/src/services/HTTPTransport.ts) - обертка над XMLHttpRequest, реализующая CRUD методы из REST API (GET, POST, PUT, DELETE).
