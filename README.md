@@ -1,7 +1,12 @@
 
 ## Описание
-
 Самостоятельный проект, разработанный в рамках курса Яндекс.Практикум "Мидл фронтенд разработчик". 
+Реализация небольшого онлайн-мессенджера на чистом ***typescript***. 
+Для реактивного рендера компонентов используется абстрактный класс  [Block](https://github.com/Vakulina/middle.messenger.praktikum.yandex/blob/29d05459fce863bbcc4bfba7ebe6e40f556f4e1b/src/services/Block.ts). В нем реализован минимальный  жизненный цикл компонента. Применение паттерна ***Event Bus*** позволяет подписаться на нужные события - изменения пропсов и события.
+
+Для запросов к серверу используется класс [HTTPTranspor](https://github.com/Vakulina/middle.messenger.praktikum.yandex/blob/29d05459fce863bbcc4bfba7ebe6e40f556f4e1b/src/services/HTTPTransport.ts) - обертка над XMLHttpRequest, реализующая CRUD методы из REST API (GET, POST, PUT, DELETE).
+
+Навигация по сайту организована с помощью класса [Router](https://github.com/Vakulina/middle.messenger.praktikum.yandex/blob/29d05459fce863bbcc4bfba7ebe6e40f556f4e1b/src/services/Router.ts) c использованием паттерна ***Singltone***. Router реализует методы инициализации, перехода на нужный роут (отображение нужного блока в зависимости от URL), навигации по window.history.
 
 - Деплой **[messeger](https://my-messager.onrender.com)**
 - [Макет figma](https://www.figma.com/file/bb2uxusIP7DzcWLj5qITnJ/Chat_external_link-(Copy)?node-id=0%3A1&t=BECpoojdFInoPUYE-1)
@@ -9,6 +14,15 @@
 ## Тестовые данные для входа без регистрации
 - Логин **Tester**
 - Пароль **Test2023**
+
+### Используемые технологии:
+- typescript
+- ООП
+- Websocet API
+- XMLHttpRequest API
+- webpack
+- docker
+- Mocha, Chai и Sinon
 
 ## Команды
 
