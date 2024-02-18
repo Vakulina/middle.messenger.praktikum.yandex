@@ -13,7 +13,7 @@ import Block from '../../services/Block';
 const first_name = new Input({
   name: 'first_name',
   label: 'Имя',
-  placeholder: 'Виктория',
+  placeholder: 'Введите имя',
   autofocus: true,
   pattern: VALIDATION_REGEXES.name[0],
   textError: VALIDATION_REGEXES.name[1],
@@ -21,7 +21,7 @@ const first_name = new Input({
 const second_name = new Input({
   name: 'second_name',
   label: 'Фамилия',
-  placeholder: 'Яковлева',
+  placeholder: 'Введите фамилию',
   autofocus: false,
   pattern: VALIDATION_REGEXES.name[0],
   textError: VALIDATION_REGEXES.name[1],
@@ -29,14 +29,14 @@ const second_name = new Input({
 const login = new Input({
   name: 'login',
   label: 'Логин',
-  placeholder: 'v.yakovleva',
+  placeholder: 'Введите логин',
   pattern: VALIDATION_REGEXES.login[0],
   textError: VALIDATION_REGEXES.login[1],
 });
 const email = new Input({
   name: 'email',
   label: 'Почта',
-  placeholder: 'pochta@yandex.ru',
+  placeholder: 'Введите почту',
   type: 'mail',
   pattern: VALIDATION_REGEXES.email[0],
   textError: VALIDATION_REGEXES.email[1],
@@ -45,7 +45,7 @@ const phone = new Input({
   name: 'phone',
   type: 'text',
   label: 'Телефон',
-  placeholder: '+7(918) 5000000',
+  placeholder: 'Введите телефон',
   pattern: VALIDATION_REGEXES.phone[0],
   textError: VALIDATION_REGEXES.phone[1],
 });
@@ -54,14 +54,16 @@ const password = new Input({
   label: 'Пароль',
   type: 'password',
   autocomplete: 'off',
+  placeholder:"Введите пароль",
   pattern: VALIDATION_REGEXES.password[0],
   textError: VALIDATION_REGEXES.password[1],
 });
 const repeated_password = new Input({
-  name: 'repeated_password',
-  label: 'Повторите пароль',
-  type: 'password',
-  autocomplete: 'off',
+  name: "repeated_password",
+  label: "Повторите пароль",
+  type: "password",
+  placeholder: "Повторите пароль",
+  autocomplete: "off",
   pattern: VALIDATION_REGEXES.password[0],
   textError: VALIDATION_REGEXES.password[1],
 });

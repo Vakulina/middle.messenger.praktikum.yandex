@@ -14,7 +14,7 @@ import Block from '../../services/Block';
 const loginInput = new Input({
   name: 'login',
   label: 'Логин',
-  placeholder: 'Yakovleva',
+  placeholder: 'Введите логин',
   autofocus: true,
   pattern: VALIDATION_REGEXES.login[0],
   textError: VALIDATION_REGEXES.login[1],
@@ -24,6 +24,7 @@ const passwordInput = new Input({
   name: 'password',
   label: 'Пароль',
   type: 'password',
+  placeholder: 'Введите пароль',
   autocomplete: 'on',
   pattern: VALIDATION_REGEXES.password[0],
   textError: VALIDATION_ERROR.UNCORRECT_PASSWORD,

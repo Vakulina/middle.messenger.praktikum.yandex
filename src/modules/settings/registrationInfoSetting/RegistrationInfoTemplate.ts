@@ -20,7 +20,7 @@ export class RegistrationInfoTemplateBase extends Form {
       first_name: new Input({
         name: 'first_name',
         label: 'Имя',
-        placeholder: 'Виктория',
+        placeholder: 'Введите имя',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.name[0],
         textError: VALIDATION_REGEXES.name[1],
@@ -29,7 +29,7 @@ export class RegistrationInfoTemplateBase extends Form {
       second_name: new Input({
         name: 'second_name',
         label: 'Фамилия',
-        placeholder: 'Яковлева',
+        placeholder: 'Введите фамилию',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.name[0],
         textError: VALIDATION_REGEXES.name[1],
@@ -38,7 +38,7 @@ export class RegistrationInfoTemplateBase extends Form {
       login: new Input({
         name: 'login',
         label: 'Логин',
-        placeholder: 'Yakovleva',
+        placeholder: 'Введите логин',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.login[0],
         textError: VALIDATION_REGEXES.login[1],
@@ -47,14 +47,14 @@ export class RegistrationInfoTemplateBase extends Form {
       display_name: new Input({
         name: 'display_name',
         label: 'Имя в чате',
-        placeholder: 'Укажите имя в чате',
+        placeholder: 'Введите имя в чате',
         stylePrefix: 'setting',
         value: this.state.user?.display_name,
       }),
       email: new Input({
         name: 'email',
         label: 'Почта',
-        placeholder: 'pochta@yandex.ru',
+        placeholder: 'Укажите почту',
         type: 'mail',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.email[0],
@@ -65,7 +65,7 @@ export class RegistrationInfoTemplateBase extends Form {
         name: 'phone',
         type: 'text',
         label: 'Телефон',
-        placeholder: '+7(918) 5000000',
+        placeholder: 'Укажите телефон',
         stylePrefix: 'setting',
         pattern: VALIDATION_REGEXES.phone[0],
         textError: VALIDATION_REGEXES.phone[1],
